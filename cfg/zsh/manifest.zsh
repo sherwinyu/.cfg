@@ -15,6 +15,7 @@ sourceit ~/dotfiles/zsh-asana.zsh
 
 sourceit ~/cfg/zsh/aliases.zsh
 sourceit ~/cfg/zsh/fancy_ctrl_z.zsh
+sourceit ~/cfg/zsh/fzf.zsh
 sourceit ~/dotfiles/.zsh.navigation
 sourceit ~/dotfiles/.zsh.commandline
 sourceit ~/dotfiles/zsh-config/fzf-git.zsh

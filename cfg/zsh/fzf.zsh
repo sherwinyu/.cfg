@@ -1,6 +1,9 @@
 # Setup fzf
 # ---------
+export FZF_DEFAULT_COMMAND='ag -g ""'
+# Default FZF_DIR is ~/cfg/zsh/fzf
 FZF_DIR=${FZF_DIR:-~/cfg/zsh/fzf}
+
 if [[ ! "$PATH" == *$FZF_DIR/bin* ]]; then
   export PATH="${PATH:+${PATH}:}$FZF_DIR/bin"
 fi

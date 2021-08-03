@@ -85,11 +85,9 @@ source $ZSH/oh-my-zsh.sh
 source ~/dotfiles/.zsh.MANIFEST
 
 # s == source slow
-export FZF_DEFAULT_COMMAND='ag -g ""'
 alias s='source ~/dotfiles/zsh.slow'
 alias ss='source ~/dotfiles/zsh.slow; source /Users/sherwin/.envs/aurelia/bin/activate'
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
 export NVM_DIR="$HOME/.nvm"
