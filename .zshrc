@@ -82,7 +82,7 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
-source ~/dotfiles/.zsh.MANIFEST
+source ~/cfg/zsh/manifest.zsh
 
 # s == source slow
 alias s='source ~/dotfiles/zsh.slow'
