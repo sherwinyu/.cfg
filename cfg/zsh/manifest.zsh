@@ -13,12 +13,11 @@ sourceit() {
 sourceit ~/.bash_profile
 sourceit ~/dotfiles/zsh-asana.zsh
 
-source ~/dotfiles/.zsh.variables
-source ~/dotfiles/.zsh.aliases
-source ~/dotfiles/.zsh.fancy_ctrlz
-source ~/dotfiles/.zsh.navigation
-source ~/dotfiles/.zsh.commandline
-source ~/dotfiles/zsh-config/fzf-git.zsh
+sourceit ~/cfg/zsh/aliases.zsh
+sourceit ~/cfg/zsh/fancy_ctrl_z.zsh
+sourceit ~/dotfiles/.zsh.navigation
+sourceit ~/dotfiles/.zsh.commandline
+sourceit ~/dotfiles/zsh-config/fzf-git.zsh
 
 if [[ -r ~/dotfiles/.zshrc.local ]]; then
   source ~/dotfiles/.zshrc.local
