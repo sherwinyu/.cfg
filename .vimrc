@@ -228,6 +228,12 @@ set formatoptions=croql
 if empty(glob('~/.nvimlocal'))
     silent !mkdir -p ~/.nvimlocal
 endif
+if empty(glob('~/.nvimlocal/backup'))
+    silent !mkdir -p ~/.nvimlocal/backup
+endif
+if empty(glob('~/.nvimlocal/undo'))
+    silent !mkdir -p ~/.nvimlocal/undo
+endif
 set backupdir=~/.nvimlocal/backup/
 set directory=~/.nvimlocal/swap/
 set undodir=~/.nvimlocal/undo/
