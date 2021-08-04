@@ -1,23 +1,18 @@
 stty -ixon
 
-# Set up Benchling dotfiles
-# For docker for mac
-# https://benchling.quip.com/X3DBAaOLseww/Switching-to-Docker-for-Mac
-# export AURELIA_ENABLE_DOCKER_FOR_MAC=true
-# source ~/.benchling-dotfiles/.zshrc.benchling
-
 sourceit() {
   [[ -e $1  ]] && source $1
 }
-# Asana specific overides
-sourceit ~/.bash_profile
-sourceit ~/dotfiles/zsh-asana.zsh
 
 sourceit ~/cfg/zsh/aliases.zsh
 sourceit ~/cfg/zsh/fancy_ctrl_z.zsh
 sourceit ~/cfg/zsh/fzf.zsh
-sourceit ~/dotfiles/.zsh.navigation
-sourceit ~/dotfiles/.zsh.commandline
+sourceit ~/cfg/zsh/fzf-git.zsh
+sourceit ~/cfg/zsh/nvm-setup.zsh
+sourceit ~/cfg/zsh/pyenv-setup.zsh
+sourceit ~/cfg/zsh/navigation.zsh
+# sourceit ~/dotfiles/.zsh.commandline
+
 sourceit ~/dotfiles/zsh-config/fzf-git.zsh
 
 if [[ -r ~/dotfiles/.zshrc.local ]]; then
