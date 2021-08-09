@@ -8,10 +8,10 @@ sourceit ~/cfg/zsh/aliases.zsh
 sourceit ~/cfg/zsh/fancy_ctrl_z.zsh
 sourceit ~/cfg/zsh/fzf.zsh
 sourceit ~/cfg/zsh/fzf-git.zsh
-sourceit ~/cfg/zsh/nvm-setup.zsh
+# sourceit ~/cfg/zsh/nvm-setup.zsh
 # sourceit ~/cfg/zsh/pyenv-setup.zsh
 sourceit ~/cfg/zsh/navigation.zsh
-# sourceit ~/dotfiles/.zsh.commandline
+sourceit ~/cfg/zsh/copy-earlier-word.zsh
 
 sourceit ~/dotfiles/zsh-config/fzf-git.zsh
 
