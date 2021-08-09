@@ -1,24 +1,19 @@
 let mapleader = "\<F14>"
 
-function! LoadFile(filename)
-  " execute 'source ~/.config/nvim/sherneovim/' . a:filename
-  execute 'source ~/dotfiles/vim-lib/' . a:filename
-endfunction
-
-
-
-call LoadFile('plugins.vim')
-set path+=~/dotfiles/vim-lib/
-set path+=~/dotfiles/vim-lib/plugin_config
-set path+=~/dotfiles/vim-lib/modules
-set path+=asana2/
+" -- Use ~/cfg/vim as the runtimepath
+let g:SHERWIN_VIM_LIB_DIR = '~/cfg/vim/'
+execute "set runtimepath+=" . g:SHERWIN_VIM_LIB_DIR
+" -- Adding these directories to the path  so `gf` works within vim files
+execute "set path+=" . g:SHERWIN_VIM_LIB_DIR
+execute "set path+=" . g:SHERWIN_VIM_LIB_DIR . 'plugin_config'
+execute "set path+=" . g:SHERWIN_VIM_LIB_DIR . 'modules'
 set suffixesadd+=.vim
 
 
-" For loading colors (Vim searches for a colors/COLORSCHEMENAME.vim file in RTP)
-" Also for loading ultisnips (UltiSnips looks for subdirectories with names in
-" g:UltiSnipsSnippetDirectories under the rtp)
-set rtp+=~/dotfiles/vim-lib
+function! LoadFile(filename)
+  execute 'source ' . g:SHERWIN_VIM_LIB_DIR . a:filename
+endfunction
+call LoadFile('plugins.vim')
 
 
 """""""""""""""""""""""""""""""""""""""
