@@ -1,5 +1,4 @@
-call plug#begin('~/dotfiles/vim-lib/plugged')
-
+call plug#begin(g:SHERWIN_VIM_LIB_DIR . 'plugged')
 
 function! LoadPluginConfig(pluginName)
   call LoadFile('plugin_config/' . a:pluginName . '.vim')
@@ -11,7 +10,7 @@ endfunction
 " Plug 'vim-scripts/ctrlp-funky', {'on': ['CtrlP', 'CtrlPMRU']}
 " Plug 'JazzCore/ctrlp-cmatcher', {'on': ['CtrlP', 'CtrlPMRU']}
 " call LoadPluginConfig('ctrl_p')
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'dir': '~/cfg/zsh/fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 call LoadPluginConfig('fzf')
 " Plug 'kristijanhusak/vim-hybrid-material'

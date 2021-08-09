@@ -9,6 +9,19 @@ execute "set path+=" . g:SHERWIN_VIM_LIB_DIR . 'plugin_config'
 execute "set path+=" . g:SHERWIN_VIM_LIB_DIR . 'modules'
 set suffixesadd+=.vim
 
+" -- HOW THIS FILE WORKS WITH .cfg -- ""
+" The runtimepath is normally ~/.vim.
+" We set it to ~/cfg/vim (referred to as vim here on out)
+" 1. load plugins.vim (vim/plugins.vim), which
+"   - This file defines declaratively, via the Plug  command, dependencies
+"   - `Plug` is the only script defined by vim/autoload, in plug.vim
+"   - :PlugInstall installs dependencies to vim/plugged
+"   - For each installed plugin, we also call plugin configuration, defined in
+"   vim/plugin_config
+" 2. Also call scripts in vim/modules via LoadModule
+"
+" This should be agnostic between nvim and vim 8 (for instance, coc.nvim doesn't load if vim version
+" isn't high enough)
 
 function! LoadFile(filename)
   execute 'source ' . g:SHERWIN_VIM_LIB_DIR . a:filename
