@@ -137,9 +137,14 @@ alias restore-cron-tab="sudo crontab ~/dotfiles/crontab"
 
 alias pg="ping google.com"
 
-if test -f `which trash`; then
+type trash > /dev/null 2>&1 && {
     alias rm='trash'
-fi
+  } || {
+    echo '`trash` not found. Consider `brew install trash`'
+  }
+# if ! [-x "$(command -v trash)"]; then
+#     alias rm='trash'
+# fi
 
 alias yf='yarn flow'
 alias yrc='yarn run client'
