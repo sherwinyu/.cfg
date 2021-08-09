@@ -234,6 +234,9 @@ endif
 if empty(glob('~/.nvimlocal/undo'))
     silent !mkdir -p ~/.nvimlocal/undo
 endif
+if empty(glob('~/.nvimlocal/undo'))
+    silent !mkdir -p ~/.nvimlocal/swap
+endif
 set backupdir=~/.nvimlocal/backup/
 set directory=~/.nvimlocal/swap/
 set undodir=~/.nvimlocal/undo/
