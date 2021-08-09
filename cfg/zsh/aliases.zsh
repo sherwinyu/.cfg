@@ -65,9 +65,9 @@ alias -g RP="-r prod"
 alias -g RS="-r staging"
 
 alias zr='source ~/.zshrc'
-alias ze='nvim ~/.zshrc'
-alias zea='nvim ~/dotfiles/.zsh.aliases'
-alias te='nvim ~/.tmux.conf'
+alias ze='vim ~/.zshrc'
+alias zea='vim ~/cfg/zsh/aliases.zsh'
+alias te='vim ~/.tmux.conf'
 alias b='cd ~-'
 
 # SSH aliases
@@ -99,7 +99,6 @@ alias -g HI='|ack --passthru'
 # TMUX handlers
 alias tmxsp="cd ~/projects/sp; tmux at -t sp || tmux new -s sp"
 alias tmxbe="cd ~/work/aurelia; tmux at -t be || tmux new -s be"
-alias tmxdf="cd ~/dotfiles; tmux at -t df || tmux new -s df"
 
 
 # ARC / BENCHLING
@@ -132,8 +131,8 @@ alias vimdiff='nvim -d'
 alias psqlb='bin/dev psql -h localhost benchling'
 
 # crontab
-alias punt-cron-tab="sudo crontab ~/dotfiles/crontab.restore"
-alias restore-cron-tab="sudo crontab ~/dotfiles/crontab"
+alias punt-cron-tab="sudo crontab ~/cfg/cron/crontab.restore"
+alias restore-cron-tab="sudo crontab ~/cfg/cron/crontab"
 
 alias pg="ping google.com"
 

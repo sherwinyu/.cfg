@@ -1,7 +1,7 @@
 " Open commonly used files
-map <leader>=ve :e ~/dotfiles/vimrc<CR>
-map <leader>=vp :e ~/dotfiles/vim-lib/plugins.vim<CR>
-map <leader>=vr :so ~/dotfiles/vimrc<CR>
+execute "map <leader>=ve :e ~/.vimrc<CR>"
+execute "map <leader>=vr :so ~/.vimrc<CR>"
+execute "map <leader>=vp :e " . g:SHERWIN_VIM_LIB_DIR . "plugins.vim<CR>"
 map <leader>=r :so <c-r>%<CR>
 map <leader>=ze :e ~/.zshrc<CR>
 map <leader>=te :e ~/.tmux.conf<CR>

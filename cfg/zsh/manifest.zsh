@@ -13,13 +13,10 @@ sourceit ~/cfg/zsh/fzf-git.zsh
 sourceit ~/cfg/zsh/navigation.zsh
 sourceit ~/cfg/zsh/copy-earlier-word.zsh
 
-sourceit ~/dotfiles/zsh-config/fzf-git.zsh
-
-if [[ -r ~/dotfiles/.zshrc.local ]]; then
-  source ~/dotfiles/.zshrc.local
+if [[ -r ~/cfg/zsh/zsh.local ]]; then
+  source ~/cfg/zsh/zsh.local
 fi
 
-export PATH="/Users/yxy/dotfiles/bin:$PATH"
 export EDITOR=/usr/local/bin/nvim
 
 bindkey -e
