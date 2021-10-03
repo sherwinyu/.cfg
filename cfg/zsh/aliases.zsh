@@ -149,7 +149,7 @@ alias yf='yarn flow'
 alias yrc='yarn run client'
 alias yrs='yarn run server'
 alias ysp='yarn start-prod'
-alias yes='yarn eslint src'
+alias yes='yarn eslint src server'
 
 alias na='~/projects/note-app'
 alias nap='~/projects/note-app-prod'
