@@ -57,7 +57,7 @@ call LoadModule('SortWords')
 
 call LoadModule('gui')
 call LoadModule('lightline')
-call LoadModule('lightline_winkle_colorscheme')
+" call LoadModule('lightline_winkle_colorscheme')
 
 " let g:python_host_prog='/Users/sherwin/.pyenv/versions/neovim2/bin/python'
 " let g:python_host_prog3='/Users/sherwin/.pyenv/versions/neovim3/bin/python'

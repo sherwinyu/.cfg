@@ -88,12 +88,11 @@ endif
 
 " Completion
 if has('nvim')
-  " Plug 'Shougo/deoplete.nvim'
-  Plug 'zchee/deoplete-jedi'
-  Plug 'SirVer/ultisnips'
-  call LoadPluginConfig('ultisnips')
+  if has('python3')
+    Plug 'SirVer/ultisnips'
+    call LoadPluginConfig('ultisnips')
+  endif
   Plug 'honza/vim-snippets'
-  " call LoadPluginConfig('deoplete')
 endif
 
 
@@ -114,6 +113,7 @@ Plug 'groenewege/vim-less'
 
 if v:version > 801 || has('nvim')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  echo 'Plugging coc.nvim'
   call LoadPluginConfig('coc')
 endif
 
@@ -148,7 +148,6 @@ Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'airblade/vim-gitgutter'
 call LoadPluginConfig('gitgutter')
 call plug#end()
-
 
 
 

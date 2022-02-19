@@ -1,7 +1,7 @@
 let g:lightline = {
-      \ 'colorscheme': 'winkle',
+      \ 'colorscheme': 'PaperColor',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], ['filename', 'modified'], ['ctrlpmark'] ],
+      \   'left': [ [ 'mode', 'paste' ], ['filename', 'modified'] ],
       \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'] ],
       \ },
       \ 'inactive': {
@@ -13,7 +13,6 @@ let g:lightline = {
       \   'filetype': 'MyFiletype',
       \   'fileencoding': 'MyFileencoding',
       \   'mode': 'MyMode',
-      \   'ctrlpmark': 'CtrlPMark',
       \   'modified': 'MyModified',
       \ },
       \ 'separator': { 'left': '', 'right': '' },
