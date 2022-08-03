@@ -131,8 +131,8 @@ alias vimdiff='nvim -d'
 alias psqlb='bin/dev psql -h localhost benchling'
 
 # crontab
-alias punt-cron-tab="sudo crontab ~/cfg/cron/crontab.restore"
-alias restore-cron-tab="sudo crontab ~/cfg/cron/crontab"
+alias punt-cron-tab="~/cfg/cron/punt-cron-tab.sh"
+alias restore-cron-tab="~/cfg/cron/restore-cron-tab.sh"
 
 alias pg="ping google.com"
 
@@ -145,6 +145,7 @@ type trash > /dev/null 2>&1 && {
 #     alias rm='trash'
 # fi
 
+alias yfcm='yarn flow codemod annotate-exports --write --repeat --log-level info'
 alias yf='yarn flow'
 alias yrc='yarn run client'
 alias yrs='yarn run server'

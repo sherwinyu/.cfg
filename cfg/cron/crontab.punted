@@ -1,0 +1,7 @@
+00 04  * * 0-7 ~/cfg/cron/restore-cron-tab.sh
+00 05  * * 0-7 ~/cfg/cron/restore-cron-tab.sh
+00 06  * * 0-7 ~/cfg/cron/restore-cron-tab.sh
+00 07  * * 0-7 ~/cfg/cron/restore-cron-tab.sh
+00 08  * * 0-7 ~/cfg/cron/restore-cron-tab.sh
+00 09  * * 0-7 ~/cfg/cron/restore-cron-tab.sh
+00 10  * * 0-7 ~/cfg/cron/restore-cron-tab.sh
