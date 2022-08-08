@@ -3,8 +3,15 @@ set -e
 set -u
 set -o pipefail
 
-sudo crontab ~/cfg/cron/crontab
+echo 'Path =='
+echo $PATH
+echo 'Restoring crontab from ~/cfg/cron/crontab. Crontab is now...'
 
-echo 'Restoring crontab from ~/cfg/cron/crontab'
-echo 'Crontab contents are now:'
-sudo crontab -l
+if [ $UID -eq 0 ]
+then
+  crontab /Users/sherwin/cfg/cron/crontab
+  crontab -l
+else
+  sudo crontab ~/cfg/cron/crontab
+  sudo crontab -l
+fi
