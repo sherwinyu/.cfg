@@ -1,0 +1,12 @@
+{
+  "flow": {
+    "command": "flow",
+    "args": ["lsp"],
+    "filetypes": ["javascript", "javascriptreact"],
+    "initializationOptions": {},
+    "requireRootPattern": true,
+    "settings": {},
+    "rootPatterns": [".flowconfig"]
+  },
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "json", "js", "javascript"]
+}
