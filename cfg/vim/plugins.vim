@@ -112,6 +112,11 @@ Plug 'groenewege/vim-less'
 
 
 if v:version > 801 || has('nvim')
+  let g:coc_global_extensions = [
+        \'coc-flow@0.1.3',
+        \'coc-eslint@1.5.8',
+        \'coc-prettier@9.3.1',
+        \]
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   echo 'Plugging coc.nvim'
   call LoadPluginConfig('coc')
