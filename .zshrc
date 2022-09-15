@@ -1,6 +1,3 @@
-# Set up config alias
-alias config="git --git-dir=$HOME/.cfg --work-tree=$HOME"
-
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 

@@ -4,6 +4,7 @@ sourceit() {
   [[ -e $1  ]] && source $1
 }
 
+sourceit ~/cfg/zsh/config.zsh
 sourceit ~/cfg/zsh/aliases.zsh
 sourceit ~/cfg/zsh/fancy_ctrl_z.zsh
 sourceit ~/cfg/zsh/fzf.zsh
