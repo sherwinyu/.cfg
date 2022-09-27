@@ -3,7 +3,7 @@
 //   ~/Library/Containers/com.hogbaysoftware.TaskPaper3/Data/Library/Application Support/TaskPaper/StyleSheets/
 //   /Users/sherwin/Library/Containers/com.hogbaysoftware.TaskPaper3/Data/Library/Application Support/TaskPaper/StyleSheets
 //   /Users/sherwinyu/Library/Application Support/TaskPaper/StyleSheets
-// NOTE -- it appears SYMLINKING the file (`ln -s ~/cfg/taskpaper/sherwin-taskpaper-theme.less . ` from
+// NOTE -- it appears SYMLINKING the file (`ln -s ~/dotfiles/sherwin-taskpaper-theme.less . ` from
 // the StyleSheets directory does NOT work -- it can't be a symlink!)
 
 // Font settings (you can change these to your preference)
@@ -38,7 +38,11 @@
 @font-family-header: @font-family;
 @font-family-note: @font-family;
 @font-size: @user-font-size;
-@font-size-header: @user-font-size * 22/18;
+/* @font-size-header: @user-font-size * 28/18; */
+@font-size-header-h1: @user-font-size * 24/18;
+@font-size-header-h2: @user-font-size * 22/18;
+@font-size-header-h3: @user-font-size * 20/18;
+@font-size-header-general: @user-font-size * 18/18;
 @note-font-size: @user-font-size;
 @tag-font-size: @user-font-size * 16/18;
 @padding: @font-size * @line-height-multiple / 12;
@@ -53,22 +57,15 @@ editor {
   guide-line-color: mix(@mute-color, @background-color, 10%);
   editor-wrap-to-column: 105;
   item-wrap-to-column: 90;
-  editor-wrap-to-column: 80;
-  item-wrap-to-column: 60;
+  /* editor-wrap-to-column: 80; */
+  /* item-wrap-to-column: 60; */
 }
 
 
 item[data-type='note'] {
-  // paragraph-spacing-after: @font-size;
   font-family: @font-family-note;
-   > run[content] {
-    background-color: @note-bg-color;
-    color: @note-fg-color;
-    font-size: @note-font-size;
-    font-style: normal;
-    // font-size: @user-font-size;
-  }
 }
+
 
 run[link] {
   color: @link-color;
@@ -81,10 +78,6 @@ run[link^='button'] {
   text-decoration: none;
 }
 
-// run[link^="filter"] {
-//   color: @mute-color;
-//   text-decoration: none;
-// }
 
 run[tag],
 item[data-type='note'] > run[tag] {
@@ -94,21 +87,37 @@ item[data-type='note'] > run[tag] {
   text-decoration: none;
 }
 /////-------------- Sherwin's contributions below
+item[data-type=note] {
+  background-color: transparent;
+  color: #666666;
+}
+item[data-key] {
+  background-color: #FAFAD2; // lightgoldenroldyellow
+  font-weight: bold;
+}
+item[data-personal] {
+  background-color: #E0FFFF; // lightcyan
+  font-weight: bold;
+}
+item[data-profile] {
+  background-color: #E0FFFF; // lightcyan
+  font-weight: bold;
+}
 
 
 
-@color-text: #555555;
+@color-text: #444444;
 @color-text-muted: mix(#555555, @background-color, 50%);
 @color-heading: mix(#2600cf, #444444, 50%);
 @color-p1: rgb(255, 0, 0);
 @color-p2: rgb(224, 62, 62);
 @color-p3: rgb(204, 108, 108);
 @color-p4: rgb(183, 134, 134);
-@color-today: orange;
+@color-today: brown;
 @color-chore: rgb(196, 178, 88);
 @color-break: pink;
 @color-internet: lightblue;
-@color-due: mix(@color-today, @background-color, 50%);
+@color-due: mix(@color-today, @background-color, 80%);
 @color-errand: @color-chore;
 @color-deep: green;
 
@@ -139,17 +148,32 @@ editor {
 // HEADERS
 item[data-type=project] {
   font-family: @font-family-header;
-  font-weight: 500;
+  font-weight: bold;
   paragraph-spacing-before: @padding * 1.5;
   paragraph-spacing-after: @padding * 1.5;
   color: mix(@color-heading, @background-color, 65%);
-  font-size: @font-size-header * 0.85;
+  font-size: @font-size-header-general;
+  text-decoration: underline;
 }
 
 // Primary Headers
 item[data-type=project].item[depth=1] {
   color: @color-heading;
-  font-size: @font-size-header;
+  &, > run[tag] {
+    font-size: @font-size-header-h1
+  }
+}
+item[data-type=project].item[depth=2] {
+  color: mix(@color-heading, @background-color, 85%);
+  &, > run[tag] {
+    font-size: @font-size-header-h2
+  }
+}
+item[data-type=project].item[depth=3] {
+  color: mix(@color-heading, @background-color, 75%);
+  &, > run[tag] {
+    font-size: @font-size-header-h3
+  }
 }
 
 // Items themselves
@@ -160,7 +184,7 @@ item {
 }
 item[data-today] {
   font-weight: bold;
-  color: #777777; // this color will get overridden by the p1-p4 colors
+  color: #777777; // this color will get overridden by the p1-p4 colors;
 }
 item[data-p1] {
   color: @color-p1;
@@ -195,9 +219,30 @@ run[tag=data-today] {
   font-size: @tag-font-size * 1.2;
   text-transform: capitalize;
 }
+
+run[tag=data-convo] {
+  font-weight: bold;
+}
+
+run[tag=data-convo],
+run[tag=data-due],
+run[tag=data-chore],
+run[tag=data-ai],
+run[tag=data-comms] {
+  text-decoration: underline;
+  color: darkgreen;
+}
+
+item[type=project].item[depth=3] > run[tag=data-due],
+item[type=project].item[depth=2] > run[tag=data-due],
+item[type=project].item[depth=1] > run[tag=data-due],
+item[type=project] > run[tag=data-due],
 run[tag=data-due] {
   color: @color-due;
 }
+
+
+
 run[tag=data-chore] {
   color: @color-chore;
   font-weight: bold;
