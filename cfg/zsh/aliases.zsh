@@ -152,6 +152,7 @@ alias yrs='yarn run server'
 alias ysp='yarn start-prod'
 alias yes='yarn eslint src server'
 
+alias uirs='~/projects/ui/rails-server'
 alias na='~/projects/note-app'
 alias nap='~/projects/note-app-prod'
 alias naw='~/dropbox/note-app-writings'
