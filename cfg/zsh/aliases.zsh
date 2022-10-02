@@ -7,6 +7,7 @@ alias dnstop='dnstop eth1'
 
 # GIT
 alias gs='git status'
+alias gsG='git -c color.status=always status | grep'
 alias ga='git add'
 alias gap='git add -p'
 alias gc='git commit'
@@ -80,7 +81,7 @@ alias ladybug='ssh sy23@ladybug.zoo.cs.yale.edu'
 # alias -g xclip='xclip -selection c'
 # alias -g X='| xclip'
 alias -g NG="noglob"
-alias -g G="| grep"
+alias -g G="| grep --color=always"
 alias -g L="| less"
 alias -g M='| more'
 alias -g H='| head'
