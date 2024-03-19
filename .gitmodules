@@ -4,3 +4,6 @@
 [submodule "cfg/zsh/fzf"]
 	path = cfg/zsh/fzf
 	url = https://github.com/junegunn/fzf.git
+[submodule "cfg/hosts-manager"]
+	path = cfg/hosts-manager
+	url = git@github.com:sherwinyu/hosts-manager.git
