@@ -14,6 +14,7 @@ sourceit ~/cfg/zsh/nvm.zsh
 # sourceit ~/cfg/zsh/pyenv-setup.zsh
 sourceit ~/cfg/zsh/navigation.zsh
 sourceit ~/cfg/zsh/copy-earlier-word.zsh
+sourceit ~/cfg/zsh/hosts-manager.zsh
 
 if [[ -r ~/cfg/zsh/zsh.local ]]; then
   source ~/cfg/zsh/zsh.local
