@@ -1,0 +1,1 @@
+/Users/sherwin/cfg/hosts-manager/hammerspoon/hosts-manager.lua
