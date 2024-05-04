@@ -42,6 +42,13 @@ nmap <leader>gF ysiWbi
 vmap <leader>gf Sbi
 
 
+" match ergodox a and ; as jump to start, jump to end
+onoremap ; $
+onoremap a 0
+vnoremap ; $
+vnoremap a 0
+
+
 " inserts a new line while keeping the cursor in the same place
 " ctrl-cr OR leader-j
 inoremap <c-cr> <CR><c-o>k<c-o>$
@@ -78,6 +85,7 @@ inoremap <c-w> <c-g>u<c-w>
 " alt-d: Kill word to right
 inoremap d <c-o>de
 inoremap ∂ <c-o>de
+inoremap <M-BS> <d-w>
 
 
 map s<space> vS<space><space>

@@ -8,6 +8,19 @@ map ´ 4gt
 map µ 5gt
 map ¶ 6gt
 
+map <M-1> 1gt
+map <M-2> 2gt
+map <M-3> 3gt
+map <M-4> 4gt
+map <M-5> 5gt
+map <M-6> 6gt
+
+map ² 2gt
+map ³ 3gt
+map ´ 4gt
+map µ 5gt
+map ¶ 6gt
+
 map <f1> 1gt
 map <f2> 2gt
 map <f3> 3gt

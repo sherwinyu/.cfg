@@ -16,6 +16,8 @@ inoremap <c-e> <c-o>$
 
 
 " Jump to start and end of line
+noremap <c-a> ^
+noremap <c-e> $
 noremap - ^
 noremap = $
 vnoremap & =
@@ -70,10 +72,12 @@ map <leader><f1> :call QuickfixToggle()<CR>
 
 " Searching via FZF / ag
 vnoremap <leader>* "vy<c-c>:Ag <c-r>v<CR>
+vnoremap <leader>8 "vy<c-c>:Ag <c-r>v
 nnoremap <leader>* :Ag <c-r><c-w><CR>!test<space>
-nnoremap <leader>& :Ag <c-r><c-w><CR>
+nnoremap <leader>8 :Ag <c-r><c-w><CR>!test<space>
+nnoremap <leader>7 =g <c-r><c-w>
 nnoremap <leader>/ :Ag <c-r>/
-nnoremap <leader>A :Ag<space>
+nnoremap <leader>a :Ag<space>
 
 " Tags
 nnoremap <leader><f12> :!ctags -R coffee benchling<CR>

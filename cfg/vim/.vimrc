@@ -148,7 +148,10 @@ noremap * :set hlsearch<CR>*N
 
 
 "Surround word with <> and drop into insert mode
-map <leader>a ysiWaEi<space>
+map <leader>A ysiWaEi<space>
+
+"surround with lower case s
+vmap s S
 
 "convert : to =
 let @e="f:c2l=kj"
