@@ -34,11 +34,18 @@ end
 ---
 --- Parameters:
 function obj:start()
-  self.window_filter = hs.window.filter.new({override={
-    visible = true,
-  }}):setDefaultFilter({
-    visible = true,
-  })
+
+
+  self.window_filter = hs.window.filter.new()
+    :setDefaultFilter({
+      visible = true,
+      allowRoles = {"AXStandardWindow"}  -- Include only standard windows
+    })
+    :setOverrideFilter({
+      visible = true,
+      allowRoles = {"AXStandardWindow"}  -- Include only standard windows
+    })
+
   self.window_filter:subscribe({
     hs.window.filter.windowFocused
   }, function(window)
@@ -56,14 +63,18 @@ function obj:stop()
   self.window_filter = nil
 end
 
---- MouseFollowsFocus:updateMouse(window)
---- Method
---- Moves the mouse to the center of the given window unless it's already inside the window
+
 function obj:updateMouse(window)
-  local current_pos = hs.geometry(hs.mouse.getAbsolutePosition())
+  local current_pos = hs.mouse.getAbsolutePosition()
   local frame = window:frame()
-  if not current_pos:inside(frame) then
-    hs.mouse.setAbsolutePosition(frame.center)
+  local frame_center = {x = frame.x + frame.w / 2, y = frame.y + frame.h / 2}
+
+  -- Debugging output
+  -- hs.alert.show("Current Pos: " .. tostring(current_pos.x) .. ", " .. tostring(current_pos.y))
+  -- hs.alert.show("Frame Center: " .. tostring(frame_center.x) .. ", " .. tostring(frame_center.y))
+
+  if not hs.geometry.point(current_pos):inside(frame) then
+    hs.mouse.setAbsolutePosition(frame_center)
   end
 end
 
