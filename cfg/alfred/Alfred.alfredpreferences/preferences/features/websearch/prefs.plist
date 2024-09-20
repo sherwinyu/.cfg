@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>customSites</key>
+	<dict>
+		<key>39D72AE7-0E7C-43E7-A2F4-CDB38964795F</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>dcn</string>
+			<key>text</key>
+			<string>Dict.CN</string>
+			<key>url</key>
+			<string>http://dict.cn/{query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+		<key>6BD433CF-02F0-4C65-8185-09D2841379D8</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>docs</string>
+			<key>spaces</key>
+			<string>+</string>
+			<key>text</key>
+			<string>Search codez .md files for '{query}'</string>
+			<key>url</key>
+			<string>https://github.com/Asana/codez/search?l=Markdown&amp;q={query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+		<key>BF90E375-9883-4A57-94A5-83F6237F9FDA</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>cety</string>
+			<key>text</key>
+			<string>Chinese Etymology</string>
+			<key>url</key>
+			<string>http://www.yellowbridge.com/chinese/character-etymology.php?zi={query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

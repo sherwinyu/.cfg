@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.lumpy.hostsunblocker</string>
+	<key>connections</key>
+	<dict>
+		<key>B7A0D15C-C1D5-44D0-A792-A8A549FFCEA7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E77BFB43-EC1C-4153-A85B-30829DCAF9DE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E3068FA2-0DF5-453C-AD78-C4260B5E4F03</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B7A0D15C-C1D5-44D0-A792-A8A549FFCEA7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E77BFB43-EC1C-4153-A85B-30829DCAF9DE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5413EFE3-CFDD-4CB0-B6D4-5C38974B4E62</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string></string>
+	<key>description</key>
+	<string></string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>hosts blocker</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>ub</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Fetching hosts...</string>
+				<key>script</key>
+				<string>import subprocess
+import json
+
+def get_enabled_domains():
+    result = subprocess.run(['hosts', 'enabled'], capture_output=True, text=True)
+    blacklist = set(['broadcasthost', 'localhost'])
+    domains = [line.split('\t')[1].strip() for line in result.stdout.splitlines()]
+    return [d for d in domains if d and d not in blacklist]
+
+print("{query}")
+query = "{query}"
+domains = get_enabled_domains()
+matching_domains = [domain for domain in domains if query.lower() in domain.lower()]
+
+items = [{"title": domain, "arg": domain, "valid": True, "subtitle": "Press enter to add this domain to block list"} for domain in matching_domains]
+print(json.dumps({"items": items}))
+</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Unblock a site temporarily</string>
+				<key>type</key>
+				<integer>9</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>E3068FA2-0DF5-453C-AD78-C4260B5E4F03</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{query}</string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>selectedDomains</key>
+					<string>query</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>B7A0D15C-C1D5-44D0-A792-A8A549FFCEA7</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>import sys
+import requests
+
+# Example arguments passed "domain1,domain2,domain3 10m"
+args = sys.argv[1].split()
+domains = args[0].split(',')
+duration = args[1]
+
+for domain in domains:
+    url = f'http://localhost:2999/unblock'
+    payload = {'domain': domain, 'duration_string': duration}
+    response = requests.post(url, json=payload)
+    print(response.text)</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>9</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>5413EFE3-CFDD-4CB0-B6D4-5C38974B4E62</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>subtext</key>
+				<string>30s or 3m</string>
+				<key>text</key>
+				<string>Duration string?</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E77BFB43-EC1C-4153-A85B-30829DCAF9DE</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>5413EFE3-CFDD-4CB0-B6D4-5C38974B4E62</key>
+		<dict>
+			<key>xpos</key>
+			<real>815</real>
+			<key>ypos</key>
+			<real>275</real>
+		</dict>
+		<key>B7A0D15C-C1D5-44D0-A792-A8A549FFCEA7</key>
+		<dict>
+			<key>xpos</key>
+			<real>355</real>
+			<key>ypos</key>
+			<real>185</real>
+		</dict>
+		<key>E3068FA2-0DF5-453C-AD78-C4260B5E4F03</key>
+		<dict>
+			<key>xpos</key>
+			<real>140</real>
+			<key>ypos</key>
+			<real>150</real>
+		</dict>
+		<key>E77BFB43-EC1C-4153-A85B-30829DCAF9DE</key>
+		<dict>
+			<key>xpos</key>
+			<real>425</real>
+			<key>ypos</key>
+			<real>320</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>

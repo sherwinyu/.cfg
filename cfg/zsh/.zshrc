@@ -80,3 +80,7 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 
 source ~/cfg/zsh/manifest.zsh
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
