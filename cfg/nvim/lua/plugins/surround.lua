@@ -1,10 +1,15 @@
+local map = vim.keymap.set
+
 return {
+	{
+		"ggandor/leap.nvim",
+		-- config = function() end,
+	},
 	{
 		"kawre/neotab.nvim",
 		event = "InsertEnter",
 		opts = {
 			tabkey = "<c-l>",
-			-- configuration goes here
 		},
 	},
 	{
@@ -312,6 +317,8 @@ return {
 						.. (diag.warning and icons.Warn .. diag.warning or "")
 					return vim.trim(ret)
 				end,
+				separator_style = "slant",
+				show_duplicate_prefix = false,
 				offsets = {
 					{
 						filetype = "neo-tree",
@@ -345,10 +352,10 @@ return {
 	{
 		"echasnovski/mini.ai",
 		event = "VeryLazy",
-		keys = {
-			{ "cx", "cie", desc = "Change word fragment", noremap = false },
-			{ "dx", "die", desc = "Delete word fragment", noremap = false },
-		},
+		-- keys = {
+		-- 	{ "cx", "cie", desc = "Change word fragment", noremap = false },
+		-- 	{ "dx", "die", desc = "Delete word fragment", noremap = false },
+		-- },
 		opts = function()
 			local ai = require("mini.ai")
 			return {
@@ -388,16 +395,12 @@ return {
 				end)
 			end)
 
-			local map = vim.keymap.set
 			map("o", "x", "ie", { desc = "Change word segment", noremap = false })
 		end,
 	},
 
 	{
 		"echasnovski/mini.surround",
-		config = function()
-			local sur = require("mini.surround")
-		end,
 		opts = {
 			mappings = {
 				add = "ys", -- Add surrounding in Normal and Visual modes

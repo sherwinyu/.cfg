@@ -2,6 +2,7 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 local map = vim.keymap.set
 local unmap = vim.keymap.del
+
 vim.keymap.set("n", "a", "b", { noremap = true })
 unmap("n", "]b")
 unmap("n", "[b")
@@ -11,19 +12,21 @@ map("i", "kj", "<Esc>", { noremap = true })
 map("v", "<space><space>", "<Esc>", { noremap = true })
 
 -- Ui
-map("n", "<leader>h", "<cmd>nohlsearch<CR>", { noremap = true, desc = "Clear search highlighting" })
+map("n", "<localleader>h", "<cmd>nohlsearch<CR>", { noremap = true, desc = "Clear search highlighting" })
+map("n", "<localleader>s", "<cmd>nohlsearch<CR>", { noremap = true, desc = "Clear search highlighting" })
 -- Movement
 map({ "n", "v", "o" }, "-", "^", { noremap = true })
 map({ "n", "v", "o" }, "=", "$", { noremap = true })
 map({ "n", "v", "o" }, "<c-a>", "^", { noremap = true })
 map({ "n", "v", "o" }, "<c-e>", "$", { noremap = true })
--- Opening, Writing and quitting files
+-- Files: open / write / quit, rename, paths
 map("n", "<Leader>e", ":e ", { noremap = true })
 
 map("n", "<Leader>E", ":e <c-r>%", { noremap = true })
 map("n", "<Leader>w", ":w<CR>", { noremap = true })
 map("n", "<Leader>q", ":q<CR>", { noremap = true })
 map("n", "<Leader>Q", ":qa", { noremap = true, desc = "Quit all" })
+map("n", "<localleader>if", "", { noremap = true, desc = "Quit all" })
 
 -- Sourcing files
 map("n", "<Leader>=l", ":luafile %<CR>", { noremap = true })
@@ -31,7 +34,7 @@ map("n", "<Leader>=s", ":source %<CR>", { noremap = true })
 map("v", "<Leader>=s", ":source<CR>", { noremap = true })
 
 -- Search
-map("n", "<leader>gn", ":set nohlsearch", { noremap = true, desc = "Clear search" })
+map("n", "<leader>gn", ":set nohlsearch", { noremap = true, desc = "Clear search highlighting" })
 -- Normal mode editing
 -- Define a reusable function to run a command and return to the original cursor position
 local function returnToCursorAfterCommand(cmd)
@@ -45,6 +48,7 @@ map("n", "g,", function()
 end, { noremap = true, desc = "Insert comma at end of line" })
 
 map("n", "<leader>j", "i<CR><Esc>k$function()", { noremap = true, desc = "Split line" })
+map("o", "x", "ie", { desc = "Word fragment" }) -- For use with cx, dx
 
 -- Insert mode Editing
 
@@ -63,7 +67,9 @@ end, { noremap = true, desc = "Gap line below" })
 map("i", "<c-a>", "<c-o>^", { noremap = true, desc = "Move to start of line" })
 map("i", "<c-e>", "<c-o>$", { noremap = true, desc = "Move to end of line" })
 map("i", "<M-f>", "<c-o>w", { noremap = true, desc = "Move forward one word" })
-map("i", "<M-b>", "<c-o>b", { noremap = true, desc = "Move back one word" })
+map("i", "<M-b>", "<c-o>b", { noremap = true, desc = "Move back word" })
+map("i", "<M-d>", "<c-o>de", { noremap = true, desc = "Delete forward word" })
+map("i", "<M-d>", "<c-o>de", { noremap = true, desc = "Delete forward word" })
 
 -- Window and tab management
 map("n", "\\", "<c-w>w", { noremap = true, desc = "Next window" })
@@ -74,20 +80,55 @@ map("n", "<f3>", "3gt", { noremap = true })
 map("n", "<f4>", "4gt", { noremap = true })
 map("n", "<f5>", "5gt", { noremap = true })
 map("n", "<f6>", "6gt", { noremap = true })
+map("n", "<c-t>", "<cmd>tabnew<CR>", { noremap = true })
 
-local telescope = require("telescope.builtin")
-local actions = require("telescope.actions")
+-- CopyFilePath
+vim.api.nvim_create_user_command("CopyFilePath", function()
+	local file_path = vim.fn.expand("%")
+	vim.fn.setreg("+", file_path)
+	print("Copied file path: " .. file_path)
+end, {})
+map("n", "<localleader>fc", "<cmd>CopyFilePath<cr>")
 
--- Custom function to list only modified buffers
-local function list_modified_buffers()
-	telescope.buffers({
-		sort_mru = true, -- Optional: Sort by most recently used
-		filter_fn = function(bufnr)
-			return vim.fn.getbufvar(bufnr, "&modified") == 1
-		end,
-	})
-end
+-- RenameFile
+vim.api.nvim_create_user_command("RenameFile", function(args)
+	local function ensure_directory_exists(path)
+		-- Get the directory part of the path
+		local dir = vim.fn.fnamemodify(path, ":h")
 
--- Create a command to call the function
-vim.api.nvim_create_user_command("TelescopeModifiedBuffers", list_modified_buffers, {})
-map("n", "<Leader>m", "<cmd>TelescopeModifiedBuffers<CR>", { desc = "List Modified Buffers", noremap = true })
+		-- If the directory doesn't exist, create it
+		if vim.fn.isdirectory(dir) == 0 then
+			vim.fn.mkdir(dir, "p") -- "p" option creates intermediate directories
+		end
+	end
+	local old_name = vim.fn.expand("%")
+	local new_name = args.args
+
+	-- Check if a new name was provided
+	if new_name == "" then
+		print("Error: No new file name provided")
+		return
+	end
+
+	-- Ensure the new directory exists before renaming
+	ensure_directory_exists(new_name)
+
+	-- Rename the file
+	local success, err = os.rename(old_name, new_name)
+	if not success then
+		print("Error renaming file: " .. err)
+		return
+	end
+
+	-- Update the current buffer to use the new file name
+	vim.cmd("edit " .. new_name)
+
+	-- Optionally, delete the old buffer
+	vim.cmd("bdelete " .. old_name)
+
+	print("Renamed file to: " .. new_name)
+end, {
+	nargs = 1, -- Require exactly one argument (the new file name)
+	complete = "file", -- Enable file name completion
+})
+map("n", "<localleader>fr", ":RenameFile <c-r>%", { desc = "Rename file", noremap = true })
