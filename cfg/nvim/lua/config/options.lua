@@ -4,3 +4,5 @@
 local opt = vim.opt
 
 opt.autowrite = false
+opt.pumblend = 0
+opt.laststatus = 2
