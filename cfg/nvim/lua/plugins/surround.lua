@@ -2,9 +2,40 @@ local map = vim.keymap.set
 
 return {
 	{
-		"ggandor/leap.nvim",
-		-- config = function() end,
+		"bkad/CamelCaseMotion",
+		config = function()
+			-- Normal mode mappings
+			map("n", "gw", "<Plug>CamelCaseMotion_w", { silent = true })
+			map("n", "gb", "<Plug>CamelCaseMotion_b", { silent = true })
+			map("n", "ge", "<Plug>CamelCaseMotion_e", { silent = true })
+
+			-- Operator-pending mode mappings
+			map("o", "X", "iW", { silent = true })
+			map("o", "x", "<Plug>CamelCaseMotion_iw", { silent = true })
+			map("o", "igw", "<Plug>CamelCaseMotion_iw", { silent = true })
+			map("o", "igb", "<Plug>CamelCaseMotion_ib", { silent = true })
+			map("o", "ige", "<Plug>CamelCaseMotion_ie", { silent = true })
+
+			-- Visual mode mappings
+			map("v", "X", "iW", { silent = true })
+			map("v", "x", "<Plug>CamelCaseMotion_iw", { silent = true })
+		end,
 	},
+	{
+		"ggandor/leap.nvim",
+		keys = {
+			{ "s", mode = { "n" }, desc = "Leap" },
+			{ "S", mode = { "n", "x", "o" }, desc = "Leap Backward to" },
+			{ "<localleader>s", mode = { "n", "x", "o" }, desc = "Leap from Windows" },
+		},
+		config = function()
+			map("n", "s", "<Plug>(leap)")
+			map("n", "<localleader>s", "<Plug>(leap-from-window)")
+			map({ "x", "o" }, "z", "<Plug>(leap-forward)")
+			map({ "x", "o" }, "Z", "<Plug>(leap-backward)")
+		end,
+	},
+
 	{
 		"kawre/neotab.nvim",
 		event = "InsertEnter",
@@ -369,6 +400,7 @@ return {
 					c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }), -- class
 					t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" }, -- tags
 					d = { "%f[%d]%d+" }, -- digits
+					k = { "()%{().-()%}()" },
 					e = { -- Word with case
 						{
 							"%u[%l%d]+%f[^%l%d]",
@@ -414,15 +446,19 @@ return {
 			custom_surroundings = {
 				["B"] = {
 					output = { left = "{", right = "}" },
-					input = { left = "{", right = "}" },
+					input = { "%{().-()%}" },
+				},
+				["k"] = {
+					output = { left = "{", right = "}" },
+					input = { "%{().-()%}" },
 				},
 				["r"] = {
 					output = { left = "[", right = "]" },
-					input = { left = "[", right = "]" },
+					input = { "%[().-()%]" },
 				},
 				["a"] = {
 					output = { left = "<", right = ">" },
-					input = { left = "<", right = ">" },
+					input = { "%<().-()%>" },
 				},
 			},
 		},

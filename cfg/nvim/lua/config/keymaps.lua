@@ -132,3 +132,7 @@ end, {
 	complete = "file", -- Enable file name completion
 })
 map("n", "<localleader>fr", ":RenameFile <c-r>%", { desc = "Rename file", noremap = true })
+
+vim.keymap.set("v", "*", function()
+	return "<Esc>/\\V" .. vim.fn.escape(vim.fn.getreg('"'), "/\\") .. "<CR>"
+end, { expr = true, silent = true, desc = "Search with selected text" })
