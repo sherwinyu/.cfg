@@ -12,8 +12,7 @@ map("i", "kj", "<Esc>", { noremap = true })
 map("v", "<space><space>", "<Esc>", { noremap = true })
 
 -- Ui
-map("n", "<localleader>h", "<cmd>nohlsearch<CR>", { noremap = true, desc = "Clear search highlighting" })
-map("n", "<localleader>s", "<cmd>nohlsearch<CR>", { noremap = true, desc = "Clear search highlighting" })
+map("n", "<localleader>h", "<cmd>set hlsearch!<CR>", { noremap = true, desc = "Clear search highlighting" })
 -- Movement
 map({ "n", "v", "o" }, "-", "^", { noremap = true })
 map({ "n", "v", "o" }, "=", "$", { noremap = true })
@@ -35,6 +34,7 @@ map("v", "<Leader>=s", ":source<CR>", { noremap = true })
 
 -- Search
 map("n", "<leader>gn", ":set nohlsearch", { noremap = true, desc = "Clear search highlighting" })
+
 -- Normal mode editing
 -- Define a reusable function to run a command and return to the original cursor position
 local function returnToCursorAfterCommand(cmd)
@@ -49,6 +49,14 @@ end, { noremap = true, desc = "Insert comma at end of line" })
 
 map("n", "<leader>j", "i<CR><Esc>k$function()", { noremap = true, desc = "Split line" })
 map("o", "x", "ie", { desc = "Word fragment" }) -- For use with cx, dx
+
+-- Moving lines / bubble up / bubbledown
+map("n", "<c-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
+map("n", "<c-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
+map("i", "<c-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+map("i", "<c-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+map("v", "<c-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
+map("v", "<c-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 
 -- Insert mode Editing
 
@@ -81,6 +89,15 @@ map("n", "<f4>", "4gt", { noremap = true })
 map("n", "<f5>", "5gt", { noremap = true })
 map("n", "<f6>", "6gt", { noremap = true })
 map("n", "<c-t>", "<cmd>tabnew<CR>", { noremap = true })
+
+map("n", "<left>", "<C-w>h", { desc = "Go to Left Window", noremap = true })
+map("n", "<down>", "<C-w>j", { desc = "Go to Lower Window", noremap = true })
+map("n", "<up>", "<C-w>k", { desc = "Go to Upper Window", noremap = true })
+map("n", "<right>", "<C-w>l", { desc = "Go to Right Window", noremap = true })
+map("n", "<M-.>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+map("n", "<M-,>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+map("n", "<M-]>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+map("n", "<M-[>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
 -- CopyFilePath
 vim.api.nvim_create_user_command("CopyFilePath", function()
@@ -134,5 +151,9 @@ end, {
 map("n", "<localleader>fr", ":RenameFile <c-r>%", { desc = "Rename file", noremap = true })
 
 vim.keymap.set("v", "*", function()
-	return "<Esc>/\\V" .. vim.fn.escape(vim.fn.getreg('"'), "/\\") .. "<CR>"
-end, { expr = true, silent = true, desc = "Search with selected text" })
+	-- Copy curently selected text into register v
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('"vy', true, false, true), "v", false)
+
+	-- Start search with register v
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("/<c-r>v", true, false, true), "n", false)
+end, { silent = true, desc = "Search with selected text" })
