@@ -14,6 +14,9 @@ return {
 			map("n", "gw", "<Plug>CamelCaseMotion_w", { silent = true })
 			map("n", "gb", "<Plug>CamelCaseMotion_b", { silent = true })
 			map("n", "ge", "<Plug>CamelCaseMotion_e", { silent = true })
+			map("o", "gw", "<Plug>CamelCaseMotion_w", { silent = true })
+			map("o", "gb", "<Plug>CamelCaseMotion_b", { silent = true })
+			map("n", "ge", "<Plug>CamelCaseMotion_e", { silent = true })
 
 			-- Operator-pending mode mappings
 			map("o", "X", "iW", { silent = true })
@@ -41,7 +44,6 @@ return {
 			map({ "x", "o" }, "Z", "<Plug>(leap-backward)")
 		end,
 	},
-
 	{
 		"kawre/neotab.nvim",
 		event = "InsertEnter",
@@ -252,6 +254,7 @@ return {
 					end,
 				}),
 				sources = cmp.config.sources({
+					{ name = "copilot", group_index = 2 },
 					{ name = "nvim_lsp" },
 					{ name = "path" },
 				}, {

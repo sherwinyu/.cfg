@@ -3,7 +3,6 @@
 local map = vim.keymap.set
 local unmap = vim.keymap.del
 
-vim.keymap.set("n", "a", "b", { noremap = true })
 unmap("n", "]b")
 unmap("n", "[b")
 unmap("n", "<space>ql")
@@ -11,7 +10,7 @@ unmap("n", "<space>ql")
 map("i", "kj", "<Esc>", { noremap = true })
 map("v", "<space><space>", "<Esc>", { noremap = true })
 
--- Ui
+-- UI
 map("n", "<localleader>h", "<cmd>set hlsearch!<CR>", { noremap = true, desc = "Clear search highlighting" })
 -- Movement
 map({ "n", "v", "o" }, "-", "^", { noremap = true })
@@ -157,3 +156,10 @@ vim.keymap.set("v", "*", function()
 	-- Start search with register v
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("/<c-r>v", true, false, true), "n", false)
 end, { silent = true, desc = "Search with selected text" })
+
+-- Operator-pending mode mappings for camel case motions
+map("o", "X", "iW", { silent = true })
+map("o", "x", "<Plug>CamelCaseMotion_iw", { silent = true })
+map("o", "igw", "<Plug>CamelCaseMotion_iw", { silent = true })
+map("o", "ige", "<Plug>CamelCaseMotion_ie", { silent = true })
+map("o", "igb", "<Plug>CamelCaseMotion_ib", { silent = true })
