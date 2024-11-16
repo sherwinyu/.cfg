@@ -33,7 +33,6 @@ vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
 	end,
 })
 
--- -- Most recent tab
 -- Keep track of the current and previous tab
 local previous_tab = nil
 

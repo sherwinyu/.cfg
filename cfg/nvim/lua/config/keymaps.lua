@@ -149,9 +149,16 @@ end, { noremap = true, desc = "Gap line below" })
 map("i", "<c-a>", "<c-o>^", { noremap = true, desc = "Move to start of line" })
 map("i", "<c-e>", "<c-o>$", { noremap = true, desc = "Move to end of line" })
 map("i", "<M-f>", "<c-o>w", { noremap = true, desc = "Move forward one word" })
-map("i", "<M-b>", "<c-o>b", { noremap = true, desc = "Move back word" })
+map("i", "<M-b>", "<c-o>b", { noremap = true, desc = "Move back one word" })
 map("i", "<M-BS>", "<c-w>", { noremap = true, desc = "Delete backward word" })
 map("i", "<M-d>", "<c-o>de", { noremap = true, desc = "Delete forward word" })
+
+-- Command mode;
+map("c", "<M-f>", "<c-right>", { noremap = true, desc = "Move forward one word" })
+map("c", "<M-b>", "<c-left>", { noremap = true, desc = "Move backward one word" })
+map("c", "<c-a>", "<Home>", { noremap = true, desc = "Move to start of line" })
+map("c", "<c-e>", "<End>", { noremap = true, desc = "Move to end of line" })
+map("i", "<M-BS>", "<c-w>", { noremap = true, desc = "Delete backward word" })
 
 -- Navigating in current windows
 map("n", "<c-b>", "8k", { noremap = true, desc = "Scroll up" })
@@ -198,6 +205,11 @@ vim.keymap.set("v", "*", function()
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("/<c-r>v", true, false, true), "n", false)
 end, { silent = true, desc = "Search with selected text" })
 
+local function search_word_under_cursor()
+	require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })
+end
+map("n", "<leader>8", search_word_under_cursor, { noremap = true, desc = "Search word under cursor" })
+
 -- Operator-pending mode mappings for camel case motions
 map("o", "X", "iW", { silent = true })
 map("o", "x", "<Plug>CamelCaseMotion_iw", { silent = true })
@@ -209,9 +221,6 @@ map("o", "igb", "<Plug>CamelCaseMotion_ib", { silent = true })
 -- Function to list buffers and jump to the selected one
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
-local pickers = require("telescope.pickers")
-local finders = require("telescope.finders")
-local sorters = require("telescope.config").values
 
 local function jump_to_buffer(bufnr)
 	local tabs = vim.api.nvim_list_tabpages()
