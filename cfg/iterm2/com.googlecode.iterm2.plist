@@ -621,14 +621,16 @@
 			</dict>
 			<key>Ansi 7 Color (Light)</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.83529411764705885</real>
+				<real>0.65545189380645752</real>
 				<key>Color Space</key>
-				<string>sRGB</string>
+				<string>P3</string>
 				<key>Green Component</key>
-				<real>0.90980392156862744</real>
+				<real>0.71151489019393921</real>
 				<key>Red Component</key>
-				<real>0.93333333333333335</real>
+				<real>0.72235125303268433</real>
 			</dict>
 			<key>Ansi 8 Color</key>
 			<dict>
@@ -718,14 +720,16 @@
 			</dict>
 			<key>Background Color (Light)</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.8901960784313725</real>
+				<real>0.89411764705882357</real>
 				<key>Color Space</key>
-				<string>sRGB</string>
+				<string>P3</string>
 				<key>Green Component</key>
 				<real>0.96470588235294119</real>
 				<key>Red Component</key>
-				<real>0.99215686274509807</real>
+				<real>0.98431372549019602</real>
 			</dict>
 			<key>Background Image Location</key>
 			<string></string>
@@ -1537,14 +1541,16 @@
 			</dict>
 			<key>Selection Color (Light)</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.83529411764705885</real>
+				<real>0.83921568627450982</real>
 				<key>Color Space</key>
-				<string>sRGB</string>
+				<string>P3</string>
 				<key>Green Component</key>
 				<real>0.90980392156862744</real>
 				<key>Red Component</key>
-				<real>0.93333333333333335</real>
+				<real>0.92549019607843142</real>
 			</dict>
 			<key>Send Code When Idle</key>
 			<false/>
