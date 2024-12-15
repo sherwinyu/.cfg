@@ -234,12 +234,13 @@ local function jump_to_buffer(bufnr)
 				vim.api.nvim_set_current_tabpage(tab)
 				vim.api.nvim_set_current_win(win)
 				print("Jumped to buffer in tab " .. tab)
-				return
+				return true
 			end
 		end
 	end
 
 	print("Buffer not found in any window.")
+	return false
 end
 
 -- Telescope picker to list buffers and jump to them
