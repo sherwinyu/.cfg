@@ -45,6 +45,7 @@ return {
 		end,
 	},
 	{
+		-- Tab out plugin
 		"kawre/neotab.nvim",
 		event = "InsertEnter",
 		opts = {
@@ -209,6 +210,9 @@ return {
 						bg = colors.bg_visual,
 					}
 				end,
+				on_colors = function()
+					-- colors.bg_statusline = colors.bg_statusline:lighten(0.1)
+				end,
 			})
 			vim.cmd("colorscheme tokyonight-moon")
 		end,
@@ -235,7 +239,7 @@ return {
 				completion = {
 					completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect"),
 				},
-				completion = cmp.config.window.bordered(),
+				-- completion = cmp.config.window.bordered(),
 				preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
 				mapping = cmp.mapping.preset.insert({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
