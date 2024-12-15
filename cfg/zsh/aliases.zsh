@@ -155,5 +155,6 @@ alias yes='yarn eslint src server'
 
 alias uirs='~/projects/ui/rails-server'
 alias na='~/projects/note-app'
+alias lp='~/projects/note-app/oryoki-src/my-remix-app/lexpla'
 alias nap='~/projects/note-app-prod'
 alias naw='~/dropbox/note-app-writings'
