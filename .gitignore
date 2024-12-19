@@ -72,6 +72,18 @@ projects/
 .zcompdump-*
 zsh.local
 
+.bundle/
+.codeium/
+.config/github-copilot/
+.cups/
+.gem/
+.paragon/
+.profile
+.rbenv/
+.volta/
+.windsurf/
+.yarn/
+Sites/
 
 
 IGNORE/
