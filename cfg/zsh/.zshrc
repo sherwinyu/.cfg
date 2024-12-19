@@ -84,3 +84,6 @@ export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# Added by Windsurf
+export PATH="/Users/sherwin/.codeium/windsurf/bin:$PATH"
