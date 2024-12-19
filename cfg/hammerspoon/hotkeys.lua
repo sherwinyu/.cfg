@@ -15,8 +15,74 @@ hs.hotkey.bind({}, "F10", function()
 	hs.application.launchOrFocus("Arc")
 end)
 
+-- Define the "Hyper" key as Ctrl + Alt + Cmd + Shift
+local hyper = { "ctrl", "alt", "cmd", "shift" }
+
+local TaskQueue = {}
+TaskQueue.__index = TaskQueue
+
+function TaskQueue.new()
+	return setmetatable({ tasks = {} }, TaskQueue)
+end
+
+function TaskQueue:after(seconds, fn)
+	table.insert(self.tasks, { seconds = seconds, fn = fn })
+	return self
+end
+
+function TaskQueue:run()
+	local delay = 0
+	for _, task in ipairs(self.tasks) do
+		delay = delay + task.seconds
+		hs.timer.doAfter(delay, task.fn)
+	end
+end
+
+function OpenWhatsapp(q)
+	if not q then
+		q = TaskQueue.new()
+	end
+
+	-- Enqueue tasks with delays
+	q:after(0.2, function()
+		hs.application.launchOrFocus("Arc")
+	end)
+	q:after(0.2, function()
+		hs.eventtap.keyStroke({ "ctrl" }, "1")
+	end)
+	q:after(0.2, function()
+		hs.eventtap.keyStroke({ "command" }, "2")
+	end)
+	return q
+end
+
+function MessageNadia(q)
+	if not q then
+		q = TaskQueue.new()
+	end
+	q = OpenWhatsapp(q)
+	q:after(0.1, function()
+		hs.eventtap.keyStroke({ "cmd" }, "k")
+	end)
+	q:after(0.1, function()
+		hs.eventtap.keyStrokes("nadia")
+	end)
+	q:after(0.1, function()
+		hs.eventtap.keyStroke({}, "return")
+	end)
+	return q
+end
+
+hs.hotkey.bind(hyper, "1", function()
+	OpenWhatsapp():run()
+end)
+
+hs.hotkey.bind(hyper, "n", function()
+	MessageNadia():run()
+end)
+
 -- Function to activate a specific menu item in TaskPaper
-function selectMenuItem(appName, menuHierarchy)
+local function selectMenuItem(appName, menuHierarchy)
 	-- Focus on the app
 	local app = hs.application.get(appName)
 	if not app then
