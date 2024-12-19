@@ -122,6 +122,13 @@ map("n", "g,", function()
 end, { noremap = true, desc = "Insert comma at end of line" })
 
 map("n", "<leader>j", "i<CR><Esc>k$function()", { noremap = true, desc = "Split line" })
+map("n", "<leader>us", 'n"tyiw:%s/<C-r>//<C-r>t/g<Left><Left>', { noremap = true, desc = "Substitute" })
+map("n", "<leader>uS", '"tyiw:s/<C-r>//<C-r>t/g<Left><Left>', { noremap = true, desc = "Substitute (line only)" })
+map("v", "<leader>us", '"ty:%s/<C-r>t/<C-r>t/g<Left><Left>', { noremap = true, desc = "Substitute" })
+map("v", "<leader>uS", '"ty:s/<C-r>t/<C-r>t/g<Left><Left>', { noremap = true, desc = "Substitute (line only)" })
+
+map("n", "*", ":set hlsearch<CR>*N", { noremap = true })
+
 map("o", "x", "ie", { desc = "Word fragment" }) -- For use with cx, dx
 
 -- Moving lines / bubble up / bubbledown
@@ -197,6 +204,7 @@ map("n", "<M-,>", "<cmd>resize -2<cr>", { desc = "Window Resize: decrease height
 map("n", "<M-]>", "<cmd>vertical resize -2<cr>", { desc = "Window Resize: decrease width" })
 map("n", "<M-[>", "<cmd>vertical resize +2<cr>", { desc = "Window Resize: increase width" })
 
+-- Searching for text
 vim.keymap.set("v", "*", function()
 	-- Copy curently selected text into register v
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('"vy', true, false, true), "v", false)
@@ -204,6 +212,14 @@ vim.keymap.set("v", "*", function()
 	-- Start search with register v
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("/<c-r>v", true, false, true), "n", false)
 end, { silent = true, desc = "Search with selected text" })
+
+vim.api.nvim_create_user_command("Ag", function(opts)
+	require("telescope.builtin").grep_string({
+		search = opts.args, -- Pre-fill the search query
+		prompt_title = "Code Search: " .. opts.args, -- Custom title
+	})
+end, { nargs = "*" })
+map("n", "<leader>a", "<cmd>Ag<space>", { noremap = true, desc = "Code search" })
 
 local function search_word_under_cursor()
 	require("telescope.builtin").grep_string({ search = vim.fn.expand("<cword>") })
