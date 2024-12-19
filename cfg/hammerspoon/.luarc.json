@@ -1,0 +1,5 @@
+{
+  "Lua.runtime.version": "LuaJIT",
+  "Lua.diagnostics.globals": ["hs"],
+  "Lua.workspace.library": ["/Users/your-username/.hammerspoon/hs"]
+}
