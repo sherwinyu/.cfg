@@ -19,36 +19,6 @@ import {
 // (--dry-run print the config json into console)
 // + Create a new profile if needed.
 writeToProfile('karabiner-config-profile', [
-  // rule('z to ctrl').manipulators([
-  //   map('z', 'optionalAny')
-  //     .toIfAlone('z', {}, { halt: true })
-  //     .toIfHeldDown('left_control')
-  //     .toDelayedAction([], toKey('z'))
-  //     .parameters({
-  //       "basic.to_delayed_action_delay_milliseconds": 500,
-  //       "basic.to_if_held_down_threshold_milliseconds": 200
-  //     })
-  // ]),
-
-
-  // rule("A")
-  //   .manipulators([
-  //     withModifier('optionalAny')([
-  //       map('a')
-  //         .toIfAlone("a", {}, { halt: true })
-  //         .toIfHeldDown("‹⇧"),
-  //     ]),
-  //   ]),
-  // rule("easy mods").manipulators([
-  //   withModifier('optionalAny')([
-  //     map('z')
-  //       .toIfAlone("z", {}, { halt: true })
-  //       .toIfHeldDown("left_control"),
-  //     map('/')
-  //       .toIfAlone("/", {}, { halt: true })
-  //       .toIfHeldDown("left_control"),
-  //   ]),
-  // ]),
 
   text_editing_layer(),
   nav_layer(),
@@ -56,6 +26,15 @@ writeToProfile('karabiner-config-profile', [
   // symbol_layer(),
   rule('jk => Esc').manipulators([
     mapSimultaneous(['j', 'k']).to('escape'),
+  ]),
+  rule('Tab → Hyper when held').manipulators([
+    map('tab')
+      .toIfAlone('tab')
+      .toIfHeldDown({ key_code: 'left_control', modifiers: ['shift', 'option', 'command'] })
+      .parameters({
+        "basic.to_if_alone_timeout_milliseconds": 100,
+        "basic.to_if_held_down_threshold_milliseconds": 100
+      })
   ]),
   rule('Caps Lock → Hyper').manipulators([
     map('caps_lock').toHyper().toIfAlone('caps_lock'),
@@ -95,7 +74,11 @@ function easy_mods_rules() {
   return rule('easy mods').manipulators([
     withMapper<ToKeyParam, ToKeyParam>({
       'z': 'left_control',
+      'x': 'left_option',
+      'c': 'left_command',
       'slash': 'right_control',
+      'period': 'right_option',
+      'comma': 'right_command',
       'f': 'left_option',
     })((lhs, rhs) => {
       return map(lhs as FromKeyParam, 'optionalAny')
