@@ -1,4 +1,28 @@
--- General hotkeys
+local function listMenuItems(appName)
+	local app = hs.application.get(appName)
+	if not app then
+		print("App not found: " .. appName)
+		return
+	end
+
+	local menuItems = app:getMenuItems()
+	hs.json.write(menuItems, "/Users/sherwin/cfg/hammerspoon/menuitems.json", true, true)
+	print("Menu items saved to menuItems.json")
+end
+
+listMenuItems("Arc")
+
+-- Function to activate a specific menu item in TaskPaper
+local function selectMenuItem(appName, menuHierarchy)
+	-- Focus on the app
+	local app = hs.application.get(appName)
+	if not app then
+		return
+	end
+
+	-- Trigger the menu item
+	app:selectMenuItem(menuHierarchy)
+end -- General hotkeys
 hs.hotkey.bind({}, "F7", function()
 	hs.application.launchOrFocus("iTerm")
 end)
@@ -43,12 +67,11 @@ function OpenWhatsapp(q)
 		q = TaskQueue.new()
 	end
 
-	-- Enqueue tasks with delays
 	q:after(0.2, function()
 		hs.application.launchOrFocus("Arc")
 	end)
 	q:after(0.2, function()
-		hs.eventtap.keyStroke({ "ctrl" }, "1")
+		selectMenuItem("Arc", { "Spaces", "Sherwin" })
 	end)
 	q:after(0.2, function()
 		hs.eventtap.keyStroke({ "command" }, "2")
@@ -73,6 +96,22 @@ function MessageNadia(q)
 	return q
 end
 
+function OpenMaps(q)
+	if not q then
+		q = TaskQueue.new()
+	end
+	q:after(0.2, function()
+		hs.application.launchOrFocus("Arc")
+	end)
+	q:after(0.2, function()
+		selectMenuItem("Arc", { "Spaces", "Sherwin" })
+	end)
+	q:after(0.2, function()
+		hs.eventtap.keyStroke({ "command" }, "6")
+	end)
+	return q
+end
+
 hs.hotkey.bind(hyper, "1", function()
 	OpenWhatsapp():run()
 end)
@@ -81,23 +120,11 @@ hs.hotkey.bind(hyper, "n", function()
 	MessageNadia():run()
 end)
 
--- Function to activate a specific menu item in TaskPaper
-local function selectMenuItem(appName, menuHierarchy)
-	-- Focus on the app
-	local app = hs.application.get(appName)
-	if not app then
-		return
-	end
-
-	-- Trigger the menu item
-	app:selectMenuItem(menuHierarchy)
-end
-
 -- Create a table to hold the TaskPaper-specific hotkeys
 local taskPaperHotkeys = {}
 
 -- Function to enable TaskPaper hotkeys
-function enableTaskPaperHotkeys()
+local function enableTaskPaperHotkeys()
 	taskPaperHotkeys = {
 		hs.hotkey.bind({ "ctrl", "cmd" }, "S", function()
 			selectMenuItem("TaskPaper", { "Edit", "Selection", "Select Branch" })
@@ -130,7 +157,7 @@ function enableTaskPaperHotkeys()
 end
 
 -- Function to disable TaskPaper hotkeys
-function disableTaskPaperHotkeys()
+local function disableTaskPaperHotkeys()
 	for _, hotkey in ipairs(taskPaperHotkeys) do
 		hotkey:delete()
 	end
@@ -138,7 +165,7 @@ function disableTaskPaperHotkeys()
 end
 
 -- Create an application watcher to enable/disable TaskPaper-specific keybindings
-hotkeyWatcher = hs.application.watcher.new(function(appName, eventType)
+local hotkeyWatcher = hs.application.watcher.new(function(appName, eventType)
 	if eventType == hs.application.watcher.activated then
 		if appName == "TaskPaper" then
 			enableTaskPaperHotkeys()
