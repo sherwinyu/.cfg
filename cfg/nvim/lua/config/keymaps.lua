@@ -29,6 +29,11 @@ unmap("n", "[b")
 unmap("n", "<space>ql")
 unmap("n", "<space>qq")
 unmap("n", "<space>qq")
+unmap("n", "<c-down>")
+unmap("n", "<c-up>")
+unmap("n", "<c-right>")
+unmap("n", "<c-down>")
+unmap("n", "<c-left>")
 
 map("i", "kj", "<Esc>", { noremap = true })
 -- Visual
@@ -36,9 +41,9 @@ map("v", "<space><space>", "<Esc>", { noremap = true })
 map("n", "<leader>v", "<c-v>", { noremap = true, desc = "Visual block" })
 map("n", "<localleader>v", "<c-v>", { noremap = true, desc = "Visual block" })
 
+-- Movement
 -- UI
 map("n", "<localleader>h", "<cmd>set hlsearch!<CR>", { noremap = true, desc = "Clear search highlighting" })
--- Movement
 map({ "n", "v", "o" }, "-", "^", { noremap = true })
 map({ "n", "v", "o" }, "=", "$", { noremap = true })
 map({ "n", "v", "o" }, "<c-a>", "^", { noremap = true })
@@ -104,7 +109,8 @@ end, {
 map("n", "<localleader>fr", ":RenameFile <c-r>%", { desc = "Rename file", noremap = true })
 
 -- Sourcing files
-map("n", "<localLeader>r", ":source %<CR>", { noremap = true })
+map("n", "<localLeader>vr", ":source %<CR>", { noremap = true, desc = "Vim Config: source file" })
+map("n", "<localLeader>vf", ":source %<CR>", { noremap = true })
 
 -- Search
 map("n", "<leader>gn", ":set nohlsearch", { noremap = true, desc = "Clear search highlighting" })
@@ -174,6 +180,8 @@ map("n", "<c-f>", "8j", { noremap = true, desc = "Scroll down" })
 map("n", "\\", "<c-w>w", { noremap = true, desc = "Next window" })
 map("n", "<tab>", "<c-w>W", { noremap = true, desc = "Prev window" })
 
+map("n", "<localleader>wm", "<c-w>", { noremap = true, desc = "Prev window" })
+
 map("n", "<f1>", "1gt", { noremap = true })
 map("n", "<f2>", "2gt", { noremap = true })
 map("n", "<f3>", "3gt", { noremap = true })
@@ -189,11 +197,14 @@ map("n", "<localleader>5", "5gt", { noremap = true })
 map("n", "<localleader>6", "6gt", { noremap = true })
 map("n", "<localleader>6", "6gt", { noremap = true })
 
-map("n", "(", "gT", { noremap = true, desc = "Previous tab" })
-map("n", ")", "gt", { noremap = true, desc = "Next tab" })
-map("n", "<localleader><enter>", "<cmd>SwitchToPreviousTab<CR>", { noremap = true, desc = "Jump to alt tab" })
-
+map("n", "(", "gT", { noremap = true, desc = "Tab: next" })
+map("n", ")", "gt", { noremap = true, desc = "Tab: previous" })
+map("n", "<localleader>(", "<cmd>tabm -1<CR>", { noremap = true, desc = "Tab: move left" })
+map("n", "<localleader>)", "<cmd>tabm +1<CR>", { noremap = true, desc = "Tab: move right" })
+map("n", "<localleader><enter>", "<cmd>SwitchToPreviousTab<CR>", { noremap = true, desc = "Tab: jump to alt" })
 map("n", "<c-t>", "<cmd>tabnew<CR>", { noremap = true })
+map("n", "<localleader>tt", "<cmd>tabnew<CR>", { noremap = true, desc = "Tab: new" })
+map("n", "<localleader>to", "<cmd>tabo<CR>", { noremap = true, desc = "Tab: Only -- Close all other tabs " })
 
 map("n", "<left>", "<C-w>h", { noremap = true, desc = "Go to Left Window" })
 map("n", "<down>", "<C-w>j", { noremap = true, desc = "Go to Lower Window" })
@@ -203,6 +214,16 @@ map("n", "<M-.>", "<cmd>resize +2<cr>", { desc = "Window Resize: increase height
 map("n", "<M-,>", "<cmd>resize -2<cr>", { desc = "Window Resize: decrease height" })
 map("n", "<M-]>", "<cmd>vertical resize -2<cr>", { desc = "Window Resize: decrease width" })
 map("n", "<M-[>", "<cmd>vertical resize +2<cr>", { desc = "Window Resize: increase width" })
+
+map("n", "<localleader>wh", "<C-w>H", { noremap = true, desc = "Window Pane: Move left" })
+map("n", "<localleader>wj", "<C-w>J", { noremap = true, desc = "Window Pane: Move down" })
+map("n", "<localleader>wk", "<C-w>K", { noremap = true, desc = "Window Pane: Move up" })
+map("n", "<localleader>wl", "<C-w>L", { noremap = true, desc = "Window Pane: Move right" })
+
+map("n", "<localleader>wv", "<C-w>v", { noremap = true, desc = "Window pane: split vertical" })
+map("n", "<localleader>ws", "<C-w>s", { noremap = true, desc = "Window pane: split horizontal" })
+map("n", "<localleader>wo", "<C-w>o", { noremap = true, desc = "Window pane: only -- close all other panes" })
+LazyVim.toggle.map("<localleader>wm", LazyVim.toggle.maximize)
 
 -- Searching for text
 vim.keymap.set("v", "*", function()
