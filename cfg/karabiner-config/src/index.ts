@@ -160,6 +160,7 @@ function easy_mods_rules() {
   return rule('easy mods').manipulators(appleKeyboardOnly([
     withMapper<ToKeyParam, ToKeyParam>({
       'z': 'left_control',
+      'x': 'left_option',
       'slash': 'right_control',
       's': 'left_shift',
       'f': 'left_option',
