@@ -251,6 +251,310 @@
       "complex_modifications": {
         "rules": [
           {
+            "description": "DuoLayer fj Hyper",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "f"
+                    },
+                    {
+                      "key_code": "j"
+                    }
+                  ],
+                  "simultaneous_options": {
+                    "to_after_key_up": []
+                  },
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
+                },
+                "to": [
+                  {
+                    "set_variable": {
+                      "name": "fj Hyper",
+                      "value": 1
+                    }
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "duo-layer-fj Hyper",
+                      "text": "Hyper Mode"
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_unless",
+                    "name": "fj Hyper",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "f"
+                },
+                "to": [
+                  {
+                    "key_code": "f",
+                    "modifiers": [
+                      "command",
+                      "option",
+                      "control",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "set_variable": {
+                      "name": "fj Hyper",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "duo-layer-fj Hyper",
+                      "text": ""
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "fj Hyper",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "j"
+                },
+                "to": [
+                  {
+                    "key_code": "j",
+                    "modifiers": [
+                      "command",
+                      "option",
+                      "control",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "set_variable": {
+                      "name": "fj Hyper",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "duo-layer-fj Hyper",
+                      "text": ""
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "fj Hyper",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "a"
+                },
+                "to": [
+                  {
+                    "key_code": "a",
+                    "modifiers": [
+                      "command",
+                      "option",
+                      "control",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "set_variable": {
+                      "name": "fj Hyper",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "duo-layer-fj Hyper",
+                      "text": ""
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "fj Hyper",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "n"
+                },
+                "to": [
+                  {
+                    "key_code": "n",
+                    "modifiers": [
+                      "command",
+                      "option",
+                      "control",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "set_variable": {
+                      "name": "fj Hyper",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "duo-layer-fj Hyper",
+                      "text": ""
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "fj Hyper",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "u"
+                },
+                "to": [
+                  {
+                    "key_code": "u",
+                    "modifiers": [
+                      "command",
+                      "option",
+                      "control",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "set_variable": {
+                      "name": "fj Hyper",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "duo-layer-fj Hyper",
+                      "text": ""
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "fj Hyper",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "k"
+                    },
+                    {
+                      "key_code": "j"
+                    }
+                  ]
+                },
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "fj Hyper",
+                    "value": 1
+                  }
+                ],
+                "to": [
+                  {
+                    "set_variable": {
+                      "name": "fj Hyper",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "duo-layer-fj Hyper",
+                      "text": ""
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "description": "Simlayer - text_editing",
             "manipulators": [
               {
@@ -272,6 +576,14 @@
                   }
                 ],
                 "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
                   {
                     "type": "variable_if",
                     "name": "text_editing",
@@ -299,6 +611,14 @@
                   }
                 ],
                 "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
                   {
                     "type": "variable_if",
                     "name": "text_editing",
@@ -333,57 +653,13 @@
                 ],
                 "conditions": [
                   {
-                    "type": "variable_if",
-                    "name": "text_editing",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "k",
-                  "modifiers": {
-                    "optional": [
-                      "any"
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
                     ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "up_arrow",
-                    "modifiers": [
-                      "control"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "text_editing",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "j",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "down_arrow",
-                    "modifiers": [
-                      "control"
-                    ]
-                  }
-                ],
-                "conditions": [
+                  },
                   {
                     "type": "variable_if",
                     "name": "text_editing",
@@ -408,12 +684,18 @@
                     "modifiers": [
                       "command"
                     ]
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "simlayer-e",
+                      "text": "Text Editing mode"
+                    }
                   }
                 ],
                 "from": {
                   "simultaneous": [
                     {
-                      "key_code": "e"
+                      "key_code": "q"
                     },
                     {
                       "key_code": "a"
@@ -429,6 +711,12 @@
                         "set_variable": {
                           "name": "text_editing",
                           "value": 0
+                        }
+                      },
+                      {
+                        "set_notification_message": {
+                          "id": "simlayer-e",
+                          "text": ""
                         }
                       }
                     ]
@@ -458,12 +746,18 @@
                       "control",
                       "command"
                     ]
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "simlayer-e",
+                      "text": "Text Editing mode"
+                    }
                   }
                 ],
                 "from": {
                   "simultaneous": [
                     {
-                      "key_code": "e"
+                      "key_code": "q"
                     },
                     {
                       "key_code": "s"
@@ -479,6 +773,12 @@
                         "set_variable": {
                           "name": "text_editing",
                           "value": 0
+                        }
+                      },
+                      {
+                        "set_notification_message": {
+                          "id": "simlayer-e",
+                          "text": ""
                         }
                       }
                     ]
@@ -514,12 +814,18 @@
                       "shift",
                       "command"
                     ]
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "simlayer-e",
+                      "text": "Text Editing mode"
+                    }
                   }
                 ],
                 "from": {
                   "simultaneous": [
                     {
-                      "key_code": "e"
+                      "key_code": "q"
                     },
                     {
                       "key_code": "p"
@@ -536,54 +842,11 @@
                           "name": "text_editing",
                           "value": 0
                         }
-                      }
-                    ]
-                  },
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                }
-              },
-              {
-                "type": "basic",
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
-                },
-                "to": [
-                  {
-                    "set_variable": {
-                      "name": "text_editing",
-                      "value": 1
-                    }
-                  },
-                  {
-                    "key_code": "up_arrow",
-                    "modifiers": [
-                      "control"
-                    ]
-                  }
-                ],
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "e"
-                    },
-                    {
-                      "key_code": "k"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "detect_key_down_uninterruptedly": true,
-                    "key_down_order": "strict",
-                    "key_up_order": "strict_inverse",
-                    "key_up_when": "any",
-                    "to_after_key_up": [
+                      },
                       {
-                        "set_variable": {
-                          "name": "text_editing",
-                          "value": 0
+                        "set_notification_message": {
+                          "id": "simlayer-e",
+                          "text": ""
                         }
                       }
                     ]
@@ -594,45 +857,350 @@
                     ]
                   }
                 }
-              },
+              }
+            ]
+          },
+          {
+            "description": "DuoLayer selection layer",
+            "manipulators": [
               {
                 "type": "basic",
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "e"
+                    },
+                    {
+                      "key_code": "f"
+                    }
+                  ],
+                  "simultaneous_options": {
+                    "to_after_key_up": [
+                      {
+                        "set_variable": {
+                          "name": "selection layer",
+                          "value": 0
+                        }
+                      },
+                      {
+                        "set_notification_message": {
+                          "id": "duo-layer-selection layer",
+                          "text": ""
+                        }
+                      }
+                    ]
+                  },
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
                 "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 200
+                  "basic.simultaneous_threshold_milliseconds": 50
                 },
                 "to": [
                   {
                     "set_variable": {
-                      "name": "text_editing",
+                      "name": "selection layer",
                       "value": 1
                     }
                   },
+                  {
+                    "set_notification_message": {
+                      "id": "duo-layer-selection layer",
+                      "text": "Selection"
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_unless",
+                    "name": "selection layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "a"
+                },
+                "to": [
+                  {
+                    "key_code": "left_arrow",
+                    "modifiers": [
+                      "command",
+                      "shift"
+                    ]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "selection layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "semicolon"
+                },
+                "to": [
+                  {
+                    "key_code": "right_arrow",
+                    "modifiers": [
+                      "command",
+                      "shift"
+                    ]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "selection layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "h"
+                },
+                "to": [
+                  {
+                    "key_code": "left_arrow",
+                    "modifiers": [
+                      "option",
+                      "shift"
+                    ]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "selection layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "j"
+                },
+                "to": [
                   {
                     "key_code": "down_arrow",
                     "modifiers": [
-                      "control"
+                      "option",
+                      "shift"
                     ]
                   }
                 ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "selection layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "k"
+                },
+                "to": [
+                  {
+                    "key_code": "up_arrow",
+                    "modifiers": [
+                      "option",
+                      "shift"
+                    ]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "selection layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "l"
+                },
+                "to": [
+                  {
+                    "key_code": "right_arrow",
+                    "modifiers": [
+                      "option",
+                      "shift"
+                    ]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "selection layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "u"
+                },
+                "to": [
+                  {
+                    "key_code": "left_arrow",
+                    "modifiers": [
+                      "option"
+                    ]
+                  },
+                  {
+                    "key_code": "right_arrow",
+                    "modifiers": [
+                      "option",
+                      "shift"
+                    ]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "selection layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "i"
+                },
+                "to": [
+                  {
+                    "key_code": "left_arrow",
+                    "modifiers": [
+                      "command"
+                    ]
+                  },
+                  {
+                    "key_code": "right_arrow",
+                    "modifiers": [
+                      "command",
+                      "shift"
+                    ]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "selection layer",
+                    "value": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "DuoLayer deletion layer",
+            "manipulators": [
+              {
+                "type": "basic",
                 "from": {
                   "simultaneous": [
                     {
-                      "key_code": "e"
+                      "key_code": "w"
                     },
                     {
-                      "key_code": "j"
+                      "key_code": "f"
                     }
                   ],
                   "simultaneous_options": {
-                    "detect_key_down_uninterruptedly": true,
-                    "key_down_order": "strict",
-                    "key_up_order": "strict_inverse",
-                    "key_up_when": "any",
                     "to_after_key_up": [
                       {
                         "set_variable": {
-                          "name": "text_editing",
+                          "name": "deletion layer",
                           "value": 0
+                        }
+                      },
+                      {
+                        "set_notification_message": {
+                          "id": "duo-layer-deletion layer",
+                          "text": ""
                         }
                       }
                     ]
@@ -642,7 +1210,307 @@
                       "any"
                     ]
                   }
-                }
+                },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
+                },
+                "to": [
+                  {
+                    "set_variable": {
+                      "name": "deletion layer",
+                      "value": 1
+                    }
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "duo-layer-deletion layer",
+                      "text": "Selection"
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_unless",
+                    "name": "deletion layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "a"
+                },
+                "to": [
+                  {
+                    "key_code": "left_arrow",
+                    "modifiers": [
+                      "command",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "key_code": "delete_or_backspace"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "deletion layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "semicolon"
+                },
+                "to": [
+                  {
+                    "key_code": "right_arrow",
+                    "modifiers": [
+                      "command",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "key_code": "delete_or_backspace"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "deletion layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "h"
+                },
+                "to": [
+                  {
+                    "key_code": "left_arrow",
+                    "modifiers": [
+                      "option",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "key_code": "delete_or_backspace"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "deletion layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "j"
+                },
+                "to": [
+                  {
+                    "key_code": "down_arrow",
+                    "modifiers": [
+                      "option",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "key_code": "delete_or_backspace"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "deletion layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "k"
+                },
+                "to": [
+                  {
+                    "key_code": "up_arrow",
+                    "modifiers": [
+                      "option",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "key_code": "delete_or_backspace"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "deletion layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "l"
+                },
+                "to": [
+                  {
+                    "key_code": "right_arrow",
+                    "modifiers": [
+                      "option",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "key_code": "delete_or_backspace"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "deletion layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "u"
+                },
+                "to": [
+                  {
+                    "key_code": "left_arrow",
+                    "modifiers": [
+                      "option"
+                    ]
+                  },
+                  {
+                    "key_code": "right_arrow",
+                    "modifiers": [
+                      "option",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "key_code": "delete_or_backspace"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "deletion layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "i"
+                },
+                "to": [
+                  {
+                    "key_code": "left_arrow",
+                    "modifiers": [
+                      "command"
+                    ]
+                  },
+                  {
+                    "key_code": "right_arrow",
+                    "modifiers": [
+                      "command",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "key_code": "delete_or_backspace"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "deletion layer",
+                    "value": 1
+                  }
+                ]
               }
             ]
           },
@@ -665,6 +1533,14 @@
                   }
                 ],
                 "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
                   {
                     "type": "variable_if",
                     "name": "nav",
@@ -689,6 +1565,14 @@
                 ],
                 "conditions": [
                   {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
                     "type": "variable_if",
                     "name": "nav",
                     "value": 1
@@ -712,6 +1596,14 @@
                 ],
                 "conditions": [
                   {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
                     "type": "variable_if",
                     "name": "nav",
                     "value": 1
@@ -734,6 +1626,82 @@
                   }
                 ],
                 "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "nav",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "u",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "open_bracket",
+                    "modifiers": [
+                      "command"
+                    ]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "nav",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "i",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "close_bracket",
+                    "modifiers": [
+                      "command"
+                    ]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
                   {
                     "type": "variable_if",
                     "name": "nav",
@@ -761,6 +1729,14 @@
                 ],
                 "conditions": [
                   {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
                     "type": "variable_if",
                     "name": "nav",
                     "value": 1
@@ -787,6 +1763,14 @@
                 ],
                 "conditions": [
                   {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
                     "type": "variable_if",
                     "name": "nav",
                     "value": 1
@@ -810,6 +1794,14 @@
                 ],
                 "conditions": [
                   {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
                     "type": "variable_if",
                     "name": "nav",
                     "value": 1
@@ -832,6 +1824,14 @@
                   }
                 ],
                 "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
                   {
                     "type": "variable_if",
                     "name": "nav",
@@ -1042,6 +2042,128 @@
                     },
                     {
                       "key_code": "j"
+                    }
+                  ],
+                  "simultaneous_options": {
+                    "detect_key_down_uninterruptedly": true,
+                    "key_down_order": "strict",
+                    "key_up_order": "strict_inverse",
+                    "key_up_when": "any",
+                    "to_after_key_up": [
+                      {
+                        "set_variable": {
+                          "name": "nav",
+                          "value": 0
+                        }
+                      },
+                      {
+                        "set_notification_message": {
+                          "id": "simlayer-d",
+                          "text": ""
+                        }
+                      }
+                    ]
+                  },
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "basic",
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
+                },
+                "to": [
+                  {
+                    "set_variable": {
+                      "name": "nav",
+                      "value": 1
+                    }
+                  },
+                  {
+                    "key_code": "open_bracket",
+                    "modifiers": [
+                      "command"
+                    ]
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "simlayer-d",
+                      "text": "Navigation Mode"
+                    }
+                  }
+                ],
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "d"
+                    },
+                    {
+                      "key_code": "u"
+                    }
+                  ],
+                  "simultaneous_options": {
+                    "detect_key_down_uninterruptedly": true,
+                    "key_down_order": "strict",
+                    "key_up_order": "strict_inverse",
+                    "key_up_when": "any",
+                    "to_after_key_up": [
+                      {
+                        "set_variable": {
+                          "name": "nav",
+                          "value": 0
+                        }
+                      },
+                      {
+                        "set_notification_message": {
+                          "id": "simlayer-d",
+                          "text": ""
+                        }
+                      }
+                    ]
+                  },
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "basic",
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
+                },
+                "to": [
+                  {
+                    "set_variable": {
+                      "name": "nav",
+                      "value": 1
+                    }
+                  },
+                  {
+                    "key_code": "close_bracket",
+                    "modifiers": [
+                      "command"
+                    ]
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "simlayer-d",
+                      "text": "Navigation Mode"
+                    }
+                  }
+                ],
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "d"
+                    },
+                    {
+                      "key_code": "i"
                     }
                   ],
                   "simultaneous_options": {
@@ -1332,11 +2454,16 @@
                 ],
                 "to_if_held_down": [
                   {
+                    "halt": true,
                     "key_code": "left_control"
                   }
                 ],
                 "to_delayed_action": {
-                  "to_if_invoked": [],
+                  "to_if_invoked": [
+                    {
+                      "key_code": "vk_none"
+                    }
+                  ],
                   "to_if_canceled": [
                     {
                       "key_code": "z"
@@ -1345,76 +2472,18 @@
                 },
                 "parameters": {
                   "basic.to_delayed_action_delay_milliseconds": 500,
-                  "basic.to_if_held_down_threshold_milliseconds": 160
-                }
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "x",
-                  "modifiers": {
-                    "optional": [
-                      "any"
+                  "basic.to_if_held_down_threshold_milliseconds": 120
+                },
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
                     ]
                   }
-                },
-                "to_if_alone": [
-                  {
-                    "halt": true,
-                    "key_code": "x"
-                  }
-                ],
-                "to_if_held_down": [
-                  {
-                    "key_code": "left_option"
-                  }
-                ],
-                "to_delayed_action": {
-                  "to_if_invoked": [],
-                  "to_if_canceled": [
-                    {
-                      "key_code": "x"
-                    }
-                  ]
-                },
-                "parameters": {
-                  "basic.to_delayed_action_delay_milliseconds": 500,
-                  "basic.to_if_held_down_threshold_milliseconds": 160
-                }
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "c",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to_if_alone": [
-                  {
-                    "halt": true,
-                    "key_code": "c"
-                  }
-                ],
-                "to_if_held_down": [
-                  {
-                    "key_code": "left_command"
-                  }
-                ],
-                "to_delayed_action": {
-                  "to_if_invoked": [],
-                  "to_if_canceled": [
-                    {
-                      "key_code": "c"
-                    }
-                  ]
-                },
-                "parameters": {
-                  "basic.to_delayed_action_delay_milliseconds": 500,
-                  "basic.to_if_held_down_threshold_milliseconds": 160
-                }
+                ]
               },
               {
                 "type": "basic",
@@ -1434,11 +2503,16 @@
                 ],
                 "to_if_held_down": [
                   {
+                    "halt": true,
                     "key_code": "right_control"
                   }
                 ],
                 "to_delayed_action": {
-                  "to_if_invoked": [],
+                  "to_if_invoked": [
+                    {
+                      "key_code": "vk_none"
+                    }
+                  ],
                   "to_if_canceled": [
                     {
                       "key_code": "slash"
@@ -1447,13 +2521,23 @@
                 },
                 "parameters": {
                   "basic.to_delayed_action_delay_milliseconds": 500,
-                  "basic.to_if_held_down_threshold_milliseconds": 160
-                }
+                  "basic.to_if_held_down_threshold_milliseconds": 120
+                },
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "period",
+                  "key_code": "s",
                   "modifiers": {
                     "optional": [
                       "any"
@@ -1463,60 +2547,41 @@
                 "to_if_alone": [
                   {
                     "halt": true,
-                    "key_code": "period"
+                    "key_code": "s"
                   }
                 ],
                 "to_if_held_down": [
-                  {
-                    "key_code": "right_option"
-                  }
-                ],
-                "to_delayed_action": {
-                  "to_if_invoked": [],
-                  "to_if_canceled": [
-                    {
-                      "key_code": "period"
-                    }
-                  ]
-                },
-                "parameters": {
-                  "basic.to_delayed_action_delay_milliseconds": 500,
-                  "basic.to_if_held_down_threshold_milliseconds": 160
-                }
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "comma",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "to_if_alone": [
                   {
                     "halt": true,
-                    "key_code": "comma"
-                  }
-                ],
-                "to_if_held_down": [
-                  {
-                    "key_code": "right_command"
+                    "key_code": "left_shift"
                   }
                 ],
                 "to_delayed_action": {
-                  "to_if_invoked": [],
+                  "to_if_invoked": [
+                    {
+                      "key_code": "vk_none"
+                    }
+                  ],
                   "to_if_canceled": [
                     {
-                      "key_code": "comma"
+                      "key_code": "s"
                     }
                   ]
                 },
                 "parameters": {
                   "basic.to_delayed_action_delay_milliseconds": 500,
-                  "basic.to_if_held_down_threshold_milliseconds": 160
-                }
+                  "basic.to_if_held_down_threshold_milliseconds": 120
+                },
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  }
+                ]
               },
               {
                 "type": "basic",
@@ -1536,11 +2601,16 @@
                 ],
                 "to_if_held_down": [
                   {
+                    "halt": true,
                     "key_code": "left_option"
                   }
                 ],
                 "to_delayed_action": {
-                  "to_if_invoked": [],
+                  "to_if_invoked": [
+                    {
+                      "key_code": "vk_none"
+                    }
+                  ],
                   "to_if_canceled": [
                     {
                       "key_code": "f"
@@ -1549,8 +2619,576 @@
                 },
                 "parameters": {
                   "basic.to_delayed_action_delay_milliseconds": 500,
-                  "basic.to_if_held_down_threshold_milliseconds": 160
-                }
+                  "basic.to_if_held_down_threshold_milliseconds": 120
+                },
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "DuoLayer oi Symbol Layer",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "o"
+                    },
+                    {
+                      "key_code": "i"
+                    }
+                  ],
+                  "simultaneous_options": {
+                    "key_down_order": "strict",
+                    "to_after_key_up": [
+                      {
+                        "set_variable": {
+                          "name": "oi Symbol Layer",
+                          "value": 0
+                        }
+                      },
+                      {
+                        "set_notification_message": {
+                          "id": "duo-layer-oi Symbol Layer",
+                          "text": ""
+                        }
+                      }
+                    ]
+                  },
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 30
+                },
+                "to": [
+                  {
+                    "set_variable": {
+                      "name": "oi Symbol Layer",
+                      "value": 1
+                    }
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "duo-layer-oi Symbol Layer",
+                      "text": "Symbols"
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "variable_unless",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "0"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"⇪\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "2"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"⌫\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "3"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"⌦\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "4"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"⇥\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "5"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"⎋\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "6"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"⌘\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "7"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"⌥\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "8"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"⌃\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "9"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"⇧\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "comma"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"‹\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "period"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"›\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "left_arrow"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"←\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "right_arrow"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"→\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "up_arrow"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"↑\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "down_arrow"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"↓\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "spacebar"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"␣\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "return_or_enter"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"⏎\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "delete_or_backspace"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"⌫\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "delete_forward"
+                },
+                "to": [
+                  {
+                    "shell_command": "osascript -e '\nset prev to the clipboard\nset the clipboard to \"⌦\"\ntell application \"System Events\"\n  keystroke \"v\" using command down\n  delay 0.1\nend tell\nset the clipboard to prev'"
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "oi Symbol Layer",
+                    "value": 1
+                  }
+                ]
               }
             ]
           },
@@ -1572,6 +3210,108 @@
                 "to": [
                   {
                     "key_code": "escape"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "right command => del",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "right_command",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to_if_alone": [
+                  {
+                    "key_code": "delete_or_backspace"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_command"
+                  }
+                ],
+                "to_delayed_action": {
+                  "to_if_invoked": [
+                    {
+                      "key_code": "vk_none"
+                    }
+                  ],
+                  "to_if_canceled": [
+                    {
+                      "key_code": "vk_none"
+                    }
+                  ]
+                },
+                "parameters": {
+                  "basic.to_if_alone_timeout_milliseconds": 500,
+                  "basic.to_if_held_down_threshold_milliseconds": 0
+                },
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "left command alone => undo",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "left_command"
+                },
+                "to_if_alone": [
+                  {
+                    "key_code": "z",
+                    "modifiers": [
+                      "command"
+                    ]
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_command"
+                  }
+                ],
+                "to_delayed_action": {
+                  "to_if_invoked": [
+                    {
+                      "key_code": "vk_none"
+                    }
+                  ],
+                  "to_if_canceled": [
+                    {
+                      "key_code": "vk_none"
+                    }
+                  ]
+                },
+                "parameters": {
+                  "basic.to_if_alone_timeout_milliseconds": 500,
+                  "basic.to_if_held_down_threshold_milliseconds": 0
+                },
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
                   }
                 ]
               }
@@ -1603,7 +3343,17 @@
                 "parameters": {
                   "basic.to_if_alone_timeout_milliseconds": 100,
                   "basic.to_if_held_down_threshold_milliseconds": 100
-                }
+                },
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           },
