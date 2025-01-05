@@ -286,145 +286,13 @@
                   {
                     "set_notification_message": {
                       "id": "duo-layer-fj Hyper",
-                      "text": "Hyper Mode fj 🌈"
+                      "text": "Hyper Mode"
                     }
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_unless",
-                    "name": "fj Hyper",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "1"
-                },
-                "to": [
-                  {
-                    "key_code": "1",
-                    "modifiers": [
-                      "command",
-                      "option",
-                      "control",
-                      "shift"
-                    ]
-                  },
-                  {
-                    "set_variable": {
-                      "name": "fj Hyper",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-fj Hyper",
-                      "text": ""
-                    }
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "device_if",
-                    "identifiers": [
-                      {
-                        "is_built_in_keyboard": true
-                      }
-                    ]
-                  },
-                  {
-                    "type": "variable_if",
-                    "name": "fj Hyper",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "2"
-                },
-                "to": [
-                  {
-                    "key_code": "2",
-                    "modifiers": [
-                      "command",
-                      "option",
-                      "control",
-                      "shift"
-                    ]
-                  },
-                  {
-                    "set_variable": {
-                      "name": "fj Hyper",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-fj Hyper",
-                      "text": ""
-                    }
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "device_if",
-                    "identifiers": [
-                      {
-                        "is_built_in_keyboard": true
-                      }
-                    ]
-                  },
-                  {
-                    "type": "variable_if",
-                    "name": "fj Hyper",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "3"
-                },
-                "to": [
-                  {
-                    "key_code": "3",
-                    "modifiers": [
-                      "command",
-                      "option",
-                      "control",
-                      "shift"
-                    ]
-                  },
-                  {
-                    "set_variable": {
-                      "name": "fj Hyper",
-                      "value": 0
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-fj Hyper",
-                      "text": ""
-                    }
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "device_if",
-                    "identifiers": [
-                      {
-                        "is_built_in_keyboard": true
-                      }
-                    ]
-                  },
-                  {
-                    "type": "variable_if",
                     "name": "fj Hyper",
                     "value": 1
                   }
@@ -1041,7 +909,7 @@
                   {
                     "set_notification_message": {
                       "id": "duo-layer-selection layer",
-                      "text": "Selection🧺"
+                      "text": "Selection"
                     }
                   }
                 ],
@@ -1356,7 +1224,7 @@
                   {
                     "set_notification_message": {
                       "id": "duo-layer-deletion layer",
-                      "text": "Deletion 🔪"
+                      "text": "Selection"
                     }
                   }
                 ],
@@ -1989,7 +1857,7 @@
                   {
                     "set_notification_message": {
                       "id": "simlayer-d",
-                      "text": "Navigation 🧭"
+                      "text": "Navigation Mode"
                     }
                   }
                 ],
@@ -2047,7 +1915,7 @@
                   {
                     "set_notification_message": {
                       "id": "simlayer-d",
-                      "text": "Navigation 🧭"
+                      "text": "Navigation Mode"
                     }
                   }
                 ],
@@ -2105,7 +1973,7 @@
                   {
                     "set_notification_message": {
                       "id": "simlayer-d",
-                      "text": "Navigation 🧭"
+                      "text": "Navigation Mode"
                     }
                   }
                 ],
@@ -2163,7 +2031,7 @@
                   {
                     "set_notification_message": {
                       "id": "simlayer-d",
-                      "text": "Navigation 🧭"
+                      "text": "Navigation Mode"
                     }
                   }
                 ],
@@ -2224,7 +2092,7 @@
                   {
                     "set_notification_message": {
                       "id": "simlayer-d",
-                      "text": "Navigation 🧭"
+                      "text": "Navigation Mode"
                     }
                   }
                 ],
@@ -2285,7 +2153,7 @@
                   {
                     "set_notification_message": {
                       "id": "simlayer-d",
-                      "text": "Navigation 🧭"
+                      "text": "Navigation Mode"
                     }
                   }
                 ],
@@ -2346,7 +2214,7 @@
                   {
                     "set_notification_message": {
                       "id": "simlayer-d",
-                      "text": "Navigation 🧭"
+                      "text": "Navigation Mode"
                     }
                   }
                 ],
@@ -2407,7 +2275,7 @@
                   {
                     "set_notification_message": {
                       "id": "simlayer-d",
-                      "text": "Navigation 🧭"
+                      "text": "Navigation Mode"
                     }
                   }
                 ],
@@ -2465,7 +2333,7 @@
                   {
                     "set_notification_message": {
                       "id": "simlayer-d",
-                      "text": "Navigation 🧭"
+                      "text": "Navigation Mode"
                     }
                   }
                 ],
@@ -2523,7 +2391,7 @@
                   {
                     "set_notification_message": {
                       "id": "simlayer-d",
-                      "text": "Navigation 🧭"
+                      "text": "Navigation Mode"
                     }
                   }
                 ],
@@ -2562,355 +2430,6 @@
                     ]
                   }
                 }
-              }
-            ]
-          },
-          {
-            "description": "DuoLayer ds nav",
-            "manipulators": [
-              {
-                "type": "basic",
-                "from": {
-                  "simultaneous": [
-                    {
-                      "key_code": "d"
-                    },
-                    {
-                      "key_code": "s"
-                    }
-                  ],
-                  "simultaneous_options": {
-                    "to_after_key_up": [
-                      {
-                        "set_variable": {
-                          "name": "ds nav",
-                          "value": 0
-                        }
-                      },
-                      {
-                        "set_notification_message": {
-                          "id": "duo-layer-ds nav",
-                          "text": ""
-                        }
-                      }
-                    ]
-                  },
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "parameters": {
-                  "basic.simultaneous_threshold_milliseconds": 50
-                },
-                "to": [
-                  {
-                    "set_variable": {
-                      "name": "ds nav",
-                      "value": 1
-                    }
-                  },
-                  {
-                    "set_notification_message": {
-                      "id": "duo-layer-ds nav",
-                      "text": "Nav Shift 🧺 🧭"
-                    }
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "variable_unless",
-                    "name": "ds nav",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "h"
-                },
-                "to": [
-                  {
-                    "key_code": "left_arrow",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "device_if",
-                    "identifiers": [
-                      {
-                        "is_built_in_keyboard": true
-                      }
-                    ]
-                  },
-                  {
-                    "type": "variable_if",
-                    "name": "ds nav",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "l"
-                },
-                "to": [
-                  {
-                    "key_code": "right_arrow",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "device_if",
-                    "identifiers": [
-                      {
-                        "is_built_in_keyboard": true
-                      }
-                    ]
-                  },
-                  {
-                    "type": "variable_if",
-                    "name": "ds nav",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "k"
-                },
-                "to": [
-                  {
-                    "key_code": "up_arrow",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "device_if",
-                    "identifiers": [
-                      {
-                        "is_built_in_keyboard": true
-                      }
-                    ]
-                  },
-                  {
-                    "type": "variable_if",
-                    "name": "ds nav",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "j"
-                },
-                "to": [
-                  {
-                    "key_code": "down_arrow",
-                    "modifiers": [
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "device_if",
-                    "identifiers": [
-                      {
-                        "is_built_in_keyboard": true
-                      }
-                    ]
-                  },
-                  {
-                    "type": "variable_if",
-                    "name": "ds nav",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "u"
-                },
-                "to": [
-                  {
-                    "key_code": "open_bracket",
-                    "modifiers": [
-                      "command",
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "device_if",
-                    "identifiers": [
-                      {
-                        "is_built_in_keyboard": true
-                      }
-                    ]
-                  },
-                  {
-                    "type": "variable_if",
-                    "name": "ds nav",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "i"
-                },
-                "to": [
-                  {
-                    "key_code": "close_bracket",
-                    "modifiers": [
-                      "command",
-                      "left_shift"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "device_if",
-                    "identifiers": [
-                      {
-                        "is_built_in_keyboard": true
-                      }
-                    ]
-                  },
-                  {
-                    "type": "variable_if",
-                    "name": "ds nav",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "a"
-                },
-                "to": [
-                  {
-                    "key_code": "left_arrow",
-                    "modifiers": [
-                      "command"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "device_if",
-                    "identifiers": [
-                      {
-                        "is_built_in_keyboard": true
-                      }
-                    ]
-                  },
-                  {
-                    "type": "variable_if",
-                    "name": "ds nav",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "semicolon"
-                },
-                "to": [
-                  {
-                    "key_code": "right_arrow",
-                    "modifiers": [
-                      "command"
-                    ]
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "device_if",
-                    "identifiers": [
-                      {
-                        "is_built_in_keyboard": true
-                      }
-                    ]
-                  },
-                  {
-                    "type": "variable_if",
-                    "name": "ds nav",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "f"
-                },
-                "to": [
-                  {
-                    "key_code": "left_option"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "device_if",
-                    "identifiers": [
-                      {
-                        "is_built_in_keyboard": true
-                      }
-                    ]
-                  },
-                  {
-                    "type": "variable_if",
-                    "name": "ds nav",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "type": "basic",
-                "from": {
-                  "key_code": "s"
-                },
-                "to": [
-                  {
-                    "key_code": "left_shift"
-                  }
-                ],
-                "conditions": [
-                  {
-                    "type": "device_if",
-                    "identifiers": [
-                      {
-                        "is_built_in_keyboard": true
-                      }
-                    ]
-                  },
-                  {
-                    "type": "variable_if",
-                    "name": "ds nav",
-                    "value": 1
-                  }
-                ]
               }
             ]
           },
@@ -3798,6 +3317,56 @@
             ]
           },
           {
+            "description": "left command alone => undo",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "left_command"
+                },
+                "to_if_alone": [
+                  {
+                    "key_code": "z",
+                    "modifiers": [
+                      "command"
+                    ]
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_command"
+                  }
+                ],
+                "to_delayed_action": {
+                  "to_if_invoked": [
+                    {
+                      "key_code": "vk_none"
+                    }
+                  ],
+                  "to_if_canceled": [
+                    {
+                      "key_code": "vk_none"
+                    }
+                  ]
+                },
+                "parameters": {
+                  "basic.to_if_alone_timeout_milliseconds": 500,
+                  "basic.to_if_held_down_threshold_milliseconds": 0
+                },
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "description": "Tab → Hyper when held",
             "manipulators": [
               {
@@ -3880,14 +3449,6 @@
             "vendor_id": 12951
           },
           "ignore": true
-        },
-        {
-          "identifiers": {
-            "is_keyboard": true,
-            "product_id": 666,
-            "vendor_id": 76
-          },
-          "treat_as_built_in_keyboard": true
         }
       ],
       "name": "karabiner-config-profile",

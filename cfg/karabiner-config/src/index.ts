@@ -33,6 +33,7 @@ writeToProfile('karabiner-config-profile', [
   sel_layer(),
   del_layer(),
   nav_layer(),
+  ds_nav_layer(),
   easy_mods_rules(),
   symbol_layer(),
   rule('jk => Esc').manipulators([
@@ -51,16 +52,16 @@ writeToProfile('karabiner-config-profile', [
         "basic.to_if_held_down_threshold_milliseconds": 0
       })
   ])),
-  rule('left command alone => undo').manipulators(appleKeyboardOnly([
-    map('left_command')
-      .toIfAlone('z', 'command')
-      .toIfHeldDown({ key_code: 'left_command' })
-      .toDelayedAction(toKey('vk_none'), toKey('vk_none'))
-      .parameters({
-        "basic.to_if_alone_timeout_milliseconds": 500,
-        "basic.to_if_held_down_threshold_milliseconds": 0
-      })
-  ])),
+  // rule('left command alone => undo').manipulators(appleKeyboardOnly([
+  //   map('left_command')
+  //     .toIfAlone('z', 'command')
+  //     .toIfHeldDown({ key_code: 'left_command' })
+  //     .toDelayedAction(toKey('vk_none'), toKey('vk_none'))
+  //     .parameters({
+  //       "basic.to_if_alone_timeout_milliseconds": 500,
+  //       "basic.to_if_held_down_threshold_milliseconds": 0
+  //     })
+  // ])),
   rule('Tab → Hyper when held').manipulators(appleKeyboardOnly([
     map('tab')
       .toIfAlone('tab')
@@ -77,7 +78,7 @@ writeToProfile('karabiner-config-profile', [
 
 function sel_layer() {
   return duoLayer('e', 'f', 'selection layer')
-    .notification('Selection')
+    .notification('Selection🧺')
     .threshold(50)
     .manipulators(appleKeyboardOnly([
       map('a').to('left_arrow', ['command', 'shift']),
@@ -100,7 +101,7 @@ function sel_layer() {
 }
 function del_layer() {
   return duoLayer('w', 'f', 'deletion layer')
-    .notification('Selection')
+    .notification('Deletion 🔪')
     .manipulators(appleKeyboardOnly([
       map('a').to('left_arrow', ['command', 'shift']).to('delete_or_backspace'),
       map(';').to('right_arrow', ['command', 'shift']).to('delete_or_backspace'),
@@ -136,7 +137,7 @@ function text_editing_layer() {
 function nav_layer() {
   return simlayer('d', 'nav', 200)
     // .notification('Nav')
-    .toIfActivated(toNotificationMessage('simlayer-d', 'Navigation Mode'))
+    .toIfActivated(toNotificationMessage('simlayer-d', 'Navigation 🧭'))
     .toIfDeactivated(toRemoveNotificationMessage('simlayer-d'))
     .manipulators(appleKeyboardOnly([
       map('h').to('left_arrow'),
@@ -146,6 +147,26 @@ function nav_layer() {
 
       map('u').to('[', 'command'),
       map('i').to(']', 'command'),
+
+      map('a').to('left_arrow', 'command'),
+      map(';').to('right_arrow', 'command'),
+
+      map('f').to('left_option'),
+      map('s').to('left_shift'),
+    ]))
+}
+function ds_nav_layer() {
+  return duoLayer('d', 's', 'ds nav')
+    .threshold(50)
+    .notification('Nav Shift 🧺 🧭')
+    .manipulators(appleKeyboardOnly([
+      map('h').to('left_arrow', 'left_shift'),
+      map('l').to('right_arrow', 'left_shift'),
+      map('k').to('up_arrow', 'left_shift'),
+      map('j').to('down_arrow', 'left_shift'),
+
+      map('u').to('[', ['command', 'left_shift']),
+      map('i').to(']', ['command', 'left_shift']),
 
       map('a').to('left_arrow', 'command'),
       map(';').to('right_arrow', 'command'),
@@ -178,7 +199,7 @@ function easy_mods_rules() {
 }
 
 function symbol_layer() {
-  return duoLayer('o', 'i', 'oi Symbol Layer')
+  return duoLayer('-', '=', '-= Symbol Layer')
     .threshold(50)
     .notification('Symbols')
     .options({ key_down_order: 'strict' })
@@ -206,10 +227,13 @@ function fj_hyper() {
   // return layer('g', 'fj Hyper')
   return duoLayer('f', 'j', 'fj Hyper')
     .leaderMode({ escape: { simultaneous: [{ key_code: 'k' }, { key_code: 'j' }] } })
-    .notification('Hyper Mode')
+    .notification('Hyper Mode fj 🌈')
     .manipulators(
       appleKeyboardOnly(
         [
+          map('1').to('1', 'Hyper'),
+          map('2').to('2', 'Hyper'),
+          map('3').to('3', 'Hyper'),
           map('f').to('f', 'Hyper'),
           map('j').to('j', 'Hyper'),
           map('a').to('a', 'Hyper'),
