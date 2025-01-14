@@ -2,49 +2,6 @@ local map = vim.keymap.set
 
 return {
 	{
-		"neovim/nvim-lspconfig",
-		opts = {
-			document_highlight = { enabled = false },
-		},
-	},
-	{
-		"bkad/CamelCaseMotion",
-		config = function()
-			-- Normal mode mappings
-			map("n", "gw", "<Plug>CamelCaseMotion_w", { silent = true })
-			map("n", "gb", "<Plug>CamelCaseMotion_b", { silent = true })
-			map("n", "ge", "<Plug>CamelCaseMotion_e", { silent = true })
-			map("o", "gw", "<Plug>CamelCaseMotion_w", { silent = true })
-			map("o", "gb", "<Plug>CamelCaseMotion_b", { silent = true })
-			map("n", "ge", "<Plug>CamelCaseMotion_e", { silent = true })
-
-			-- Operator-pending mode mappings
-			map("o", "X", "iW", { silent = true })
-			map("o", "x", "<Plug>CamelCaseMotion_iw", { silent = true })
-			map("o", "igw", "<Plug>CamelCaseMotion_iw", { silent = true })
-			map("o", "ige", "<Plug>CamelCaseMotion_ie", { silent = true })
-			map("o", "igb", "<Plug>CamelCaseMotion_ib", { silent = true })
-
-			-- Visual mode mappings
-			map("v", "X", "iW", { silent = true })
-			map("v", "x", "<Plug>CamelCaseMotion_iw", { silent = true })
-		end,
-	},
-	{
-		"ggandor/leap.nvim",
-		keys = {
-			{ "s", mode = { "n" }, desc = "Leap" },
-			{ "S", mode = { "n", "x", "o" }, desc = "Leap Backward to" },
-			{ "<localleader>s", mode = { "n", "x", "o" }, desc = "Leap from Windows" },
-		},
-		config = function()
-			map("n", "s", "<Plug>(leap)")
-			map("n", "<localleader>s", "<Plug>(leap-from-window)")
-			map({ "x", "o" }, "z", "<Plug>(leap-forward)")
-			map({ "x", "o" }, "Z", "<Plug>(leap-backward)")
-		end,
-	},
-	{
 		-- Tab out plugin
 		"kawre/neotab.nvim",
 		event = "InsertEnter",
@@ -114,44 +71,44 @@ return {
 						{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
 						{ LazyVim.lualine.pretty_path() },
 					},
-					lualine_x = {
-            -- stylua: ignore
-            {
-              function() return require("noice").api.status.command.get() end,
-              cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-              color = function() return LazyVim.ui.fg("Statement") end,
-            },
-            -- stylua: ignore
-            {
-              function() return require("noice").api.status.mode.get() end,
-              cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-              color = function() return LazyVim.ui.fg("Constant") end,
-            },
-            -- stylua: ignore
-            {
-              function() return "  " .. require("dap").status() end,
-              cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
-              color = function() return LazyVim.ui.fg("Debug") end,
-            },
-						{
-							"diff",
-							symbols = {
-								added = icons.git.added,
-								modified = icons.git.modified,
-								removed = icons.git.removed,
-							},
-							source = function()
-								local gitsigns = vim.b.gitsigns_status_dict
-								if gitsigns then
-									return {
-										added = gitsigns.added,
-										modified = gitsigns.changed,
-										removed = gitsigns.removed,
-									}
-								end
-							end,
-						},
-					},
+					-- lualine_x = {
+					--        -- stylua: ignore
+					--        {
+					--          function() return require("noice").api.status.command.get() end,
+					--          cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+					--          color = function() return LazyVim.ui.fg("Statement") end,
+					--        },
+					--        -- stylua: ignore
+					--        {
+					--          function() return require("noice").api.status.mode.get() end,
+					--          cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+					--          color = function() return LazyVim.ui.fg("Constant") end,
+					--        },
+					--        -- stylua: ignore
+					--        {
+					--          function() return "  " .. require("dap").status() end,
+					--          cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
+					--          color = function() return LazyVim.ui.fg("Debug") end,
+					--        },
+					-- 	{
+					-- 		"diff",
+					-- 		symbols = {
+					-- 			added = icons.git.added,
+					-- 			modified = icons.git.modified,
+					-- 			removed = icons.git.removed,
+					-- 		},
+					-- 		source = function()
+					-- 			local gitsigns = vim.b.gitsigns_status_dict
+					-- 			if gitsigns then
+					-- 				return {
+					-- 					added = gitsigns.added,
+					-- 					modified = gitsigns.changed,
+					-- 					removed = gitsigns.removed,
+					-- 				}
+					-- 			end
+					-- 		end,
+					-- 	},
+					-- },
 					lualine_y = {
 						{ "progress", separator = " ", padding = { left = 1, right = 0 } },
 						{ "location", padding = { left = 0, right = 1 } },
