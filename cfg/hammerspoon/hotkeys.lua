@@ -1,3 +1,22 @@
+function ToggleApp(appName)
+	local app = hs.application.get(appName)
+	print("Found app:", app)
+
+	if app then
+		if app:isFrontmost() then
+			app:hide()
+		else
+			app:activate()
+		end
+	else
+		hs.application.launchOrFocus(appName)
+	end
+end
+
+-- Bind it to a hotkey (example using Command+Alt+I for iTerm)
+hs.hotkey.bind({ "cmd", "alt" }, "i", function()
+	ToggleApp("iTerm")
+end)
 local function listMenuItems(appName)
 	local app = hs.application.get(appName)
 	if not app then
@@ -26,19 +45,19 @@ local function selectMenuItem(appName, menuHierarchy)
 	app:selectMenuItem(menuHierarchy)
 end -- General hotkeys
 hs.hotkey.bind({}, "F7", function()
-	hs.application.launchOrFocus("iTerm")
+	ToggleApp("iTerm")
 end)
 
 hs.hotkey.bind({}, "F8", function()
-	hs.application.launchOrFocus("TaskPaper")
+	ToggleApp("TaskPaper")
 end)
 
 hs.hotkey.bind({}, "F9", function()
-	hs.application.launchOrFocus("sherwinotes")
+	ToggleApp("sherwinotes")
 end)
 
 hs.hotkey.bind({}, "F10", function()
-	hs.application.launchOrFocus("Arc")
+	ToggleApp("Arc")
 end)
 
 -- Define the "Hyper" key as Ctrl + Alt + Cmd + Shift
@@ -72,7 +91,7 @@ function OpenWhatsapp(q)
 	end
 
 	q:after(0.2, function()
-		hs.application.launchOrFocus("Arc")
+		ToggleApp("Arc")
 	end)
 	q:after(0.2, function()
 		selectMenuItem("Arc", { "Spaces", "Sherwin" })
@@ -105,7 +124,7 @@ function OpenMaps(q)
 		q = TaskQueue.new()
 	end
 	q:after(0.2, function()
-		hs.application.launchOrFocus("Arc")
+		ToggleApp("Arc")
 	end)
 	q:after(0.2, function()
 		selectMenuItem("Arc", { "Spaces", "Sherwin" })
@@ -121,7 +140,7 @@ function OpenAsana(q)
 		q = TaskQueue.new()
 	end
 	q:after(0.2, function()
-		hs.application.launchOrFocus("Arc")
+		ToggleApp("Arc")
 	end)
 	q:after(0.2, function()
 		selectMenuItem("Arc", { "Spaces", "Sherwin" })
@@ -141,32 +160,32 @@ hs.hotkey.bind(hyper, "n", function()
 end)
 
 hs.hotkey.bind(hyper, ";", function()
-	hs.application.launchOrFocus("Spotify")
+	ToggleApp("Spotify")
 end)
 
 hs.hotkey.bind(zoot, ";", function()
-	hs.application.launchOrFocus("Spotify")
+	ToggleApp("Spotify")
 end)
 
 hs.hotkey.bind(zoot, ",", function()
-	hs.application.launchOrFocus("ChatGPT")
+	ToggleApp("ChatGPT")
 end)
 
 hs.hotkey.bind(zoot, ".", function()
-	hs.application.launchOrFocus("Claude")
+	ToggleApp("Claude")
 end)
 
 hs.hotkey.bind(zoot, "h", function()
-	hs.application.launchOrFocus("Habits 2025")
+	ToggleApp("Habits 2025")
 end)
 
 hs.hotkey.bind(zoot, "m", function()
-	hs.application.launchOrFocus("Google Maps")
+	ToggleApp("Google Maps")
 end)
 
 hs.hotkey.bind(zoot, "o", function()
 	-- soon to be Oryoki
-	hs.application.launchOrFocus("Sherwinotes")
+	ToggleApp("Sherwinotes")
 end)
 
 -- Create a table to hold the TaskPaper-specific hotkeys
