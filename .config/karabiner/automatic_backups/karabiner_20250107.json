@@ -251,7 +251,7 @@
       "complex_modifications": {
         "rules": [
           {
-            "description": "DuoLayer fg Hyper",
+            "description": "DuoLayer fj Hyper",
             "manipulators": [
               {
                 "type": "basic",
@@ -261,7 +261,7 @@
                       "key_code": "f"
                     },
                     {
-                      "key_code": "g"
+                      "key_code": "j"
                     }
                   ],
                   "simultaneous_options": {
@@ -279,21 +279,21 @@
                 "to": [
                   {
                     "set_variable": {
-                      "name": "fg Hyper",
+                      "name": "fj Hyper",
                       "value": 1
                     }
                   },
                   {
                     "set_notification_message": {
-                      "id": "duo-layer-fg Hyper",
-                      "text": "Hyper Mode fg 🌈"
+                      "id": "duo-layer-fj Hyper",
+                      "text": "Hyper Mode fj 🌈"
                     }
                   }
                 ],
                 "conditions": [
                   {
                     "type": "variable_unless",
-                    "name": "fg Hyper",
+                    "name": "fj Hyper",
                     "value": 1
                   }
                 ]
@@ -315,13 +315,13 @@
                   },
                   {
                     "set_variable": {
-                      "name": "fg Hyper",
+                      "name": "fj Hyper",
                       "value": 0
                     }
                   },
                   {
                     "set_notification_message": {
-                      "id": "duo-layer-fg Hyper",
+                      "id": "duo-layer-fj Hyper",
                       "text": ""
                     }
                   }
@@ -337,7 +337,7 @@
                   },
                   {
                     "type": "variable_if",
-                    "name": "fg Hyper",
+                    "name": "fj Hyper",
                     "value": 1
                   }
                 ]
@@ -359,13 +359,13 @@
                   },
                   {
                     "set_variable": {
-                      "name": "fg Hyper",
+                      "name": "fj Hyper",
                       "value": 0
                     }
                   },
                   {
                     "set_notification_message": {
-                      "id": "duo-layer-fg Hyper",
+                      "id": "duo-layer-fj Hyper",
                       "text": ""
                     }
                   }
@@ -381,7 +381,7 @@
                   },
                   {
                     "type": "variable_if",
-                    "name": "fg Hyper",
+                    "name": "fj Hyper",
                     "value": 1
                   }
                 ]
@@ -403,13 +403,13 @@
                   },
                   {
                     "set_variable": {
-                      "name": "fg Hyper",
+                      "name": "fj Hyper",
                       "value": 0
                     }
                   },
                   {
                     "set_notification_message": {
-                      "id": "duo-layer-fg Hyper",
+                      "id": "duo-layer-fj Hyper",
                       "text": ""
                     }
                   }
@@ -425,7 +425,7 @@
                   },
                   {
                     "type": "variable_if",
-                    "name": "fg Hyper",
+                    "name": "fj Hyper",
                     "value": 1
                   }
                 ]
@@ -447,13 +447,13 @@
                   },
                   {
                     "set_variable": {
-                      "name": "fg Hyper",
+                      "name": "fj Hyper",
                       "value": 0
                     }
                   },
                   {
                     "set_notification_message": {
-                      "id": "duo-layer-fg Hyper",
+                      "id": "duo-layer-fj Hyper",
                       "text": ""
                     }
                   }
@@ -469,7 +469,7 @@
                   },
                   {
                     "type": "variable_if",
-                    "name": "fg Hyper",
+                    "name": "fj Hyper",
                     "value": 1
                   }
                 ]
@@ -491,13 +491,13 @@
                   },
                   {
                     "set_variable": {
-                      "name": "fg Hyper",
+                      "name": "fj Hyper",
                       "value": 0
                     }
                   },
                   {
                     "set_notification_message": {
-                      "id": "duo-layer-fg Hyper",
+                      "id": "duo-layer-fj Hyper",
                       "text": ""
                     }
                   }
@@ -513,7 +513,7 @@
                   },
                   {
                     "type": "variable_if",
-                    "name": "fg Hyper",
+                    "name": "fj Hyper",
                     "value": 1
                   }
                 ]
@@ -535,13 +535,13 @@
                   },
                   {
                     "set_variable": {
-                      "name": "fg Hyper",
+                      "name": "fj Hyper",
                       "value": 0
                     }
                   },
                   {
                     "set_notification_message": {
-                      "id": "duo-layer-fg Hyper",
+                      "id": "duo-layer-fj Hyper",
                       "text": ""
                     }
                   }
@@ -557,7 +557,7 @@
                   },
                   {
                     "type": "variable_if",
-                    "name": "fg Hyper",
+                    "name": "fj Hyper",
                     "value": 1
                   }
                 ]
@@ -579,13 +579,13 @@
                   },
                   {
                     "set_variable": {
-                      "name": "fg Hyper",
+                      "name": "fj Hyper",
                       "value": 0
                     }
                   },
                   {
                     "set_notification_message": {
-                      "id": "duo-layer-fg Hyper",
+                      "id": "duo-layer-fj Hyper",
                       "text": ""
                     }
                   }
@@ -601,7 +601,7 @@
                   },
                   {
                     "type": "variable_if",
-                    "name": "fg Hyper",
+                    "name": "fj Hyper",
                     "value": 1
                   }
                 ]
@@ -623,13 +623,13 @@
                   },
                   {
                     "set_variable": {
-                      "name": "fg Hyper",
+                      "name": "fj Hyper",
                       "value": 0
                     }
                   },
                   {
                     "set_notification_message": {
-                      "id": "duo-layer-fg Hyper",
+                      "id": "duo-layer-fj Hyper",
                       "text": ""
                     }
                   }
@@ -645,7 +645,7 @@
                   },
                   {
                     "type": "variable_if",
-                    "name": "fg Hyper",
+                    "name": "fj Hyper",
                     "value": 1
                   }
                 ]
@@ -665,20 +665,20 @@
                 "conditions": [
                   {
                     "type": "variable_if",
-                    "name": "fg Hyper",
+                    "name": "fj Hyper",
                     "value": 1
                   }
                 ],
                 "to": [
                   {
                     "set_variable": {
-                      "name": "fg Hyper",
+                      "name": "fj Hyper",
                       "value": 0
                     }
                   },
                   {
                     "set_notification_message": {
-                      "id": "duo-layer-fg Hyper",
+                      "id": "duo-layer-fj Hyper",
                       "text": ""
                     }
                   }
@@ -3730,10 +3730,10 @@
                 "from": {
                   "simultaneous": [
                     {
-                      "key_code": "k"
+                      "key_code": "j"
                     },
                     {
-                      "key_code": "j"
+                      "key_code": "k"
                     }
                   ]
                 },
@@ -3792,6 +3792,72 @@
                         "is_built_in_keyboard": true
                       }
                     ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Tab → Hyper when held",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "tab"
+                },
+                "to_if_alone": [
+                  {
+                    "key_code": "tab"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "left_control",
+                    "modifiers": [
+                      "shift",
+                      "option",
+                      "command"
+                    ]
+                  }
+                ],
+                "parameters": {
+                  "basic.to_if_alone_timeout_milliseconds": 100,
+                  "basic.to_if_held_down_threshold_milliseconds": 100
+                },
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Caps Lock → Hyper",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "caps_lock"
+                },
+                "to": [
+                  {
+                    "key_code": "left_command",
+                    "modifiers": [
+                      "option",
+                      "control",
+                      "shift"
+                    ]
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "caps_lock"
                   }
                 ]
               }
