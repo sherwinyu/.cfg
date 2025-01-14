@@ -10,7 +10,9 @@ local function listMenuItems(appName)
 	print("Menu items saved to menuItems.json")
 end
 
-listMenuItems("Arc")
+if false then
+	listMenuItems("Arc")
+end
 
 -- Function to activate a specific menu item in TaskPaper
 local function selectMenuItem(appName, menuHierarchy)
@@ -41,6 +43,8 @@ end)
 
 -- Define the "Hyper" key as Ctrl + Alt + Cmd + Shift
 local hyper = { "ctrl", "alt", "cmd", "shift" }
+
+local zoot = { "ctrl", "alt", "cmd" }
 
 local TaskQueue = {}
 TaskQueue.__index = TaskQueue
@@ -112,12 +116,57 @@ function OpenMaps(q)
 	return q
 end
 
+function OpenAsana(q)
+	if not q then
+		q = TaskQueue.new()
+	end
+	q:after(0.2, function()
+		hs.application.launchOrFocus("Arc")
+	end)
+	q:after(0.2, function()
+		selectMenuItem("Arc", { "Spaces", "Sherwin" })
+	end)
+	q:after(0.2, function()
+		hs.eventtap.keyStroke({ "command" }, "3")
+	end)
+	return q
+end
+
 hs.hotkey.bind(hyper, "1", function()
 	OpenWhatsapp():run()
 end)
 
 hs.hotkey.bind(hyper, "n", function()
 	MessageNadia():run()
+end)
+
+hs.hotkey.bind(hyper, ";", function()
+	hs.application.launchOrFocus("Spotify")
+end)
+
+hs.hotkey.bind(zoot, ";", function()
+	hs.application.launchOrFocus("Spotify")
+end)
+
+hs.hotkey.bind(zoot, ",", function()
+	hs.application.launchOrFocus("ChatGPT")
+end)
+
+hs.hotkey.bind(zoot, ".", function()
+	hs.application.launchOrFocus("Claude")
+end)
+
+hs.hotkey.bind(zoot, "h", function()
+	hs.application.launchOrFocus("Habits 2025")
+end)
+
+hs.hotkey.bind(zoot, "m", function()
+	hs.application.launchOrFocus("Google Maps")
+end)
+
+hs.hotkey.bind(zoot, "o", function()
+	-- soon to be Oryoki
+	hs.application.launchOrFocus("Sherwinotes")
 end)
 
 -- Create a table to hold the TaskPaper-specific hotkeys
