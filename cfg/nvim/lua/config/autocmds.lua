@@ -54,3 +54,11 @@ vim.api.nvim_create_autocmd("TabLeave", {
 
 -- Command to switch to the most recently used tab
 vim.api.nvim_create_user_command("SwitchToPreviousTab", switch_to_previous_tab, {})
+
+-- Disable document_highlight for all LSP servers
+-- See https://www.reddit.com/r/neovim/comments/1apv2c8/how_do_i_kill_same_word_highlight_in_lazyvim/
+-- See https://github.com/neovim/nvim-lspconfig/issues/3432#issuecomment-2524149379
+LazyVim.lsp.on_attach(function(client, buffer)
+	require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
+	client.server_capabilities.documentHighlightProvider = false -- disable automatic under cursor word highlights
+end)
