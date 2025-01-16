@@ -13,10 +13,6 @@ function ToggleApp(appName)
 	end
 end
 
--- Bind it to a hotkey (example using Command+Alt+I for iTerm)
-hs.hotkey.bind({ "cmd", "alt" }, "i", function()
-	ToggleApp("iTerm")
-end)
 local function listMenuItems(appName)
 	local app = hs.application.get(appName)
 	if not app then
