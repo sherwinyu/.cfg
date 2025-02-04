@@ -179,6 +179,10 @@ hs.hotkey.bind(zoot, "m", function()
 	ToggleApp("Google Maps")
 end)
 
+hs.hotkey.bind(zoot, "n", function()
+	ToggleApp("Notion")
+end)
+
 hs.hotkey.bind(zoot, "o", function()
 	-- soon to be Oryoki
 	ToggleApp("Sherwinotes")
