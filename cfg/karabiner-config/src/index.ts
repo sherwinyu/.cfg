@@ -83,8 +83,8 @@ function sel_layer() {
           .to("right_arrow", ["option", "shift"]),
 
         map("i")
-          .to("left_arrow", ["command"])
-          .to("right_arrow", ["command", "shift"]),
+          .to("up_arrow", ["option"])
+          .to("down_arrow", ["option", "shift"]),
       ]),
     );
 }
