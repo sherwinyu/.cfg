@@ -153,6 +153,28 @@ return {
 		-- color = '#FFFFFF'
 	},
 	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {},
+		config = function()
+			require("tokyonight").setup({
+				style = "moon", -- Use your preferred style: night, storm, or day
+				on_highlights = function(hl, colors)
+					-- Increase the contrast of the visual selection
+					hl.Visual = {
+						fg = "#FFFFFF",
+						bg = colors.bg_visual,
+					}
+				end,
+				on_colors = function()
+					-- colors.bg_statusline = colors.bg_statusline:lighten(0.1)
+				end,
+			})
+			vim.cmd("colorscheme tokyonight-moon")
+		end,
+	},
+	{
 		"rcarriga/nvim-notify",
 		keys = {
 			{ "<leader>in", "<cmd>Telescope notify<cr>", desc = "Show notifications" },
