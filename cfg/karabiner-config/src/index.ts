@@ -251,10 +251,12 @@ function fg_hyper() {
         map("2").to("2", "Hyper"),
         map("3").to("3", "Hyper"),
         map("f").to("f", "Hyper"),
+        map("g").to("g", "Hyper"),
         map("j").to("j", "Hyper"),
         map("a").to("a", "Hyper"),
         map("n").to("n", "Hyper"),
         map("u").to("u", "Hyper"),
+        map("/").to("u", "Meh"),
       ]),
     );
 }
