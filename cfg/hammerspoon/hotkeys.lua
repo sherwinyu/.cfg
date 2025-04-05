@@ -159,6 +159,14 @@ hs.hotkey.bind(hyper, ";", function()
 	ToggleApp("Spotify")
 end)
 
+hs.hotkey.bind(zoot, "p", function()
+	ToggleApp("Chrome")
+end)
+
+hs.hotkey.bind(zoot, "k", function()
+	ToggleApp("Cursor")
+end)
+
 hs.hotkey.bind(zoot, ";", function()
 	ToggleApp("Spotify")
 end)
@@ -185,7 +193,7 @@ end)
 
 hs.hotkey.bind(zoot, "o", function()
 	-- soon to be Oryoki
-	ToggleApp("Sherwinotes")
+	ToggleApp("Oryoki")
 end)
 
 -- Create a table to hold the TaskPaper-specific hotkeys
