@@ -39,7 +39,9 @@ local function selectMenuItem(appName, menuHierarchy)
 
 	-- Trigger the menu item
 	app:selectMenuItem(menuHierarchy)
-end -- General hotkeys
+end
+-- General hotkeys
+
 hs.hotkey.bind({}, "F7", function()
 	ToggleApp("iTerm")
 end)
@@ -49,7 +51,7 @@ hs.hotkey.bind({}, "F8", function()
 end)
 
 hs.hotkey.bind({}, "F9", function()
-	ToggleApp("sherwinotes")
+	ToggleApp("Oryoki")
 end)
 
 hs.hotkey.bind({}, "F10", function()
