@@ -25,7 +25,12 @@ import {
 // + Create a new profile if needed.
 // type Manipulators = ReturnType<ReturnType<typeof withCondition>>
 function appleKeyboardOnly(manipulators: any[]) {
-  return withCondition(ifDevice({ is_built_in_keyboard: true }))(manipulators);
+  return withCondition(
+    ifDevice(
+      [{ is_built_in_keyboard: true }, { vendor_id: 1452 }],
+      "Apple Keyboards only",
+    ),
+  )(manipulators);
 }
 writeToProfile("karabiner-config-profile", [
   fg_hyper(),
