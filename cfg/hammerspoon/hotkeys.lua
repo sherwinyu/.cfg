@@ -6,9 +6,21 @@ function ToggleApp(appName)
 		if app:isFrontmost() then
 			app:hide()
 		else
+			-- Bring to foreground if minimized or hidden
+			if app:isHidden() then
+				app:unhide()
+			end
+			-- Unminimize all windows if minimized
+			local windows = app:allWindows()
+			for _, window in ipairs(windows) do
+				if window:isMinimized() then
+					window:unminimize()
+				end
+			end
 			app:activate()
 		end
 	else
+		-- Start the app if it's not running
 		hs.application.launchOrFocus(appName)
 	end
 end
@@ -208,6 +220,10 @@ end)
 hs.hotkey.bind(zoot, "o", function()
 	-- soon to be Oryoki
 	ToggleApp("Oryoki")
+end)
+
+hs.hotkey.bind(zoot, "-", function()
+	ToggleApp("Dia")
 end)
 
 -- Create a table to hold the TaskPaper-specific hotkeys
