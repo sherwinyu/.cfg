@@ -165,6 +165,18 @@ hs.hotkey.bind(zoot, "p", function()
 	ToggleApp("Chrome")
 end)
 
+hs.hotkey.bind(zoot, "0", function()
+	ToggleApp("Arc")
+end)
+
+hs.hotkey.bind(zoot, "z", function()
+	ToggleApp("Zed")
+end)
+
+hs.hotkey.bind(zoot, "j", function()
+	ToggleApp("Slack")
+end)
+
 hs.hotkey.bind(zoot, "k", function()
 	ToggleApp("Cursor")
 end)
