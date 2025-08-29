@@ -226,6 +226,30 @@ hs.hotkey.bind(zoot, "-", function()
 	ToggleApp("Dia")
 end)
 
+hs.hotkey.bind(hyper, "1", function()
+	local audio = require("audio-test")
+	local outputDevices = {
+		"External Headphones",
+		"Macbook Air Speakers",
+	}
+	local inputDevices = {
+		"MacBook Air Microphone",
+	}
+	audio.setAudioConfig({ input = inputDevices, output = outputDevices })
+end)
+
+hs.hotkey.bind(hyper, "2", function()
+	local audio = require("audio-test")
+	local outputDevices = {
+		"External Headphones",
+		"Macbook Air Speakers",
+	}
+	local inputDevices = {
+		"TOZO T10",
+	}
+	audio.setAudioConfig({ input = inputDevices, output = outputDevices })
+end)
+
 -- Create a table to hold the TaskPaper-specific hotkeys
 local taskPaperHotkeys = {}
 

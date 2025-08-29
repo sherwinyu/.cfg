@@ -17,6 +17,10 @@ hs.hotkey.bind(hyper, "c", function()
 	hs.openConsole()
 end)
 
+local audio = require("audio-test")
+audio.setupAudioHotkeys()
+print("printing......... ===HELLO", audio.listAudioDevices())
+
 -- Config other Spoons
 hs.loadSpoon("MouseFollowsFocus"):start()
 
