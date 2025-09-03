@@ -56,9 +56,10 @@ local function setAudioConfig(config)
 		local availableOutputs = hs.audiodevice.allOutputDevices()
 		for _, priorityDevice in ipairs(outputDevices) do
 			for _, device in ipairs(availableOutputs) do
-				if device:name() == priorityDevice then
+				print(device:name(), priorityDevice)
+				if string.lower(device:name()) == string.lower(priorityDevice) then
 					device:setDefaultOutputDevice()
-					selectedOutput = priorityDevice
+					selectedOutput = device:name()
 					print("Set output device to: " .. priorityDevice)
 					goto nextInput
 				end
@@ -93,14 +94,38 @@ local function setAudioConfig(config)
 	if selectedOutput then
 		table.insert(details, "Output: " .. selectedOutput)
 	else
-		table.insert(details, "Output: No change")
+		local currentOutput = hs.audiodevice.defaultOutputDevice()
+		local currentName = currentOutput and currentOutput:name() or "Unknown"
+		table.insert(details, "Output: " .. currentName .. " (no change)")
 	end
 
 	if selectedInput then
 		table.insert(details, "Input: " .. selectedInput)
 	else
-		table.insert(details, "Input: No change")
+		local currentInput = hs.audiodevice.defaultInputDevice()
+		local currentName = currentInput and currentInput:name() or "Unknown"
+		table.insert(details, "Input: " .. currentName .. " (no change)")
 	end
+
+	-- Add available devices info
+	table.insert(details, "")
+	table.insert(details, "Available devices:")
+
+	local availableOutputs = hs.audiodevice.allOutputDevices()
+	local outputNames = {}
+	for _, device in ipairs(availableOutputs) do
+		table.insert(outputNames, device:name())
+	end
+	table.insert(details, "Out: " .. table.concat(outputNames, ", "))
+
+	local availableInputs = hs.audiodevice.allInputDevices()
+	local inputNames = {}
+	for _, device in ipairs(availableInputs) do
+		table.insert(inputNames, device:name())
+	end
+	table.insert(details, "In: " .. table.concat(inputNames, ", "))
+
+	print("\n\n", table.concat(details, "\n"))
 
 	local notification = hs.notify.new({
 		title = notificationText,
