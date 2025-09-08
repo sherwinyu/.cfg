@@ -119,6 +119,19 @@
 			<key>Version</key>
 			<integer>2</integer>
 		</dict>
+		<key>0xd-0x20000-0x24</key>
+		<dict>
+			<key>Action</key>
+			<integer>12</integer>
+			<key>Keycode</key>
+			<integer>13</integer>
+			<key>Modifiers</key>
+			<integer>131072</integer>
+			<key>Text</key>
+			<string>\n</string>
+			<key>Version</key>
+			<integer>1</integer>
+		</dict>
 		<key>0xf700-0x220000-0x7e</key>
 		<dict>
 			<key>Action</key>
@@ -1053,6 +1066,8 @@
 			<string>Default</string>
 			<key>Disable Window Resizing</key>
 			<true/>
+			<key>Enable Triggers in Interactive Apps</key>
+			<false/>
 			<key>Faint Text Alpha</key>
 			<real>0.5</real>
 			<key>Faint Text Alpha (Dark)</key>
@@ -1639,7 +1654,7 @@
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
-			<integer>1000</integer>
+			<integer>10000</integer>
 			<key>Selected Text Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -1728,6 +1743,91 @@
 			<string>xterm-256color</string>
 			<key>Transparency</key>
 			<integer>0</integer>
+			<key>Triggers</key>
+			<array>
+				<dict>
+					<key>action</key>
+					<string>HighlightTrigger</string>
+					<key>parameter</key>
+					<string>{p3#ffffffffffff,#e19238}</string>
+					<key>partial</key>
+					<true/>
+					<key>regex</key>
+					<string>\w*(E|e)rror</string>
+				</dict>
+				<dict>
+					<key>action</key>
+					<string>HighlightTrigger</string>
+					<key>parameter</key>
+					<string>{p3#ffffffffffff,#13652c}</string>
+					<key>partial</key>
+					<true/>
+					<key>regex</key>
+					<string>[a-zA-Z0-9.]+\.(py|ts)</string>
+				</dict>
+				<dict>
+					<key>action</key>
+					<string>HighlightTrigger</string>
+					<key>parameter</key>
+					<string>{p3#ffffffffffff,#23e7e9}</string>
+					<key>partial</key>
+					<true/>
+					<key>regex</key>
+					<string>\.[a-z]+:\d+</string>
+				</dict>
+				<dict>
+					<key>action</key>
+					<string>HighlightTrigger</string>
+					<key>parameter</key>
+					<string>{p3#ffffffffffff,#23e9df}</string>
+					<key>regex</key>
+					<string>line \d+,</string>
+				</dict>
+				<dict>
+					<key>action</key>
+					<string>HighlightTrigger</string>
+					<key>parameter</key>
+					<string>{p3#ffffffffffff,#e9ac23}</string>
+					<key>regex</key>
+					<string>\w*(W|w)arning</string>
+				</dict>
+				<dict>
+					<key>action</key>
+					<string>HighlightTrigger</string>
+					<key>disabled</key>
+					<false/>
+					<key>parameter</key>
+					<string>{p3#ffffffffffff,#5423e9}</string>
+					<key>regex</key>
+					<string>(GET|POST) /</string>
+				</dict>
+				<dict>
+					<key>action</key>
+					<string>HighlightTrigger</string>
+					<key>disabled</key>
+					<false/>
+					<key>parameter</key>
+					<string>{p3#ffffffffffff,p3#eade334b2376}</string>
+					<key>regex</key>
+					<string>(e|E)rror</string>
+				</dict>
+				<dict>
+					<key>action</key>
+					<string>HighlightTrigger</string>
+					<key>parameter</key>
+					<string>{p3#ffffffffffff,#e9bb23}</string>
+					<key>regex</key>
+					<string>WARNING</string>
+				</dict>
+				<dict>
+					<key>action</key>
+					<string>HighlightTrigger</string>
+					<key>parameter</key>
+					<string>{p3#ffffffffffff,#ea1200}</string>
+					<key>regex</key>
+					<string>ERROR</string>
+				</dict>
+			</array>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
@@ -2790,6 +2890,8 @@
 	</array>
 	<key>PMPrintingExpandedStateForPrint2</key>
 	<false/>
+	<key>PMPrintingPanelSize</key>
+	<string>{777, 828}</string>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -2831,6 +2933,8 @@
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
 	<real>0.15567805109797297</real>
+	<key>TabStyleWithAutomaticOption</key>
+	<integer>4</integer>
 	<key>UseLionStyleFullscreen</key>
 	<false/>
 	<key>VisualIndicatorForEsc</key>
@@ -2840,6 +2944,8 @@
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
+	<false/>
+	<key>kTurnOffSlowTriggersOfferUserDefaultsKey</key>
 	<false/>
 </dict>
 </plist>
