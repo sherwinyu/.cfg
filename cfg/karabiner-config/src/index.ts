@@ -34,6 +34,8 @@ function appleKeyboardOnly(manipulators: any[]) {
 }
 writeToProfile("karabiner-config-profile", [
   fg_hyper(),
+  tab_hyper_rule(),
+  capslock_zoot_rule(),
   text_editing_layer(),
   sel_layer(),
   del_layer(),
@@ -264,4 +266,34 @@ function fg_hyper() {
         map("/").to("u", "Meh"),
       ]),
     );
+}
+
+function tab_hyper_rule() {
+  return rule("Tab => Hyper").manipulators(
+    appleKeyboardOnly([
+      map("tab")
+        .toIfAlone("tab")
+        .toIfHeldDown({ key_code: "right_command", modifiers: ["right_control", "right_option", "right_shift"] })
+        .toDelayedAction(toKey("vk_none"), toKey("vk_none"))
+        .parameters({
+          "basic.to_if_alone_timeout_milliseconds": 500,
+          "basic.to_if_held_down_threshold_milliseconds": 0,
+        }),
+    ]),
+  );
+}
+
+function capslock_zoot_rule() {
+  return rule("Capslock => Zoot (Ctrl+Option+Cmd)").manipulators(
+    appleKeyboardOnly([
+      map("caps_lock", { optional: "any" })
+        .toIfAlone("escape")
+        .toIfHeldDown({ key_code: "right_command", modifiers: ["right_control", "right_option"] })
+        .toDelayedAction(toKey("vk_none"), toKey("vk_none"))
+        .parameters({
+          "basic.to_if_alone_timeout_milliseconds": 500,
+          "basic.to_if_held_down_threshold_milliseconds": 0,
+        }),
+    ]),
+  );
 }
