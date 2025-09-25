@@ -263,6 +263,7 @@ function fg_hyper() {
         map("a").to("a", "Hyper"),
         map("n").to("n", "Hyper"),
         map("u").to("u", "Hyper"),
+        map("w").to("w", "Hyper"),
         map("/").to("u", "Meh"),
       ]),
     );
@@ -273,7 +274,10 @@ function tab_hyper_rule() {
     appleKeyboardOnly([
       map("tab")
         .toIfAlone("tab")
-        .toIfHeldDown({ key_code: "right_command", modifiers: ["right_control", "right_option", "right_shift"] })
+        .toIfHeldDown({
+          key_code: "right_command",
+          modifiers: ["right_control", "right_option", "right_shift"],
+        })
         .toDelayedAction(toKey("vk_none"), toKey("vk_none"))
         .parameters({
           "basic.to_if_alone_timeout_milliseconds": 500,
@@ -288,7 +292,10 @@ function capslock_zoot_rule() {
     appleKeyboardOnly([
       map("caps_lock", { optional: "any" })
         .toIfAlone("escape")
-        .toIfHeldDown({ key_code: "right_command", modifiers: ["right_control", "right_option"] })
+        .toIfHeldDown({
+          key_code: "right_command",
+          modifiers: ["right_control", "right_option"],
+        })
         .toDelayedAction(toKey("vk_none"), toKey("vk_none"))
         .parameters({
           "basic.to_if_alone_timeout_milliseconds": 500,
