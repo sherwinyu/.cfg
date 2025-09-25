@@ -1,3 +1,12 @@
+# CLAUDE CODE CONFIG WORKFLOW
+function claude-cfg() {
+    cd ~/cfg
+    claude --allow-read="//Users/sherwin/.config/**,//Users/sherwin/cfg/**" \
+          --allow-bash="WEZTERM_CONFIG_FILE=/Users/sherwin/cfg/wezterm/wezterm.lua wezterm show-config,ln:*" \
+          --allow-web-fetch="domain:wezterm.org" \
+          "$@"
+}
+
 alias egrep='egrep --color=auto -i'
 
 alias fgrep='fgrep --color=auto -i'
