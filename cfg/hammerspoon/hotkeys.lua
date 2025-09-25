@@ -55,7 +55,7 @@ end
 -- General hotkeys
 
 hs.hotkey.bind({}, "F7", function()
-	ToggleApp("iTerm")
+	ToggleApp("WezTerm")
 end)
 
 hs.hotkey.bind({}, "F8", function()
@@ -183,6 +183,10 @@ end)
 
 hs.hotkey.bind(zoot, "z", function()
 	ToggleApp("Zed")
+end)
+
+hs.hotkey.bind(zoot, "l", function()
+	ToggleApp("Linear")
 end)
 
 hs.hotkey.bind(zoot, "j", function()
