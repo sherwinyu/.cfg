@@ -1,0 +1,441 @@
+{
+    "window.commandCenter": true,
+    "workbench.colorTheme": "Solarized Light",
+    "vim.insertModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "k",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        },
+        {
+            "before": [
+                "k",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ],
+    "vim.relativeLineNumbers": true,
+    "vim.relativeLineNumbersInActivePane": true,
+    "vim.visualstar": true,
+    "vim.leader": "<space>",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>", "k"
+            ],
+            "commands": [
+                {
+                    "command": "editor.gotoParentFold"
+                },
+            ]
+        },
+        {
+            "before": [
+                "<bs>",
+                "<bs>"
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.focusOtherSideEditor"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<CR>"
+            ],
+            "commands": [
+                {
+                    "command": "editor.action.insertLineAfter"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<S-CR>"
+            ],
+            "commands": [
+                {
+                    "command": "editor.action.insertLineBefore"
+                }
+            ]
+        },
+        {
+            "before": [
+                "c", "x"
+            ],
+            "commands": [
+                {
+                    "command": "editor.action.smartSelect.grow"
+                },
+                {
+                    // FIX ME
+                    "command": "editor.sendKeys"
+                },
+            ]
+        },
+        {
+            "before": [
+                "<S-CR>"
+            ],
+            "commands": [
+                {
+                    "command": "editor.action.insertLineBefore"
+                }
+            ]
+        },
+        {
+            "before": [
+                "-"
+            ],
+            "commands": [
+                {
+                    "command": "cursorHome"
+                }
+            ]
+        },
+        {
+            "before": [
+                "="
+            ],
+            "commands": [
+                {
+                    "command": "cursorEnd"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "<leader>"
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.quickOpen"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<space>",
+                "<space>"
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.quickOpen"
+                }
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "r"
+            ],
+            "commands": [
+                {
+                    "command": "editor.action.referenceSearch.trigger"
+                }
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "y"
+            ],
+            "commands": [
+                {
+                    "command": "editor.action.goToTypeDefinition"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "c",
+                "a"
+            ],
+            "commands": [
+                {
+                    "command": "editor.action.sourceAction"
+                }
+            ]
+        },
+        {
+            "before": [
+                "\\"
+            ], 
+            "commands": [
+                {
+                    "command": "workbench.action.focusNextGroup"
+                }
+            ]
+        },
+        {
+            "before": [
+                "("
+            ],
+            "after": [
+                "g",
+                "T"
+            ]
+        },
+        {
+            "before": [
+                ")"
+            ],
+            "after": [
+                "g",
+                "t"
+            ]
+        },
+        {
+            "before": [
+                "<bs>", "1"
+            ],
+            "after": [
+                "1",
+                "g",
+                "t"
+            ]
+        },
+        {
+            "before": [
+                "<bs>", "2"
+            ],
+            "after": [
+                "2",
+                "g",
+                "t"
+            ]
+        },
+        {
+            "before": [
+                "<bs>", "3"
+            ],
+            "after": [
+                "3",
+                "g",
+                "t"
+            ]
+        },
+        {
+            "before": [
+                "<bs>", "4"
+            ],
+            "after": [
+                "4",
+                "g",
+                "t"
+            ]
+        },
+
+
+        {
+            "before": [
+                "<tab>"
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.focusPreviousGroup"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "w"
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.files.save"
+                }
+            ]
+        },
+
+        {
+            "before": [
+                "<leader>",
+                "o"
+            ],
+            "commands": [
+                {
+                    "command": "breadcrumbs.focusAndSelect"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "w",
+                "a"
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.files.saveAll"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "q"
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.closeActiveEditor"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "x"
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.files.save"
+                },
+                {
+                    "command": "workbench.action.closeActiveEditor"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "x",
+                "x"
+            ],
+            "commands": [
+                {
+                    "command": "workbench.actions.view.problems"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "/"
+            ],
+            "commands": [
+                {
+                    "command": "search.action.openNewEditor"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<c-i>"
+            ],
+            "commands": [
+                {
+                    "command": "editor.action.smartSelect.grow"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<backspace>", "w", "o"
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.closeEditorsInOtherGroups"
+                }
+            ]
+        }
+
+    ],
+    "editor.lineNumbers": "relative",
+    "vim.normalModeKeyBindings": [],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "<leader>"
+            ],
+            "after": [
+                "<esc>"
+            ]
+        },
+        {
+            "before": [
+                "<bs>",
+                "<bs>"
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.focusOtherSideEditor"
+                }
+            ]
+        },
+        {
+            "before": [
+                "("
+            ],
+            "after": [
+                "g",
+                "T"
+            ]
+        },
+        {
+            "before": [
+                ")"
+            ],
+            "after": [
+                "g",
+                "t"
+            ]
+        },
+        {
+            "before": [
+                "<c-i>"
+            ],
+            "commands": [
+                {
+                    "command": "editor.action.smartSelect.shrink"
+                },
+            ],
+        },
+        {
+            "before": [
+                "<c-u>"
+            ],
+            "commands": [
+                {
+                    "command": "editor.action.smartSelect.grow"
+                },
+            ],
+        },
+    ],
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.editor.pinnedTabsOnSeparateRow": true,
+    "workbench.editor.scrollToSwitchTabs": true,
+    "window.autoDetectColorScheme": true,
+    "workbench.preferredDarkColorTheme": "Solarized Dark",
+    "workbench.preferredLightColorTheme": "Solarized Light",
+    "vim.highlightedyank.enable": true,
+    "editor.cursorSurroundingLines": 5,
+    "vim.gdefault": true,
+    "vim.hlsearch": true,
+    "vim.maxmapdepth": 100,
+    "vim.overrideCopy": false,
+    "vim.showMarksInGutter": true,
+    "vim.sneak": true,
+    "vim.sneakUseIgnorecaseAndSmartcase": true,
+    "vim.useSystemClipboard": true,
+    "vim.whichwrap": "b,s,f,t",
+    "editor.accessibilitySupport": "off",
+    "typescript.tsserver.watchOptions": "vscode",
+    "vim.operatorPendingModeKeyBindings": [
+        
+    ],
+    "git.blame.statusBarItem.enabled": false,
+    "git.blame.editorDecoration.enabled": true
+}
