@@ -209,6 +209,10 @@ hs.hotkey.bind(zoot, ".", function()
 	ToggleApp("Claude")
 end)
 
+hs.hotkey.bind(zoot, "c", function()
+	ToggleApp("Google Calendar")
+end)
+
 hs.hotkey.bind(zoot, "h", function()
 	ToggleApp("Habits 2025")
 end)

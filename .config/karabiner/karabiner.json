@@ -332,8 +332,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -376,8 +380,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -420,8 +428,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -464,8 +476,60 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
+                    ],
+                    "description": "Apple Keyboards only"
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "fg Hyper",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "g"
+                },
+                "to": [
+                  {
+                    "key_code": "g",
+                    "modifiers": [
+                      "command",
+                      "option",
+                      "control",
+                      "shift"
                     ]
+                  },
+                  {
+                    "set_variable": {
+                      "name": "fg Hyper",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "duo-layer-fg Hyper",
+                      "text": ""
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
+                      }
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -508,8 +572,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -552,8 +620,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -596,8 +668,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -640,8 +716,107 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
+                    ],
+                    "description": "Apple Keyboards only"
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "fg Hyper",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "w"
+                },
+                "to": [
+                  {
+                    "key_code": "w",
+                    "modifiers": [
+                      "command",
+                      "option",
+                      "control",
+                      "shift"
                     ]
+                  },
+                  {
+                    "set_variable": {
+                      "name": "fg Hyper",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "duo-layer-fg Hyper",
+                      "text": ""
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
+                      }
+                    ],
+                    "description": "Apple Keyboards only"
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "fg Hyper",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "slash"
+                },
+                "to": [
+                  {
+                    "key_code": "u",
+                    "modifiers": [
+                      "option",
+                      "control",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "set_variable": {
+                      "name": "fg Hyper",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "duo-layer-fg Hyper",
+                      "text": ""
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
+                      }
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -687,6 +862,122 @@
             ]
           },
           {
+            "description": "Tab => Hyper",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "tab"
+                },
+                "to_if_alone": [
+                  {
+                    "key_code": "tab"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_command",
+                    "modifiers": [
+                      "right_control",
+                      "right_option",
+                      "right_shift"
+                    ]
+                  }
+                ],
+                "to_delayed_action": {
+                  "to_if_invoked": [
+                    {
+                      "key_code": "vk_none"
+                    }
+                  ],
+                  "to_if_canceled": [
+                    {
+                      "key_code": "vk_none"
+                    }
+                  ]
+                },
+                "parameters": {
+                  "basic.to_if_alone_timeout_milliseconds": 500,
+                  "basic.to_if_held_down_threshold_milliseconds": 0
+                },
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
+                      }
+                    ],
+                    "description": "Apple Keyboards only"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "Capslock => Zoot (Ctrl+Option+Cmd)",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "caps_lock",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to_if_alone": [
+                  {
+                    "key_code": "escape"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "right_command",
+                    "modifiers": [
+                      "right_control",
+                      "right_option"
+                    ]
+                  }
+                ],
+                "to_delayed_action": {
+                  "to_if_invoked": [
+                    {
+                      "key_code": "vk_none"
+                    }
+                  ],
+                  "to_if_canceled": [
+                    {
+                      "key_code": "vk_none"
+                    }
+                  ]
+                },
+                "parameters": {
+                  "basic.to_if_alone_timeout_milliseconds": 500,
+                  "basic.to_if_held_down_threshold_milliseconds": 0
+                },
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
+                      }
+                    ],
+                    "description": "Apple Keyboards only"
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "description": "Simlayer - text_editing",
             "manipulators": [
               {
@@ -713,8 +1004,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -748,8 +1043,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -789,8 +1088,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1073,8 +1376,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1103,8 +1410,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1133,8 +1444,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1163,8 +1478,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1193,8 +1512,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1223,8 +1546,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1259,8 +1586,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1276,15 +1607,15 @@
                 },
                 "to": [
                   {
-                    "key_code": "left_arrow",
+                    "key_code": "up_arrow",
                     "modifiers": [
-                      "command"
+                      "option"
                     ]
                   },
                   {
-                    "key_code": "right_arrow",
+                    "key_code": "down_arrow",
                     "modifiers": [
-                      "command",
+                      "option",
                       "shift"
                     ]
                   }
@@ -1295,8 +1626,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1391,8 +1726,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1424,8 +1763,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1457,8 +1800,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1490,8 +1837,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1523,8 +1874,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1556,8 +1911,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1595,8 +1954,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1634,8 +1997,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1670,8 +2037,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1701,8 +2072,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1732,8 +2107,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1763,8 +2142,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1797,8 +2180,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1831,8 +2218,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1865,8 +2256,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1899,8 +2294,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1930,8 +2329,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -1961,8 +2364,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -2645,8 +3052,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -2674,8 +3085,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -2703,8 +3118,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -2732,8 +3151,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -2762,8 +3185,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -2792,8 +3219,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -2821,8 +3252,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -2850,8 +3285,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -2876,8 +3315,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -2902,8 +3345,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -2961,8 +3408,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   }
                 ]
               },
@@ -3010,8 +3461,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   }
                 ]
               },
@@ -3059,8 +3514,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   }
                 ]
               },
@@ -3108,8 +3567,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   }
                 ]
               },
@@ -3157,8 +3620,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   }
                 ]
               }
@@ -3242,8 +3709,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3268,8 +3739,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3294,8 +3769,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3320,8 +3799,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3346,8 +3829,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3372,8 +3859,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3398,8 +3889,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3424,8 +3919,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3450,8 +3949,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3476,8 +3979,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3502,8 +4009,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3528,8 +4039,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3554,8 +4069,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3580,8 +4099,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3606,8 +4129,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3632,8 +4159,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3658,8 +4189,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3684,8 +4219,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3710,8 +4249,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   },
                   {
                     "type": "variable_if",
@@ -3790,8 +4333,12 @@
                     "identifiers": [
                       {
                         "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
                       }
-                    ]
+                    ],
+                    "description": "Apple Keyboards only"
                   }
                 ]
               }

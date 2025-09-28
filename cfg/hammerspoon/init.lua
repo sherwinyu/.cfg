@@ -13,10 +13,6 @@ hs.hotkey.bind(hyper, "r", function()
 	end)
 end)
 
-hs.hotkey.bind(hyper, "c", function()
-	hs.alert.show("Show hammerspoon console")
-	hs.openConsole()
-end)
 
 local fuzzyFinder = require("fuzzy-finder")
 hs.hotkey.bind(zoot, "space", function()

@@ -5,8 +5,24 @@ local config = wezterm.config_builder()
 config.font = wezterm.font('JetBrains Mono', { weight = 'Regular' })
 config.font_size = 13.0
 
--- Color scheme
+-- Color scheme (will be overridden by workspace-specific themes)
 config.color_scheme = 'Tokyo Night'
+
+-- Workspace-specific color schemes
+local workspace_color_schemes = {
+  cfg = {
+    dark = 'Tokyo Night',
+    light = 'Tokyo Night Day',
+  },
+  oryoki = {
+    dark = 'Catppuccin Mocha',
+    light = 'Catppuccin Latte',
+  },
+  gamma = {
+    dark = 'Nord (Gogh)',
+    light = 'Solarized Light (Gogh)',
+  },
+}
 
 -- Tab bar
 config.hide_tab_bar_if_only_one_tab = false -- Show tab bar to display workspace
@@ -147,6 +163,143 @@ config.keys = {
     mods = 'CMD|SHIFT',
     action = wezterm.action.ActivateCommandPalette,
   },
+  -- Leader key pane navigation (` + hjkl)
+  {
+    key = '`',
+    action = wezterm.action.ActivateKeyTable {
+      name = 'pane_navigation',
+      timeout_milliseconds = 1000,
+    },
+  },
+}
+
+-- Key tables
+config.key_tables = {
+  pane_navigation = {
+    {
+      key = 'h',
+      action = wezterm.action.ActivatePaneDirection 'Left',
+    },
+    {
+      key = 'j',
+      action = wezterm.action.ActivatePaneDirection 'Down',
+    },
+    {
+      key = 'k',
+      action = wezterm.action.ActivatePaneDirection 'Up',
+    },
+    {
+      key = 'l',
+      action = wezterm.action.ActivatePaneDirection 'Right',
+    },
+    -- Send literal backtick on double tap
+    {
+      key = '`',
+      action = wezterm.action.SendKey { key = '`' },
+    },
+    -- Workspace switching with color scheme updates
+    {
+      key = '1',
+      action = wezterm.action_callback(function(window, pane)
+        window:perform_action(wezterm.action.SwitchToWorkspace { name = 'cfg' }, pane)
+        wezterm.time.call_after(0.1, function()
+          update_color_scheme_for_workspace(window)
+        end)
+      end),
+    },
+    {
+      key = '2',
+      action = wezterm.action_callback(function(window, pane)
+        window:perform_action(wezterm.action.SwitchToWorkspace { name = 'oryoki' }, pane)
+        wezterm.time.call_after(0.1, function()
+          update_color_scheme_for_workspace(window)
+        end)
+      end),
+    },
+    {
+      key = '3',
+      action = wezterm.action_callback(function(window, pane)
+        window:perform_action(wezterm.action.SwitchToWorkspace { name = 'gamma' }, pane)
+        wezterm.time.call_after(0.1, function()
+          update_color_scheme_for_workspace(window)
+        end)
+      end),
+    },
+    -- Rename current pane (leader r)
+    {
+      key = 'r',
+      action = wezterm.action.PromptInputLine {
+        description = 'Enter name for this pane:',
+        action = wezterm.action_callback(function(window, pane, line)
+          if line then
+            -- Set the pane title using OSC escape sequence
+            pane:send_text(string.format('\027]2;%s\027\\', line))
+            claude_notify('Pane Renamed', 'Pane renamed to: ' .. line)
+          end
+        end),
+      },
+    },
+    -- Rebalance panes evenly (leader =)
+    {
+      key = '=',
+      action = wezterm.action_callback(function(window, pane)
+        -- Get all panes in current tab
+        local tab = window:active_tab()
+        local panes = tab:panes()
+
+        if #panes <= 1 then
+          return
+        end
+
+        -- For simplicity, we'll resize all panes to try to make them more equal
+        -- This is a workaround since WezTerm doesn't have built-in even balancing
+
+        -- Get the tab size
+        local tab_size = tab:get_size()
+        local cols = tab_size.cols
+        local rows = tab_size.rows
+
+        -- Calculate target sizes (this is a simplified approach)
+        -- In a real implementation, we'd need to analyze the split tree structure
+
+        -- For now, let's try to resize panes by adjusting them towards average size
+        local total_panes = #panes
+
+        -- Balance with larger increments for faster results
+        -- This approach sends resize commands to quickly even out the panes
+        for i = 1, 3 do -- Fewer passes with larger adjustments
+          for _, p in ipairs(panes) do
+            local pane_size = p:get_dimensions()
+
+            -- Calculate target sizes with more aggressive adjustments
+            local avg_cols = math.floor(cols / total_panes)
+            local avg_rows = math.floor(rows / total_panes)
+
+            -- Use increments of 10 for faster rebalancing
+            if pane_size.cols > avg_cols + 10 then
+              window:perform_action(wezterm.action.AdjustPaneSize { 'Left', 10 }, p)
+            elseif pane_size.cols < avg_cols - 10 then
+              window:perform_action(wezterm.action.AdjustPaneSize { 'Right', 10 }, p)
+            end
+
+            if pane_size.rows > avg_rows + 5 then
+              window:perform_action(wezterm.action.AdjustPaneSize { 'Up', 10 }, p)
+            elseif pane_size.rows < avg_rows - 5 then
+              window:perform_action(wezterm.action.AdjustPaneSize { 'Down', 10 }, p)
+            end
+          end
+        end
+
+        -- Show notification that rebalancing was attempted
+        claude_notify('Panes', 'Attempted to rebalance ' .. total_panes .. ' panes')
+      end),
+    },
+    -- Exit the key table
+    {
+      key = 'Escape',
+      action = 'PopKeyTable',
+    },
+  },
 }
 
 -- Mouse bindings
@@ -178,6 +331,55 @@ end
 function claude_task_complete(task)
   claude_notify('Task Complete', task)
 end
+
+-- Pane naming helpers
+function set_pane_title(title)
+  -- Function to help with setting pane titles from Lua
+  -- This would be called from the shell using wezterm cli
+  return wezterm.action_callback(function(window, pane)
+    -- This sets the pane title, which will show in the tab title when active
+    pane:send_text(string.format('\027]2;%s\027\\', title))
+  end)
+end
+
+-- System theme detection and workspace color scheme switching
+local function get_system_appearance()
+  local success, stdout = wezterm.run_child_process({'defaults', 'read', '-g', 'AppleInterfaceStyle'})
+  if success and stdout:match('Dark') then
+    return 'dark'
+  else
+    return 'light'
+  end
+end
+
+local function update_color_scheme_for_workspace(window)
+  local workspace_name = window:active_workspace()
+  local appearance = get_system_appearance()
+
+  if workspace_color_schemes[workspace_name] then
+    local color_scheme = workspace_color_schemes[workspace_name][appearance]
+    if color_scheme then
+      local overrides = window:get_config_overrides() or {}
+      overrides.color_scheme = color_scheme
+      window:set_config_overrides(overrides)
+    end
+  end
+end
+
+-- Update color scheme when workspace changes
+wezterm.on('window-config-reloaded', function(window, pane)
+  update_color_scheme_for_workspace(window)
+end)
+
+-- Update color scheme when switching workspaces
+wezterm.on('mux-startup', function()
+  -- Set up a timer to periodically check and update themes
+  wezterm.time.call_after(1, function()
+    for _, window in ipairs(wezterm.mux.all_windows()) do
+      update_color_scheme_for_workspace(window:gui_window())
+    end
+  end)
+end)
 
 -- Export for shell scripts
 wezterm.on('user-var-changed', function(window, pane, name, value)
@@ -263,6 +465,20 @@ local function create_cfg_workspace()
   main_tab:activate()
 end
 
+local function create_oryoki_workspace()
+  local mux = wezterm.mux
+
+  -- Create main tab
+  local main_tab, main_pane, main_window = mux.spawn_window {
+    workspace = 'oryoki',
+    cwd = wezterm.home_dir .. '/projects/oryoki',
+  }
+  main_tab:set_title('Main')
+
+  -- Activate main tab
+  main_tab:activate()
+end
+
 local function create_gamma_workspace()
   local mux = wezterm.mux
 
@@ -331,56 +547,15 @@ end
 
 -- GUI startup event
 wezterm.on('gui-startup', function(cmd)
-  -- Create cfg workspace on startup
+  -- Create all workspaces on startup
   create_cfg_workspace()
+  create_oryoki_workspace()
+  create_gamma_workspace()
 
   -- Set cfg as the active workspace
   local mux = wezterm.mux
   mux.set_active_workspace('cfg')
 end)
 
--- Key binding to switch to cfg workspace
-table.insert(config.keys, {
-  key = 'c',
-  mods = 'CMD|SHIFT',
-  action = wezterm.action.SwitchToWorkspace {
-    name = 'cfg',
-  },
-})
-
--- Key binding to create/recreate cfg workspace
-table.insert(config.keys, {
-  key = 'c',
-  mods = 'CMD|SHIFT|CTRL',
-  action = wezterm.action_callback(function(window, pane)
-    create_cfg_workspace()
-    window:perform_action(
-      wezterm.action.SwitchToWorkspace { name = 'cfg' },
-      pane
-    )
-  end),
-})
-
--- Key binding to switch to gamma workspace
-table.insert(config.keys, {
-  key = 'g',
-  mods = 'CMD|SHIFT',
-  action = wezterm.action.SwitchToWorkspace {
-    name = 'gamma',
-  },
-})
-
--- Key binding to create/recreate gamma workspace
-table.insert(config.keys, {
-  key = 'g',
-  mods = 'CMD|SHIFT|CTRL',
-  action = wezterm.action_callback(function(window, pane)
-    create_gamma_workspace()
-    window:perform_action(
-      wezterm.action.SwitchToWorkspace { name = 'gamma' },
-      pane
-    )
-  end),
-})
 
 return config
