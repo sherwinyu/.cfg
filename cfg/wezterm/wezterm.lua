@@ -1,27 +1,27 @@
-local wezterm = require 'wezterm'
+local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 -- Font configuration
-config.font = wezterm.font('JetBrains Mono', { weight = 'Regular' })
+config.font = wezterm.font("JetBrains Mono", { weight = "Regular" })
 config.font_size = 13.0
 
 -- Color scheme (will be overridden by workspace-specific themes)
-config.color_scheme = 'Tokyo Night'
+config.color_scheme = "Tokyo Night"
 
 -- Workspace-specific color schemes
 local workspace_color_schemes = {
-  cfg = {
-    dark = 'Tokyo Night',
-    light = 'Tokyo Night Day',
-  },
-  oryoki = {
-    dark = 'Catppuccin Mocha',
-    light = 'Catppuccin Latte',
-  },
-  gamma = {
-    dark = 'Nord (Gogh)',
-    light = 'Solarized Light (Gogh)',
-  },
+	cfg = {
+		dark = "Tokyo Night",
+		light = "Tokyo Night Day",
+	},
+	oryoki = {
+		dark = "Catppuccin Mocha",
+		light = "Catppuccin Latte",
+	},
+	gamma = {
+		dark = "Nord (Gogh)",
+		light = "Solarized Light (Gogh)",
+	},
 }
 
 -- Tab bar
@@ -36,7 +36,7 @@ config.show_new_tab_button_in_tab_bar = false
 config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.95
 config.macos_window_background_blur = 20
-config.window_close_confirmation = 'NeverPrompt'
+config.window_close_confirmation = "NeverPrompt"
 
 -- Initial window size
 config.initial_cols = 120
@@ -47,269 +47,259 @@ config.scrollback_lines = 10000
 
 -- Key bindings
 config.keys = {
-  -- Split panes
-  {
-    key = 'd',
-    mods = 'CMD',
-    action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
-  },
-  {
-    key = 'D',
-    mods = 'CMD|SHIFT',
-    action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
-  },
-  -- Navigate panes
-  {
-    key = 'LeftArrow',
-    mods = 'CMD|OPT',
-    action = wezterm.action.ActivatePaneDirection 'Left',
-  },
-  {
-    key = 'RightArrow',
-    mods = 'CMD|OPT',
-    action = wezterm.action.ActivatePaneDirection 'Right',
-  },
-  {
-    key = 'UpArrow',
-    mods = 'CMD|OPT',
-    action = wezterm.action.ActivatePaneDirection 'Up',
-  },
-  {
-    key = 'DownArrow',
-    mods = 'CMD|OPT',
-    action = wezterm.action.ActivatePaneDirection 'Down',
-  },
-  -- Close pane
-  {
-    key = 'w',
-    mods = 'CMD',
-    action = wezterm.action.CloseCurrentPane { confirm = false },
-  },
-  -- Line navigation
-  {
-    key = 'LeftArrow',
-    mods = 'CMD',
-    action = wezterm.action.SendKey { key = 'a', mods = 'CTRL' },
-  },
-  {
-    key = 'RightArrow',
-    mods = 'CMD',
-    action = wezterm.action.SendKey { key = 'e', mods = 'CTRL' },
-  },
-  -- Tab navigation
-  {
-    key = '[',
-    mods = 'CMD',
-    action = wezterm.action.ActivateTabRelative(-1),
-  },
-  {
-    key = ']',
-    mods = 'CMD',
-    action = wezterm.action.ActivateTabRelative(1),
-  },
-  -- Pane navigation
-  {
-    key = '[',
-    mods = 'CMD|OPT',
-    action = wezterm.action.ActivatePaneDirection 'Prev',
-  },
-  {
-    key = ']',
-    mods = 'CMD|OPT',
-    action = wezterm.action.ActivatePaneDirection 'Next',
-  },
-  -- Pane zoom toggle
-  {
-    key = 'Enter',
-    mods = 'CMD|SHIFT',
-    action = wezterm.action.TogglePaneZoomState,
-  },
-  -- Launcher and navigator
-  {
-    key = 'k',
-    mods = 'CMD',
-    action = wezterm.action.ShowLauncher,
-  },
-  {
-    key = 'k',
-    mods = 'CMD|SHIFT',
-    action = wezterm.action.ShowTabNavigator,
-  },
-  -- Switch to last used tab
-  {
-    key = 'Tab',
-    mods = 'CTRL',
-    action = wezterm.action.ActivateLastTab,
-  },
-  -- Quick select and pane select
-  {
-    key = 's',
-    mods = 'CMD',
-    action = wezterm.action.QuickSelect,
-  },
-  {
-    key = 'p',
-    mods = 'CMD',
-    action = wezterm.action.PaneSelect,
-  },
-  -- Copy mode and command palette
-  {
-    key = 's',
-    mods = 'CMD|SHIFT',
-    action = wezterm.action.ActivateCopyMode,
-  },
-  {
-    key = 'p',
-    mods = 'CMD|SHIFT',
-    action = wezterm.action.ActivateCommandPalette,
-  },
-  -- Leader key pane navigation (` + hjkl)
-  {
-    key = '`',
-    action = wezterm.action.ActivateKeyTable {
-      name = 'pane_navigation',
-      timeout_milliseconds = 1000,
-    },
-  },
+	-- Split panes
+	{
+		key = "d",
+		mods = "CMD",
+		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+	},
+	{
+		key = "D",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+	},
+	-- Close pane
+	{
+		key = "w",
+		mods = "CMD",
+		action = wezterm.action.CloseCurrentPane({ confirm = false }),
+	},
+	-- Line navigation
+	{
+		key = "LeftArrow",
+		mods = "CMD",
+		action = wezterm.action.SendKey({ key = "a", mods = "CTRL" }),
+	},
+	{
+		key = "RightArrow",
+		mods = "CMD",
+		action = wezterm.action.SendKey({ key = "e", mods = "CTRL" }),
+	},
+	-- Word navigation
+	{
+		key = "LeftArrow",
+		mods = "OPT",
+		action = wezterm.action.SendKey({ key = "b", mods = "ALT" }),
+	},
+	{
+		key = "RightArrow",
+		mods = "OPT",
+		action = wezterm.action.SendKey({ key = "f", mods = "ALT" }),
+	},
+	-- Tab navigation
+	{
+		key = "[",
+		mods = "CMD",
+		action = wezterm.action.ActivateTabRelative(-1),
+	},
+	{
+		key = "]",
+		mods = "CMD",
+		action = wezterm.action.ActivateTabRelative(1),
+	},
+	-- Pane navigation
+	{
+		key = "[",
+		mods = "CMD|OPT",
+		action = wezterm.action.ActivatePaneDirection("Prev"),
+	},
+	{
+		key = "]",
+		mods = "CMD|OPT",
+		action = wezterm.action.ActivatePaneDirection("Next"),
+	},
+	-- Pane zoom toggle
+	{
+		key = "Enter",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.TogglePaneZoomState,
+	},
+	-- Launcher and navigator
+	{
+		key = "k",
+		mods = "CMD",
+		action = wezterm.action.ShowLauncher,
+	},
+	{
+		key = "k",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.ShowTabNavigator,
+	},
+	-- Switch to last used tab
+	{
+		key = "Tab",
+		mods = "CTRL",
+		action = wezterm.action.ActivateLastTab,
+	},
+	-- Quick select and pane select
+	{
+		key = "s",
+		mods = "CMD",
+		action = wezterm.action.QuickSelect,
+	},
+	{
+		key = "p",
+		mods = "CMD",
+		action = wezterm.action.PaneSelect,
+	},
+	-- Copy mode and command palette
+	{
+		key = "s",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.ActivateCopyMode,
+	},
+	{
+		key = "p",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.ActivateCommandPalette,
+	},
+	-- Leader key pane navigation (` + hjkl)
+	{
+		key = "`",
+		action = wezterm.action.ActivateKeyTable({
+			name = "pane_navigation",
+			timeout_milliseconds = 1000,
+		}),
+	},
 }
 
 -- Key tables
 config.key_tables = {
-  pane_navigation = {
-    {
-      key = 'h',
-      action = wezterm.action.ActivatePaneDirection 'Left',
-    },
-    {
-      key = 'j',
-      action = wezterm.action.ActivatePaneDirection 'Down',
-    },
-    {
-      key = 'k',
-      action = wezterm.action.ActivatePaneDirection 'Up',
-    },
-    {
-      key = 'l',
-      action = wezterm.action.ActivatePaneDirection 'Right',
-    },
-    -- Send literal backtick on double tap
-    {
-      key = '`',
-      action = wezterm.action.SendKey { key = '`' },
-    },
-    -- Workspace switching with color scheme updates
-    {
-      key = '1',
-      action = wezterm.action_callback(function(window, pane)
-        window:perform_action(wezterm.action.SwitchToWorkspace { name = 'cfg' }, pane)
-        wezterm.time.call_after(0.1, function()
-          update_color_scheme_for_workspace(window)
-        end)
-      end),
-    },
-    {
-      key = '2',
-      action = wezterm.action_callback(function(window, pane)
-        window:perform_action(wezterm.action.SwitchToWorkspace { name = 'oryoki' }, pane)
-        wezterm.time.call_after(0.1, function()
-          update_color_scheme_for_workspace(window)
-        end)
-      end),
-    },
-    {
-      key = '3',
-      action = wezterm.action_callback(function(window, pane)
-        window:perform_action(wezterm.action.SwitchToWorkspace { name = 'gamma' }, pane)
-        wezterm.time.call_after(0.1, function()
-          update_color_scheme_for_workspace(window)
-        end)
-      end),
-    },
-    -- Rename current pane (leader r)
-    {
-      key = 'r',
-      action = wezterm.action.PromptInputLine {
-        description = 'Enter name for this pane:',
-        action = wezterm.action_callback(function(window, pane, line)
-          if line then
-            -- Set the pane title using OSC escape sequence
-            pane:send_text(string.format('\027]2;%s\027\\', line))
-            claude_notify('Pane Renamed', 'Pane renamed to: ' .. line)
-          end
-        end),
-      },
-    },
-    -- Rebalance panes evenly (leader =)
-    {
-      key = '=',
-      action = wezterm.action_callback(function(window, pane)
-        -- Get all panes in current tab
-        local tab = window:active_tab()
-        local panes = tab:panes()
+	pane_navigation = {
+		{
+			key = "h",
+			action = wezterm.action.ActivatePaneDirection("Left"),
+		},
+		{
+			key = "j",
+			action = wezterm.action.ActivatePaneDirection("Down"),
+		},
+		{
+			key = "k",
+			action = wezterm.action.ActivatePaneDirection("Up"),
+		},
+		{
+			key = "l",
+			action = wezterm.action.ActivatePaneDirection("Right"),
+		},
+		-- Send literal backtick on double tap
+		{
+			key = "`",
+			action = wezterm.action.SendKey({ key = "`" }),
+		},
+		-- Workspace switching with color scheme updates
+		{
+			key = "1",
+			action = wezterm.action_callback(function(window, pane)
+				window:perform_action(wezterm.action.SwitchToWorkspace({ name = "cfg" }), pane)
+				wezterm.time.call_after(0.1, function()
+					update_color_scheme_for_workspace(window)
+				end)
+			end),
+		},
+		{
+			key = "2",
+			action = wezterm.action_callback(function(window, pane)
+				window:perform_action(wezterm.action.SwitchToWorkspace({ name = "oryoki" }), pane)
+				wezterm.time.call_after(0.1, function()
+					update_color_scheme_for_workspace(window)
+				end)
+			end),
+		},
+		{
+			key = "3",
+			action = wezterm.action_callback(function(window, pane)
+				window:perform_action(wezterm.action.SwitchToWorkspace({ name = "gamma" }), pane)
+				wezterm.time.call_after(0.1, function()
+					update_color_scheme_for_workspace(window)
+				end)
+			end),
+		},
+		-- Rename current pane (leader r)
+		{
+			key = "r",
+			action = wezterm.action.PromptInputLine({
+				description = "Enter name for this pane:",
+				action = wezterm.action_callback(function(window, pane, line)
+					if line then
+						-- Set the pane title using OSC escape sequence
+						pane:send_text(string.format("\027]2;%s\027\\", line))
+						claude_notify("Pane Renamed", "Pane renamed to: " .. line)
+					end
+				end),
+			}),
+		},
+		-- Rebalance panes evenly (leader =)
+		{
+			key = "=",
+			action = wezterm.action_callback(function(window, pane)
+				-- Get all panes in current tab
+				local tab = window:active_tab()
+				local panes = tab:panes()
 
-        if #panes <= 1 then
-          return
-        end
+				if #panes <= 1 then
+					return
+				end
 
-        -- For simplicity, we'll resize all panes to try to make them more equal
-        -- This is a workaround since WezTerm doesn't have built-in even balancing
+				-- For simplicity, we'll resize all panes to try to make them more equal
+				-- This is a workaround since WezTerm doesn't have built-in even balancing
 
-        -- Get the tab size
-        local tab_size = tab:get_size()
-        local cols = tab_size.cols
-        local rows = tab_size.rows
+				-- Get the tab size
+				local tab_size = tab:get_size()
+				local cols = tab_size.cols
+				local rows = tab_size.rows
 
-        -- Calculate target sizes (this is a simplified approach)
-        -- In a real implementation, we'd need to analyze the split tree structure
+				-- Calculate target sizes (this is a simplified approach)
+				-- In a real implementation, we'd need to analyze the split tree structure
 
-        -- For now, let's try to resize panes by adjusting them towards average size
-        local total_panes = #panes
+				-- For now, let's try to resize panes by adjusting them towards average size
+				local total_panes = #panes
 
-        -- Balance with larger increments for faster results
-        -- This approach sends resize commands to quickly even out the panes
-        for i = 1, 3 do -- Fewer passes with larger adjustments
-          for _, p in ipairs(panes) do
-            local pane_size = p:get_dimensions()
+				-- Balance with larger increments for faster results
+				-- This approach sends resize commands to quickly even out the panes
+				for i = 1, 3 do -- Fewer passes with larger adjustments
+					for _, p in ipairs(panes) do
+						local pane_size = p:get_dimensions()
 
-            -- Calculate target sizes with more aggressive adjustments
-            local avg_cols = math.floor(cols / total_panes)
-            local avg_rows = math.floor(rows / total_panes)
+						-- Calculate target sizes with more aggressive adjustments
+						local avg_cols = math.floor(cols / total_panes)
+						local avg_rows = math.floor(rows / total_panes)
 
-            -- Use increments of 10 for faster rebalancing
-            if pane_size.cols > avg_cols + 10 then
-              window:perform_action(wezterm.action.AdjustPaneSize { 'Left', 10 }, p)
-            elseif pane_size.cols < avg_cols - 10 then
-              window:perform_action(wezterm.action.AdjustPaneSize { 'Right', 10 }, p)
-            end
+						-- Use increments of 10 for faster rebalancing
+						if pane_size.cols > avg_cols + 10 then
+							window:perform_action(wezterm.action.AdjustPaneSize({ "Left", 10 }), p)
+						elseif pane_size.cols < avg_cols - 10 then
+							window:perform_action(wezterm.action.AdjustPaneSize({ "Right", 10 }), p)
+						end
 
-            if pane_size.rows > avg_rows + 5 then
-              window:perform_action(wezterm.action.AdjustPaneSize { 'Up', 10 }, p)
-            elseif pane_size.rows < avg_rows - 5 then
-              window:perform_action(wezterm.action.AdjustPaneSize { 'Down', 10 }, p)
-            end
-          end
-        end
+						if pane_size.rows > avg_rows + 5 then
+							window:perform_action(wezterm.action.AdjustPaneSize({ "Up", 10 }), p)
+						elseif pane_size.rows < avg_rows - 5 then
+							window:perform_action(wezterm.action.AdjustPaneSize({ "Down", 10 }), p)
+						end
+					end
+				end
 
-        -- Show notification that rebalancing was attempted
-        claude_notify('Panes', 'Attempted to rebalance ' .. total_panes .. ' panes')
-      end),
-    },
-    -- Exit the key table
-    {
-      key = 'Escape',
-      action = 'PopKeyTable',
-    },
-  },
+				-- Show notification that rebalancing was attempted
+				claude_notify("Panes", "Attempted to rebalance " .. total_panes .. " panes")
+			end),
+		},
+		-- Exit the key table
+		{
+			key = "Escape",
+			action = "PopKeyTable",
+		},
+	},
 }
 
 -- Mouse bindings
 config.mouse_bindings = {
-  -- Right click to paste
-  {
-    event = { Down = { streak = 1, button = 'Right' } },
-    mods = 'NONE',
-    action = wezterm.action.PasteFrom 'Clipboard',
-  },
+	-- Right click to paste
+	{
+		event = { Down = { streak = 1, button = "Right" } },
+		mods = "NONE",
+		action = wezterm.action.PasteFrom("Clipboard"),
+	},
 }
 
 -- Performance
@@ -317,245 +307,246 @@ config.max_fps = 60
 config.animation_fps = 1
 
 -- Bell
-config.audible_bell = 'SystemBeep'
+config.audible_bell = "SystemBeep"
 
 -- Claude Code integration helpers
 function claude_notify(title, message)
-  wezterm.gui.gui_windows()[1]:toast_notification('Claude Code - ' .. title, message, nil, 4000)
+	wezterm.gui.gui_windows()[1]:toast_notification("Claude Code - " .. title, message, nil, 4000)
 end
 
 function claude_permission_request(permission)
-  claude_notify('Permission Required', 'Claude Code needs permission: ' .. permission)
+	claude_notify("Permission Required", "Claude Code needs permission: " .. permission)
 end
 
 function claude_task_complete(task)
-  claude_notify('Task Complete', task)
+	claude_notify("Task Complete", task)
 end
 
 -- Pane naming helpers
 function set_pane_title(title)
-  -- Function to help with setting pane titles from Lua
-  -- This would be called from the shell using wezterm cli
-  return wezterm.action_callback(function(window, pane)
-    -- This sets the pane title, which will show in the tab title when active
-    pane:send_text(string.format('\027]2;%s\027\\', title))
-  end)
+	-- Function to help with setting pane titles from Lua
+	-- This would be called from the shell using wezterm cli
+	return wezterm.action_callback(function(window, pane)
+		-- This sets the pane title, which will show in the tab title when active
+		pane:send_text(string.format("\027]2;%s\027\\", title))
+	end)
 end
 
 -- System theme detection and workspace color scheme switching
 local function get_system_appearance()
-  local success, stdout = wezterm.run_child_process({'defaults', 'read', '-g', 'AppleInterfaceStyle'})
-  if success and stdout:match('Dark') then
-    return 'dark'
-  else
-    return 'light'
-  end
+	local success, stdout = wezterm.run_child_process({ "defaults", "read", "-g", "AppleInterfaceStyle" })
+	if success and stdout:match("Dark") then
+		return "dark"
+	else
+		return "light"
+	end
 end
 
 local function update_color_scheme_for_workspace(window)
-  local workspace_name = window:active_workspace()
-  local appearance = get_system_appearance()
+	local workspace_name = window:active_workspace()
+	local appearance = get_system_appearance()
 
-  if workspace_color_schemes[workspace_name] then
-    local color_scheme = workspace_color_schemes[workspace_name][appearance]
-    if color_scheme then
-      local overrides = window:get_config_overrides() or {}
-      overrides.color_scheme = color_scheme
-      window:set_config_overrides(overrides)
-    end
-  end
+	if workspace_color_schemes[workspace_name] then
+		local color_scheme = workspace_color_schemes[workspace_name][appearance]
+		if color_scheme then
+			local overrides = window:get_config_overrides() or {}
+			overrides.color_scheme = color_scheme
+			window:set_config_overrides(overrides)
+		end
+	end
 end
 
 -- Update color scheme when workspace changes
-wezterm.on('window-config-reloaded', function(window, pane)
-  update_color_scheme_for_workspace(window)
+wezterm.on("window-config-reloaded", function(window, pane)
+	update_color_scheme_for_workspace(window)
 end)
 
 -- Update color scheme when switching workspaces
-wezterm.on('mux-startup', function()
-  -- Set up a timer to periodically check and update themes
-  wezterm.time.call_after(1, function()
-    for _, window in ipairs(wezterm.mux.all_windows()) do
-      update_color_scheme_for_workspace(window:gui_window())
-    end
-  end)
+wezterm.on("mux-startup", function()
+	-- Set up a timer to periodically check and update themes
+	wezterm.time.call_after(1, function()
+		for _, window in ipairs(wezterm.mux.all_windows()) do
+			update_color_scheme_for_workspace(window:gui_window())
+		end
+	end)
 end)
 
 -- Export for shell scripts
-wezterm.on('user-var-changed', function(window, pane, name, value)
-  if name == 'CLAUDE_NOTIFY_TITLE' and pane.user_vars.CLAUDE_NOTIFY_MESSAGE then
-    claude_notify(value, pane.user_vars.CLAUDE_NOTIFY_MESSAGE)
-  elseif name == 'CLAUDE_NOTIFY_MESSAGE' and pane.user_vars.CLAUDE_NOTIFY_TITLE then
-    claude_notify(pane.user_vars.CLAUDE_NOTIFY_TITLE, value)
-  end
+wezterm.on("user-var-changed", function(window, pane, name, value)
+	if name == "CLAUDE_NOTIFY_TITLE" and pane.user_vars.CLAUDE_NOTIFY_MESSAGE then
+		claude_notify(value, pane.user_vars.CLAUDE_NOTIFY_MESSAGE)
+	elseif name == "CLAUDE_NOTIFY_MESSAGE" and pane.user_vars.CLAUDE_NOTIFY_TITLE then
+		claude_notify(pane.user_vars.CLAUDE_NOTIFY_TITLE, value)
+	end
 end)
 
 -- Custom tab bar to show workspace
-wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
-  local workspace = tab.active_pane.user_vars.WEZTERM_WORKSPACE or
-                   wezterm.mux.get_active_workspace()
-  local title = tab.tab_title
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+	local workspace = tab.active_pane.user_vars.WEZTERM_WORKSPACE or wezterm.mux.get_active_workspace()
+	local title = tab.tab_title
 
-  if title and #title > 0 then
-    title = title
-  else
-    title = tab.active_pane.title
-  end
+	if title and #title > 0 then
+		title = title
+	else
+		title = tab.active_pane.title
+	end
 
-  -- Show workspace name in first tab
-  if tab.tab_index == 0 and workspace then
-    title = string.format('[%s] %s', workspace, title)
-  end
+	-- Show workspace name in first tab
+	if tab.tab_index == 0 and workspace then
+		title = string.format("[%s] %s", workspace, title)
+	end
 
-  return {
-    { Text = ' ' .. title .. ' ' },
-  }
+	return {
+		{ Text = " " .. title .. " " },
+	}
 end)
 
 -- Workspace creation functions
 local function create_cfg_workspace()
-  local mux = wezterm.mux
+	local mux = wezterm.mux
 
-  -- Create main tab with splits
-  local main_tab, main_pane, main_window = mux.spawn_window {
-    workspace = 'cfg',
-    cwd = wezterm.home_dir .. '/cfg',
-  }
-  main_tab:set_title('Main')
+	-- Create main tab with splits
+	local main_tab, main_pane, main_window = mux.spawn_window({
+		workspace = "cfg",
+		cwd = wezterm.home_dir .. "/cfg",
+	})
+	main_tab:set_title("Main")
 
-  -- Split for config status
-  local config_pane = main_pane:split {
-    direction = 'Right',
-    size = 0.5,
-  }
-  config_pane:send_text('alias config="git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin"\nconfig status\n')
+	-- Split for config status
+	local config_pane = main_pane:split({
+		direction = "Right",
+		size = 0.5,
+	})
+	config_pane:send_text(
+		'alias config="git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin"\nconfig status\n'
+	)
 
-  -- Split for claude sessions
-  local claude_pane = config_pane:split {
-    direction = 'Bottom',
-    size = 0.5,
-  }
-  claude_pane:send_text('claude session list\n')
+	-- Split for claude sessions
+	local claude_pane = config_pane:split({
+		direction = "Bottom",
+		size = 0.5,
+	})
+	claude_pane:send_text("claude session list\n")
 
-  -- Create Wez tab
-  local wez_tab, wez_pane = main_window:spawn_tab {
-    cwd = wezterm.home_dir .. '/cfg/wezterm',
-  }
-  wez_tab:set_title('Wez')
+	-- Create Wez tab
+	local wez_tab, wez_pane = main_window:spawn_tab({
+		cwd = wezterm.home_dir .. "/cfg/wezterm",
+	})
+	wez_tab:set_title("Wez")
 
-  -- Create nvim config tab
-  local nvim_tab, nvim_pane = main_window:spawn_tab {
-    cwd = wezterm.home_dir .. '/cfg/nvim',
-  }
-  nvim_tab:set_title('nvimc')
+	-- Create nvim config tab
+	local nvim_tab, nvim_pane = main_window:spawn_tab({
+		cwd = wezterm.home_dir .. "/cfg/nvim",
+	})
+	nvim_tab:set_title("nvimc")
 
-  -- Create karabiner tab
-  local karabiner_tab, karabiner_pane = main_window:spawn_tab {
-    cwd = wezterm.home_dir .. '/cfg/karabiner-config',
-  }
-  karabiner_tab:set_title('karabiner')
+	-- Create karabiner tab
+	local karabiner_tab, karabiner_pane = main_window:spawn_tab({
+		cwd = wezterm.home_dir .. "/cfg/karabiner-config",
+	})
+	karabiner_tab:set_title("karabiner")
 
-  -- Create hammerspoon tab
-  local hammer_tab, hammer_pane = main_window:spawn_tab {
-    cwd = wezterm.home_dir .. '/cfg/hammerspoon',
-  }
-  hammer_tab:set_title('hammerspoon')
+	-- Create hammerspoon tab
+	local hammer_tab, hammer_pane = main_window:spawn_tab({
+		cwd = wezterm.home_dir .. "/cfg/hammerspoon",
+	})
+	hammer_tab:set_title("hammerspoon")
 
-  -- Activate main tab
-  main_tab:activate()
+	-- Activate main tab
+	main_tab:activate()
 end
 
 local function create_oryoki_workspace()
-  local mux = wezterm.mux
+	local mux = wezterm.mux
 
-  -- Create main tab
-  local main_tab, main_pane, main_window = mux.spawn_window {
-    workspace = 'oryoki',
-    cwd = wezterm.home_dir .. '/projects/oryoki',
-  }
-  main_tab:set_title('Main')
+	-- Create main tab
+	local main_tab, main_pane, main_window = mux.spawn_window({
+		workspace = "oryoki",
+		cwd = wezterm.home_dir .. "/projects/oryoki",
+	})
+	main_tab:set_title("Main")
 
-  -- Activate main tab
-  main_tab:activate()
+	-- Activate main tab
+	main_tab:activate()
 end
 
 local function create_gamma_workspace()
-  local mux = wezterm.mux
+	local mux = wezterm.mux
 
-  -- Create main tab
-  local main_tab, main_pane, main_window = mux.spawn_window {
-    workspace = 'gamma',
-    cwd = wezterm.home_dir .. '/projects/gamma',
-  }
-  main_tab:set_title('Main')
+	-- Create main tab
+	local main_tab, main_pane, main_window = mux.spawn_window({
+		workspace = "gamma",
+		cwd = wezterm.home_dir .. "/projects/gamma",
+	})
+	main_tab:set_title("Main")
 
-  -- Setup direnv hook for main pane
-  main_pane:send_text('eval "$(direnv hook zsh)"\n')
+	-- Setup direnv hook for main pane
+	main_pane:send_text('eval "$(direnv hook zsh)"\n')
 
-  -- Split for git status
-  local git_pane = main_pane:split {
-    direction = 'Right',
-    size = 0.5,
-    cwd = wezterm.home_dir .. '/projects/gamma',
-  }
-  git_pane:send_text('eval "$(direnv hook zsh)"\ngit status\n')
+	-- Split for git status
+	local git_pane = main_pane:split({
+		direction = "Right",
+		size = 0.5,
+		cwd = wezterm.home_dir .. "/projects/gamma",
+	})
+	git_pane:send_text('eval "$(direnv hook zsh)"\ngit status\n')
 
-  -- Split for additional commands
-  local extra_pane = git_pane:split {
-    direction = 'Bottom',
-    size = 0.5,
-    cwd = wezterm.home_dir .. '/projects/gamma',
-  }
-  extra_pane:send_text('eval "$(direnv hook zsh)"\n')
+	-- Split for additional commands
+	local extra_pane = git_pane:split({
+		direction = "Bottom",
+		size = 0.5,
+		cwd = wezterm.home_dir .. "/projects/gamma",
+	})
+	extra_pane:send_text('eval "$(direnv hook zsh)"\n')
 
-  -- Create Dev tab with tall splits
-  local dev_tab, dev_main_pane = main_window:spawn_tab {
-    cwd = wezterm.home_dir .. '/projects/gamma',
-  }
-  dev_tab:set_title('Dev')
+	-- Create Dev tab with tall splits
+	local dev_tab, dev_main_pane = main_window:spawn_tab({
+		cwd = wezterm.home_dir .. "/projects/gamma",
+	})
+	dev_tab:set_title("Dev")
 
-  -- Dev pane 1: git status
-  dev_main_pane:send_text('eval "$(direnv hook zsh)"\ngs\n')
+	-- Dev pane 1: git status
+	dev_main_pane:send_text('eval "$(direnv hook zsh)"\ngs\n')
 
-  -- Dev pane 2: client dev server (tall split)
-  local client_pane = dev_main_pane:split {
-    direction = 'Right',
-    size = 0.33,
-    cwd = wezterm.home_dir .. '/projects/gamma',
-  }
-  client_pane:send_text('eval "$(direnv hook zsh)"\ncd packages/client\nyarn dev:remote:turbo\n')
+	-- Dev pane 2: client dev server (tall split)
+	local client_pane = dev_main_pane:split({
+		direction = "Right",
+		size = 0.33,
+		cwd = wezterm.home_dir .. "/projects/gamma",
+	})
+	client_pane:send_text('eval "$(direnv hook zsh)"\ncd packages/client\nyarn dev:remote:turbo\n')
 
-  -- Dev pane 3: server directory (tall split)
-  local server_pane = client_pane:split {
-    direction = 'Right',
-    size = 0.5,
-    cwd = wezterm.home_dir .. '/projects/gamma',
-  }
-  server_pane:send_text('eval "$(direnv hook zsh)"\ncd packages/server\n')
+	-- Dev pane 3: server directory (tall split)
+	local server_pane = client_pane:split({
+		direction = "Right",
+		size = 0.5,
+		cwd = wezterm.home_dir .. "/projects/gamma",
+	})
+	server_pane:send_text('eval "$(direnv hook zsh)"\ncd packages/server\n')
 
-  -- Dev pane 4: hocuspocus server (tall split)
-  local hocus_pane = server_pane:split {
-    direction = 'Right',
-    size = 1.0,
-    cwd = wezterm.home_dir .. '/projects/gamma',
-  }
-  hocus_pane:send_text('eval "$(direnv hook zsh)"\nyarn workspace hocuspocus dev\n')
+	-- Dev pane 4: hocuspocus server (tall split)
+	local hocus_pane = server_pane:split({
+		direction = "Right",
+		size = 1.0,
+		cwd = wezterm.home_dir .. "/projects/gamma",
+	})
+	hocus_pane:send_text('eval "$(direnv hook zsh)"\nyarn workspace hocuspocus dev\n')
 
-  -- Activate main tab
-  main_tab:activate()
+	-- Activate main tab
+	main_tab:activate()
 end
 
 -- GUI startup event
-wezterm.on('gui-startup', function(cmd)
-  -- Create all workspaces on startup
-  create_cfg_workspace()
-  create_oryoki_workspace()
-  create_gamma_workspace()
+wezterm.on("gui-startup", function(cmd)
+	-- Create all workspaces on startup
+	create_cfg_workspace()
+	create_oryoki_workspace()
+	create_gamma_workspace()
 
-  -- Set cfg as the active workspace
-  local mux = wezterm.mux
-  mux.set_active_workspace('cfg')
+	-- Set cfg as the active workspace
+	local mux = wezterm.mux
+	mux.set_active_workspace("cfg")
 end)
 
-
 return config
+
