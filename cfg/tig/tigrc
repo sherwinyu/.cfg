@@ -1,0 +1,18 @@
+# Tig configuration
+# Works with both normal repos and dotfiles bare repo
+
+# General settings
+set main-view-commit-title = yes
+set main-view-date = relative
+set main-view-author = abbreviated
+set main-view-id = yes
+set line-graphics = utf-8
+set status-show-untracked-files = yes
+set refresh-mode = auto
+
+# Key bindings that work for any repo
+bind generic R !git reset --hard HEAD
+bind status A !git add %(file)
+bind status D !git diff %(file)
+bind status C !git commit
+bind main C !git commit
