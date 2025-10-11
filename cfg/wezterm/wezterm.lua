@@ -309,6 +309,11 @@ config.animation_fps = 1
 -- Bell
 config.audible_bell = "SystemBeep"
 
+-- Cursor configuration
+config.default_cursor_style = "BlinkingBlock"
+config.cursor_blink_rate = 800
+config.cursor_thickness = "200%"
+
 -- Claude Code integration helpers
 function claude_notify(title, message)
 	wezterm.gui.gui_windows()[1]:toast_notification("Claude Code - " .. title, message, nil, 4000)
