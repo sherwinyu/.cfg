@@ -306,8 +306,24 @@ config.mouse_bindings = {
 config.max_fps = 60
 config.animation_fps = 1
 
--- Bell
-config.audible_bell = "SystemBeep"
+-- Bell configuration
+config.audible_bell = "Disabled"
+config.visual_bell = {
+	fade_in_function = "EaseIn",
+	fade_in_duration_ms = 150,
+	fade_out_function = "EaseOut",
+	fade_out_duration_ms = 150,
+}
+
+-- Custom bell handler for notifications
+wezterm.on("bell", function(window, pane)
+	wezterm.gui.gui_windows()[1]:toast_notification(
+		"WezTerm Alert",
+		"Terminal bell triggered in " .. (pane:get_title() or "pane"),
+		nil,
+		4000
+	)
+end)
 
 -- Cursor configuration
 config.default_cursor_style = "BlinkingBlock"

@@ -1,0 +1,23 @@
+{
+  "notifications": {
+    "enabled": true,
+    "bell_on_completion": true,
+    "bell_on_error": false,
+    "bell_on_long_task": true,
+    "long_task_threshold_seconds": 5
+  },
+  "appearance": {
+    "theme": "auto"
+  },
+  "behavior": {
+    "auto_save": true,
+    "confirm_destructive_actions": true
+  },
+  "integrations": {
+    "terminal_bell": {
+      "enabled": true,
+      "command": "printf '\\a'",
+      "description": "Sends terminal bell character to trigger WezTerm notifications"
+    }
+  }
+}
