@@ -4,20 +4,42 @@
     "bell_on_completion": true,
     "bell_on_error": false,
     "bell_on_long_task": true,
-    "long_task_threshold_seconds": 5
+    "long_task_threshold_seconds": 5,
+    "bell_on_human_input_required": true
   },
   "appearance": {
     "theme": "auto"
   },
   "behavior": {
     "auto_save": true,
-    "confirm_destructive_actions": true
+    "confirm_destructive_actions": true,
+    "notify_on_human_input": true
   },
   "integrations": {
     "terminal_bell": {
       "enabled": true,
       "command": "printf '\\a'",
       "description": "Sends terminal bell character to trigger WezTerm notifications"
+    }
+  },
+  "instructions": {
+    "global_behavior": [
+      "IMPORTANT: Always use the notification script when human input is required or when completing tasks that may take time.",
+      "Use '/Users/sherwin/cfg/claude/notify.sh \"message\"' via the Bash tool to trigger notifications.",
+      "Trigger notifications in these scenarios:",
+      "  - When waiting for human input or confirmation",
+      "  - When completing long-running tasks (>5 seconds)",
+      "  - When encountering errors that require human attention", 
+      "  - When reaching a natural stopping point where user attention is needed",
+      "  - Before asking questions that require user decision-making",
+      "Example usage: Run '/Users/sherwin/cfg/claude/notify.sh \"Task completed - please review\"' when done with significant work."
+    ],
+    "notification_messages": {
+      "human_input_required": "Human input required",
+      "task_completed": "Claude task completed",
+      "error_occurred": "Claude encountered an error",
+      "decision_needed": "User decision needed",
+      "review_required": "Please review completed work"
     }
   }
 }

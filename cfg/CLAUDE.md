@@ -26,7 +26,28 @@ WebFetch(domain:wezterm.org)
 
 # Create symlinks (common pattern for dotfiles)
 Bash(ln:*)
+
+# Notification system
+Bash(/Users/sherwin/cfg/claude/notify.sh)
 ```
+
+## Notification System
+
+**IMPORTANT**: Claude must use the notification system to alert when human input is required or when completing significant tasks.
+
+Always trigger notifications in these scenarios:
+- When waiting for human input or confirmation
+- When completing long-running tasks (>5 seconds)
+- When encountering errors that require human attention
+- When reaching a natural stopping point where user attention is needed
+- Before asking questions that require user decision-making
+
+**Usage**: Run `/Users/sherwin/cfg/claude/notify.sh "message"` via the Bash tool.
+
+**Examples**:
+- `/Users/sherwin/cfg/claude/notify.sh "Task completed - please review"`
+- `/Users/sherwin/cfg/claude/notify.sh "Human input required"`
+- `/Users/sherwin/cfg/claude/notify.sh "Error encountered - user attention needed"`
 
 ## Directory Structure Patterns
 
