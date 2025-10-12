@@ -307,7 +307,7 @@ config.max_fps = 60
 config.animation_fps = 1
 
 -- Bell configuration
-config.audible_bell = "Disabled"
+config.audible_bell = "SystemBeep"  -- Enable audible system beep
 config.visual_bell = {
 	fade_in_function = "EaseIn",
 	fade_in_duration_ms = 150,
@@ -315,7 +315,7 @@ config.visual_bell = {
 	fade_out_duration_ms = 150,
 }
 
--- Custom bell handler for notifications
+-- Custom bell handler for notifications (in addition to audible bell)
 wezterm.on("bell", function(window, pane)
 	wezterm.gui.gui_windows()[1]:toast_notification(
 		"WezTerm Alert",
