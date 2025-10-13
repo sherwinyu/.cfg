@@ -43,7 +43,9 @@ writeToProfile("karabiner-config-profile", [
   ds_nav_layer(),
   easy_mods_rules(),
   symbol_layer(),
-  rule("jk => Esc").manipulators([mapSimultaneous(["k", "j"]).to("escape")]),
+  rule("jk => Esc").manipulators(
+    appleKeyboardOnly([mapSimultaneous(["k", "j"]).to("escape")]),
+  ),
   rule("right command => del").manipulators(
     appleKeyboardOnly([
       map("right_command", { optional: "any" })
@@ -72,11 +74,16 @@ writeToProfile("karabiner-config-profile", [
 ]);
 
 function sel_layer() {
-  return duoLayer("e", "f", "selection layer")
-    .notification("Selection🧺")
-    .threshold(50)
-    .manipulators(
-      appleKeyboardOnly([
+  return withCondition(
+    ifDevice(
+      [{ is_built_in_keyboard: true }, { vendor_id: 1452 }],
+      "Apple Keyboards only",
+    ),
+  )([
+    duoLayer("e", "f", "selection layer")
+      .notification("Selection🧺")
+      .threshold(50)
+      .manipulators([
         map("a").to("left_arrow", ["command", "shift"]),
         map(";").to("right_arrow", ["command", "shift"]),
 
@@ -93,7 +100,7 @@ function sel_layer() {
           .to("up_arrow", ["option"])
           .to("down_arrow", ["option", "shift"]),
       ]),
-    );
+  ])[0];
 }
 function del_layer() {
   return duoLayer("w", "f", "deletion layer")

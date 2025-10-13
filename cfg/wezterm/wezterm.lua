@@ -535,7 +535,7 @@ local function create_gamma_workspace()
 		size = 0.33,
 		cwd = wezterm.home_dir .. "/projects/gamma",
 	})
-	client_pane:send_text('eval "$(direnv hook zsh)"\ncd packages/client\nyarn dev:remote:turbo\n')
+	client_pane:send_text('eval "$(direnv hook zsh)"\ncd packages/client; nvm use\nyarn dev:remote:turbo\n')
 
 	-- Dev pane 3: server directory (tall split)
 	local server_pane = client_pane:split({
@@ -543,7 +543,7 @@ local function create_gamma_workspace()
 		size = 0.5,
 		cwd = wezterm.home_dir .. "/projects/gamma",
 	})
-	server_pane:send_text('eval "$(direnv hook zsh)"\ncd packages/server\n')
+	server_pane:send_text('eval "$(direnv hook zsh);"\ncd packages/server; nvm use\n')
 
 	-- Dev pane 4: hocuspocus server (tall split)
 	local hocus_pane = server_pane:split({

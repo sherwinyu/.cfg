@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin status)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin diff)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin diff cfg/wezterm/wezterm.lua)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin diff -- wezterm/wezterm.lua)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin diff -- cfg/wezterm/wezterm.lua)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin diff wezterm.lua)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin restore cfg/wezterm/wezterm.lua)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin pull)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin restore wezterm.lua)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
