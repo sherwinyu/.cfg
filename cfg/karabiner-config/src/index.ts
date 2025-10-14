@@ -271,6 +271,8 @@ function fg_hyper() {
         map("n").to("n", "Hyper"),
         map("u").to("u", "Hyper"),
         map("w").to("w", "Hyper"),
+        map("[").to("[", "Hyper"),
+        map("]").to("]", "Hyper"),
         map("/").to("u", "Meh"),
       ]),
     );
@@ -282,8 +284,8 @@ function tab_hyper_rule() {
       map("tab")
         .toIfAlone("tab")
         .toIfHeldDown({
-          key_code: "right_command",
-          modifiers: ["right_control", "right_option", "right_shift"],
+          key_code: "left_command",
+          modifiers: ["left_control", "left_option", "left_shift"],
         })
         .toDelayedAction(toKey("vk_none"), toKey("vk_none"))
         .parameters({
@@ -300,8 +302,8 @@ function capslock_zoot_rule() {
       map("caps_lock", { optional: "any" })
         .toIfAlone("escape")
         .toIfHeldDown({
-          key_code: "right_command",
-          modifiers: ["right_control", "right_option"],
+          key_code: "left_command",
+          modifiers: ["left_control", "left_option"],
         })
         .toDelayedAction(toKey("vk_none"), toKey("vk_none"))
         .parameters({
