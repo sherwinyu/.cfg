@@ -26,6 +26,7 @@
     "vim.visualstar": true,
     "vim.leader": "<space>",
     "vim.normalModeKeyBindingsNonRecursive": [
+
         {
             "before": [
                 "<leader>", "k"
@@ -240,6 +241,16 @@
         {
             "before": [
                 "<tab>"
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.focusPreviousGroup"
+                }
+            ]
+        },
+        {
+            "before": [
+                "|"
             ],
             "commands": [
                 {
