@@ -49,12 +49,12 @@ return {
 			set_theme_from_system()
 
 			-- Update theme when Neovim gains focus (event-based, no polling!)
-			vim.api.nvim_create_autocmd({ "FocusGained", "VimResume" }, {
-				group = vim.api.nvim_create_augroup("auto_theme_switcher", { clear = true }),
-				callback = function()
-					set_theme_from_system()
-				end,
-			})
+			-- vim.api.nvim_create_autocmd({ "FocusGained", "VimResume" }, {
+			-- 	group = vim.api.nvim_create_augroup("auto_theme_switcher", { clear = true }),
+			-- 	callback = function()
+			-- 		set_theme_from_system()
+			-- 	end,
+			-- })
 		end,
 	},
 

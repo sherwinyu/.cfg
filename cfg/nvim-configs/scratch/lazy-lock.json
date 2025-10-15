@@ -3,7 +3,6 @@
   "auto-session": { "branch": "main", "commit": "517a75727d28a4d1ee9c79b56dde239a5408778f" },
   "blink.cmp": { "branch": "main", "commit": "327fff91fe6af358e990be7be1ec8b78037d2138" },
   "coerce.nvim": { "branch": "main", "commit": "3e253701345a56d627306343faf89b2e61bbeb1e" },
-  "copilot-lsp": { "branch": "main", "commit": "a80e0c17e7366614d39506825f49a25d285fead9" },
   "copilot.lua": { "branch": "master", "commit": "92e08cd472653beaece28ad9c8508a851a613358" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
   "fzf-lua": { "branch": "main", "commit": "83e4080ae886a42ec48c5c26ce5892ceb557c425" },
@@ -28,6 +27,7 @@
   "sideways.vim": { "branch": "main", "commit": "1efb7db049e5536742dc89205f6e229297c31230" },
   "sqlite.lua": { "branch": "master", "commit": "50092d60feb242602d7578398c6eb53b4a8ffe7b" },
   "switch.vim": { "branch": "main", "commit": "4017a58f7ed8a2d76a288e36130affe8eb55e83a" },
+  "tabby.nvim": { "branch": "main", "commit": "b3affa6db7eab80fca2a2db5b73b473144507039" },
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
   "tokyonight.nvim": { "branch": "main", "commit": "d14614cbfc63b6037bfccd48bb982d2ad2003352" }
 }

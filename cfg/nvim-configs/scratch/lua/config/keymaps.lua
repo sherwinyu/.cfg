@@ -160,13 +160,123 @@ map("n", "<localleader>4", "4gt", { noremap = true })
 map("n", "<localleader>5", "5gt", { noremap = true })
 map("n", "<localleader>6", "6gt", { noremap = true })
 
+-- Tab navigation
 map("n", "(", "gT", { noremap = true, desc = "Tab: next" })
 map("n", ")", "gt", { noremap = true, desc = "Tab: previous" })
 map("n", "<localleader>(", "<cmd>tabm -1<CR>", { noremap = true, desc = "Tab: move left" })
 map("n", "<localleader>)", "<cmd>tabm +1<CR>", { noremap = true, desc = "Tab: move right" })
+
+-- Tab lifecycle
 map("n", "<c-t>", "<cmd>tabnew<CR>", { noremap = true })
 map("n", "<localleader>tt", "<cmd>tabnew<CR>", { noremap = true, desc = "Tab: new" })
-map("n", "<localleader>to", "<cmd>tabo<CR>", { noremap = true, desc = "Tab: Only -- Close all other tabs " })
+map("n", "<localleader>to", "<cmd>tabo<CR>", { noremap = true, desc = "Tab: Only -- Close all other tabs" })
+
+-- Tab management commands
+-- Rename current tab
+vim.api.nvim_create_user_command("TabRename", function(args)
+	local tabname = args.args
+	if tabname == "" then
+		print("Error: No tab name provided")
+		return
+	end
+	vim.fn.settabvar(vim.fn.tabpagenr(), "tabby_tab_name", tabname)
+	print("Tab renamed to: " .. tabname)
+end, {
+	nargs = 1,
+	desc = "Rename current tab",
+})
+map("n", "<localleader>tr", ":TabRename ", { noremap = true, desc = "Tab: rename" })
+
+-- Clone current tab (duplicate all windows to new tab)
+vim.api.nvim_create_user_command("TabClone", function()
+	-- Get all normal windows in current tab (exclude floating windows)
+	local windows = vim.api.nvim_tabpage_list_wins(0)
+	local win_info = {}
+
+	-- Filter out floating windows and store buffer + position info
+	for _, win in ipairs(windows) do
+		local config = vim.api.nvim_win_get_config(win)
+		-- Only include normal windows (not floating)
+		if config.relative == "" then
+			local pos = vim.api.nvim_win_get_position(win)
+			table.insert(win_info, {
+				bufnr = vim.api.nvim_win_get_buf(win),
+				row = pos[1],
+				col = pos[2],
+				width = vim.api.nvim_win_get_width(win),
+				height = vim.api.nvim_win_get_height(win),
+			})
+		end
+	end
+
+	-- If only one window, use simple tab split
+	if #win_info == 1 then
+		vim.cmd("tab split")
+		print("Tab cloned (1 window)")
+		return
+	end
+
+	-- Sort windows by position (top to bottom, left to right)
+	table.sort(win_info, function(a, b)
+		if a.row == b.row then
+			return a.col < b.col
+		end
+		return a.row < b.row
+	end)
+
+	-- Create new tab with first buffer
+	vim.cmd("tabnew")
+	vim.cmd("buffer " .. win_info[1].bufnr)
+
+	-- Recreate splits by detecting layout pattern
+	for i = 2, #win_info do
+		local prev = win_info[i - 1]
+		local curr = win_info[i]
+
+		-- Determine split direction based on position
+		-- If row is same, it's a vertical split (side by side)
+		-- If row is different, it's a horizontal split (top/bottom)
+		if curr.row == prev.row then
+			-- Vertical split (same row, different column)
+			vim.cmd("vsplit")
+		else
+			-- Horizontal split (different row)
+			vim.cmd("split")
+		end
+
+		vim.cmd("buffer " .. curr.bufnr)
+	end
+
+	-- Return to first window
+	vim.cmd("1wincmd w")
+
+	print("Tab cloned (" .. #win_info .. " windows)")
+end, {
+	desc = "Clone all windows to new tab",
+})
+map("n", "<localleader>tc", "<cmd>TabClone<cr>", { noremap = true, desc = "Tab: clone all windows" })
+
+-- Pin buffer to all tabs (open in all tabs)
+vim.api.nvim_create_user_command("TabPin", function()
+	local current_buf = vim.fn.bufnr("%")
+	local current_tab = vim.fn.tabpagenr()
+
+	-- Open buffer in all tabs
+	for tabnr = 1, vim.fn.tabpagenr("$") do
+		if tabnr ~= current_tab then
+			vim.cmd(tabnr .. "tabnext")
+			vim.cmd("vsplit")
+			vim.cmd("buffer " .. current_buf)
+		end
+	end
+
+	-- Return to original tab
+	vim.cmd(current_tab .. "tabnext")
+	print("Buffer pinned to all tabs")
+end, {
+	desc = "Pin current buffer to all tabs",
+})
+map("n", "<localleader>tp", "<cmd>TabPin<cr>", { noremap = true, desc = "Tab: pin buffer to all tabs" })
 
 map("n", "<left>", "<C-w>h", { noremap = true, desc = "Go to Left Window" })
 map("n", "<down>", "<C-w>j", { noremap = true, desc = "Go to Lower Window" })
