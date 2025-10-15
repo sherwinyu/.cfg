@@ -1,12 +1,12 @@
 -- UI plugins: colorscheme, statusline, notifications
 return {
-	-- Tokyo Night colorscheme
+	-- Tokyo Night colorscheme with auto light/dark switching
 	{
 		"folke/tokyonight.nvim",
 		lazy = false,
 		priority = 1000,
 		opts = {
-			style = "moon",
+			style = "moon", -- Default to dark mode (moon)
 			on_highlights = function(hl, colors)
 				hl.Visual = {
 					fg = "#FFFFFF",
@@ -21,7 +21,40 @@ return {
 		},
 		config = function(_, opts)
 			require("tokyonight").setup(opts)
-			vim.cmd("colorscheme tokyonight-moon")
+
+			-- Function to detect macOS appearance
+			local function get_macos_appearance()
+				local handle = io.popen("defaults read -g AppleInterfaceStyle 2>/dev/null")
+				if handle then
+					local result = handle:read("*a")
+					handle:close()
+					return result:match("Dark") and "dark" or "light"
+				end
+				return "dark"
+			end
+
+			-- Function to set theme based on system appearance
+			local function set_theme_from_system()
+				local appearance = get_macos_appearance()
+				if appearance == "light" then
+					vim.o.background = "light"
+					vim.cmd("colorscheme tokyonight-day")
+				else
+					vim.o.background = "dark"
+					vim.cmd("colorscheme tokyonight-moon")
+				end
+			end
+
+			-- Set initial theme
+			set_theme_from_system()
+
+			-- Update theme when Neovim gains focus (event-based, no polling!)
+			vim.api.nvim_create_autocmd({ "FocusGained", "VimResume" }, {
+				group = vim.api.nvim_create_augroup("auto_theme_switcher", { clear = true }),
+				callback = function()
+					set_theme_from_system()
+				end,
+			})
 		end,
 	},
 
