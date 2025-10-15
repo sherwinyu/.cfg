@@ -23,8 +23,8 @@ return {
 			vim.g.sideways_no_mappings = true
 		end,
 		keys = {
-			{ "gh", "<cmd>SidewaysLeft<cr>", desc = "Move param left" },
-			{ "gl", "<cmd>SidewaysRight<cr>", desc = "Move param right" },
+			{ "rh", "<cmd>SidewaysLeft<cr>", desc = "Move param left" },
+			{ "rl", "<cmd>SidewaysRight<cr>", desc = "Move param right" },
 		},
 	},
 
@@ -33,9 +33,56 @@ return {
 		"AndrewRadev/switch.vim",
 		init = function()
 			vim.g.switch_mapping = ""
+			-- Custom switch definitions (global)
+			vim.g.switch_custom_definitions = {
+				-- TypeScript/JavaScript specific (simple strings)
+				{ "const", "let" },
+				{ "import", "export" },
+				{ "async", "sync" },
+				{ "==", "===" },
+				{ "!=", "!==" },
+				{ "any", "unknown" },
+				{ "type", "interface" },
+				{ "map", "flatMap", "filter", "reduce" },
+				{ "slice", "splice" },
+				{ "find", "filter", "some", "every" },
+				{ "string", "number", "boolean" },
+
+				-- Common programming words
+				{ "yes", "no" },
+				{ "on", "off" },
+				{ "true", "false" },
+				{ "enable", "disable" },
+				{ "enabled", "disabled" },
+				{ "show", "hide" },
+				{ "visible", "hidden" },
+				{ "start", "end" },
+				{ "begin", "end" },
+				{ "first", "last" },
+				{ "before", "after" },
+				{ "up", "down" },
+				{ "left", "right" },
+				{ "top", "bottom" },
+				{ "width", "height" },
+				{ "horizontal", "vertical" },
+				{ "row", "column" },
+				{ "x", "y" },
+				{ "min", "max" },
+				{ "add", "remove" },
+				{ "create", "delete" },
+				{ "insert", "update", "delete" },
+				{ "read", "write" },
+				{ "open", "close" },
+				{ "source", "target" },
+				{ "from", "to" },
+				{ "input", "output" },
+				{ "absolute", "relative" },
+				{ "&&", "||" },
+				{ "and", "or" },
+			}
 		end,
 		keys = {
-			{ "<leader>-", "<cmd>Switch<cr>", desc = "Switch" },
+			{ "r.", "<cmd>Switch<cr>", desc = "Switch" },
 		},
 	},
 
@@ -74,7 +121,7 @@ return {
 		end,
 		config = function(_, opts)
 			require("mini.ai").setup(opts)
-			vim.keymap.set("o", "x", "ie", { desc = "Change word segment", noremap = false })
+			-- Note: 'x' text object is now handled by CamelCaseMotion in motion.lua
 		end,
 	},
 

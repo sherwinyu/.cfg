@@ -24,7 +24,18 @@ opt.signcolumn = "yes"
 opt.updatetime = 50
 opt.autowrite = false
 opt.pumblend = 0
-opt.laststatus = 2
+opt.laststatus = 3 -- Global statusline (3 = one for all windows)
+opt.cmdheight = 0 -- Hide command line when not in use
+opt.fillchars = {
+	eob = " ",
+	horiz = "─",
+	horizup = "┴",
+	horizdown = "┬",
+	vert = "│",
+	vertleft = "┤",
+	vertright = "├",
+	verthoriz = "┼"
+}
 opt.list = false
 opt.smartcase = true
 opt.virtualedit = "block"

@@ -20,6 +20,7 @@ map("n", "<LocalLeader>E", ":e <c-r>%", { noremap = true })
 map("n", "<LocalLeader>fsa", ":saveas <c-r>%", { noremap = true })
 map("n", "<Leader>w", ":w<CR>", { noremap = true })
 map("n", "<Leader>q", ":q<CR>", { noremap = true })
+map("n", "<Leader>.q", ":qa<CR>", { noremap = true, desc = "Quit all" })
 map("n", "<LocalLeader>q", ":q<CR>", { noremap = true })
 map("n", "<Leader>Q", ":qa", { noremap = true, desc = "Quit all" })
 
@@ -90,6 +91,14 @@ map("v", "<leader>uS", '"ty:s/<C-r>t/<C-r>t/g<Left><Left>', { noremap = true, de
 
 map("n", "*", ":set hlsearch<CR>*N", { noremap = true })
 
+-- Indent/outdent current line
+map("n", ">", ">>", { noremap = true, desc = "Indent line" })
+map("n", "<", "<<", { noremap = true, desc = "Outdent line" })
+
+-- Indent/outdent in visual mode and reselect
+map("v", ">", ">gv", { noremap = true, desc = "Indent and reselect" })
+map("v", "<", "<gv", { noremap = true, desc = "Outdent and reselect" })
+
 map("o", "x", "ie", { desc = "Word fragment" })
 
 -- Moving lines / bubble up / bubbledown
@@ -115,6 +124,7 @@ end, { noremap = true, desc = "Gap line below" })
 
 map("i", "<c-a>", "<c-o>^", { noremap = true, desc = "Move to start of line" })
 map("i", "<c-e>", "<c-o>$", { noremap = true, desc = "Move to end of line" })
+map("i", "<D-Right>", "<c-o>$", { noremap = true, desc = "Move to end of line" })
 map("i", "<M-f>", "<c-o>w", { noremap = true, desc = "Move forward one word" })
 map("i", "<M-b>", "<c-o>b", { noremap = true, desc = "Move back one word" })
 map("i", "<M-BS>", "<c-w>", { noremap = true, desc = "Delete backward word" })
@@ -132,7 +142,8 @@ map("n", "<c-f>", "8j", { noremap = true, desc = "Scroll down" })
 
 -- Window and tab management
 map("n", "\\", "<c-w>w", { noremap = true, desc = "Next window" })
-map("n", "<tab>", "<c-w>W", { noremap = true, desc = "Prev window" })
+map("n", "|", "<c-w>W", { noremap = true, desc = "Prev window" })
+-- Tab is reserved for Copilot NES suggestions
 map("n", "<localleader>wm", "<c-w>", { noremap = true, desc = "Window mode" })
 
 map("n", "<f1>", "1gt", { noremap = true })

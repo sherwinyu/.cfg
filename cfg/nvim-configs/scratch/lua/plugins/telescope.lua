@@ -45,18 +45,9 @@ return {
 			}
 		end,
 		keys = {
-			{ "<leader>t", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-			{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-			{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
-			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-			{ "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent files" },
-			{ "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Grep" },
-			{ "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-			{ "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
-			{ "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+			-- File finding moved to fzf-lua
+			-- Live grep moved to fzf-lua
 			{ "<leader>sr", "<cmd>Telescope resume<cr>", desc = "Telescope Resume" },
-			{ "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "Git Commits" },
-			{ "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "Git Status" },
 			-- Custom search commands
 			{ "<leader>a", "<cmd>Ag<space>", desc = "Code search" },
 			{
