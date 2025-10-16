@@ -17,6 +17,7 @@ map({ "n", "v", "o" }, "<c-e>", "$", { noremap = true })
 -- Files: open / write / quit, rename, paths / lifecycle
 map("n", "<LocalLeader>e", ":e ", { noremap = true })
 map("n", "<LocalLeader>E", ":e <c-r>%", { noremap = true })
+map("n", "<LocalLeader>.e", ":e!<CR>", { noremap = true, desc = "Reload file (discard changes)" })
 map("n", "<LocalLeader>fsa", ":saveas <c-r>%", { noremap = true })
 map("n", "<Leader>w", ":w<CR>", { noremap = true })
 map("n", "<Leader>q", ":q<CR>", { noremap = true })
@@ -275,10 +276,17 @@ end, {
 })
 map("n", "<localleader>tp", "<cmd>TabPin<cr>", { noremap = true, desc = "Tab: pin buffer to all tabs" })
 
-map("n", "<left>", "<C-w>h", { noremap = true, desc = "Go to Left Window" })
-map("n", "<down>", "<C-w>j", { noremap = true, desc = "Go to Lower Window" })
-map("n", "<up>", "<C-w>k", { noremap = true, desc = "Go to Upper Window" })
-map("n", "<right>", "<C-w>l", { noremap = true, desc = "Go to Right Window" })
+-- Arrow keys: left/right for tabs, up/down cycle through panes
+map("n", "<left>", "gT", { noremap = true, desc = "Tab: previous" })
+map("n", "<right>", "gt", { noremap = true, desc = "Tab: next" })
+map("n", "<up>", "<C-w>W", { noremap = true, desc = "Pane: previous" })
+map("n", "<down>", "<C-w>w", { noremap = true, desc = "Pane: next" })
+
+-- Shift+Arrow keys: select window in direction
+map("n", "<S-left>", "<C-w>h", { noremap = true, desc = "Window: go left" })
+map("n", "<S-right>", "<C-w>l", { noremap = true, desc = "Window: go right" })
+map("n", "<S-up>", "<C-w>k", { noremap = true, desc = "Window: go up" })
+map("n", "<S-down>", "<C-w>j", { noremap = true, desc = "Window: go down" })
 map("n", "<M-.>", "<cmd>resize +2<cr>", { desc = "Window Resize: increase height" })
 map("n", "<M-,>", "<cmd>resize -2<cr>", { desc = "Window Resize: decrease height" })
 map("n", "<M-]>", "<cmd>vertical resize -2<cr>", { desc = "Window Resize: decrease width" })
