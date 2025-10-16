@@ -9,6 +9,7 @@ return {
 			auto_session_suppress_dirs = { "~/", "~/Downloads", "/tmp" },
 			auto_session_use_git_branch = false,
 			bypass_session_save_file_types = { "neo-tree" },
+			log_level = "error", -- Suppress info messages to avoid PRESS ENTER prompts
 			-- Keymaps
 			session_lens = {
 				load_on_setup = true,

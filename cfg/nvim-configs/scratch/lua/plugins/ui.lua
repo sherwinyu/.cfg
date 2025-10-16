@@ -17,6 +17,23 @@ return {
 					fg = colors.blue0, -- Visible blue separator
 					bg = colors.bg,
 				}
+
+				-- Increase tab bar contrast
+				-- Active tab: bright background with dark text
+				hl.TabLineSel = {
+					fg = colors.bg_dark,
+					bg = colors.blue,
+					bold = true,
+				}
+				-- Inactive tab: subtle background with muted text
+				hl.TabLine = {
+					fg = colors.fg_dark,
+					bg = colors.bg_highlight,
+				}
+				-- Tab bar fill: matches editor background
+				hl.TabLineFill = {
+					bg = colors.bg,
+				}
 			end,
 		},
 		config = function(_, opts)
@@ -34,8 +51,7 @@ return {
 			end
 
 			-- Function to set theme based on system appearance
-			local function set_theme_from_system()
-				local appearance = get_macos_appearance()
+			local function set_theme_from_system(appearance)
 				if appearance == "light" then
 					vim.o.background = "light"
 					vim.cmd("colorscheme tokyonight-day")
@@ -43,18 +59,37 @@ return {
 					vim.o.background = "dark"
 					vim.cmd("colorscheme tokyonight-moon")
 				end
+
+				-- Reload UI plugins to pick up new colors
+				-- Schedule to ensure colorscheme is fully loaded
+				vim.schedule(function()
+					-- Reload lualine using shared config
+					local ok_lualine, lualine = pcall(require, "lualine")
+					if ok_lualine and _G.lualine_config then
+						lualine.setup(_G.lualine_config)
+					end
+
+					-- Reconfigure incline with fresh colors
+					local ok_incline, incline = pcall(require, "incline")
+					if ok_incline and _G.build_incline_config then
+						incline.setup(_G.build_incline_config())
+					end
+				end)
 			end
 
 			-- Set initial theme
 			set_theme_from_system()
 
 			-- Update theme when Neovim gains focus (event-based, no polling!)
-			-- vim.api.nvim_create_autocmd({ "FocusGained", "VimResume" }, {
-			-- 	group = vim.api.nvim_create_augroup("auto_theme_switcher", { clear = true }),
-			-- 	callback = function()
-			-- 		set_theme_from_system()
-			-- 	end,
-			-- })
+			vim.api.nvim_create_autocmd({ "FocusGained", "VimResume" }, {
+				group = vim.api.nvim_create_augroup("auto_theme_switcher", { clear = true }),
+				callback = function()
+					local appearance = get_macos_appearance()
+					if appearance ~= vim.o.background then
+						set_theme_from_system(appearance)
+					end
+				end,
+			})
 		end,
 	},
 
@@ -74,50 +109,55 @@ return {
 			-- Force global statusline
 			vim.o.laststatus = 3
 
-			local colors = require("tokyonight.colors").setup()
-			require("lualine").setup({
+			-- Shared lualine config
+			local lualine_config = {
 				options = {
 					theme = "auto",
 					globalstatus = true, -- Single statusline at bottom
 				},
-			sections = {
-				lualine_a = {
-					{
-						"mode",
-						fmt = function(s)
-							local mode_map = {
-								["NORMAL"] = "N",
-								["INSERT"] = "I",
-								["VISUAL"] = "V",
-								["V-LINE"] = "VL",
-								["V-BLOCK"] = "VB",
-								["COMMAND"] = "!",
-								["REPLACE"] = "R",
-								["TERMINAL"] = "T",
-							}
-							return mode_map[s] or s
+				sections = {
+					lualine_a = {
+						{
+							"mode",
+							fmt = function(s)
+								local mode_map = {
+									["NORMAL"] = "N",
+									["INSERT"] = "I",
+									["VISUAL"] = "V",
+									["V-LINE"] = "VL",
+									["V-BLOCK"] = "VB",
+									["COMMAND"] = "!",
+									["REPLACE"] = "R",
+									["TERMINAL"] = "T",
+								}
+								return mode_map[s] or s
+							end,
+						},
+					},
+					lualine_b = { "branch" },
+					lualine_c = {
+						{ "diagnostics" },
+						{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+						{ "filename", path = 1 },
+					},
+					lualine_x = {},
+					lualine_y = {
+						{ "progress", separator = " ", padding = { left = 1, right = 0 } },
+						{ "location", padding = { left = 0, right = 1 } },
+					},
+					lualine_z = {
+						function()
+							return " " .. os.date("%R")
 						end,
 					},
 				},
-				lualine_b = { "branch" },
-				lualine_c = {
-					{ "diagnostics" },
-					{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-					{ "filename", path = 1 },
-				},
-				lualine_x = {},
-				lualine_y = {
-					{ "progress", separator = " ", padding = { left = 1, right = 0 } },
-					{ "location", padding = { left = 0, right = 1 } },
-				},
-				lualine_z = {
-					function()
-						return " " .. os.date("%R")
-					end,
-				},
-			},
 				extensions = { "neo-tree", "lazy" },
-			})
+			}
+
+			-- Store config globally for reuse
+			_G.lualine_config = lualine_config
+
+			require("lualine").setup(lualine_config)
 		end,
 	},
 
@@ -126,8 +166,6 @@ return {
 		"b0o/incline.nvim",
 		event = "BufReadPre",
 		config = function()
-			local colors = require("tokyonight.colors").setup()
-
 			-- Get last dir and filename only
 			local function get_short_path(path)
 				if path == "" then
@@ -163,37 +201,54 @@ return {
 				return counts
 			end
 
-			require("incline").setup({
-				window = {
-					padding = 0,
-					margin = { horizontal = 0, vertical = 0 },
-					placement = { horizontal = "right", vertical = "bottom" },
-				},
-				render = function(props)
-					local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":~:.")
-					local short_path = get_short_path(filename)
-					local modified = vim.bo[props.buf].modified and " ●" or ""
+			-- Store helper functions globally for reuse
+			_G.incline_get_short_path = get_short_path
+			_G.incline_get_diagnostics = get_diagnostics
 
-					-- Get diagnostics
-					local diag = get_diagnostics(props.buf)
-					local diag_str = ""
-					if diag.errors > 0 then
-						diag_str = diag_str .. "  " .. diag.errors
-					end
-					if diag.warnings > 0 then
-						diag_str = diag_str .. "  " .. diag.warnings
-					end
+			-- Build incline config function
+			local function build_incline_config()
+				-- Clear the color cache
+				package.loaded["tokyonight.colors"] = nil
+				local colors = require("tokyonight.colors").setup()
 
-					-- High contrast for focused window
-					local bg = props.focused and colors.blue or colors.bg_highlight
-					local fg = props.focused and colors.bg or colors.fg
-					local gui = props.focused and "bold" or "none"
+				return {
+					window = {
+						padding = 0,
+						margin = { horizontal = 0, vertical = 0 },
+						placement = { horizontal = "right", vertical = "bottom" },
+					},
+					render = function(props)
+						-- Use fresh colors from cache
+						local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":~:.")
+						local short_path = _G.incline_get_short_path(filename)
+						local modified = vim.bo[props.buf].modified and " ●" or ""
 
-					return {
-						{ " " .. short_path .. modified .. diag_str .. " ", guibg = bg, guifg = fg, gui = gui },
-					}
-				end,
-			})
+						-- Get diagnostics
+						local diag = _G.incline_get_diagnostics(props.buf)
+						local diag_str = ""
+						if diag.errors > 0 then
+							diag_str = diag_str .. "  " .. diag.errors
+						end
+						if diag.warnings > 0 then
+							diag_str = diag_str .. "  " .. diag.warnings
+						end
+
+						-- High contrast for focused window
+						local bg = props.focused and colors.blue or colors.bg_highlight
+						local fg = props.focused and colors.bg or colors.fg
+						local gui = props.focused and "bold" or "none"
+
+						return {
+							{ " " .. short_path .. modified .. diag_str .. " ", guibg = bg, guifg = fg, gui = gui },
+						}
+					end,
+				}
+			end
+
+			-- Store config builder globally for reuse
+			_G.build_incline_config = build_incline_config
+
+			require("incline").setup(build_incline_config())
 		end,
 	},
 

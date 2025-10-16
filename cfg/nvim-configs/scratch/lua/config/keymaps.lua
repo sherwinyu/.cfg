@@ -211,8 +211,7 @@ vim.api.nvim_create_user_command("TabClone", function()
 
 	-- If only one window, use simple tab split
 	if #win_info == 1 then
-		vim.cmd("tab split")
-		print("Tab cloned (1 window)")
+		vim.cmd("silent tab split")
 		return
 	end
 
@@ -249,8 +248,6 @@ vim.api.nvim_create_user_command("TabClone", function()
 
 	-- Return to first window
 	vim.cmd("1wincmd w")
-
-	print("Tab cloned (" .. #win_info .. " windows)")
 end, {
 	desc = "Clone all windows to new tab",
 })
