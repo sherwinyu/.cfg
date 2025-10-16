@@ -7,6 +7,11 @@ function claude-cfg() {
           "$@"
 }
 
+# CLAUDE CODE ALIASES
+alias cc='claude'
+alias ccr='claude -r'
+alias ccyolo='claude --dangerously-skip-permissions'
+
 alias egrep='egrep --color=auto -i'
 
 alias fgrep='fgrep --color=auto -i'
@@ -136,6 +141,12 @@ alias agpi="ag_python_import"
 alias retag="ctags -R coffee benchling"
 
 alias vimdiff='nvim -d'
+
+# NVIM CONFIG SWITCHING
+alias nva='NVIM_APPNAME=nvim-configs-lazyvim nvim'      # LazyVim distribution
+alias nvb='NVIM_APPNAME=nvim-configs-scratch nvim'     # Scratch-built with lazy.nvim
+alias cdnva='cd ~/cfg/nvim-configs/lazyvim'             # Change to LazyVim config dir
+alias cdnvb='cd ~/cfg/nvim-configs/scratch'             # Change to scratch config dir
 
 # Benchling psql
 alias psqlb='bin/dev psql -h localhost benchling'

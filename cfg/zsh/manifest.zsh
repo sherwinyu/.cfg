@@ -43,7 +43,7 @@ remove_prints() {
 copy_args() {
   echo "$@" | tr -d '\n' | pbcopy
 }
-alias cc=copy_args
+alias cpc=copy_args
 alias -g TRIM="| tr -d '\n'"
 
 # Fast ag
