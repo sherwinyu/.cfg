@@ -86,27 +86,27 @@ config.keys = {
 		mods = "OPT",
 		action = wezterm.action.SendKey({ key = "f", mods = "ALT" }),
 	},
-	-- Tab navigation
-	{
-		key = "[",
-		mods = "CMD",
-		action = wezterm.action.ActivateTabRelative(-1),
-	},
-	{
-		key = "]",
-		mods = "CMD",
-		action = wezterm.action.ActivateTabRelative(1),
-	},
 	-- Pane navigation
 	{
 		key = "[",
-		mods = "CMD|OPT",
+		mods = "CMD",
 		action = wezterm.action.ActivatePaneDirection("Prev"),
 	},
 	{
 		key = "]",
-		mods = "CMD|OPT",
+		mods = "CMD",
 		action = wezterm.action.ActivatePaneDirection("Next"),
+	},
+	-- Tab navigation
+	{
+		key = "[",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.ActivateTabRelative(-1),
+	},
+	{
+		key = "]",
+		mods = "CMD|SHIFT",
+		action = wezterm.action.ActivateTabRelative(1),
 	},
 	-- Pane zoom toggle
 	{
@@ -153,6 +153,12 @@ config.keys = {
 		mods = "CMD|SHIFT",
 		action = wezterm.action.ActivateCommandPalette,
 	},
+	-- Disable Cmd+Q (prevent accidental quit)
+	{
+		key = "q",
+		mods = "CMD",
+		action = wezterm.action.DisableDefaultAssignment,
+	},
 	-- Leader key pane navigation (` + hjkl)
 	{
 		key = "`",
@@ -186,6 +192,15 @@ config.key_tables = {
 		{
 			key = "`",
 			action = wezterm.action.SendKey({ key = "`" }),
+		},
+		-- Workspace navigation (prev/next)
+		{
+			key = "p",
+			action = wezterm.action.SwitchWorkspaceRelative(-1),
+		},
+		{
+			key = "n",
+			action = wezterm.action.SwitchWorkspaceRelative(1),
 		},
 		-- Workspace switching with color scheme updates
 		{
