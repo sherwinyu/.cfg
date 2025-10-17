@@ -1,0 +1,196 @@
+# AeroSpace Configuration
+# Experimental config - testing before moving to ~/cfg
+
+# Start AeroSpace at login
+start-at-login = true
+
+# Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+after-startup-command = [
+    # JankyBorders has a built-in detection of already running process,
+    # so it won't be run twice on AeroSpace restart
+    'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
+]
+
+# Gaps between windows (inner) and between windows and screen edge (outer)
+[gaps]
+inner.horizontal = 8
+inner.vertical = 8
+outer.left = 8
+outer.bottom = 8
+outer.top = 8
+outer.right = 8
+
+[mode.main.binding]
+alt-cmd-leftSquareBracket = 'focus dfs-prev'
+alt-cmd-rightSquareBracket = 'focus dfs-next'
+
+ctrl-alt-cmd-leftSquareBracket = 'focus dfs-prev'
+ctrl-alt-cmd-rightSquareBracket = 'focus dfs-next'
+# alt-cmd-leftSquareBracket = 'focus --boundaries all-monitors-outer-frame dfs-prev'
+# alt-cmd-rightSquareBracket = 'focus --boundaries all-monitors-outer-frame dfs-next'
+
+# commands i need;
+# - select prev / next window
+# - toggle float
+
+# - move to monitor left; move to monitor left
+# - select prev / next mon
+# - join-with DIR
+
+# win-mode
+
+
+# 'main' binding mode declaration
+# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
+# [mode.main.binding]
+
+# Modifier key: Alt (Option)
+# You can change this to cmd, ctrl, shift combinations
+
+# Focus windows (vim-style navigation)
+ctrl-alt-h = 'focus left'
+ctrl-alt-j = 'focus down'
+ctrl-alt-k = 'focus up'
+ctrl-alt-l = 'focus right'
+
+# Move windows
+ctrl-alt-left ='move --boundaries-action create-implicit-container left'
+ctrl-alt-right ='move --boundaries-action create-implicit-container right'
+ctrl-alt-up ='move --boundaries-action create-implicit-container up'
+ctrl-alt-down ='move --boundaries-action create-implicit-container down'
+
+
+ctrl-alt-shift-h = 'move --boundaries-action create-implicit-container left'
+ctrl-alt-shift-j = 'move --boundaries-action create-implicit-container down'
+ctrl-alt-shift-k = 'move --boundaries-action create-implicit-container up'
+ctrl-alt-shift-l = 'move --boundaries-action create-implicit-container right'
+
+# Move window to prev/next monitor
+alt-ctrl-cmd-left = 'move-node-to-monitor --wrap-around prev --focus-follows-window'
+alt-ctrl-cmd-right = 'move-node-to-monitor --wrap-around next --focus-follows-window'
+
+cmd-alt-ctrl-b = 'focus-back-and-forth'
+cmd-alt-ctrl-backspace = 'workspace-back-and-forth'
+alt-n = 'workspace-back-and-forth'
+
+# App launcher shortcuts (zoot = Ctrl+Alt+Cmd)
+ctrl-alt-cmd-p = 'exec-and-forget open -a "Google Chrome"'
+ctrl-alt-cmd-0 = 'exec-and-forget open -a Arc'
+ctrl-alt-cmd-7 = 'exec-and-forget open -a WezTerm'
+ctrl-alt-cmd-z = 'exec-and-forget open -a Zed'
+ctrl-alt-cmd-l = 'exec-and-forget open -a Linear'
+ctrl-alt-cmd-j = 'exec-and-forget open -a Slack'
+ctrl-alt-cmd-k = 'exec-and-forget open -a Cursor'
+ctrl-alt-cmd-semicolon = 'exec-and-forget open -a Spotify'
+ctrl-alt-cmd-comma = 'exec-and-forget open -a ChatGPT'
+ctrl-alt-cmd-period = 'exec-and-forget open -a Claude'
+ctrl-alt-cmd-c = 'exec-and-forget open -a "Google Calendar"'
+ctrl-alt-cmd-h = 'exec-and-forget open -a "Habits 2025"'
+ctrl-alt-cmd-m = 'exec-and-forget open -a "Google Maps"'
+ctrl-alt-cmd-n = 'exec-and-forget open -a Notion'
+ctrl-alt-cmd-o = 'exec-and-forget open -a Oryoki'
+ctrl-alt-cmd-minus = 'exec-and-forget open -a Dia'
+
+# Resize mode (enter with Alt+R, then use h/j/k/l to resize, Esc to exit)
+ctrl-alt-cmd-s = 'mode resize'
+
+# Split orientation
+ctrl-alt-s = 'layout h_accordion'  # Horizontal split (side by side)
+ctrl-alt-v = 'layout v_accordion'  # Vertical split (stacked)
+ctrl-alt-t = 'layout tiles'        # Automatic tiling (default)
+
+# Toggle fullscreen (fills screen, removes gaps)
+alt-enter = 'fullscreen'
+
+# Temporary maximize (fullscreen without gaps, toggle to restore)
+alt-m = 'fullscreen --no-outer-gaps'
+
+# Float/unfloat window
+# alt-shift-space = 'layout floating tiling'
+cmd-alt-ctrl-space = 'layout floating tiling'
+
+# Workspaces (like virtual desktops)
+# 0 = catchall (floating), 1-5 = organized tiled workspaces
+ctrl-alt-0 = 'workspace 0'
+
+ctrl-alt-1 = 'workspace 1'
+ctrl-alt-2 = 'workspace 2'
+ctrl-alt-3 = 'workspace 3'
+ctrl-alt-4 = 'workspace 4'
+
+ctrl-alt-6 = 'workspace 1'
+ctrl-alt-7 = 'workspace 2'
+ctrl-alt-8 = 'workspace 3'
+ctrl-alt-9 = 'workspace 4'
+
+cmd-ctrl-alt-1 = 'workspace 1'
+cmd-ctrl-alt-2 = 'workspace 2'
+cmd-ctrl-alt-3 = 'workspace 3'
+cmd-ctrl-alt-4 = 'workspace 4'
+
+
+# Move window to workspace (with auto layout adjustment)
+ctrl-alt-shift-0 = ['layout floating', 'move-node-to-workspace 0']
+
+
+# Move window to workspace and follow (with auto layout adjustment)
+shift-alt-ctrl-1 = ['layout tiling', 'move-node-to-workspace 1', 'workspace 1']
+shift-alt-ctrl-2 = ['layout tiling', 'move-node-to-workspace 2', 'workspace 2']
+shift-alt-ctrl-3 = ['layout tiling', 'move-node-to-workspace 3', 'workspace 3']
+shift-alt-ctrl-4 = ['layout tiling', 'move-node-to-workspace 4', 'workspace 4']
+shift-alt-ctrl-6 = ['layout tiling', 'move-node-to-workspace 1', 'workspace 1']
+shift-alt-ctrl-7 = ['layout tiling', 'move-node-to-workspace 2', 'workspace 2']
+shift-alt-ctrl-8 = ['layout tiling', 'move-node-to-workspace 3', 'workspace 3']
+shift-alt-ctrl-9 = ['layout tiling', 'move-node-to-workspace 4', 'workspace 4']
+
+cmd-shift-alt-ctrl-1 = ['layout tiling', 'move-node-to-workspace 1', 'workspace 1']
+cmd-shift-alt-ctrl-2 = ['layout tiling', 'move-node-to-workspace 2', 'workspace 2']
+cmd-shift-alt-ctrl-3 = ['layout tiling', 'move-node-to-workspace 3', 'workspace 3']
+cmd-shift-alt-ctrl-4 = ['layout tiling', 'move-node-to-workspace 4', 'workspace 4']
+cmd-shift-alt-ctrl-6 = ['layout tiling', 'move-node-to-workspace 1', 'workspace 1']
+cmd-shift-alt-ctrl-7 = ['layout tiling', 'move-node-to-workspace 2', 'workspace 2']
+cmd-shift-alt-ctrl-8 = ['layout tiling', 'move-node-to-workspace 3', 'workspace 3']
+cmd-shift-alt-ctrl-9 = ['layout tiling', 'move-node-to-workspace 4', 'workspace 4']
+
+# Reload config
+alt-ctrl-r = 'reload-config'
+
+# Balance layout (make all windows equal size)
+alt-shift-b = 'flatten-workspace-tree'
+
+# Resize mode
+[mode.resize.binding]
+h = 'resize width -50'
+j = 'resize height +50'
+k = 'resize height -50'
+l = 'resize width +50'
+shift-h = 'resize width -10'
+shift-j = 'resize height +10'
+shift-k = 'resize height -10'
+shift-l = 'resize width +10'
+enter = 'mode main'
+esc = 'mode main'
+
+# Workspace 0 (catchall) configuration - all windows float by default
+[[on-window-detected]]
+run = ['layout floating', 'move-node-to-workspace 0']
+
+# Override: Apps that should always float (even in tiling workspaces)
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.calculator'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.ActivityMonitor'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+if.window-title-regex-substring = 'Info$|Finder Preferences'
+run = 'layout floating'
