@@ -30,6 +30,7 @@ return {
 		},
 		config = function()
 			local lspconfig = require("lspconfig")
+			local fzf = require("fzf-lua")
 
 			-- Configure Lua LSP for Neovim
 			lspconfig.lua_ls.setup({
@@ -53,15 +54,62 @@ return {
 			})
 
 			-- Configure TypeScript LSP
-			lspconfig.ts_ls.setup({})
+			lspconfig.ts_ls.setup({
+				settings = {
+					typescript = {
+						inlayHints = {
+							includeInlayParameterNameHints = "all",
+							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayVariableTypeHints = true,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayFunctionLikeReturnTypeHints = true,
+							includeInlayEnumMemberValueHints = true,
+						},
+					},
+					javascript = {
+						inlayHints = {
+							includeInlayParameterNameHints = "all",
+							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayVariableTypeHints = true,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayFunctionLikeReturnTypeHints = true,
+							includeInlayEnumMemberValueHints = true,
+						},
+					},
+				},
+			})
 
 			-- Key mappings
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-			vim.keymap.set("n", "gr", function()
-				require("fzf-lua").lsp_references()
-			end, { desc = "Go to references" })
-			vim.keymap.set("n", "gh", vim.lsp.buf.hover, { desc = "Hover" })
+			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+			vim.keymap.set("n", "gi", fzf.lsp_implementations, { desc = "Go to implementations" })
+			vim.keymap.set("n", "gt", fzf.lsp_typedefs, { desc = "Go to type definition" })
+			vim.keymap.set("n", "gr", fzf.lsp_references, { desc = "Go to references" })
+			vim.keymap.set("n", "gh", vim.lsp.buf.hover, { desc = "Hover documentation" })
+			vim.keymap.set("n", "gH", vim.lsp.buf.signature_help, { desc = "Signature help" })
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
+			vim.keymap.set("n", "<leader>ds", fzf.lsp_document_symbols, { desc = "Document symbols" })
+			vim.keymap.set("n", "<leader>ws", fzf.lsp_workspace_symbols, { desc = "Workspace symbols" })
+			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
+			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
+			vim.keymap.set("n", "<leader>cd", fzf.diagnostics_document, { desc = "Document diagnostics" })
+			vim.keymap.set("n", "<leader>cD", fzf.diagnostics_workspace, { desc = "Workspace diagnostics" })
+
+			-- Override Neovim's default gr* mappings to use fzf where appropriate
+			vim.keymap.set("n", "grr", fzf.lsp_references, { desc = "LSP: References (fzf)" })
+			vim.keymap.set("n", "gri", fzf.lsp_implementations, { desc = "LSP: Implementations (fzf)" })
+			vim.keymap.set("n", "grt", fzf.lsp_typedefs, { desc = "LSP: Type definitions (fzf)" })
+			-- Keep gra and grn as-is (code action and rename don't benefit from fzf)
+			vim.keymap.set("n", "gra", vim.lsp.buf.code_action, { desc = "LSP: Code action" })
+			vim.keymap.set("x", "gra", vim.lsp.buf.code_action, { desc = "LSP: Code action" })
+			vim.keymap.set("n", "grn", vim.lsp.buf.rename, { desc = "LSP: Rename" })
+
+			-- Call hierarchy (navigable with fzf)
+			vim.keymap.set("n", "<leader>ci", fzf.lsp_incoming_calls, { desc = "LSP: Incoming calls" })
+			vim.keymap.set("n", "<leader>co", fzf.lsp_outgoing_calls, { desc = "LSP: Outgoing calls" })
 		end,
 	},
 }
