@@ -8,7 +8,7 @@ map("n", "<leader>v", "<c-v>", { noremap = true, desc = "Visual block" })
 map("n", "<localleader>v", "<c-v>", { noremap = true, desc = "Visual block" })
 
 -- Movement
-map("n", "<localleader>h", "<cmd>set hlsearch!<CR>", { noremap = true, desc = "Clear search highlighting" })
+map("n", "<localleader>h", "<cmd>nohlsearch<CR>", { noremap = true, desc = "Clear search highlighting" })
 map({ "n", "v", "o" }, "-", "^", { noremap = true })
 map({ "n", "v", "o" }, "=", "$", { noremap = true })
 map({ "n", "v", "o" }, "<c-a>", "^", { noremap = true })

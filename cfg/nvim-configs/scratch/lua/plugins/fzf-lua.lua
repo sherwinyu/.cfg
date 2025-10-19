@@ -9,13 +9,14 @@ return {
 		keys = {
 			-- Main menu
 			{ "<leader>fz", "<cmd>FzfLua<cr>", desc = "FzfLua menu" },
+			{ "<leader>fZ", "<cmd>FzfLua builtin<cr>", desc = "FzfLua builtin pickers" },
 			-- Command palette (like VS Code)
 			{ "<leader>p", "<cmd>FzfLua commands<cr>", desc = "Command Palette" },
 			{ "<leader>s;", "<cmd>FzfLua commands<cr>", desc = "Command Palette" },
 			{
 				"<leader><leader>",
-				"<cmd>FzfLua oldfiles cwd_only=true include_current_session=true<cr>",
-				desc = "Recent files",
+				"<cmd>FzfLua files cwd_only=true<cr>",
+				desc = "All files",
 			},
 			-- Files & search
 			{ "<leader>t", "<cmd>FzfLua files<cr>", desc = "All files" },

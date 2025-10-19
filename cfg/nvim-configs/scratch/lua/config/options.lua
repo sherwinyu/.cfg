@@ -7,6 +7,7 @@ local opt = vim.opt
 -- General settings
 opt.number = true
 opt.relativenumber = true
+opt.cursorline = true
 opt.expandtab = true
 opt.tabstop = 2
 opt.shiftwidth = 2
@@ -16,7 +17,7 @@ opt.swapfile = false
 opt.backup = false
 opt.undofile = true
 opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
-opt.hlsearch = false
+opt.hlsearch = true
 opt.incsearch = true
 opt.termguicolors = true
 opt.scrolloff = 8
@@ -40,3 +41,20 @@ opt.list = false
 opt.smartcase = true
 opt.virtualedit = "block"
 opt.wildmode = "longest:full,full"
+
+-- Only show cursorline and relative numbers in active window
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+	pattern = "*",
+	callback = function()
+		vim.wo.cursorline = true
+		vim.wo.relativenumber = true
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
+	pattern = "*",
+	callback = function()
+		vim.wo.cursorline = false
+		vim.wo.relativenumber = false
+	end,
+})

@@ -34,6 +34,12 @@ return {
 				hl.TabLineFill = {
 					bg = colors.bg,
 				}
+
+				-- Make current line number more prominent
+				hl.CursorLineNr = {
+					fg = colors.orange,
+					bold = true,
+				}
 			end,
 		},
 		config = function(_, opts)

@@ -9,9 +9,8 @@ return {
 				preset = "default",
 				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 				["<C-e>"] = { "hide", "show" }, -- Toggle: hide if visible, show if hidden
-				["<Tab>"] = { "select_next", "fallback" },
+				["<Tab>"] = { "accept", "fallback" },
 				["<S-Tab>"] = { "select_prev", "fallback" },
-				["<CR>"] = { "accept", "fallback" },
 				["<C-j>"] = { "select_next", "fallback" },
 				["<C-k>"] = { "select_prev", "fallback" },
 				["<C-b>"] = { "scroll_documentation_up", "fallback" },

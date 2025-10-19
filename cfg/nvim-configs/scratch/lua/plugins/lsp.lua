@@ -110,6 +110,37 @@ return {
 			-- Call hierarchy (navigable with fzf)
 			vim.keymap.set("n", "<leader>ci", fzf.lsp_incoming_calls, { desc = "LSP: Incoming calls" })
 			vim.keymap.set("n", "<leader>co", fzf.lsp_outgoing_calls, { desc = "LSP: Outgoing calls" })
+
+			-- Source actions (TypeScript: organize imports, remove unused, etc.)
+			vim.keymap.set("n", "<leader>cA", function()
+				vim.lsp.buf.code_action({
+					apply = true,
+					context = {
+						only = { "source" },
+						diagnostics = {},
+					},
+				})
+			end, { desc = "Source actions (organize imports, etc.)" })
+
+			vim.keymap.set("n", "<leader>cO", function()
+				vim.lsp.buf.code_action({
+					apply = true,
+					context = {
+						only = { "source.organizeImports" },
+						diagnostics = {},
+					},
+				})
+			end, { desc = "Organize imports" })
+
+			vim.keymap.set("n", "<leader>cR", function()
+				vim.lsp.buf.code_action({
+					apply = true,
+					context = {
+						only = { "source.removeUnused" },
+						diagnostics = {},
+					},
+				})
+			end, { desc = "Remove unused imports" })
 		end,
 	},
 }
