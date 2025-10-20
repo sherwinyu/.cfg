@@ -6,12 +6,18 @@ config.font = wezterm.font("JetBrains Mono", { weight = "Regular" })
 config.font_size = 13.0
 
 -- Color scheme (will be overridden by workspace-specific themes)
-config.color_scheme = "Tokyo Night"
+config.color_scheme = "Catppuccin Mocha"
+
+-- Custom cursor colors
+config.colors = {
+	cursor_bg = "#ff1493", -- bright pink (DeepPink)
+	cursor_border = "#ff1493",
+}
 
 -- Workspace-specific color schemes
 local workspace_color_schemes = {
 	cfg = {
-		dark = "Tokyo Night",
+		dark = "Catppuccin Mocha",
 		light = "Tokyo Night Day",
 	},
 	oryoki = {
