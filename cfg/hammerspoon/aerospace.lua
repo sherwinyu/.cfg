@@ -8,6 +8,20 @@ local function aerospace(cmd)
 	hs.task.new("/opt/homebrew/bin/aerospace", nil, cmd):start()
 end
 
+-- Configuration for move behavior
+local shouldCreateImplicitContainer = false
+
+-- Helper function to move windows with configurable boundary behavior
+local function aerospaceMove(direction)
+	local cmd = {"move"}
+	if shouldCreateImplicitContainer then
+		table.insert(cmd, "--boundaries-action")
+		table.insert(cmd, "create-implicit-container")
+	end
+	table.insert(cmd, direction)
+	aerospace(cmd)
+end
+
 -- Track workspace history
 local workspaceHistory = {
 	current = nil,
@@ -91,14 +105,14 @@ end
 -- Visual feedback when entering/exiting mode
 windowMode.entered = function()
 	showBanner()
-	-- Set border to prominent glow
-	hs.task.new("/opt/homebrew/bin/borders", nil, {"active_color=glow(0xff00d9ff)", "width=8.0"}):start()
+	-- Set border to medium saturation lake 9px glow
+	hs.task.new("/opt/homebrew/bin/borders", nil, {"active_color=glow(0xff5eb3d6)", "width=9.0"}):start()
 end
 
 windowMode.exited = function()
 	hideBanner()
-	-- Restore normal border
-	hs.task.new("/opt/homebrew/bin/borders", nil, {"active_color=0xffe1e3e4", "width=6.5"}):start()
+	-- Restore normal border: desaturated light blue 6px
+	hs.task.new("/opt/homebrew/bin/borders", nil, {"active_color=0xffadd8e6", "width=6.0"}):start()
 end
 
 -- Bind Alt+G to enter/exit modal
@@ -146,22 +160,92 @@ end)
 -- === Window Movement (Shift+h/j/k/l) ===
 windowMode:bind({"shift"}, "h", function()
 	hs.alert.show("⇐ Move Left")
-	aerospace({"move", "--boundaries-action", "create-implicit-container", "left"})
+	aerospaceMove("left")
 end)
 
 windowMode:bind({"shift"}, "j", function()
 	hs.alert.show("⇓ Move Down")
-	aerospace({"move", "--boundaries-action", "create-implicit-container", "down"})
+	aerospaceMove("down")
 end)
 
 windowMode:bind({"shift"}, "k", function()
 	hs.alert.show("⇑ Move Up")
-	aerospace({"move", "--boundaries-action", "create-implicit-container", "up"})
+	aerospaceMove("up")
 end)
 
 windowMode:bind({"shift"}, "l", function()
 	hs.alert.show("⇒ Move Right")
-	aerospace({"move", "--boundaries-action", "create-implicit-container", "right"})
+	aerospaceMove("right")
+end)
+
+-- === Join With Direction (Ctrl+Shift+h/j/k/l) ===
+windowMode:bind({"ctrl", "shift"}, "h", function()
+	hs.alert.show("⇇ Join Left")
+	aerospace({"join-with", "left"})
+end)
+
+windowMode:bind({"ctrl", "shift"}, "j", function()
+	hs.alert.show("⇊ Join Down")
+	aerospace({"join-with", "down"})
+end)
+
+windowMode:bind({"ctrl", "shift"}, "k", function()
+	hs.alert.show("⇈ Join Up")
+	aerospace({"join-with", "up"})
+end)
+
+windowMode:bind({"ctrl", "shift"}, "l", function()
+	hs.alert.show("⇉ Join Right")
+	aerospace({"join-with", "right"})
+end)
+
+-- === Move Window to Monitor (Cmd+left/right) ===
+windowMode:bind({"cmd"}, "left", function()
+	hs.alert.show("⇐ Move Window to Prev Monitor")
+	aerospace({"move-node-to-monitor", "--wrap-around", "--focus-follows-window", "prev"})
+end)
+
+-- windowMode:bind({"shift"}, "right", function()
+windowMode:bind({"cmd"}, "right", function()
+	hs.alert.show("⇒ Move Window to Next Monitor")
+	aerospace({"move-node-to-monitor", "--wrap-around", "--focus-follows-window", "next"})
+end)
+
+-- === Resize (Ctrl+u/i for height, Ctrl+j/k for width) ===
+windowMode:bind({"ctrl"}, "u", function()
+	hs.alert.show("↕ Decrease Height")
+	aerospace({"resize", "height", "-50"})
+end)
+
+windowMode:bind({"ctrl"}, "i", function()
+	hs.alert.show("↕ Increase Height")
+	aerospace({"resize", "height", "+50"})
+end)
+
+windowMode:bind({"ctrl"}, "j", function()
+	hs.alert.show("↔ Decrease Width")
+	aerospace({"resize", "width", "-50"})
+end)
+
+windowMode:bind({"ctrl"}, "k", function()
+	hs.alert.show("↔ Increase Width")
+	aerospace({"resize", "width", "+50"})
+end)
+
+-- windowMode:bind({"ctrl"}, "h", function()
+-- 	hs.alert.show("⬌ Half Screen")
+-- 	aerospace({"resize", "smart", "-50"})
+-- end)
+
+-- ===  Workspace Prev / Next (y/o) ===
+windowMode:bind({}, "y", function ()
+  hs.alert.show("Prev Workspace")
+	aerospace({'workspace', 'prev'})
+end)
+
+windowMode:bind({}, "o", function ()
+  hs.alert.show("Next Workspace")
+	aerospace({'workspace', 'next'})
 end)
 
 -- ===  Workspace Selection (1/2/3/4/0) ===
@@ -235,6 +319,22 @@ end)
 windowMode:bind({}, "n", function()
 	hs.alert.show("⬚ Toggle Float")
 	aerospace({"layout", "floating", "tiling"})
+end)
+
+-- === Layout Modes (w/e/r) ===
+windowMode:bind({}, "w", function()
+	hs.alert.show("═ Horizontal Accordion")
+	aerospace({"layout", "h_accordion"})
+end)
+
+windowMode:bind({}, "e", function()
+	hs.alert.show("▦ Tiles")
+	aerospace({"layout", "tiles", "horizontal", "vertical"})
+end)
+
+windowMode:bind({}, "r", function()
+	hs.alert.show("║ Vertical Accordion")
+	aerospace({"layout", "v_accordion"})
 end)
 
 -- === Merge Window to Previous Workspace ===
@@ -314,18 +414,6 @@ end)
 
 windowMode:bind({}, ",", function()
 	hs.alert.show("→ Next Monitor")
-	aerospace({"focus-monitor", "--wrap-around", "next"})
-end)
-
--- === Move Workspace to Monitor (Shift+m/,) ===
-windowMode:bind({"shift"}, "m", function()
-	hs.alert.show("⇐ Move Workspace to Prev Monitor")
-	aerospace({"move-workspace-to-monitor", "--wrap-around", "prev"})
-end)
-
-windowMode:bind({"shift"}, ",", function()
-	hs.alert.show("⇒ Move Workspace to Next Monitor")
-	aerospace({"move-workspace-to-monitor", "--wrap-around", "next"})
 end)
 
 -- Global hotkey: Ctrl+Alt+Cmd+T to merge to previous workspace

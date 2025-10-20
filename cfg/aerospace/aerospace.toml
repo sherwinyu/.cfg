@@ -10,7 +10,8 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 after-startup-command = [
     # JankyBorders has a built-in detection of already running process,
     # so it won't be run twice on AeroSpace restart
-    'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
+    # No inactive border, active border: desaturated light blue 6px
+    'exec-and-forget borders active_color=0xffadd8e6 inactive_color=0x00000000 width=6.0'
 ]
 
 # Gaps between windows (inner) and between windows and screen edge (outer)
@@ -172,10 +173,6 @@ shift-k = 'resize height -10'
 shift-l = 'resize width +10'
 enter = 'mode main'
 esc = 'mode main'
-
-# Workspace 0 (catchall) configuration - all windows float by default
-[[on-window-detected]]
-run = ['layout floating', 'move-node-to-workspace 0']
 
 # Override: Apps that should always float (even in tiling workspaces)
 [[on-window-detected]]
