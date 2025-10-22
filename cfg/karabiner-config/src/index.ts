@@ -61,6 +61,18 @@ writeToProfile("karabiner-config-profile", [
         }),
     ]),
   ),
+  rule("v held => opt+v").manipulators(
+    appleKeyboardOnly([
+      map("v")
+        .toIfAlone("v")
+        .toIfHeldDown("v", "left_option")
+        .toDelayedAction(toKey("vk_none"), toKey("vk_none"))
+        .parameters({
+          "basic.to_if_alone_timeout_milliseconds": 500,
+          "basic.to_if_held_down_threshold_milliseconds": 120,
+        }),
+    ]),
+  ),
   // rule('left command alone => undo').manipulators(appleKeyboardOnly([
   //   map('left_command')
   //     .toIfAlone('z', 'command')
@@ -74,16 +86,11 @@ writeToProfile("karabiner-config-profile", [
 ]);
 
 function sel_layer() {
-  return withCondition(
-    ifDevice(
-      [{ is_built_in_keyboard: true }, { vendor_id: 1452 }],
-      "Apple Keyboards only",
-    ),
-  )([
-    duoLayer("e", "f", "selection layer")
-      .notification("Selection🧺")
-      .threshold(50)
-      .manipulators([
+  return duoLayer("e", "f", "selection layer")
+    .notification("Selection🧺")
+    .threshold(50)
+    .manipulators(
+      appleKeyboardOnly([
         map("a").to("left_arrow", ["command", "shift"]),
         map(";").to("right_arrow", ["command", "shift"]),
 
@@ -100,7 +107,7 @@ function sel_layer() {
           .to("up_arrow", ["option"])
           .to("down_arrow", ["option", "shift"]),
       ]),
-  ])[0];
+    );
 }
 function del_layer() {
   return duoLayer("w", "f", "deletion layer")
@@ -170,6 +177,9 @@ function nav_layer() {
 
           map("u").to("[", "command"),
           map("i").to("]", "command"),
+
+          map("y").to("[", ["command", "shift"]),
+          map("o").to("]", ["command", "shift"]),
 
           map("a").to("left_arrow", "command"),
           map(";").to("right_arrow", "command"),
