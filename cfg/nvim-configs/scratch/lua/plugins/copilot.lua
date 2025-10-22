@@ -1,4 +1,4 @@
--- GitHub Copilot with copilot.lua
+-- GitHub Copilot integrated with blink.cmp
 return {
 	{
 		"zbirenbaum/copilot.lua",
@@ -26,7 +26,7 @@ return {
 					auto_trigger = true,
 					debounce = 75,
 					keymap = {
-						accept = "<M-l>",
+						accept = "<Tab>",
 						accept_word = false,
 						accept_line = false,
 						next = "<M-]>",
@@ -45,5 +45,11 @@ return {
 				copilot_node_command = "node", -- Node.js version must be > 18.x
 			})
 		end,
+	},
+
+	-- Copilot source for blink.cmp
+	{
+		"giuxtaposition/blink-cmp-copilot",
+		dependencies = { "zbirenbaum/copilot.lua" },
 	},
 }

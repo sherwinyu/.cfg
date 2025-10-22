@@ -41,6 +41,7 @@ opt.list = false
 opt.smartcase = true
 opt.virtualedit = "block"
 opt.wildmode = "longest:full,full"
+opt.clipboard = "unnamedplus" -- Use system clipboard for yank/paste
 
 -- Only show cursorline and relative numbers in active window
 vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {

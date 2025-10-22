@@ -1,6 +1,7 @@
 {
   "CamelCaseMotion": { "branch": "master", "commit": "e69b0024f8f63db10c5d0df26d4920760755d454" },
   "auto-session": { "branch": "main", "commit": "517a75727d28a4d1ee9c79b56dde239a5408778f" },
+  "blink-cmp-copilot": { "branch": "main", "commit": "439cff78780c033aa23cf061d7315314b347e3c1" },
   "blink.cmp": { "branch": "main", "commit": "327fff91fe6af358e990be7be1ec8b78037d2138" },
   "coerce.nvim": { "branch": "main", "commit": "3e253701345a56d627306343faf89b2e61bbeb1e" },
   "copilot.lua": { "branch": "master", "commit": "92e08cd472653beaece28ad9c8508a851a613358" },
@@ -9,6 +10,9 @@
   "incline.nvim": { "branch": "main", "commit": "0fd2d5a27504dba7fdc507a53275f22c081fe640" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "leap.nvim": { "branch": "main", "commit": "aa204264ffaf83650ee676ef68f52e327688b048" },
+  "litee-calltree.nvim": { "branch": "main", "commit": "b50c809d136ad479caf761a7f030da98c56c7976" },
+  "litee-symboltree.nvim": { "branch": "main", "commit": "488a660afcfd54644e6b755256907d3c7d8cf8d0" },
+  "litee.nvim": { "branch": "main", "commit": "4efaf373322d9e71eaff31164abb393417cc6f6a" },
   "lualine.nvim": { "branch": "master", "commit": "e533fac71bc361768f90004af695cd1f1aa1900a" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "6bdb14f230de0904229ec367b410fb817e59b072" },
   "mason.nvim": { "branch": "main", "commit": "ad7146aa61dcaeb54fa900144d768f040090bff0" },

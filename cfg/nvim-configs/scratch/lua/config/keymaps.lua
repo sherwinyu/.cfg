@@ -67,8 +67,11 @@ end, {
 map("n", "<localleader>fr", ":RenameFile <c-r>%", { desc = "Rename file", noremap = true })
 
 -- Sourcing files
-map("n", "<localLeader>vr", ":source %<CR>", { noremap = true, desc = "Vim Config: source file" })
-map("n", "<localLeader>vf", ":source %<CR>", { noremap = true })
+map("n", "<localLeader>vr", function()
+	vim.cmd("source $MYVIMRC")
+	print("Reloaded Neovim config")
+end, { noremap = true, desc = "Vim Config: reload config" })
+map("n", "<localLeader>vf", ":source %<CR>", { noremap = true, desc = "Vim Config: source current file" })
 
 -- Search
 map("n", "<leader>gn", ":set nohlsearch", { noremap = true, desc = "Clear search highlighting" })
