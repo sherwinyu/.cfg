@@ -2,10 +2,8 @@ import {
   duoLayer,
   FromKeyParam,
   ifDevice,
-  layer,
   map,
   mapSimultaneous,
-  Modifier,
   rule,
   simlayer,
   toKey,
@@ -34,7 +32,7 @@ function appleKeyboardOnly(manipulators: any[]) {
 }
 writeToProfile("karabiner-config-profile", [
   fg_hyper(),
-  tab_hyper_rule(),
+  backslash_hyper_rule(),
   capslock_zoot_rule(),
   text_editing_layer(),
   sel_layer(),
@@ -288,11 +286,11 @@ function fg_hyper() {
     );
 }
 
-function tab_hyper_rule() {
+function backslash_hyper_rule() {
   return rule("Tab => Hyper").manipulators(
     appleKeyboardOnly([
-      map("tab")
-        .toIfAlone("tab")
+      map("backslash")
+        .toIfAlone("backslash")
         .toIfHeldDown({
           key_code: "left_command",
           modifiers: ["left_control", "left_option", "left_shift"],

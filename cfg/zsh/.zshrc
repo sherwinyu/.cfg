@@ -83,6 +83,7 @@ source ~/cfg/zsh/manifest.zsh
 source ~/cfg/zsh/tig-config.zsh
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+eval "$(direnv hook zsh)"
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
