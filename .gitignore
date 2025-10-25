@@ -1,5 +1,8 @@
 ~/.cfg
 ~/Applications/
+
+.config/karabiner/automatic_backups/*
+
 ~/Desktop/
 ~/Documents/
 ~/Downloads/
@@ -44,6 +47,7 @@ projects/
 .CFUserTextEncoding
 .dropbox/
 .config/coc
+.config/karabiner/karabiner.json
 .vim/
 .python_history
 .node_repl_history
@@ -84,6 +88,9 @@ zsh.local
 .windsurf/
 .yarn/
 Sites/
+
+*/.claude/settings.local.json
+*local*
 
 
 IGNORE/

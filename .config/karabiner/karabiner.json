@@ -781,6 +781,102 @@
               {
                 "type": "basic",
                 "from": {
+                  "key_code": "open_bracket"
+                },
+                "to": [
+                  {
+                    "key_code": "open_bracket",
+                    "modifiers": [
+                      "command",
+                      "option",
+                      "control",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "set_variable": {
+                      "name": "fg Hyper",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "duo-layer-fg Hyper",
+                      "text": ""
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
+                      }
+                    ],
+                    "description": "Apple Keyboards only"
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "fg Hyper",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "close_bracket"
+                },
+                "to": [
+                  {
+                    "key_code": "close_bracket",
+                    "modifiers": [
+                      "command",
+                      "option",
+                      "control",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "set_variable": {
+                      "name": "fg Hyper",
+                      "value": 0
+                    }
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "duo-layer-fg Hyper",
+                      "text": ""
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
+                      }
+                    ],
+                    "description": "Apple Keyboards only"
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "fg Hyper",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
                   "key_code": "slash"
                 },
                 "to": [
@@ -867,20 +963,20 @@
               {
                 "type": "basic",
                 "from": {
-                  "key_code": "tab"
+                  "key_code": "backslash"
                 },
                 "to_if_alone": [
                   {
-                    "key_code": "tab"
+                    "key_code": "backslash"
                   }
                 ],
                 "to_if_held_down": [
                   {
-                    "key_code": "right_command",
+                    "key_code": "left_command",
                     "modifiers": [
-                      "right_control",
-                      "right_option",
-                      "right_shift"
+                      "left_control",
+                      "left_option",
+                      "left_shift"
                     ]
                   }
                 ],
@@ -937,10 +1033,10 @@
                 ],
                 "to_if_held_down": [
                   {
-                    "key_code": "right_command",
+                    "key_code": "left_command",
                     "modifiers": [
-                      "right_control",
-                      "right_option"
+                      "left_control",
+                      "left_option"
                     ]
                   }
                 ],
@@ -2235,6 +2331,84 @@
               {
                 "type": "basic",
                 "from": {
+                  "key_code": "y",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "open_bracket",
+                    "modifiers": [
+                      "command",
+                      "shift"
+                    ]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
+                      }
+                    ],
+                    "description": "Apple Keyboards only"
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "nav",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "o",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "close_bracket",
+                    "modifiers": [
+                      "command",
+                      "shift"
+                    ]
+                  }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
+                      }
+                    ],
+                    "description": "Apple Keyboards only"
+                  },
+                  {
+                    "type": "variable_if",
+                    "name": "nav",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "from": {
                   "key_code": "a",
                   "modifiers": {
                     "optional": [
@@ -2703,6 +2877,130 @@
                     },
                     {
                       "key_code": "i"
+                    }
+                  ],
+                  "simultaneous_options": {
+                    "detect_key_down_uninterruptedly": true,
+                    "key_down_order": "strict",
+                    "key_up_order": "strict_inverse",
+                    "key_up_when": "any",
+                    "to_after_key_up": [
+                      {
+                        "set_variable": {
+                          "name": "nav",
+                          "value": 0
+                        }
+                      },
+                      {
+                        "set_notification_message": {
+                          "id": "simlayer-d",
+                          "text": ""
+                        }
+                      }
+                    ]
+                  },
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "basic",
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
+                },
+                "to": [
+                  {
+                    "set_variable": {
+                      "name": "nav",
+                      "value": 1
+                    }
+                  },
+                  {
+                    "key_code": "open_bracket",
+                    "modifiers": [
+                      "command",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "simlayer-d",
+                      "text": "Navigation 🧭"
+                    }
+                  }
+                ],
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "d"
+                    },
+                    {
+                      "key_code": "y"
+                    }
+                  ],
+                  "simultaneous_options": {
+                    "detect_key_down_uninterruptedly": true,
+                    "key_down_order": "strict",
+                    "key_up_order": "strict_inverse",
+                    "key_up_when": "any",
+                    "to_after_key_up": [
+                      {
+                        "set_variable": {
+                          "name": "nav",
+                          "value": 0
+                        }
+                      },
+                      {
+                        "set_notification_message": {
+                          "id": "simlayer-d",
+                          "text": ""
+                        }
+                      }
+                    ]
+                  },
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "basic",
+                "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 200
+                },
+                "to": [
+                  {
+                    "set_variable": {
+                      "name": "nav",
+                      "value": 1
+                    }
+                  },
+                  {
+                    "key_code": "close_bracket",
+                    "modifiers": [
+                      "command",
+                      "shift"
+                    ]
+                  },
+                  {
+                    "set_notification_message": {
+                      "id": "simlayer-d",
+                      "text": "Navigation 🧭"
+                    }
+                  }
+                ],
+                "from": {
+                  "simultaneous": [
+                    {
+                      "key_code": "d"
+                    },
+                    {
+                      "key_code": "o"
                     }
                   ],
                   "simultaneous_options": {
@@ -4284,6 +4582,20 @@
                   {
                     "key_code": "escape"
                   }
+                ],
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
+                      }
+                    ],
+                    "description": "Apple Keyboards only"
+                  }
                 ]
               }
             ]
@@ -4326,6 +4638,60 @@
                 "parameters": {
                   "basic.to_if_alone_timeout_milliseconds": 500,
                   "basic.to_if_held_down_threshold_milliseconds": 0
+                },
+                "conditions": [
+                  {
+                    "type": "device_if",
+                    "identifiers": [
+                      {
+                        "is_built_in_keyboard": true
+                      },
+                      {
+                        "vendor_id": 1452
+                      }
+                    ],
+                    "description": "Apple Keyboards only"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "description": "v held => opt+v",
+            "manipulators": [
+              {
+                "type": "basic",
+                "from": {
+                  "key_code": "v"
+                },
+                "to_if_alone": [
+                  {
+                    "key_code": "v"
+                  }
+                ],
+                "to_if_held_down": [
+                  {
+                    "key_code": "v",
+                    "modifiers": [
+                      "left_option"
+                    ]
+                  }
+                ],
+                "to_delayed_action": {
+                  "to_if_invoked": [
+                    {
+                      "key_code": "vk_none"
+                    }
+                  ],
+                  "to_if_canceled": [
+                    {
+                      "key_code": "vk_none"
+                    }
+                  ]
+                },
+                "parameters": {
+                  "basic.to_if_alone_timeout_milliseconds": 500,
+                  "basic.to_if_held_down_threshold_milliseconds": 120
                 },
                 "conditions": [
                   {
