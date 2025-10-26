@@ -3,9 +3,28 @@
 
 local windowMode = hs.hotkey.modal.new()
 
+-- Track workspace history
+local workspaceHistory = {
+	current = nil,
+	previous = nil
+}
+
+-- Watch for workspace changeps
+local function updateWorkspaceHistory()
+	local task = hs.task.new("/opt/homebrew/bin/aerospace", function(exitCode, stdOut, stdErr)
+		local newWorkspace = stdOut:match("%d+")
+		if newWorkspace and newWorkspace ~= workspaceHistory.current then
+			workspaceHistory.previous = workspaceHistory.current
+			workspaceHistory.current = newWorkspace
+		end
+	end, {"list-workspaces", "--focused"})
+	task:start()
+end
+
 -- Helper function to run aerospace commands
 local function aerospace(cmd)
 	hs.task.new("/opt/homebrew/bin/aerospace", nil, cmd):start()
+  updateWorkspaceHistory()
 end
 
 -- Configuration for move behavior
@@ -22,27 +41,7 @@ local function aerospaceMove(direction)
 	aerospace(cmd)
 end
 
--- Track workspace history
-local workspaceHistory = {
-	current = nil,
-	previous = nil
-}
 
--- Watch for workspace changes
-local function updateWorkspaceHistory()
-	local task = hs.task.new("/opt/homebrew/bin/aerospace", function(exitCode, stdOut, stdErr)
-		local newWorkspace = stdOut:match("%d+")
-		if newWorkspace and newWorkspace ~= workspaceHistory.current then
-			workspaceHistory.previous = workspaceHistory.current
-			workspaceHistory.current = newWorkspace
-		end
-	end, {"list-workspaces", "--focused"})
-	task:start()
-end
-
--- Start tracking immediately and poll every 0.5 seconds
-updateWorkspaceHistory()
-hs.timer.doEvery(0.5, updateWorkspaceHistory)
 
 -- Create persistent banner
 local banner = nil
@@ -53,6 +52,8 @@ local function showBanner()
 
 	-- Get current workspace
 	local currentWorkspace = workspaceHistory.current or "?"
+  local prevWorkspace = workspaceHistory.previous or "?"
+
 
 	-- Create canvas at center of screen (2x larger)
 	local bannerWidth = 400
@@ -85,7 +86,7 @@ local function showBanner()
 	-- Workspace number
 	banner[3] = {
 		type = "text",
-		text = "Workspace " .. currentWorkspace,
+		text = "Workspace " .. currentWorkspace .. ' -- prev' .. prevWorkspace,
 		textAlignment = "center",
 		textColor = { red = 0.7, green = 0.7, blue = 0.7, alpha = 1 },
 		textSize = 20,
@@ -106,24 +107,15 @@ end
 windowMode.entered = function()
 	showBanner()
 	-- Set border to medium saturation lake 9px glow
-	hs.task.new("/opt/homebrew/bin/borders", nil, {"active_color=glow(0xff5eb3d6)", "width=9.0"}):start()
+	hs.task.new("/opt/homebrew/bin/borders", nil, {"active_color=glow(0xffF53BFE)", "width=8.0"}):start()
+
 end
 
 windowMode.exited = function()
 	hideBanner()
 	-- Restore normal border: desaturated light blue 6px
-	hs.task.new("/opt/homebrew/bin/borders", nil, {"active_color=0xffadd8e6", "width=6.0"}):start()
+	hs.task.new("/opt/homebrew/bin/borders", nil, {"active_color=0xffB22222", "width=8.0"}):start()
 end
-
--- Bind Alt+G to enter/exit modal
-hs.hotkey.bind({"alt"}, "g",
-	function()
-		windowMode:enter()
-	end,
-	function()
-		windowMode:exit()
-	end
-)
 
 -- Bind Alt+V to enter/exit modal (alternative)
 hs.hotkey.bind({"alt"}, "v",
@@ -138,22 +130,22 @@ hs.hotkey.bind({"alt"}, "v",
 -- === Window Focus (h/j/k/l) ===
 -- Focus within workspace, crossing all monitors with wrap-around
 windowMode:bind({}, "h", function()
-	hs.alert.show("← Focus Left")
+	-- hs.alert.show("← Focus Left")
 	aerospace({"focus", "--boundaries", "all-monitors-outer-frame", "--boundaries-action", "wrap-around-all-monitors", "left"})
 end)
 
 windowMode:bind({}, "j", function()
-	hs.alert.show("↓ Focus Down")
+	-- hs.alert.show("↓ Focus Down")
 	aerospace({"focus", "down"})
 end)
 
 windowMode:bind({}, "k", function()
-	hs.alert.show("↑ Focus Up")
+	-- hs.alert.show("↑ Focus Up")
 	aerospace({"focus", "up"})
 end)
 
 windowMode:bind({}, "l", function()
-	hs.alert.show("→ Focus Right")
+	-- hs.alert.show("→ Focus Right")
 	aerospace({"focus", "--boundaries", "all-monitors-outer-frame", "--boundaries-action", "wrap-around-all-monitors", "right"})
 end)
 
@@ -337,16 +329,27 @@ windowMode:bind({}, "r", function()
 	aerospace({"layout", "v_accordion"})
 end)
 
--- === Merge Window to Previous Workspace ===
-windowMode:bind({}, "t", function()
+local function mergeToPrevWorkspace()
 	if workspaceHistory.previous then
-		hs.alert.show("↶ Move to Workspace " .. workspaceHistory.previous)
-		aerospace({"move-node-to-workspace", workspaceHistory.previous})
-		aerospace({"workspace", workspaceHistory.previous})
+    local prevWorkspace = workspaceHistory.previous
+		hs.alert.show("↶ Sup Move to Workspace " .. prevWorkspace)
+		aerospace({"move-node-to-workspace", "--focus-follows-window", prevWorkspace})
+		-- aerospace({"workspace", prevWorkspace})
 	else
 		hs.alert.show("No previous workspace")
 	end
+end
+
+-- === Merge Window to Previous Workspace ===
+windowMode:bind({}, "t", function()
+  mergeToPrevWorkspace()
 end)
+
+-- Global hotkey: Ctrl+Alt+Cmd+T to merge current window to the previously used workspace
+hs.hotkey.bind({"ctrl", "alt", "cmd"}, "t", function()
+  mergeToPrevWorkspace()
+end)
+
 
 windowMode:bind({}, "return", function()
 	hs.alert.show("⛶ Toggle Fullscreen")
@@ -379,33 +382,6 @@ windowMode:bind({"shift"}, "0", function()
 	task:start()
 end)
 
--- === Workspace Navigation (d/f) ===
-windowMode:bind({}, "d", function()
-	hs.alert.show("← Prev Workspace")
-	-- Focus previous workspace (cycle through 0-4)
-	local task = hs.task.new("/opt/homebrew/bin/aerospace", function(exitCode, stdOut, stdErr)
-		local current = tonumber(stdOut:match("%d+"))
-		if current then
-			local prev = current == 0 and 4 or current - 1
-			aerospace({"workspace", tostring(prev)})
-		end
-	end, {"list-workspaces", "--focused"})
-	task:start()
-end)
-
-windowMode:bind({}, "g", function()
-	hs.alert.show("→ Next Workspace")
-	-- Focus next workspace (cycle through 0-4)
-	local task = hs.task.new("/opt/homebrew/bin/aerospace", function(exitCode, stdOut, stdErr)
-		local current = tonumber(stdOut:match("%d+"))
-		if current then
-			local next = current == 4 and 0 or current + 1
-			aerospace({"workspace", tostring(next)})
-		end
-	end, {"list-workspaces", "--focused"})
-	task:start()
-end)
-
 -- === Monitor Navigation (m/,) ===
 windowMode:bind({}, "m", function()
 	hs.alert.show("← Prev Monitor")
@@ -413,18 +389,8 @@ windowMode:bind({}, "m", function()
 end)
 
 windowMode:bind({}, ",", function()
-	hs.alert.show("→ Next Monitor")
+	hs.alert.show("→ Nexg Monitor")
 end)
 
--- Global hotkey: Ctrl+Alt+Cmd+T to merge to previous workspace
-hs.hotkey.bind({"ctrl", "alt", "cmd"}, "t", function()
-	if workspaceHistory.previous then
-		hs.alert.show("↶ Move to Workspace " .. workspaceHistory.previous)
-		aerospace({"move-node-to-workspace", workspaceHistory.previous})
-		aerospace({"workspace", workspaceHistory.previous})
-	else
-		hs.alert.show("No previous workspace")
-	end
-end)
 
 return windowMode
