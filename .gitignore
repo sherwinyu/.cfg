@@ -92,5 +92,6 @@ Sites/
 */.claude/settings.local.json
 *local*
 
+**/node_modules/
 
 IGNORE/

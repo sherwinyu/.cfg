@@ -28,3 +28,7 @@ hs.loadSpoon("MouseFollowsFocus"):start()
 
 local hotkeyWatcher = require("hotkeys")
 hotkeyWatcher:start()
+
+-- Aerospace window management modal
+package.path = package.path .. ";" .. os.getenv("HOME") .. "/cfg/aerospace/?.lua"
+require("aerospace")
