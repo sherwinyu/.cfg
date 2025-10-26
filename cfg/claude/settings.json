@@ -1,4 +1,32 @@
 {
+  "permissions": {
+    "allow": [
+      "Read(//Users/sherwin/**)",
+      "Write(/Users/sherwin/cfg/**)",
+      "Edit(/Users/sherwin/cfg/**)",
+      "Bash(osascript:*)",
+      "Bash(hs:*)",
+      "Bash(/opt/homebrew/bin/aerospace resize:*)",
+      "Bash(/opt/homebrew/bin/aerospace:*)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin diff cfg/aerospace/aerospace.toml)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin diff cfg/hammerspoon/aerospace.lua)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin add cfg/aerospace/aerospace.toml cfg/hammerspoon/aerospace.lua)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin diff --staged --stat)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin commit -m \"$(cat <<''EOF''*)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin log -1 --format='%h %s')",
+      "Bash(git push:*)",
+      "Bash(mv:*)",
+      "Bash(config status)",
+      "Bash(config diff:*)",
+      "Bash(config log -5 --oneline)",
+      "Bash(config add:*)",
+      "Bash(config commit:*)",
+      "Bash(WEZTERM_CONFIG_FILE=\"/Users/sherwin/cfg/wezterm/wezterm.lua\" wezterm show-config)",
+      "Bash(ln:*)",
+      "Bash(/Users/sherwin/cfg/claude/notify.sh*)",
+      "WebFetch(domain:wezterm.org)"
+    ]
+  },
   "notifications": {
     "enabled": true,
     "bell_on_completion": true,
