@@ -151,8 +151,16 @@ end)
 
 -- === Window Movement (Shift+h/j/k/l) ===
 windowMode:bind({"shift"}, "h", function()
-	hs.alert.show("⇐ Move Left")
-	aerospaceMove("left")
+	-- Try to move left within workspace; if at boundary, move to prev monitor
+	local cmd = "/opt/homebrew/bin/aerospace move --boundaries-action fail left || /opt/homebrew/bin/aerospace move-node-to-monitor --wrap-around --focus-follows-window prev"
+	hs.task.new("/bin/sh", function(exitCode, stdOut, stdErr)
+		if stdOut and stdOut:match("monitor") then
+			hs.alert.show("⇐⇐ Move to Prev Monitor")
+		else
+			hs.alert.show("⇐ Move Left")
+		end
+		updateWorkspaceHistory()
+	end, {"-c", cmd}):start()
 end)
 
 windowMode:bind({"shift"}, "j", function()
@@ -166,8 +174,16 @@ windowMode:bind({"shift"}, "k", function()
 end)
 
 windowMode:bind({"shift"}, "l", function()
-	hs.alert.show("⇒ Move Right")
-	aerospaceMove("right")
+	-- Try to move right within workspace; if at boundary, move to next monitor
+	local cmd = "/opt/homebrew/bin/aerospace move --boundaries-action fail right || /opt/homebrew/bin/aerospace move-node-to-monitor --wrap-around --focus-follows-window next"
+	hs.task.new("/bin/sh", function(exitCode, stdOut, stdErr)
+		if stdOut and stdOut:match("monitor") then
+			hs.alert.show("⇒⇒ Move to Next Monitor")
+		else
+			hs.alert.show("⇒ Move Right")
+		end
+		updateWorkspaceHistory()
+	end, {"-c", cmd}):start()
 end)
 
 -- === Join With Direction (Ctrl+Shift+h/j/k/l) ===
@@ -361,25 +377,21 @@ windowMode:bind({}, "delete", function()
 	aerospace({"workspace-back-and-forth"})
 end)
 
--- === Reset/Destroy All Workspaces (Shift+0) ===
-windowMode:bind({"shift"}, "0", function()
+-- === Reset/Destroy All Workspaces (Ctrl+Shift+R) ===
+windowMode:bind({"ctrl", "shift"}, "r", function()
 	hs.alert.show("⟲ Reset All Workspaces")
-	-- Get all windows and move them to workspace 0 as floating
-	local task = hs.task.new("/opt/homebrew/bin/aerospace", function(exitCode, stdOut, stdErr)
-		local windowIds = {}
-		for line in stdOut:gmatch("[^\r\n]+") do
-			table.insert(windowIds, line)
+	-- Use shell pipeline to process all windows sequentially
+	local moveCmd = "/opt/homebrew/bin/aerospace list-windows --all --format '%{window-id}' | while read wid; do /opt/homebrew/bin/aerospace --window-id \"$wid\" layout floating; /opt/homebrew/bin/aerospace --window-id \"$wid\" move-node-to-workspace 0; done"
+	hs.task.new("/bin/sh", function(exitCode, stdOut, stdErr)
+		if exitCode == 0 then
+			hs.alert.show("✓ All windows moved to workspace 0")
+			-- Switch to workspace 0
+			aerospace({"workspace", "0"})
+		else
+			hs.alert.show("⚠ Error resetting workspaces")
+			print("Reset error:", stdErr)
 		end
-
-		-- Move each window to workspace 0 and set to floating
-		for _, windowId in ipairs(windowIds) do
-			aerospace({"--window-id", windowId, "layout", "floating"})
-			aerospace({"--window-id", windowId, "move-node-to-workspace", "0"})
-		end
-
-		hs.alert.show("✓ All windows moved to workspace 0")
-	end, {"list-windows", "--all", "--format", "%{window-id}"})
-	task:start()
+	end, {"-c", moveCmd}):start()
 end)
 
 -- === Monitor Navigation (m/,) ===

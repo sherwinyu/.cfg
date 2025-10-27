@@ -78,35 +78,35 @@ alt-m = 'fullscreen --no-outer-gaps'
 
 # Workspaces (like virtual desktops)
 # 0 = catchall (floating), 1-5 = organized tiled workspaces
-ctrl-alt-0 = 'workspace 0'
-
-ctrl-alt-1 = 'workspace 1'
-ctrl-alt-2 = 'workspace 2'
-ctrl-alt-3 = 'workspace 3'
-ctrl-alt-4 = 'workspace 4'
+# ctrl-alt-0 = 'workspace 0'
+#
+# ctrl-alt-1 = 'workspace 1'
+# ctrl-alt-2 = 'workspace 2'
+# ctrl-alt-3 = 'workspace 3'
+# ctrl-alt-4 = 'workspace 4'
 
 # Move window to workspace (with auto layout adjustment)
-ctrl-alt-shift-0 = ['layout floating', 'move-node-to-workspace 0']
+# ctrl-alt-shift-0 = ['layout floating', 'move-node-to-workspace 0']
 
 
 # Move window to workspace and follow (with auto layout adjustment)
-shift-alt-ctrl-1 = ['layout tiling', 'move-node-to-workspace 1', 'workspace 1']
-shift-alt-ctrl-2 = ['layout tiling', 'move-node-to-workspace 2', 'workspace 2']
-shift-alt-ctrl-3 = ['layout tiling', 'move-node-to-workspace 3', 'workspace 3']
-shift-alt-ctrl-4 = ['layout tiling', 'move-node-to-workspace 4', 'workspace 4']
-shift-alt-ctrl-6 = ['layout tiling', 'move-node-to-workspace 1', 'workspace 1']
-shift-alt-ctrl-7 = ['layout tiling', 'move-node-to-workspace 2', 'workspace 2']
-shift-alt-ctrl-8 = ['layout tiling', 'move-node-to-workspace 3', 'workspace 3']
-shift-alt-ctrl-9 = ['layout tiling', 'move-node-to-workspace 4', 'workspace 4']
-
-cmd-shift-alt-ctrl-1 = ['layout tiling', 'move-node-to-workspace 1', 'workspace 1']
-cmd-shift-alt-ctrl-2 = ['layout tiling', 'move-node-to-workspace 2', 'workspace 2']
-cmd-shift-alt-ctrl-3 = ['layout tiling', 'move-node-to-workspace 3', 'workspace 3']
-cmd-shift-alt-ctrl-4 = ['layout tiling', 'move-node-to-workspace 4', 'workspace 4']
-cmd-shift-alt-ctrl-6 = ['layout tiling', 'move-node-to-workspace 1', 'workspace 1']
-cmd-shift-alt-ctrl-7 = ['layout tiling', 'move-node-to-workspace 2', 'workspace 2']
-cmd-shift-alt-ctrl-8 = ['layout tiling', 'move-node-to-workspace 3', 'workspace 3']
-cmd-shift-alt-ctrl-9 = ['layout tiling', 'move-node-to-workspace 4', 'workspace 4']
+# shift-alt-ctrl-1 = ['layout tiling', 'move-node-to-workspace 1', 'workspace 1']
+# shift-alt-ctrl-2 = ['layout tiling', 'move-node-to-workspace 2', 'workspace 2']
+# shift-alt-ctrl-3 = ['layout tiling', 'move-node-to-workspace 3', 'workspace 3']
+# shift-alt-ctrl-4 = ['layout tiling', 'move-node-to-workspace 4', 'workspace 4']
+# shift-alt-ctrl-6 = ['layout tiling', 'move-node-to-workspace 1', 'workspace 1']
+# shift-alt-ctrl-7 = ['layout tiling', 'move-node-to-workspace 2', 'workspace 2']
+# shift-alt-ctrl-8 = ['layout tiling', 'move-node-to-workspace 3', 'workspace 3']
+# shift-alt-ctrl-9 = ['layout tiling', 'move-node-to-workspace 4', 'workspace 4']
+#
+# cmd-shift-alt-ctrl-1 = ['layout tiling', 'move-node-to-workspace 1', 'workspace 1']
+# cmd-shift-alt-ctrl-2 = ['layout tiling', 'move-node-to-workspace 2', 'workspace 2']
+# cmd-shift-alt-ctrl-3 = ['layout tiling', 'move-node-to-workspace 3', 'workspace 3']
+# cmd-shift-alt-ctrl-4 = ['layout tiling', 'move-node-to-workspace 4', 'workspace 4']
+# cmd-shift-alt-ctrl-6 = ['layout tiling', 'move-node-to-workspace 1', 'workspace 1']
+# cmd-shift-alt-ctrl-7 = ['layout tiling', 'move-node-to-workspace 2', 'workspace 2']
+# cmd-shift-alt-ctrl-8 = ['layout tiling', 'move-node-to-workspace 3', 'workspace 3']
+# cmd-shift-alt-ctrl-9 = ['layout tiling', 'move-node-to-workspace 4', 'workspace 4']
 
 # Reload config
 alt-ctrl-r = 'reload-config'

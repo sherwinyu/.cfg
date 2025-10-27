@@ -71,6 +71,18 @@ writeToProfile("karabiner-config-profile", [
         }),
     ]),
   ),
+  rule("' held => opt+v").manipulators(
+    appleKeyboardOnly([
+      map("'")
+        .toIfAlone("'")
+        .toIfHeldDown("v", "left_option")
+        .toDelayedAction(toKey("vk_none"), toKey("vk_none"))
+        .parameters({
+          "basic.to_if_alone_timeout_milliseconds": 500,
+          "basic.to_if_held_down_threshold_milliseconds": 120,
+        }),
+    ]),
+  ),
   // rule('left command alone => undo').manipulators(appleKeyboardOnly([
   //   map('left_command')
   //     .toIfAlone('z', 'command')
