@@ -49,19 +49,36 @@ local function selectMenuItem(appName, menuHierarchy)
 		return
 	end
 
+
 	-- Trigger the menu item
 	app:selectMenuItem(menuHierarchy)
 end
+
+-- Define the "Hyper" key as Ctrl + Alt + Cmd + Shift
+local hyper = { "ctrl", "alt", "cmd", "shift" }
+
+local zoot = { "ctrl", "alt", "cmd" }
+
+
 -- General hotkeys
 
 hs.hotkey.bind({}, "F7", function()
 	ToggleApp("WezTerm")
 end)
+hs.hotkey.bind(zoot, "7", function()
+	ToggleApp("WezTerm")
+end)
 
+hs.hotkey.bind(zoot, "8", function()
+	ToggleApp("TaskPaper")
+end)
 hs.hotkey.bind({}, "F8", function()
 	ToggleApp("TaskPaper")
 end)
 
+hs.hotkey.bind(zoot, "9", function()
+	ToggleApp("Oryoki")
+end)
 hs.hotkey.bind({}, "F9", function()
 	ToggleApp("Oryoki")
 end)
@@ -70,10 +87,6 @@ hs.hotkey.bind({}, "F10", function()
 	ToggleApp("Arc")
 end)
 
--- Define the "Hyper" key as Ctrl + Alt + Cmd + Shift
-local hyper = { "ctrl", "alt", "cmd", "shift" }
-
-local zoot = { "ctrl", "alt", "cmd" }
 
 local TaskQueue = {}
 TaskQueue.__index = TaskQueue
