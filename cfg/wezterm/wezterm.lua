@@ -114,6 +114,17 @@ config.keys = {
 		mods = "CMD|SHIFT",
 		action = wezterm.action.ActivateTabRelative(1),
 	},
+	-- Move tabs left/right
+	{
+		key = "[",
+		mods = "CTRL|SHIFT|CMD",
+		action = wezterm.action.MoveTabRelative(-1),
+	},
+	{
+		key = "]",
+		mods = "CTRL|SHIFT|CMD",
+		action = wezterm.action.MoveTabRelative(1),
+	},
 	-- Pane zoom toggle
 	{
 		key = "Enter",
@@ -422,15 +433,40 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
 	end
 end)
 
--- Custom tab bar to show workspace
+-- Helper to extract last directory from path
+local function get_dir_name(cwd_uri)
+	if not cwd_uri then
+		return nil
+	end
+	local cwd = cwd_uri.file_path or tostring(cwd_uri)
+	-- Remove trailing slash and get last component
+	cwd = cwd:gsub("/$", "")
+	return cwd:match("([^/]+)$") or cwd
+end
+
+-- Right status bar showing current directory
+wezterm.on("update-right-status", function(window, pane)
+	local cwd_uri = pane:get_current_working_dir()
+	local cwd = get_dir_name(cwd_uri) or ""
+
+	window:set_right_status(wezterm.format({
+		{ Foreground = { Color = "#7aa2f7" } },
+		{ Text = " 📁 " .. cwd .. " " },
+	}))
+end)
+
+-- Custom tab bar to show workspace and directory
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 	local workspace = tab.active_pane.user_vars.WEZTERM_WORKSPACE or wezterm.mux.get_active_workspace()
+	local pane = tab.active_pane
 	local title = tab.tab_title
 
 	if title and #title > 0 then
 		title = title
 	else
-		title = tab.active_pane.title
+		-- Use directory name if available, otherwise pane title
+		local dir_name = get_dir_name(pane.current_working_dir)
+		title = dir_name or pane.title
 	end
 
 	-- Show workspace name in first tab
@@ -441,6 +477,16 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	return {
 		{ Text = " " .. title .. " " },
 	}
+end)
+
+-- Window title with workspace and full directory path
+wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
+	local workspace = wezterm.mux.get_active_workspace()
+	local cwd = ""
+	if pane.current_working_dir then
+		cwd = pane.current_working_dir.file_path or tostring(pane.current_working_dir)
+	end
+	return string.format("[%s] %s", workspace, cwd)
 end)
 
 -- Workspace creation functions
