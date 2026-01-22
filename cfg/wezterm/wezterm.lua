@@ -455,14 +455,17 @@ local function get_dir_name(cwd_uri)
 	return cwd:match("([^/]+)$") or cwd
 end
 
--- Right status bar showing current directory
+-- Right status bar showing workspace and current directory
 wezterm.on("update-right-status", function(window, pane)
 	local cwd_uri = pane:get_current_working_dir()
 	local cwd = get_dir_name(cwd_uri) or ""
+	local workspace = window:active_workspace()
 
 	window:set_right_status(wezterm.format({
+		{ Foreground = { Color = "#bb9af7" } },
+		{ Text = " " .. workspace .. " " },
 		{ Foreground = { Color = "#7aa2f7" } },
-		{ Text = " 📁 " .. cwd .. " " },
+		{ Text = "| 📁 " .. cwd .. " " },
 	}))
 end)
 
