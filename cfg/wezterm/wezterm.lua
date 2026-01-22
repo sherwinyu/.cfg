@@ -125,6 +125,17 @@ config.keys = {
 		mods = "CTRL|SHIFT|CMD",
 		action = wezterm.action.MoveTabRelative(1),
 	},
+	-- Rotate panes (move pane position within tab)
+	{
+		key = "[",
+		mods = "CTRL|CMD",
+		action = wezterm.action.RotatePanes("CounterClockwise"),
+	},
+	{
+		key = "]",
+		mods = "CTRL|CMD",
+		action = wezterm.action.RotatePanes("Clockwise"),
+	},
 	-- Pane zoom toggle
 	{
 		key = "Enter",
