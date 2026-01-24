@@ -139,6 +139,8 @@ map("c", "<M-f>", "<c-right>", { noremap = true, desc = "Move forward one word" 
 map("c", "<M-b>", "<c-left>", { noremap = true, desc = "Move backward one word" })
 map("c", "<c-a>", "<Home>", { noremap = true, desc = "Move to start of line" })
 map("c", "<c-e>", "<End>", { noremap = true, desc = "Move to end of line" })
+map("c", "<Down>", "<C-n>", { noremap = true, desc = "Next completion" })
+map("c", "<Up>", "<C-p>", { noremap = true, desc = "Previous completion" })
 
 -- Navigating in current windows
 map("n", "<c-b>", "8k", { noremap = true, desc = "Scroll up" })
