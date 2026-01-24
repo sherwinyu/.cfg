@@ -41,6 +41,29 @@ local function aerospaceMove(direction)
 	aerospace(cmd)
 end
 
+-- Helper function to move with fallback to monitor switch
+-- Tries to move within workspace; if at boundary, moves to adjacent monitor
+local function aerospaceMoveWithMonitorFallback(direction, onSuccess, onMonitorMove)
+	local moveArgs = "move --boundaries-action fail " .. direction
+	local monitorDir = (direction == "left") and "prev" or "next"
+	local monitorArgs = "move-node-to-monitor --wrap-around --focus-follows-window " .. monitorDir
+
+	if shouldCreateImplicitContainer then
+		moveArgs = "move --boundaries-action create-implicit-container " .. direction
+	end
+
+	local cmd = "/opt/homebrew/bin/aerospace " .. moveArgs .. " || /opt/homebrew/bin/aerospace " .. monitorArgs
+	hs.task.new("/bin/sh", function(exitCode, stdOut, stdErr)
+		-- Check stderr for monitor move indication
+		if stdErr and stdErr:match("move%-node%-to%-monitor") or exitCode ~= 0 then
+			if onMonitorMove then onMonitorMove() end
+		else
+			if onSuccess then onSuccess() end
+		end
+		updateWorkspaceHistory()
+	end, {"-c", cmd}):start()
+end
+
 
 
 -- Create persistent banner
@@ -151,16 +174,10 @@ end)
 
 -- === Window Movement (Shift+h/j/k/l) ===
 windowMode:bind({"shift"}, "h", function()
-	-- Try to move left within workspace; if at boundary, move to prev monitor
-	local cmd = "/opt/homebrew/bin/aerospace move --boundaries-action fail left || /opt/homebrew/bin/aerospace move-node-to-monitor --wrap-around --focus-follows-window prev"
-	hs.task.new("/bin/sh", function(exitCode, stdOut, stdErr)
-		if stdOut and stdOut:match("monitor") then
-			hs.alert.show("⇐⇐ Move to Prev Monitor")
-		else
-			hs.alert.show("⇐ Move Left")
-		end
-		updateWorkspaceHistory()
-	end, {"-c", cmd}):start()
+	aerospaceMoveWithMonitorFallback("left",
+		function() hs.alert.show("⇐ Move Left") end,
+		function() hs.alert.show("⇐⇐ Move to Prev Monitor") end
+	)
 end)
 
 windowMode:bind({"shift"}, "j", function()
@@ -174,16 +191,10 @@ windowMode:bind({"shift"}, "k", function()
 end)
 
 windowMode:bind({"shift"}, "l", function()
-	-- Try to move right within workspace; if at boundary, move to next monitor
-	local cmd = "/opt/homebrew/bin/aerospace move --boundaries-action fail right || /opt/homebrew/bin/aerospace move-node-to-monitor --wrap-around --focus-follows-window next"
-	hs.task.new("/bin/sh", function(exitCode, stdOut, stdErr)
-		if stdOut and stdOut:match("monitor") then
-			hs.alert.show("⇒⇒ Move to Next Monitor")
-		else
-			hs.alert.show("⇒ Move Right")
-		end
-		updateWorkspaceHistory()
-	end, {"-c", cmd}):start()
+	aerospaceMoveWithMonitorFallback("right",
+		function() hs.alert.show("⇒ Move Right") end,
+		function() hs.alert.show("⇒⇒ Move to Next Monitor") end
+	)
 end)
 
 -- === Join With Direction (Ctrl+Shift+h/j/k/l) ===

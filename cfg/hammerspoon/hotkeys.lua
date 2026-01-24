@@ -49,7 +49,6 @@ local function selectMenuItem(appName, menuHierarchy)
 		return
 	end
 
-
 	-- Trigger the menu item
 	app:selectMenuItem(menuHierarchy)
 end
@@ -58,7 +57,6 @@ end
 local hyper = { "ctrl", "alt", "cmd", "shift" }
 
 local zoot = { "ctrl", "alt", "cmd" }
-
 
 -- General hotkeys
 
@@ -86,7 +84,6 @@ end)
 hs.hotkey.bind({}, "F10", function()
 	ToggleApp("Arc")
 end)
-
 
 local TaskQueue = {}
 TaskQueue.__index = TaskQueue
