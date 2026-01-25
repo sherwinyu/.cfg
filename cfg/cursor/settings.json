@@ -448,5 +448,9 @@
         
     ],
     "git.blame.statusBarItem.enabled": false,
-    "git.blame.editorDecoration.enabled": true
+    "git.blame.editorDecoration.enabled": true,
+    "database-client.autoSync": true,
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
