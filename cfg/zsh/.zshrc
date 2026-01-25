@@ -99,3 +99,5 @@ if [ -f '/Users/sherwin/cfg/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/she
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/sherwin/cfg/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/sherwin/cfg/google-cloud-sdk/completion.zsh.inc'; fi
+
+alias claude="/Users/sherwin/.claude/local/claude"

@@ -51,27 +51,11 @@ alias -g TRIM="| tr -d '\n'"
 agg() {
   ag "$*"
 }
-gt() {
-  # gulp test --testFile $1
-  bin/dev jsunit --testFile $1
-}
-
-function run_console() {
-  if [[ -n $1 ]]; then
-    bin/db $1 remote-shell
-  else
-    bin/dev shell
-  fi
-}
 
 function select_deploy() {
   ag --heading 'DEPLOY_NAME = ' | grep "DEPLOY_NAME = '" | sed 's/DEPLOY_NAME = //g' | tr -s ' ' | cut -f 2 -d ' ' | sed "s/'//g" | fzf-tmux -d 10
 }
 alias rcd='rc $(select_deploy)'
-
-function genome_grep() {
-  curl $1 2>/dev/null | gunzip -c | grep ">" | grep "(plasmid\|chloroplast\|incision element\|mitochondrial\|mitochondrion)"
-}
 
 function convert() {
   cat $1 | textutil -convert html -stdin -stdout | pandoc --from=html --to=markdown | sed -e 's/\[.*\]{\.Apple-converted-space}//g' > "$1.out"
