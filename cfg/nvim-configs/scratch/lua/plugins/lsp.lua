@@ -29,11 +29,12 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 		},
 		config = function()
-			local lspconfig = require("lspconfig")
 			local fzf = require("fzf-lua")
 
-			-- Configure Lua LSP for Neovim
-			lspconfig.lua_ls.setup({
+			-- Configure Lua LSP for Neovim (new API for nvim 0.11+)
+			vim.lsp.config("lua_ls", {
+				cmd = { "lua-language-server" },
+				root_markers = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml" },
 				settings = {
 					Lua = {
 						runtime = {
@@ -53,8 +54,10 @@ return {
 				},
 			})
 
-			-- Configure TypeScript LSP
-			lspconfig.ts_ls.setup({
+			-- Configure TypeScript LSP (new API for nvim 0.11+)
+			vim.lsp.config("ts_ls", {
+				cmd = { "typescript-language-server", "--stdio" },
+				root_markers = { "package.json", "tsconfig.json", "jsconfig.json" },
 				settings = {
 					typescript = {
 						inlayHints = {
@@ -80,6 +83,10 @@ return {
 					},
 				},
 			})
+
+			-- Enable LSP servers
+			vim.lsp.enable("lua_ls")
+			vim.lsp.enable("ts_ls")
 
 			-- Key mappings
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
