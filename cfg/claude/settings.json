@@ -1,7 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Read(//Users/sherwin/**)",
+      "Read(/Users/sherwin/**)",
       "Write(/Users/sherwin/cfg/**)",
       "Edit(/Users/sherwin/cfg/**)",
       "Bash(osascript:*)",
@@ -12,7 +12,7 @@
       "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin diff cfg/hammerspoon/aerospace.lua)",
       "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin add cfg/aerospace/aerospace.toml cfg/hammerspoon/aerospace.lua)",
       "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin diff --staged --stat)",
-      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin commit -m \"$(cat <<''EOF''*)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin commit:*)",
       "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin log -1 --format='%h %s')",
       "Bash(git push:*)",
       "Bash(mv:*)",
@@ -27,6 +27,7 @@
       "WebFetch(domain:wezterm.org)"
     ]
   },
+  "alwaysThinkingEnabled": false,
   "notifications": {
     "enabled": true,
     "bell_on_completion": true,
@@ -57,7 +58,7 @@
       "Trigger notifications in these scenarios:",
       "  - When waiting for human input or confirmation",
       "  - When completing long-running tasks (>5 seconds)",
-      "  - When encountering errors that require human attention", 
+      "  - When encountering errors that require human attention",
       "  - When reaching a natural stopping point where user attention is needed",
       "  - Before asking questions that require user decision-making",
       "Example usage: Run '/Users/sherwin/cfg/claude/notify.sh \"Task completed - please review\"' when done with significant work."
@@ -69,5 +70,6 @@
       "decision_needed": "User decision needed",
       "review_required": "Please review completed work"
     }
-  }
+  },
+  "model": "opus"
 }
