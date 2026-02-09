@@ -19,6 +19,10 @@ hs.hotkey.bind(zoot, "space", function()
 	fuzzyFinder.show()
 end)
 
+hs.hotkey.bind(zoot, "y", function()
+	hs.application.launchOrFocus("WhatsApp")
+end)
+
 local audio = require("audio-test")
 audio.setupAudioHotkeys()
 print("printing......... ===HELLO", audio.listAudioDevices())
@@ -29,6 +33,6 @@ hs.loadSpoon("MouseFollowsFocus"):start()
 local hotkeyWatcher = require("hotkeys")
 hotkeyWatcher:start()
 
--- Aerospace window management modal
-package.path = package.path .. ";" .. os.getenv("HOME") .. "/cfg/aerospace/?.lua"
-require("aerospace")
+-- Window navigation (center-point based)
+local windowNav = require("window-nav")
+windowNav.bindHotkeys(zoot)
