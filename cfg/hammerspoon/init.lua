@@ -20,7 +20,7 @@ hs.hotkey.bind(zoot, "space", function()
 end)
 
 hs.hotkey.bind(zoot, "y", function()
-	hs.application.launchOrFocus("WhatsApp")
+	ToggleApp("WhatsApp")
 end)
 
 local audio = require("audio-test")

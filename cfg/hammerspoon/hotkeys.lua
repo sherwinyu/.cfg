@@ -1,10 +1,33 @@
 function ToggleApp(appName)
 	local app = hs.application.get(appName)
-	print("Found app:", app)
+	-- Fallback: search running apps, preferring exact name match over substring
+	if not app then
+		local running = hs.application.runningApplications()
+		local partial = nil
+		for _, a in ipairs(running) do
+			local name = a:name() or ""
+			if name:lower() == appName:lower() then
+				app = a
+				break
+			elseif not partial and name:lower():find(appName:lower(), 1, true) then
+				partial = a
+			end
+		end
+		if not app then
+			app = partial
+		end
+	end
 
 	if app then
+		print("ToggleApp:", appName, "found:", app:name(), "pid:", app:pid(), "frontmost:", app:isFrontmost())
 		if app:isFrontmost() then
 			app:hide()
+			-- Some apps (e.g. Arc) ignore programmatic hide; fall back to Cmd+H
+			hs.timer.doAfter(0.05, function()
+				if app:isFrontmost() then
+					hs.eventtap.keyStroke({"cmd"}, "h")
+				end
+			end)
 		else
 			-- Bring to foreground if minimized or hidden
 			if app:isHidden() then
@@ -242,6 +265,10 @@ end)
 
 hs.hotkey.bind(zoot, "-", function()
 	ToggleApp("Dia")
+end)
+
+hs.hotkey.bind(zoot, "/", function()
+	ToggleApp("Conductor")
 end)
 
 hs.hotkey.bind(hyper, "1", function()
