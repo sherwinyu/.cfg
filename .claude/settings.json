@@ -1,1 +1,124 @@
-/Users/sherwin/cfg/claude/settings.json
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/sherwin/**)",
+      "Write(/Users/sherwin/cfg/**)",
+      "Edit(/Users/sherwin/cfg/**)",
+      "Bash(osascript:*)",
+      "Bash(hs:*)",
+      "Bash(/opt/homebrew/bin/aerospace resize:*)",
+      "Bash(/opt/homebrew/bin/aerospace:*)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin diff cfg/aerospace/aerospace.toml)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin diff cfg/hammerspoon/aerospace.lua)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin add cfg/aerospace/aerospace.toml cfg/hammerspoon/aerospace.lua)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin diff --staged --stat)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin commit:*)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin log -1 --format='%h %s')",
+      "Bash(git push:*)",
+      "Bash(mv:*)",
+      "Bash(config status)",
+      "Bash(config diff:*)",
+      "Bash(config log -5 --oneline)",
+      "Bash(config add:*)",
+      "Bash(config commit:*)",
+      "Bash(WEZTERM_CONFIG_FILE=\"/Users/sherwin/cfg/wezterm/wezterm.lua\" wezterm show-config)",
+      "Bash(ln:*)",
+      "Bash(/Users/sherwin/cfg/claude/notify.sh*)",
+      "WebFetch(domain:wezterm.org)"
+    ]
+  },
+  "model": "opus[1m]",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/opt/homebrew/bin/watchdog-client"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/opt/homebrew/bin/watchdog-client"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/opt/homebrew/bin/watchdog-client"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/opt/homebrew/bin/watchdog-client"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "workflow-setup@gamma-internal-plugins": true,
+    "buddy-glasses@gamma-internal-plugins": true
+  },
+  "notifications": {
+    "enabled": true,
+    "bell_on_completion": true,
+    "bell_on_error": false,
+    "bell_on_long_task": true,
+    "long_task_threshold_seconds": 5,
+    "bell_on_human_input_required": true
+  },
+  "appearance": {
+    "theme": "auto"
+  },
+  "behavior": {
+    "auto_save": true,
+    "confirm_destructive_actions": true,
+    "notify_on_human_input": true
+  },
+  "integrations": {
+    "terminal_bell": {
+      "enabled": true,
+      "command": "printf '\\a'",
+      "description": "Sends terminal bell character to trigger WezTerm notifications"
+    }
+  },
+  "instructions": {
+    "global_behavior": [
+      "IMPORTANT: Always use the notification script when human input is required or when completing tasks that may take time.",
+      "Use '/Users/sherwin/cfg/claude/notify.sh \"message\"' via the Bash tool to trigger notifications.",
+      "Trigger notifications in these scenarios:",
+      "  - When waiting for human input or confirmation",
+      "  - When completing long-running tasks (>5 seconds)",
+      "  - When encountering errors that require human attention",
+      "  - When reaching a natural stopping point where user attention is needed",
+      "  - Before asking questions that require user decision-making",
+      "Example usage: Run '/Users/sherwin/cfg/claude/notify.sh \"Task completed - please review\"' when done with significant work."
+    ],
+    "notification_messages": {
+      "human_input_required": "Human input required",
+      "task_completed": "Claude task completed",
+      "error_occurred": "Claude encountered an error",
+      "decision_needed": "User decision needed",
+      "review_required": "Please review completed work"
+    }
+  }
+}

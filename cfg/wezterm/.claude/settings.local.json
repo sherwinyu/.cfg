@@ -26,7 +26,8 @@
       "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin log:*)",
       "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin diff:*)",
       "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin add:*)",
-      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin status:*)"
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin status:*)",
+      "Bash(git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin push)"
     ],
     "deny": [],
     "ask": []

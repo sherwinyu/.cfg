@@ -28,6 +28,11 @@
     ]
   },
   "alwaysThinkingEnabled": false,
+  "model": "opus",
+  "enabledPlugins": {
+    "workflow-setup@gamma-internal-plugins": true,
+    "buddy-glasses@gamma-internal-plugins": true
+  },
   "notifications": {
     "enabled": true,
     "bell_on_completion": true,
@@ -70,6 +75,5 @@
       "decision_needed": "User decision needed",
       "review_required": "Please review completed work"
     }
-  },
-  "model": "opus"
+  }
 }

@@ -1,113 +1,514 @@
 {
-  "numStartups": 28,
+  "numStartups": 189,
   "installMethod": "global",
-  "autoUpdates": true,
+  "autoUpdates": false,
   "theme": "light",
   "preferredNotifChannel": "terminal_bell",
+  "hasSeenTasksHint": true,
+  "hasUsedStash": true,
   "customApiKeyResponses": {
-    "approved": [
-      "EvRG9Sn0rnQ-dpU6xwAA",
-      "iJuJATG4qZQ-Y0XQmQAA"
-    ],
-    "rejected": []
+    "approved": [],
+    "rejected": [
+      "EvRG9Sn0rnQ-dpU6xwAA"
+    ]
   },
   "tipsHistory": {
     "new-user-warmup": 1,
-    "memory-command": 25,
-    "shift-enter": 25,
-    "theme-command": 25,
-    "status-line": 4,
-    "prompt-queue": 25,
-    "enter-to-steer-in-relatime": 25,
-    "todo-list": 25,
-    "ide-upsell-external-terminal": 25,
-    "# for memory": 25,
-    "install-github-app": 25,
-    "drag-and-drop-images": 25,
-    "paste-images-mac": 25,
-    "double-esc": 25,
-    "continue": 26,
-    "permissions": 26,
-    "custom-commands": 27,
-    "shift-tab": 26,
-    "image-paste": 16,
-    "custom-agents": 18,
-    "plan-mode-for-complex-tasks": 24
+    "memory-command": 184,
+    "shift-enter": 185,
+    "theme-command": 171,
+    "status-line": 184,
+    "prompt-queue": 66,
+    "enter-to-steer-in-relatime": 171,
+    "todo-list": 173,
+    "ide-upsell-external-terminal": 189,
+    "# for memory": 62,
+    "install-github-app": 184,
+    "drag-and-drop-images": 185,
+    "paste-images-mac": 185,
+    "double-esc": 39,
+    "continue": 184,
+    "permissions": 184,
+    "custom-commands": 184,
+    "shift-tab": 185,
+    "image-paste": 178,
+    "custom-agents": 186,
+    "plan-mode-for-complex-tasks": 189,
+    "double-esc-code-restore": 184,
+    "tab-toggle-thinking": 69,
+    "ultrathink-keyword": 100,
+    "git-worktrees": 186,
+    "stickers-command": 90,
+    "install-slack-app": 185,
+    "rename-conversation": 176,
+    "config-thinking-mode": 90,
+    "btw-side-question": 85,
+    "desktop-app": 176,
+    "web-app": 184,
+    "mobile-app": 184,
+    "frontend-design-plugin": 128,
+    "agent-flag": 184,
+    "feedback-command": 184,
+    "color-when-multi-clauding": 188,
+    "desktop-shortcut": 189
   },
-  "promptQueueUseCount": 1,
-  "showExpandedTodos": true,
+  "promptQueueUseCount": 60,
   "cachedStatsigGates": {
-    "tengu_disable_bypass_permissions_mode": false
+    "tengu_disable_bypass_permissions_mode": false,
+    "tengu_use_file_checkpoints": true,
+    "tengu_tool_pear": false,
+    "tengu_migrate_ignore_patterns": false,
+    "tengu_prompt_suggestion": true,
+    "tengu_year_end_2025_campaign_promo": false,
+    "tengu_streaming_tool_execution2": false,
+    "tengu_session_memory": false
+  },
+  "cachedDynamicConfigs": {
+    "tengu_1p_event_batch_config": {
+      "scheduledDelayMillis": 5000,
+      "maxExportBatchSize": 200,
+      "maxQueueSize": 8192
+    },
+    "tengu-top-of-feed-tip": {
+      "tip": "",
+      "color": ""
+    }
+  },
+  "cachedGrowthBookFeatures": {
+    "tengu_pewter_lantern": false,
+    "tengu_penguins_enabled": true,
+    "tengu_kairos_cron_durable": false,
+    "tengu_drift_lantern": false,
+    "tengu_cobalt_heron": false,
+    "tengu_ember_latch": false,
+    "tengu_tool_search_unsupported_models": [
+      "haiku"
+    ],
+    "tengu_ccr_bridge": true,
+    "tengu_marble_fox": false,
+    "tengu_summarize_tool_results": true,
+    "tengu_classifier_summary_heuristic_emit": false,
+    "tengu_grey_step": true,
+    "tengu_ultraplan_prompt_identifier": "visual_plan",
+    "tengu_harbor_ledger": [
+      {
+        "marketplace": "claude-plugins-official",
+        "plugin": "discord"
+      },
+      {
+        "marketplace": "claude-plugins-official",
+        "plugin": "telegram"
+      },
+      {
+        "marketplace": "claude-plugins-official",
+        "plugin": "fakechat"
+      },
+      {
+        "marketplace": "claude-plugins-official",
+        "plugin": "imessage"
+      }
+    ],
+    "tengu_vscode_onboarding": false,
+    "tengu_amber_flint": true,
+    "tengu_bridge_repl_v2_config": {
+      "init_retry_max_attempts": 3,
+      "init_retry_base_delay_ms": 500,
+      "init_retry_jitter_fraction": 0.25,
+      "init_retry_max_delay_ms": 4000,
+      "http_timeout_ms": 10000,
+      "uuid_dedup_buffer_size": 2000,
+      "heartbeat_interval_ms": 20000,
+      "heartbeat_jitter_fraction": 0.1,
+      "token_refresh_buffer_ms": 600000,
+      "teardown_archive_timeout_ms": 1500,
+      "connect_timeout_ms": 15000,
+      "min_version": "2.1.70",
+      "should_show_app_upgrade_message": false
+    },
+    "tengu_mcp_retry_failed_remote": false,
+    "tengu_sparrow_ledger": false,
+    "tengu_blue_coaster": false,
+    "tengu_satin_quoll": {},
+    "tengu_sepia_cormorant": [],
+    "tengu_sm_compact": false,
+    "tengu_immediate_model_command": false,
+    "tengu_log_datadog_events": true,
+    "tengu_crimson_vector": true,
+    "tengu-off-switch": {
+      "activated": false
+    },
+    "tengu_review_bughunter_config": {
+      "fleet_size": 5,
+      "max_duration_minutes": 10,
+      "agent_timeout_seconds": 600,
+      "total_wallclock_minutes": 22,
+      "model": "claude-opus-4-7",
+      "cost_note": "$5-$20",
+      "duration_note": "~5-10 min",
+      "enabled": true
+    },
+    "tengu_jasper_finch": false,
+    "tengu_slate_meadow": false,
+    "tengu_cinder_almanac": true,
+    "tengu_harbor_permissions": true,
+    "tengu_amber_lark": false,
+    "tengu_prompt_cache_1h_config": {
+      "allowlist": [
+        "repl_main_thread*",
+        "sdk",
+        "auto_mode",
+        "rolling_compact",
+        "memdir_relevance"
+      ]
+    },
+    "tengu_lean_sub_pf7q": false,
+    "tengu_coral_beacon": false,
+    "tengu_turnip_cathedral": false,
+    "tengu_keybinding_customization_release": true,
+    "tengu_marble_whisper2": true,
+    "tengu_copper_fox": false,
+    "tengu_malort_pedway": {
+      "enabled": false,
+      "pixelValidation": false,
+      "clipboardPasteMultiline": true,
+      "screenshotFilter": true,
+      "mouseAnimation": true,
+      "hideBeforeAction": true,
+      "autoTargetDisplay": true,
+      "coordinateMode": "pixels"
+    },
+    "tengu_1p_event_batch_config": {
+      "scheduledDelayMillis": 10000,
+      "maxExportBatchSize": 400,
+      "maxQueueSize": 8192,
+      "path": "/api/event_logging/v2/batch"
+    },
+    "tengu_slate_thimble": false,
+    "tengu_noreread_q7m_velvet": false,
+    "tengu_disable_bypass_permissions_mode": false,
+    "tengu_c4w_usage_limit_notifications_enabled": true,
+    "tengu_mcp_elicitation": true,
+    "tengu_slate_ridge": true,
+    "tengu_post_compact_survey": false,
+    "tengu_vinteuil_phrase": true,
+    "tengu_ccr_bundle_seed_enabled": true,
+    "tengu_turtle_carbon": true,
+    "tengu_quiet_basalt_echo": false,
+    "tengu_grey_wool": true,
+    "tengu_garnet_plover": false,
+    "tengu_claudeai_mcp_connectors": true,
+    "tengu_good_survey_transcript_ask_config": {
+      "probability": 0
+    },
+    "tengu_slate_heron": {
+      "enabled": false,
+      "gapThresholdMinutes": 60,
+      "keepRecent": 5
+    },
+    "tengu_scarf_coffee": false,
+    "tengu_kv7_prompt_sort": true,
+    "tengu_basalt_wren": false,
+    "tengu_cache_plum_violet": true,
+    "tengu_pewter_ledger": "OFF",
+    "tengu_worktree_mode": true,
+    "tengu_quiet_harbor": false,
+    "tengu_sub_nomdrep_q7k": true,
+    "tengu_bad_survey_transcript_ask_config": {
+      "probability": 0
+    },
+    "tengu_chomp_inflection": false,
+    "tengu_event_sampling_config": {},
+    "tengu_willow_census_ttl_hours": 24,
+    "tengu_amber_lynx": false,
+    "tengu_pewter_brook": false,
+    "tengu_otk_slot_v1": false,
+    "tengu_slate_ribbon": true,
+    "tengu_oboe": true,
+    "tengu_sedge_lantern": true,
+    "tengu_compact_line_prefix_killswitch": false,
+    "tengu_fg_left_arrow_agents": false,
+    "tengu_code_diff_cli": true,
+    "tengu_bridge_poll_interval_ms": 0,
+    "tengu_marble_anvil": true,
+    "tengu_snippet_save": false,
+    "tengu_ccr_bridge_multi_session": true,
+    "tengu_timber_lark": "off",
+    "tengu_amber_stoat": true,
+    "tengu_relpath_gh7k": false,
+    "tengu_editafterwrite_qpl": false,
+    "tengu_mulberry_fog": false,
+    "tengu_slate_finch": false,
+    "tengu_sm_compact_config": {
+      "minTokens": 2000,
+      "maxTokens": 20000,
+      "minTextBlockMessages": 5
+    },
+    "tengu_marble_whisper": true,
+    "tengu_loud_sugary_rock": false,
+    "tengu_silk_hinge": false,
+    "tengu_hawthorn_window": 200000,
+    "tengu_vscode_cc_auth": true,
+    "tengu_sotto_voce": true,
+    "tengu_olive_hinge": "",
+    "tengu_swinburne_dune": true,
+    "tengu_amber_wren": {
+      "targetedRangeNudge": true,
+      "maxTokens": 25000
+    },
+    "tengu_fennel_kite": false,
+    "tengu_classifier_disabled_surfaces": "",
+    "tengu_cork_lantern": false,
+    "tengu_hawthorn_steeple": false,
+    "tengu_feedback_survey_config": {
+      "minTimeBeforeFeedbackMs": 600000,
+      "minTimeBetweenFeedbackMs": 43200000,
+      "minTimeBetweenGlobalFeedbackMs": 43200000,
+      "minUserTurnsBeforeFeedback": 5,
+      "minUserTurnsBetweenFeedback": 25,
+      "hideThanksAfterMs": 3000,
+      "onForModels": [
+        "*"
+      ],
+      "probability": 0
+    },
+    "tengu_edit_anchorwaste_kp3": false,
+    "tengu_cobalt_ridge": true,
+    "tengu_ant_attribution_header_new": true,
+    "tengu_hayate": false,
+    "tengu_surreal_dali": true,
+    "tengu_workout2": true,
+    "tengu_walrus_canteen": false,
+    "tengu_willow_prism": true,
+    "tengu_birch_compass": false,
+    "tengu_sepia_heron": false,
+    "tengu_amber_anchor": false,
+    "tengu_classifier_summary_llm_emit": false,
+    "tengu_flint_harbor": true,
+    "tengu_slate_nexus": true,
+    "tengu_umber_petrel": false,
+    "tengu_onyx_plover": {
+      "enabled": false,
+      "minHours": 24,
+      "minSessions": 3
+    },
+    "tengu_shale_finch": false,
+    "tengu_passport_quail": false,
+    "tengu_coral_fern": false,
+    "tengu_quiet_fern": true,
+    "tengu_cobalt_lantern": true,
+    "tengu_ochre_hollow": false,
+    "tengu_frond_boric": {},
+    "tengu_amber_sentinel": true,
+    "tengu_prompt_suggestion": true,
+    "tengu_mcp_subagent_prompt": true,
+    "tengu_ember_quill": false,
+    "tengu_destructive_command_warning": false,
+    "tengu_willow_mode": "hint_v2",
+    "tengu_vellum_lantern": false,
+    "tengu_ccr_post_turn_summary": false,
+    "tengu_willow_refresh_ttl_hours": 0,
+    "tengu_cedar_inlet": "off",
+    "tengu_lichen_compass": false,
+    "tengu_ccr_bundle_max_bytes": 104857600,
+    "tengu_react_vulnerability_warning": false,
+    "tengu_year_end_2025_campaign_promo": false,
+    "tengu_kairos_push_notifications": true,
+    "tengu_orchid_trellis": false,
+    "tengu_ultraplan_timeout_seconds": 5400,
+    "tengu_max_version_config": {},
+    "tengu_bridge_requires_action_details": false,
+    "tengu_slate_kestrel": false,
+    "tengu_hazel_osprey_floor": 75000,
+    "tengu_read_dedup_killswitch": true,
+    "tengu_moth_copse": false,
+    "tengu_herring_clock": false,
+    "tengu_prompt_cache_diagnostics": false,
+    "tengu_sage_compass2": {
+      "enabled": true
+    },
+    "tengu_bridge_poll_interval_config": {
+      "poll_interval_ms_not_at_capacity": 2000,
+      "poll_interval_ms_at_capacity": 600000,
+      "heartbeat_interval_ms": 0,
+      "multisession_poll_interval_ms_not_at_capacity": 5000,
+      "multisession_poll_interval_ms_at_capacity": 60000,
+      "multisession_poll_interval_ms_partial_capacity": 5000,
+      "non_exclusive_heartbeat_interval_ms": 180000,
+      "session_keepalive_interval_ms": 0,
+      "session_keepalive_interval_v2_ms": 0
+    },
+    "tengu_red_coaster": false,
+    "tengu_canary": {},
+    "tengu_amber_coil_r4n": false,
+    "tengu_session_memory": false,
+    "tengu_native_installation": false,
+    "tengu_orchid_mantis": true,
+    "tengu_mocha_barista": true,
+    "tengu_maple_forge_w8k": false,
+    "tengu_slate_moth": false,
+    "tengu_chair_sermon": false,
+    "tengu_tide_elm": "off",
+    "tengu_nimble_amber_prose": false,
+    "tengu_tool_result_persistence": false,
+    "tengu_willow_sentinel_ttl_hours": 1,
+    "tengu_birthday_hat": false,
+    "tengu_lapis_finch": true,
+    "tengu_prism_ledger": false,
+    "tengu_crystal_beam": {
+      "budgetTokens": 0
+    },
+    "tengu_cork_m4q": true,
+    "tengu_version_config": {
+      "minVersion": "1.0.24"
+    },
+    "tengu_gypsum_kite": false,
+    "tengu_desktop_upsell_v2": {
+      "enabled": false
+    },
+    "tengu_cedar_halo": false,
+    "tengu_penguin_mode_promo": {
+      "discountPercent": 0,
+      "endDate": "Feb 16"
+    },
+    "tengu_jade_anvil_4": false,
+    "tengu_auto_mode_config": {
+      "enabled": "enabled",
+      "twoStageClassifier": true
+    },
+    "tengu_desktop_upsell": {
+      "enable_shortcut_tip": true,
+      "enable_startup_dialog": false
+    },
+    "tengu_trace_lantern": false,
+    "tengu_negative_interaction_transcript_ask_config": {
+      "probability": 0
+    },
+    "tengu_gleaming_fair": false,
+    "tengu_billiard_aviary": false,
+    "tengu_kairos_loop_dynamic": true,
+    "tengu_vscode_review_upsell": false,
+    "tengu_amber_swift": false,
+    "tengu_copper_bridge": true,
+    "tengu_doorbell_agave": false,
+    "tengu_velvet_moth": 0.2,
+    "tengu_dunwich_bell": false,
+    "tengu_cobalt_raccoon": false,
+    "tengu_tangerine_ladder_boost": true,
+    "tengu_swann_brevity": "focused",
+    "tengu_flint_harbor_prompt": {
+      "prompt": "You are helping a power user generate an onboarding guide for teammates who are new to Claude Code. The guide will live in the team's onboarding docs and can be pasted into Claude for an interactive walkthrough.\n\nYou're co-authoring this with them — collaborative and helpful, like a teammate who's done this before and is happy to share.\n\n## Usage data (last {{WINDOW_DAYS}} days)\n\nThis was scanned from the guide creator's local Claude Code transcripts:\n\n```json\n{{USAGE_DATA}}\n```\n\n## Your task\n\nBefore anything else — including before thinking through the classification — output exactly this line as your first visible text:\n\n> Looking at how you've used Claude over the last {{WINDOW_DAYS}} days to put together an onboarding guide for teammates new to Claude Code.\n\nThis must come before any extended thinking about session descriptors. The guide creator is staring at a blank screen until you do. Classification is step 2, not step 1.\n\nGenerate the guide immediately, then ask for revisions. Don't wait for answers first — it's easier for the guide creator to edit a concrete draft than answer abstract questions.\n\n1. **Output the acknowledgment line above.** No thinking, no classification, no tool calls before this. One line, then move on.\n\n2. **Derive the work-type breakdown.** Read the `sessionDescriptors` array — each entry describes one session via its title, any linked code reviews (`prNumbers`), and first user message. Classify each session into one of these task types:\n\n   - **build_feature** — new functionality, scripts, tools, config/CI/env setup\n   - **debug_fix** — investigating and fixing bugs\n   - **improve_quality** — refactoring, tests, cleanup, code review\n   - **analyze_data** — queries, metrics, number crunching\n   - **plan_design** — architecture, approach, strategy, understanding unfamiliar code, design review\n   - **prototype** — spikes, POCs, throwaway exploration\n   - **write_docs** — PRDs, RFCs, READMEs, design docs, copy/doc review\n\n   Categories describe the *type of task*, not the project or domain — a teammate on any project should recognize them. Review sessions belong with whatever's being reviewed: code review is improve_quality, doc review is write_docs, design review is plan_design. Most sessions fit the list; only invent a new category if it's genuinely a different type of task. Pick the top 3-5 with rough percentages. First messages alone are usually enough; titles and code-review links are enrichment. If first messages are uninformative, use tool and MCP counts as a weak hint. If there are ~0 sessions, leave the breakdown as a TODO.\n\n   In the rendered guide, display categories with spaces and title case (e.g. \"Build Feature\" not \"build_feature\").\n\n3. **Gather the remaining pieces.** For repos, start with `currentRepo` and check the workspace for sibling repo directories. For MCP server setup, use each entry's `name` (and `urlOrigin` where present) to infer what the server does and how a teammate would get access. Leave the Team Tips and Get Started sections as TODO placeholders — you'll ask for these in Review and fill them in after.\n\n4. **Write the guide to `ONBOARDING.md`** following this template:\n\n```\n{{GUIDE_TEMPLATE}}\n```\n\n   Fill in real numbers from the usage data (not placeholders). Use `generatedBy` for the name; if it's missing, omit the name. Ascii bar charts: `█` for filled, `░` for empty, 20 chars wide. Keep the HTML comment instruction at the bottom exactly as shown.\n\n5. **Render the guide in a code block, then close out the first turn.** You're co-authoring this guide with the guide creator — frame the follow-up as collaboration, not corrections.\n\n   After the code block, add a `---` horizontal rule and a `**Review**` heading so the guide is visually separated from your questions. Under the heading, number these three questions:\n\n   1. \"I went with '[X]' for the team name — let me know if that sounds right.\" (or if you couldn't tell: \"What's the team name? I'll add it in.\")\n   2. Is there a starter task for someone new to Claude Code? (ticket or doc link — optional)\n   3. Any team tips you'd tell a new teammate that aren't already in CLAUDE.md?\n\n   After they answer, update `ONBOARDING.md` with their team name, tips, and starter task. Then close with this exact line (not numbered, not paraphrased):\n\n   Saved to `ONBOARDING.md`. Drop it in your team docs and channels — when a new teammate pastes it into Claude Code, they get a guided onboarding tour from there.\n\n   Apply any edits they come back with to the file.",
+      "guideTemplate": "# Welcome to [Team Name]\n\n## How We Use Claude\n\nBased on [name]'s usage over the last [N] days:\n\nWork Type Breakdown:\n  [Category 1]  [ascii bar]  [N]%\n  [Category 2]  [ascii bar]  [N]%\n  [Category 3]  [ascii bar]  [N]%\n  ...\n\nTop Skills & Commands:\n  [/command]  [ascii bar]  [N]x/month\n  ...\n\nTop MCP Servers:\n  [Server]  [ascii bar]  [N] calls\n  ...\n\n## Your Setup Checklist\n\n### Codebases\n- [ ] [repo-name] — [repo url]\n...\n\n### MCP Servers to Activate\n- [ ] [Server] — [what it's for]. [How to get access]\n...\n\n### Skills to Know About\n- [/command] — [what it does, when the team uses it]\n...\n\n## Team Tips\n\n_TODO_\n\n## Get Started\n\n_TODO_\n\n<!-- INSTRUCTION FOR CLAUDE: A new teammate just pasted this guide for how the\nteam uses Claude Code. You're their onboarding buddy — warm, conversational,\nnot lecture-y.\n\nOpen with a warm welcome — include the team name from the title. Then: \"Your\nteammate uses Claude Code for [list all the work types]. Let's get you started.\"\n\nCheck what's already in place against everything under Setup Checklist\n(including skills), using markdown checkboxes — [x] done, [ ] not yet. Lead\nwith what they already have. One sentence per item, all in one message.\n\nTell them you'll help with setup, cover the actionable team tips, then the\nstarter task (if there is one). Offer to start with the first unchecked item,\nget their go-ahead, then work through the rest one by one.\n\nAfter setup, walk them through the remaining sections — offer to help where you\ncan (e.g. link to channels), and just surface the purely informational bits.\n\nDon't invent sections or summaries that aren't in the guide. The stats are the\nguide creator's personal usage data — don't extrapolate them into a \"team\nworkflow\" narrative. -->",
+      "windowDays": 30
+    },
+    "tengu_quill_anvil": false,
+    "tengu_cobalt_compass": true,
+    "tengu_streaming_tool_execution2": true,
+    "tengu_bridge_min_version": {
+      "minVersion": "2.1.70"
+    },
+    "tengu_collage_kaleidoscope": true,
+    "tengu_scratch": false,
+    "tengu_ultraplan_config": {
+      "enabled": true
+    },
+    "tengu_bridge_repl_v2": true,
+    "tengu_tool_pear": false,
+    "tengu_sm_config": {
+      "minimumMessageTokensToInit": 150000,
+      "minimumTokensBetweenUpdate": 40000,
+      "toolCallsBetweenUpdates": 10
+    },
+    "tengu_kairos_cron": true,
+    "tengu_tern_alloy": "off",
+    "tengu_sage_compass": {},
+    "tengu_compact_cache_prefix": true,
+    "tengu_marble_sandcastle": false,
+    "tengu_brass_pebble": false,
+    "tengu_thinkback": false,
+    "tengu_relay_chain_v1": false,
+    "tengu_slate_siskin": {
+      "enabled": false,
+      "timeoutMs": 8000,
+      "throttleMs": 30000,
+      "summaryLineThreshold": 5
+    },
+    "tengu_grey_step2": {
+      "enabled": true,
+      "dialogTitle": "We recommend medium effort for Opus",
+      "dialogDescription": "Effort determines how long Claude thinks for when completing your task. We recommend medium effort for most tasks to balance speed and intelligence and maximize rate limits. Use ultrathink to trigger high effort when needed."
+    },
+    "tengu_amber_redwood2": "",
+    "tengu_attribution_header": true,
+    "tengu-top-of-feed-tip": {
+      "tip": "",
+      "color": ""
+    },
+    "tengu_pewter_kestrel": {
+      "global": 50000,
+      "Bash": 30000,
+      "PowerShell": 30000,
+      "Grep": 20000,
+      "Snip": 1000,
+      "StrReplaceBasedEditTool": 30000,
+      "BashSearchTool": 20000
+    },
+    "tengu_system_prompt_global_cache": true,
+    "tengu_amber_lattice": {
+      "plugins": [
+        "security-guidance",
+        "code-review",
+        "commit-commands",
+        "code-simplifier",
+        "hookify",
+        "feature-dev",
+        "frontend-design",
+        "pr-review-toolkit",
+        "skill-creator",
+        "plugin-dev",
+        "agent-sdk-dev",
+        "mcp-server-dev",
+        "claude-code-setup",
+        "claude-md-management",
+        "playground",
+        "ralph-loop",
+        "explanatory-output-style",
+        "learning-output-style",
+        "clangd-lsp",
+        "csharp-lsp",
+        "gopls-lsp",
+        "jdtls-lsp",
+        "kotlin-lsp",
+        "lua-lsp",
+        "php-lsp",
+        "pyright-lsp",
+        "ruby-lsp",
+        "rust-analyzer-lsp",
+        "swift-lsp",
+        "typescript-lsp"
+      ]
+    },
+    "tengu_plugin_official_mkt_git_fallback": true,
+    "tengu_copper_wren": false,
+    "tengu_amber_prism": false,
+    "tengu_gouda_loop": true,
+    "tengu_miraculo_the_bard": false,
+    "tengu_hazel_osprey": false,
+    "tengu_plum_vx3": true,
+    "tengu_bramble_lintel": 7,
+    "tengu_gha_plugin_code_review": false,
+    "tengu_cobalt_wren": false,
+    "tengu_quill_anvil_v2": false,
+    "tengu_plank_river_frost": "user_intent",
+    "tengu_laurel_crown": false,
+    "tengu_file_write_optimization": true,
+    "tengu_bergotte_lantern": false,
+    "tengu_harbor": true
   },
   "firstStartTime": "2025-09-09T22:22:46.873Z",
   "userID": "7d5374550cc1ccff773ce8da3d2c6b64d95ec64d56c55e80e8bc58cfb980dfa9",
   "projects": {
     "/Users/sherwin/cfg/hammerspoon": {
       "allowedTools": [],
-      "history": [
-        {
-          "display": "this is great! an you 1. change ts to insert time in HH:MM:SS format (and same with td)\n2. add a command `unblock - unblock websites` which calls through to the unblocker script bound to hyper+u (keep the existing binding also)\n3. add a comand to `hsreload` to reload the hs config (courrnetly bound to hyper+r (keep existing binding)",
-          "pastedContents": {}
-        },
-        {
-          "display": "nice! the ui shows up correctly",
-          "pastedContents": {}
-        },
-        {
-          "display": "[Pasted text #1 +8 lines]",
-          "pastedContents": {
-            "1": {
-              "id": 1,
-              "type": "text",
-              "content": "2025-09-10 09:56:48: 09:56:48 ERROR:   LuaSkin: dictionary key (action) cannot be converted into a proper NSObject\n2025-09-10 09:56:48: 09:56:48 ERROR:   LuaSkin: dictionary key (cmd) cannot be converted into a proper NSObject\n2025-09-10 09:56:48: 09:56:48 ERROR:   LuaSkin: array element (table: 0x6000001bbf40) cannot be converted into a proper NSObject\n2025-09-10 09:56:48: 09:56:48 ERROR:   LuaSkin: hs.chooser:choices() table could not be parsed correctly.\n2025-09-10 09:56:48: 09:56:48 ERROR:   LuaSkin: dictionary key (action) cannot be converted into a proper NSObject\n2025-09-10 09:56:48: 09:56:48 ERROR:   LuaSkin: dictionary key (cmd) cannot be converted into a proper NSObject\n2025-09-10 09:56:48: 09:56:48 ERROR:   LuaSkin: array element (table: 0x6000001a1400) cannot be converted into a proper NSObject\n2025-09-10 09:56:48: 09:56:48 ERROR:   LuaSkin: hs.chooser:choices() table could not be parsed correctly.\n"
-            }
-          }
-        },
-        {
-          "display": "says \"Fuzzy finder loaded with 4 comman\" as an alert. But the ui is empty ",
-          "pastedContents": {}
-        },
-        {
-          "display": "the commands don't show up as options in the ui",
-          "pastedContents": {}
-        },
-        {
-          "display": "can you make a fuzzy-find like interface (similar to Raycast, Alfred, etc) for some custom scripts / actions in hammerspoon? bind it to zoot + sp\u0000ace. for now, just include two commands\n\n1) hsconsole: show hammerspoon console\n2) ts: insert current timestamp\n3) date: insert current YYYY-MM-DD\n4) td: insert YYYY-MM-DD @ $TIMESTAMP",
-          "pastedContents": {}
-        },
-        {
-          "display": "what line?",
-          "pastedContents": {}
-        },
-        {
-          "display": "where does reload console bind as a hotkey?",
-          "pastedContents": {}
-        },
-        {
-          "display": "hello",
-          "pastedContents": {}
-        },
-        {
-          "display": "hi",
-          "pastedContents": {}
-        },
-        {
-          "display": "claude",
-          "pastedContents": {}
-        },
-        {
-          "display": "/status ",
-          "pastedContents": {}
-        },
-        {
-          "display": "/login ",
-          "pastedContents": {}
-        },
-        {
-          "display": "/status ",
-          "pastedContents": {}
-        }
-      ],
       "mcpContextUris": [],
       "mcpServers": {},
       "enabledMcpjsonServers": [],
@@ -117,122 +518,951 @@
       "hasClaudeMdExternalIncludesApproved": false,
       "hasClaudeMdExternalIncludesWarningShown": false,
       "lastTotalWebSearchRequests": 0,
-      "lastCost": 0.7351676500000002,
-      "lastAPIDuration": 229844,
-      "lastToolDuration": 428,
-      "lastDuration": 75153962,
-      "lastLinesAdded": 152,
-      "lastLinesRemoved": 15,
-      "lastTotalInputTokens": 3243,
-      "lastTotalOutputTokens": 8212,
-      "lastTotalCacheCreationInputTokens": 96737,
-      "lastTotalCacheReadInputTokens": 831925,
-      "lastSessionId": "fb86df03-803b-4df8-8d76-4f147a7c2c8e"
+      "lastCost": 0,
+      "lastAPIDuration": 0,
+      "lastAPIDurationWithoutRetries": 0,
+      "lastToolDuration": 0,
+      "lastDuration": 8477,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 0,
+      "lastTotalOutputTokens": 0,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 0,
+      "lastFpsAverage": 6.38,
+      "lastFpsLow1Pct": 131.67,
+      "lastModelUsage": {},
+      "lastSessionId": "5fbaf5bf-7ad5-4c6f-aff3-f5c5b1734820",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 48,
+        "frame_duration_ms_min": 0.05566596984863281,
+        "frame_duration_ms_max": 7.594583988189697,
+        "frame_duration_ms_avg": 0.6030111908912659,
+        "frame_duration_ms_p50": 0.32877039909362793,
+        "frame_duration_ms_p95": 2.3104749202728243,
+        "frame_duration_ms_p99": 5.911905472278599,
+        "hook_duration_ms_count": 1,
+        "hook_duration_ms_min": 154,
+        "hook_duration_ms_max": 154,
+        "hook_duration_ms_avg": 154,
+        "hook_duration_ms_p50": 154,
+        "hook_duration_ms_p95": 154,
+        "hook_duration_ms_p99": 154
+      }
     },
     "/Users/sherwin/projects/gamma": {
       "allowedTools": [],
-      "history": [
-        {
-          "display": "local but not checked in, i mean",
-          "pastedContents": {}
+      "mcpContextUris": [],
+      "mcpServers": {
+        "linear": {
+          "type": "sse",
+          "url": "https://mcp.linear.app/sse"
         },
-        {
-          "display": "is there a local option for a project-level agent?",
-          "pastedContents": {}
+        "datadog-mcp": {
+          "type": "http",
+          "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
         },
-        {
-          "display": "if i create an agent, where is it stored? is it checked into the codebase?",
-          "pastedContents": {}
-        },
-        {
-          "display": "/agents ",
-          "pastedContents": {}
-        },
-        {
-          "display": "hello, can you guide me on how to integrate with claude desktop?",
-          "pastedContents": {}
-        },
-        {
-          "display": "/login ",
-          "pastedContents": {}
-        },
-        {
-          "display": "say hi",
-          "pastedContents": {}
-        },
-        {
-          "display": "write a PR message for this last commit'\n",
-          "pastedContents": {}
-        },
-        {
-          "display": "find the commit that introduced this 20250828015800_add_path_edited_to_doc/",
-          "pastedContents": {}
-        },
-        {
-          "display": "how do i run migrations?",
-          "pastedContents": {}
-        },
-        {
-          "display": "continue",
-          "pastedContents": {}
-        },
-        {
-          "display": "i'm trying to figure out where updateMode actually updates the store (and all the upstream codepaths). mode is either 'structured' or 'freeform' -- where is the source of truth for this, and how can i spy into it (in redux)?",
-          "pastedContents": {}
-        },
-        {
-          "display": "specifically, mention splitting the constant from MAX_CHARS",
-          "pastedContents": {}
-        },
-        {
-          "display": "write a commit msg for my last commit",
-          "pastedContents": {}
-        },
-        {
-          "display": "write",
-          "pastedContents": {}
-        },
-        {
-          "display": "how many characters in the following\n\n[Pasted text #1 +1 lines]",
-          "pastedContents": {
-            "1": {
-              "id": 1,
-              "type": "text",
-              "content": "Okay, so look at time check. I'm gonna do some stretching and I think what's going on, there's something up with our error tracking. ProlisMirror is complaining that the node it's trying to create is actually invalid, which is quite surprising given that the test helper is building the nodes just fine in other cases, but not in this functional case. So there's something weird about that that I'm trying to suss out. I've already confirmed that the schema seems to be correct. It's just not sure why this error is happening. It's getting quite powerful. I'm adding stronger type safety to the builder, parameterizing it, which is great. Otherwise checking in today, it's about 10.50 right now. It's only a little bit longer than I want on this, but I can get it to a point. Maybe let's do one more session and that'll be a good stopping point, I think. Okay.\n"
-            }
-          }
-        },
-        {
-          "display": "how",
-          "pastedContents": {}
-        },
-        {
-          "display": "now can you uncomment the Sherwin entry in /Users/sherwin/projects/gamma/packages/server/src/db/seed.ts and replace with my provider id and image url?",
-          "pastedContents": {}
-        },
-        {
-          "display": "can you grab the profile url also",
-          "pastedContents": {}
-        },
-        {
-          "display": "great that works. can you help me extract the google auth provider id for user sherwin@gamma.app using psql?",
-          "pastedContents": {}
-        },
-        {
-          "display": "Password for user postgres:\npsql: error: connection to server at \"localhost\" (::1), port 5432 failed: fe_sendauth: no password supplied",
-          "pastedContents": {}
-        },
-        {
-          "display": "help me log into the postgres running from docker. here's some info\n\n[Pasted text #1 +19 lines]",
-          "pastedContents": {
-            "1": {
-              "id": 1,
-              "type": "text",
-              "content": "initdb: warning: enabling \"trust\" authentication for local connections\n\ninitdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.\n\nwaiting for server to start....2025-09-09 23:16:45.106 UTC [48] LOG:  starting PostgreSQL 16.3 (Debian 16.3-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit\n\n2025-09-09 23:16:45.107 UTC [48] LOG:  listening on Unix socket \"/var/run/postgresql/.s.PGSQL.5432\"\n\n2025-09-09 23:16:45.109 UTC [51] LOG:  database system was shut down at 2025-09-09 23:16:44 UTC\n\n2025-09-09 23:16:45.113 UTC [48] LOG:  database system is ready to accept connections\n\n done\n\nserver started\n\n\n/usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*\n\n"
-            }
-          }
+        "vercel": {
+          "type": "http",
+          "url": "https://mcp.vercel.com"
         }
+      },
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 3,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "graphql.tsx",
+        "files.service.ts",
+        "flags.ts",
+        "graphql.schema.ts",
+        "messages.po"
       ],
+      "exampleFilesGeneratedAt": 1773422613943,
+      "hasCompletedProjectOnboarding": true,
+      "lastTotalWebSearchRequests": 0,
+      "reactVulnerabilityCache": {
+        "detected": false,
+        "package": null,
+        "packageName": null,
+        "version": null,
+        "packageManager": null
+      },
+      "lastCost": 0.04545975,
+      "lastAPIDuration": 7306,
+      "lastAPIDurationWithoutRetries": 7304,
+      "lastToolDuration": 0,
+      "lastDuration": 36035,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 3,
+      "lastTotalOutputTokens": 142,
+      "lastTotalCacheCreationInputTokens": 4713,
+      "lastTotalCacheReadInputTokens": 24877,
+      "lastModelUsage": {
+        "claude-opus-4-6": {
+          "inputTokens": 3,
+          "outputTokens": 142,
+          "cacheReadInputTokens": 24877,
+          "cacheCreationInputTokens": 4713,
+          "webSearchRequests": 0,
+          "costUSD": 0.04545975
+        }
+      },
+      "lastSessionId": "19b5769f-0e21-499b-b6c4-6fcd7fe111a3",
+      "lastFpsAverage": 5.03,
+      "lastFpsLow1Pct": 133.28,
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 176,
+        "frame_duration_ms_min": 0.029791951179504395,
+        "frame_duration_ms_max": 11.655166029930115,
+        "frame_duration_ms_avg": 1.0102499574422836,
+        "frame_duration_ms_p50": 0.6767085194587708,
+        "frame_duration_ms_p95": 3.7709479928016663,
+        "frame_duration_ms_p99": 7.056406006217003,
+        "hook_duration_ms_count": 1,
+        "hook_duration_ms_min": 192,
+        "hook_duration_ms_max": 192,
+        "hook_duration_ms_avg": 192,
+        "hook_duration_ms_p50": 192,
+        "hook_duration_ms_p95": 192,
+        "hook_duration_ms_p99": 192
+      }
+    },
+    "/Users/sherwin/cfg": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 4,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "lastTotalWebSearchRequests": 0,
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 0,
+      "lastAPIDuration": 0,
+      "lastToolDuration": 0,
+      "lastDuration": 381378219,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 0,
+      "lastTotalOutputTokens": 0,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 0,
+      "lastSessionId": "710d33d1-61f6-4bcc-8da9-045260365d4e",
+      "reactVulnerabilityCache": {
+        "detected": false,
+        "package": null,
+        "packageName": null,
+        "version": null,
+        "packageManager": null
+      },
+      "lastAPIDurationWithoutRetries": 0,
+      "lastFpsAverage": 0,
+      "lastFpsLow1Pct": 15.43,
+      "lastModelUsage": {},
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 260,
+        "frame_duration_ms_min": 0.03608298301696777,
+        "frame_duration_ms_max": 232.06783413887024,
+        "frame_duration_ms_avg": 6.143294411439162,
+        "frame_duration_ms_p50": 1.2733750343322754,
+        "frame_duration_ms_p95": 15.952182996273024,
+        "frame_duration_ms_p99": 50.39136942148269,
+        "hook_duration_ms_count": 1,
+        "hook_duration_ms_min": 194,
+        "hook_duration_ms_max": 194,
+        "hook_duration_ms_avg": 194,
+        "hook_duration_ms_p50": 194,
+        "hook_duration_ms_p95": 194,
+        "hook_duration_ms_p99": 194
+      }
+    },
+    "/Users/sherwin/cfg/karabiner-config": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 7,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "lastTotalWebSearchRequests": 0
+    },
+    "/Users/sherwin/cfg/wezterm": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "ignorePatterns": [],
+      "projectOnboardingSeenCount": 1,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": []
+    },
+    "/Users/sherwin/cfg/claude": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "ignorePatterns": [],
+      "projectOnboardingSeenCount": 1,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [],
+      "lastTotalWebSearchRequests": 0,
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 0.01103085,
+      "lastAPIDuration": 12476,
+      "lastToolDuration": 0,
+      "lastDuration": 57287,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 464,
+      "lastTotalOutputTokens": 79,
+      "lastTotalCacheCreationInputTokens": 1561,
+      "lastTotalCacheReadInputTokens": 13551,
+      "lastSessionId": "1841dca1-341e-44c7-80a7-1ab3b93d8a7d"
+    },
+    "/Users/sherwin": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "ignorePatterns": [],
+      "projectOnboardingSeenCount": 4,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [],
+      "lastTotalWebSearchRequests": 0,
+      "reactVulnerabilityCache": {
+        "detected": false,
+        "package": null,
+        "packageName": null,
+        "version": null,
+        "packageManager": null
+      }
+    },
+    "/Users/sherwin/cfg/hosts-manager": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "ignorePatterns": [],
+      "projectOnboardingSeenCount": 2,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "unblock_client.py",
+        "unblock_server.py",
+        "lib.py",
+        "consts.py",
+        "",
+        "I can only identify 4 files from the provided data. To return exactly five filenames as requested, I would need additional files in the modification history."
+      ],
+      "exampleFilesGeneratedAt": 1761687800296,
+      "lastTotalWebSearchRequests": 0,
+      "reactVulnerabilityCache": {
+        "detected": false,
+        "package": null,
+        "packageName": null,
+        "version": null,
+        "packageManager": null
+      }
+    },
+    "/Users/sherwin/projects/oryoki": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "ignorePatterns": [],
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "NoteEditor.tsx",
+        "layout.tsx",
+        "hotkeys.ts",
+        "state.tsx",
+        "OmniSearch.tsx"
+      ],
+      "exampleFilesGeneratedAt": 1777065774458,
+      "hasCompletedProjectOnboarding": true,
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 74,
+        "frame_duration_ms_min": 0.048790931701660156,
+        "frame_duration_ms_max": 2410.841125011444,
+        "frame_duration_ms_avg": 47.821438621830296,
+        "frame_duration_ms_p50": 0.7208335399627686,
+        "frame_duration_ms_p95": 117.40342788696269,
+        "frame_duration_ms_p99": 830.2429351353559,
+        "hook_duration_ms_count": 1,
+        "hook_duration_ms_min": 144,
+        "hook_duration_ms_max": 144,
+        "hook_duration_ms_avg": 144,
+        "hook_duration_ms_p50": 144,
+        "hook_duration_ms_p95": 144,
+        "hook_duration_ms_p99": 144
+      },
+      "lastCost": 0,
+      "lastAPIDuration": 0,
+      "lastAPIDurationWithoutRetries": 0,
+      "lastToolDuration": 0,
+      "lastDuration": 291485072,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 0,
+      "lastTotalOutputTokens": 0,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 0,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 0,
+      "lastFpsLow1Pct": 0.41,
+      "lastModelUsage": {},
+      "lastSessionId": "eb6c7fb0-9f50-4ab9-a44e-a01f1cd37cae",
+      "disabledMcpServers": [],
+      "lastGracefulShutdown": false
+    },
+    "/Users/sherwin/projects/voice-app": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 1,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "I don't have any file modification data to analyze. The lists of files modified by the user and other users are both empty. ",
+        "",
+        "Could you please provide:",
+        "1. A list of files modified by the user (with modification counts)",
+        "2. A list of files modified by other users (with modification counts)",
+        "",
+        "Once you provide this data, I'll be able to identify five frequently modified files representing core application logic and return their basenames."
+      ],
+      "exampleFilesGeneratedAt": 1765333859100
+    },
+    "/Users/sherwin/projects/gamma2": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {
+        "linear": {
+          "type": "sse",
+          "url": "https://mcp.linear.app/sse"
+        },
+        "linear-server": {
+          "type": "http",
+          "url": "https://mcp.linear.app/mcp"
+        }
+      },
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "reactVulnerabilityCache": {
+        "detected": false,
+        "package": null,
+        "packageName": null,
+        "version": null,
+        "packageManager": null
+      },
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 0.37044335,
+      "lastAPIDuration": 49336,
+      "lastAPIDurationWithoutRetries": 49330,
+      "lastToolDuration": 41404,
+      "lastDuration": 173381,
+      "lastLinesAdded": 5,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 503,
+      "lastTotalOutputTokens": 1674,
+      "lastTotalCacheCreationInputTokens": 30513,
+      "lastTotalCacheReadInputTokens": 288373,
+      "lastTotalWebSearchRequests": 0,
+      "lastModelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 141,
+          "outputTokens": 177,
+          "cacheReadInputTokens": 11776,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.0022036
+        },
+        "claude-opus-4-5-20251101": {
+          "inputTokens": 362,
+          "outputTokens": 1497,
+          "cacheReadInputTokens": 276597,
+          "cacheCreationInputTokens": 30513,
+          "webSearchRequests": 0,
+          "costUSD": 0.36823975000000003
+        }
+      },
+      "lastSessionId": "b09a92f7-6ee8-443a-b179-fb0832c314c3",
+      "exampleFiles": [
+        "flags.ts",
+        "messages.js",
+        "messages.po",
+        "yarn.lock",
+        "index.ts"
+      ],
+      "exampleFilesGeneratedAt": 1767730714459
+    },
+    "/Users/sherwin/projects/gamma3": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {
+        "linear-server": {
+          "type": "http",
+          "url": "https://mcp.linear.app/mcp"
+        }
+      },
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "reactVulnerabilityCache": {
+        "detected": false,
+        "package": null,
+        "packageName": null,
+        "version": null,
+        "packageManager": null
+      },
+      "exampleFiles": [
+        "flags.ts",
+        "messages.po",
+        "messages.js",
+        "yarn.lock",
+        "messages.po"
+      ],
+      "exampleFilesGeneratedAt": 1767733377448,
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 0.15784399999999998,
+      "lastAPIDuration": 7849,
+      "lastAPIDurationWithoutRetries": 7832,
+      "lastToolDuration": 0,
+      "lastDuration": 82890,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 1374,
+      "lastTotalOutputTokens": 97,
+      "lastTotalCacheCreationInputTokens": 23958,
+      "lastTotalCacheReadInputTokens": 10263,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 3.07,
+      "lastFpsLow1Pct": 119.44,
+      "lastModelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 1365,
+          "outputTokens": 43,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.0015800000000000002
+        },
+        "claude-opus-4-5-20251101": {
+          "inputTokens": 9,
+          "outputTokens": 54,
+          "cacheReadInputTokens": 10263,
+          "cacheCreationInputTokens": 23958,
+          "webSearchRequests": 0,
+          "costUSD": 0.156264
+        }
+      },
+      "lastSessionId": "cc150bb3-7241-42d8-86bd-ebe6c1e654f8"
+    },
+    "/Users/sherwin/projects/sherwin-claude-workflow": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "reactVulnerabilityCache": {
+        "detected": false,
+        "package": null,
+        "packageName": null,
+        "version": null,
+        "packageManager": null
+      },
+      "lastCost": 0.23952974999999996,
+      "lastAPIDuration": 33484,
+      "lastAPIDurationWithoutRetries": 33479,
+      "lastToolDuration": 3243,
+      "lastDuration": 170840097,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 1560,
+      "lastTotalOutputTokens": 801,
+      "lastTotalCacheCreationInputTokens": 39475,
+      "lastTotalCacheReadInputTokens": 63674,
+      "lastTotalWebSearchRequests": 0,
+      "lastModelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 1529,
+          "outputTokens": 194,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 11371,
+          "webSearchRequests": 0,
+          "costUSD": 0.016712750000000002
+        },
+        "claude-opus-4-5-20251101": {
+          "inputTokens": 31,
+          "outputTokens": 607,
+          "cacheReadInputTokens": 63674,
+          "cacheCreationInputTokens": 28104,
+          "webSearchRequests": 0,
+          "costUSD": 0.222817
+        }
+      },
+      "lastSessionId": "fbeea3a6-2db9-4b53-ba1f-56dbecaf02a3"
+    },
+    "/Users/sherwin/.claude-worktrees/gamma/happy-kilby": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "flags.ts",
+        "graphql.schema.ts",
+        "messages.js",
+        "messages.po",
+        "yarn.lock"
+      ],
+      "exampleFilesGeneratedAt": 1770350434613,
+      "reactVulnerabilityCache": {
+        "detected": false,
+        "package": null,
+        "packageName": null,
+        "version": null,
+        "packageManager": null
+      },
+      "lastCost": 9.495166349999996,
+      "lastAPIDuration": 1596708,
+      "lastAPIDurationWithoutRetries": 1590694,
+      "lastToolDuration": 817335,
+      "lastDuration": 63383327,
+      "lastLinesAdded": 1981,
+      "lastLinesRemoved": 21,
+      "lastTotalInputTokens": 66329,
+      "lastTotalOutputTokens": 78384,
+      "lastTotalCacheCreationInputTokens": 886617,
+      "lastTotalCacheReadInputTokens": 10008509,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 0.51,
+      "lastFpsLow1Pct": 33.65,
+      "lastModelUsage": {
+        "claude-opus-4-6": {
+          "inputTokens": 1978,
+          "outputTokens": 53009,
+          "cacheReadInputTokens": 7322308,
+          "cacheCreationInputTokens": 586156,
+          "webSearchRequests": 0,
+          "costUSD": 8.659744000000002
+        },
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 64351,
+          "outputTokens": 25375,
+          "cacheReadInputTokens": 2686201,
+          "cacheCreationInputTokens": 300461,
+          "webSearchRequests": 0,
+          "costUSD": 0.8354223500000002
+        }
+      },
+      "lastSessionId": "3a7ea860-1f8a-4a6e-a1af-d7a8362428d6",
+      "hasCompletedProjectOnboarding": true,
+      "mcpServers": {
+        "linear-server": {
+          "type": "http",
+          "url": "https://mcp.linear.app/mcp"
+        }
+      }
+    },
+    "/Users/sherwin/conductor/workspaces/gamma/rio-de-janeiro": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "flags.ts",
+        "graphql.tsx",
+        "graphql.schema.ts",
+        "messages.po",
+        "messages.js"
+      ],
+      "exampleFilesGeneratedAt": 1771532644020
+    },
+    "/Users/sherwin/conductor/workspaces/gamma/nagoya": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "index.ts",
+        "ScenarioEditorPage.tsx",
+        "types.ts",
+        "TrialEditor.tsx",
+        "scenarioStore.ts"
+      ],
+      "exampleFilesGeneratedAt": 1771532804495
+    },
+    "/Users/sherwin/conductor/workspaces/gamma/new-york": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "index.ts",
+        "ScenarioEditorPage.tsx",
+        "scenarioStore.ts",
+        "DatasetViewPage.tsx",
+        "TrialEditor.tsx"
+      ],
+      "exampleFilesGeneratedAt": 1771533626305
+    },
+    "/Users/sherwin/conductor/workspaces/gamma/krakow": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "index.ts",
+        "ScenarioEditorPage.tsx",
+        "scenarioStore.ts",
+        "runTrial.ts",
+        "TrialEditor.tsx"
+      ],
+      "exampleFilesGeneratedAt": 1771546301639
+    },
+    "/Users/sherwin/conductor/workspaces/gamma/sarajevo": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "index.ts",
+        "ScenarioEditorPage.tsx",
+        "runTrial.ts",
+        "scenarioStore.ts",
+        "TrialEditor.tsx"
+      ],
+      "exampleFilesGeneratedAt": 1771546546948
+    },
+    "/Users/sherwin/conductor/workspaces/gamma/madison": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "index.ts",
+        "ScenarioEditorPage.tsx",
+        "types.ts",
+        "runTrial.ts",
+        "scenarioStore.ts"
+      ],
+      "exampleFilesGeneratedAt": 1771701736828
+    },
+    "/Users/sherwin/conductor/workspaces/oryoki/davao": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "NoteEditor.tsx",
+        "hotkeys.ts",
+        "ListEditor.tsx",
+        "state.tsx",
+        "OmniSearch.tsx"
+      ],
+      "exampleFilesGeneratedAt": 1771795935942
+    },
+    "/Users/sherwin/projects/oryoki2": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "NoteEditor.tsx",
+        "package.json",
+        "layout.tsx",
+        "hotkeys.ts",
+        "state.tsx"
+      ],
+      "exampleFilesGeneratedAt": 1773256335685,
+      "hasCompletedProjectOnboarding": true,
+      "lastCost": 5.450856499999999,
+      "lastAPIDuration": 529426,
+      "lastAPIDurationWithoutRetries": 529394,
+      "lastToolDuration": 452654,
+      "lastDuration": 887838777,
+      "lastLinesAdded": 159,
+      "lastLinesRemoved": 68,
+      "lastTotalInputTokens": 300673,
+      "lastTotalOutputTokens": 19562,
+      "lastTotalCacheCreationInputTokens": 568702,
+      "lastTotalCacheReadInputTokens": 2312588,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 0.01,
+      "lastFpsLow1Pct": 13.06,
+      "lastModelUsage": {
+        "claude-opus-4-6": {
+          "inputTokens": 168,
+          "outputTokens": 12073,
+          "cacheReadInputTokens": 2003156,
+          "cacheCreationInputTokens": 538142,
+          "webSearchRequests": 0,
+          "costUSD": 4.667630499999999
+        },
+        "claude-sonnet-4-6": {
+          "inputTokens": 970,
+          "outputTokens": 4784,
+          "cacheReadInputTokens": 309432,
+          "cacheCreationInputTokens": 30560,
+          "webSearchRequests": 0,
+          "costUSD": 0.470166
+        },
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 299535,
+          "outputTokens": 2705,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.31306
+        }
+      },
+      "lastSessionId": "ba05b038-6260-4e13-998a-65df21fbaf8c",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 12764,
+        "frame_duration_ms_min": 0.02495896816253662,
+        "frame_duration_ms_max": 959965.2371249199,
+        "frame_duration_ms_avg": 82.18630483157207,
+        "frame_duration_ms_p50": 1.3063545227050781,
+        "frame_duration_ms_p95": 6.69994812607764,
+        "frame_duration_ms_p99": 71.26120668649672,
+        "hook_duration_ms_count": 133,
+        "hook_duration_ms_min": 119,
+        "hook_duration_ms_max": 440,
+        "hook_duration_ms_avg": 180.09774436090225,
+        "hook_duration_ms_p50": 161,
+        "hook_duration_ms_p95": 273.79999999999995,
+        "hook_duration_ms_p99": 380.12000000000006,
+        "pre_tool_hook_duration_ms_count": 70,
+        "pre_tool_hook_duration_ms_min": 138,
+        "pre_tool_hook_duration_ms_max": 385,
+        "pre_tool_hook_duration_ms_avg": 191.02857142857144,
+        "pre_tool_hook_duration_ms_p50": 168,
+        "pre_tool_hook_duration_ms_p95": 274.55,
+        "pre_tool_hook_duration_ms_p99": 378.79
+      }
+    },
+    "/Users/sherwin/conductor/workspaces/gamma/london": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": false,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "index.ts",
+        "ScenarioEditorPage.tsx",
+        "runTrial.ts",
+        "scenarioStore.ts",
+        "TrialEditor.tsx"
+      ],
+      "exampleFilesGeneratedAt": 1771886228332
+    },
+    "/Users/sherwin/conductor/workspaces/gamma/florence": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "index.ts",
+        "ScenarioEditorPage.tsx",
+        "types.ts",
+        "runTrial.ts",
+        "scenarioStore.ts"
+      ],
+      "exampleFilesGeneratedAt": 1771905996390,
+      "lastCost": 0.000609,
+      "lastAPIDuration": 646,
+      "lastAPIDurationWithoutRetries": 645,
+      "lastToolDuration": 0,
+      "lastDuration": 92265,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 454,
+      "lastTotalOutputTokens": 31,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 0,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 0.49,
+      "lastFpsLow1Pct": 161.15,
+      "lastModelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 454,
+          "outputTokens": 31,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.000609
+        }
+      },
+      "lastSessionId": "bb0a9683-1fe0-48b3-8a52-af745f12f489",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 45,
+        "frame_duration_ms_min": 0.07787501811981201,
+        "frame_duration_ms_max": 6.20550000667572,
+        "frame_duration_ms_avg": 0.8595730966991848,
+        "frame_duration_ms_p50": 0.6867079734802246,
+        "frame_duration_ms_p95": 2.409824800491329,
+        "frame_duration_ms_p99": 4.721508502960213,
+        "hook_duration_ms_count": 1,
+        "hook_duration_ms_min": 159,
+        "hook_duration_ms_max": 159,
+        "hook_duration_ms_avg": 159,
+        "hook_duration_ms_p50": 159,
+        "hook_duration_ms_p95": 159,
+        "hook_duration_ms_p99": 159
+      }
+    },
+    "/Users/sherwin/conductor/workspaces/gamma/islamabad": {
+      "allowedTools": [],
+      "mcpContextUris": [],
+      "mcpServers": {},
+      "enabledMcpjsonServers": [],
+      "disabledMcpjsonServers": [],
+      "hasTrustDialogAccepted": true,
+      "projectOnboardingSeenCount": 0,
+      "hasClaudeMdExternalIncludesApproved": false,
+      "hasClaudeMdExternalIncludesWarningShown": false,
+      "exampleFiles": [
+        "index.ts",
+        "ScenarioEditorPage.tsx",
+        "scenarioStore.ts",
+        "runTrial.ts",
+        "grade.ts"
+      ],
+      "exampleFilesGeneratedAt": 1771906161842,
+      "lastCost": 0.000609,
+      "lastAPIDuration": 745,
+      "lastAPIDurationWithoutRetries": 745,
+      "lastToolDuration": 0,
+      "lastDuration": 91451,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 454,
+      "lastTotalOutputTokens": 31,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 0,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 0.44,
+      "lastFpsLow1Pct": 244.58,
+      "lastModelUsage": {
+        "claude-haiku-4-5-20251001": {
+          "inputTokens": 454,
+          "outputTokens": 31,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.000609
+        }
+      },
+      "lastSessionId": "49e2d998-0412-4721-bc1a-f06c7b1d2f93",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 40,
+        "frame_duration_ms_min": 0.6673749999899883,
+        "frame_duration_ms_max": 4.088582999997016,
+        "frame_duration_ms_avg": 1.6289291499988194,
+        "frame_duration_ms_p50": 1.116791499998726,
+        "frame_duration_ms_p95": 3.9070437500024124,
+        "frame_duration_ms_p99": 4.081091879995001,
+        "hook_duration_ms_count": 1,
+        "hook_duration_ms_min": 104,
+        "hook_duration_ms_max": 104,
+        "hook_duration_ms_avg": 104,
+        "hook_duration_ms_p50": 104,
+        "hook_duration_ms_p95": 104,
+        "hook_duration_ms_p99": 104
+      }
+    },
+    "/Users/sherwin/Downloads": {
+      "allowedTools": [],
       "mcpContextUris": [],
       "mcpServers": {},
       "enabledMcpjsonServers": [],
@@ -241,229 +1471,60 @@
       "projectOnboardingSeenCount": 2,
       "hasClaudeMdExternalIncludesApproved": false,
       "hasClaudeMdExternalIncludesWarningShown": false,
-      "exampleFiles": [
-        "ChatPane.tsx",
-        "graphql.tsx",
-        "flags.ts",
-        "buddy.agent.tsx",
-        "graphql.schema.ts"
-      ],
-      "exampleFilesGeneratedAt": 1757461348365,
-      "hasCompletedProjectOnboarding": true,
-      "lastTotalWebSearchRequests": 0
+      "lastCost": 0,
+      "lastAPIDuration": 0,
+      "lastAPIDurationWithoutRetries": 0,
+      "lastToolDuration": 0,
+      "lastDuration": 3149464,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 0,
+      "lastTotalOutputTokens": 0,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 0,
+      "lastTotalWebSearchRequests": 0,
+      "lastFpsAverage": 0.06,
+      "lastFpsLow1Pct": 56.07,
+      "lastModelUsage": {},
+      "lastSessionId": "d757b548-4691-4072-a1ae-e75fec3d0076",
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 184,
+        "frame_duration_ms_min": 0.030624985694885254,
+        "frame_duration_ms_max": 82.25874996185303,
+        "frame_duration_ms_avg": 1.5665758576082147,
+        "frame_duration_ms_p50": 0.8446040153503418,
+        "frame_duration_ms_p95": 2.236853557825088,
+        "frame_duration_ms_p99": 13.406636867523126,
+        "hook_duration_ms_count": 1,
+        "hook_duration_ms_min": 157,
+        "hook_duration_ms_max": 157,
+        "hook_duration_ms_avg": 157,
+        "hook_duration_ms_p50": 157,
+        "hook_duration_ms_p95": 157,
+        "hook_duration_ms_p99": 157
+      }
     },
-    "/Users/sherwin/cfg": {
+    "/Users/sherwin/projects/trot-n-spot": {
       "allowedTools": [],
-      "history": [
-        {
-          "display": "commit all changes",
-          "pastedContents": {}
-        },
-        {
-          "display": "say something",
-          "pastedContents": {}
-        },
-        {
-          "display": "okay great",
-          "pastedContents": {}
-        },
-        {
-          "display": "can you add `claude config set --global preferredNotifChannel terminal_bell\n` to my global claude config in cfg? make the appropriate symlinks if necessary",
-          "pastedContents": {}
-        },
-        {
-          "display": "can you trigger your bell?",
-          "pastedContents": {}
-        },
-        {
-          "display": "Can we have claude code popup a toast via wezterm if it needs permissions / finishes a task?",
-          "pastedContents": {}
-        },
-        {
-          "display": "set the audible bell to SystemBeep for wezterm",
-          "pastedContents": {}
-        },
-        {
-          "display": "can you now change hammerspoon to bind F7 to wezterm instead of iterm",
-          "pastedContents": {}
-        },
-        {
-          "display": "in wezterm, let's change some more mappings: command+shift+s => entire copy mode; command+shift+p => open command palette p",
-          "pastedContents": {}
-        },
-        {
-          "display": "let's set the primary working directory for all panes / tabs in Gamma to be ~/projects/gamma. also make sure we run `eval \"$(direnv hook zsh)\" ` for every pane. then, create a 2nd tab with splits, all of them tall, running: 1. gs (git status) 2. cd packages/client; yarn dev:remote:turbo 3. cd packages/server 4; yarn workspace hocuspocus dev",
-          "pastedContents": {}
-        },
-        {
-          "display": "now, add a wezterm workspace (follow the existing pattern) called Gamma",
-          "pastedContents": {}
-        },
-        {
-          "display": "great. can you commit this change also?",
-          "pastedContents": {}
-        },
-        {
-          "display": "can you read over our conversation and produce a CLAUDE.md / agent for working on config files? Or an alias / command for claude-in-config that automatically the permissions we used in this session?",
-          "pastedContents": {}
-        },
-        {
-          "display": "by the way, you don't need to alias `config` -- that's already present in the environment.",
-          "pastedContents": {}
-        },
-        {
-          "display": "can we actually clean up cfg/.config/wezterm and move it to cfg/wezterm? no need for the intermediate .config. update symlinks and amend the commit",
-          "pastedContents": {}
-        },
-        {
-          "display": "do we need to add the symlink also?",
-          "pastedContents": {}
-        },
-        {
-          "display": "no this is great. can you commit these changes? instead of using `git` use `config` to tap into the bare repo",
-          "pastedContents": {}
-        },
-        {
-          "display": "great. Is there a way to style differently / include the name of the workspace in the tab bar? so it's easy to know what workspace i'm in?",
-          "pastedContents": {}
-        },
-        {
-          "display": "session",
-          "pastedContents": {}
-        },
-        {
-          "display": "oops sorry try this page https://wezterm.org/config/lua/gui-events/gui-startup.html",
-          "pastedContents": {}
-        },
-        {
-          "display": "Can you look at this link, the \"elaborate example that configures two workspaces\"? I think we should 1. have a functions for creating the workspaces (using mux.spawn_window, workspace = ...), e.g. create_cfg_workspace and setting up their tabs 2. hook into the gui-startup event to call the function create_cfg_workspace and 3. have a hotkey to change to a given workspace",
-          "pastedContents": {}
-        },
-        {
-          "display": "Hm, this doesn't quite work. switching back to the workspace causes a new set of tabs to be created. what's the idiomatic way to create and manage wezterm workspaces?",
-          "pastedContents": {}
-        },
-        {
-          "display": "got it. can we create a workspace called cfg, for editing config files? first tab: ~/cfg and run `config status` in one pane, claude in second pane (list the sessions). second tab (named Wez): ~/cfg/wezterm. third tab (named nvimc) ~/cfg/nvim. third tab (named karabiner) ~/cfg/karabiner-config) fourth tab (named hammerspoon) ~/cfg/hammerspoon",
-          "pastedContents": {}
-        },
-        {
-          "display": "can a \"pane\" live in multiple windows or tabs?",
-          "pastedContents": {}
-        },
-        {
-          "display": "is a workspace tied to a tab, window or pane? what's the mental model?",
-          "pastedContents": {}
-        },
-        {
-          "display": "hmm, what is easiest to read / iterate on? how do domains work? are they only for sshing into other machines? Can I keep different coding projects in different domains, all locally?",
-          "pastedContents": {}
-        },
-        {
-          "display": "what's the best way to set up saved layouts / workspaces - splits, dev commands running in each, logs, etc?",
-          "pastedContents": {}
-        },
-        {
-          "display": "can we make cmd+s enter quick selection mode, and cmd+P enter pane select ui?",
-          "pastedContents": {}
-        },
-        {
-          "display": "great. can we make ctrl+tab switch between previously used tabs?",
-          "pastedContents": {}
-        },
-        {
-          "display": "can we make the Launcher to cmd K and the tab navigaotr cmd shift k",
-          "pastedContents": {}
-        },
-        {
-          "display": "sorry, command+shift+enter",
-          "pastedContents": {}
-        },
-        {
-          "display": "Can we actually use command+shift+",
-          "pastedContents": {}
-        },
-        {
-          "display": "is there a maximize-pane function?",
-          "pastedContents": {}
-        },
-        {
-          "display": "what are some other power features in wezterm that help for keyboard heavy users?",
-          "pastedContents": {}
-        },
-        {
-          "display": "great. now let's make cmd + opt + [ and  ] do prev / next pane ",
-          "pastedContents": {}
-        },
-        {
-          "display": "not quite - i think du is just command [ and di is just command ]. can you remove the shift?",
-          "pastedContents": {}
-        },
-        {
-          "display": "nice, now add look at what navigation layer (d) + u and i do in karabiner. They are for navigating to previous / next tabs. I think it might be command+[ and command+]? In any case, map those to prev / next tab. ",
-          "pastedContents": {}
-        },
-        {
-          "display": "Can you add the following commands / mappings:  cmd+left => ctrl-a (move to start of line)cmd-right => ctrl-e (move to end of line)",
-          "pastedContents": {}
-        },
-        {
-          "display": "Ah, I think we want to set up the symlink from ~/.config/wezterm to ~/cfg/wezterm. And check both into this repo. That's the whole point of using a bare repo - we don't have to do any \"bootstrapping\"  since we just bare clone this repo. ",
-          "pastedContents": {}
-        },
-        {
-          "display": "how can i test if it's working",
-          "pastedContents": {}
-        },
-        {
-          "display": "https://www.atlassian.com/git/tutorials/dotfiles",
-          "pastedContents": {}
-        },
-        {
-          "display": "alias config=\"git --git-dir=/Users/sherwin/.cfg/ --work-tree=/Users/sherwin\"\ngit clone --bare git@github.com:sherwinyu/.cfg.git ~/.cfg\n",
-          "pastedContents": {}
-        },
-        {
-          "display": "dlet's set up an initial config. Also, this current directory (~/cfg) is a bare repo for my dotfiles -- see ",
-          "pastedContents": {}
-        },
-        {
-          "display": "can you help me configure wezterm?",
-          "pastedContents": {}
-        },
-        {
-          "display": "> okay, now 1. go into hammerspoon, and unbind hyper-c from show\n  consol and 2. go into karabiner and add space to the fg layer",
-          "pastedContents": {}
-        },
-        {
-          "display": "okay, now 1. go into hammerspoon, and unbind hyper-c from show consol and 2. go into karabiner and add space to the fg layer",
-          "pastedContents": {}
-        },
-        {
-          "display": "this is mostly woring, except now ctrl tab (hold down ctrl, show up tab switcher) in Arc (similar to command-tab in macos) is broken. I think it's probably because other events are being sent, even on tapping Tab? ",
-          "pastedContents": {}
-        },
-        {
-          "display": "can you change my karabiner config (see karabiner-config/src/index.ts) so that holding down tab acts as hyper key, and holding down capslock acts as zoot (ctrl option cmd)?",
-          "pastedContents": {}
-        }
-      ],
       "mcpContextUris": [],
       "mcpServers": {},
       "enabledMcpjsonServers": [],
       "disabledMcpjsonServers": [],
       "hasTrustDialogAccepted": true,
-      "projectOnboardingSeenCount": 4,
+      "projectOnboardingSeenCount": 0,
       "hasClaudeMdExternalIncludesApproved": false,
-      "hasClaudeMdExternalIncludesWarningShown": false,
-      "lastTotalWebSearchRequests": 0,
-      "hasCompletedProjectOnboarding": true
+      "hasClaudeMdExternalIncludesWarningShown": false
     }
   },
   "s1mAccessCache": {
     "1a736fe0-01e5-45d1-99d0-17b54c3d17fc": {
       "hasAccess": false,
       "timestamp": 1757457217227
+    },
+    "2ce55af0-e13a-430b-8df0-2eb46bd4af2f": {
+      "hasAccess": false,
+      "hasAccessNotAsDefault": true,
+      "timestamp": 1771095348467
     }
   },
   "isQualifiedForDataSharing": false,
@@ -471,31 +1532,145 @@
   "iterm2BackupPath": "/Users/sherwin/Library/Preferences/com.googlecode.iterm2.plist.bak",
   "shiftEnterKeyBindingInstalled": true,
   "hasCompletedOnboarding": true,
-  "lastOnboardingVersion": "1.0.109",
+  "lastOnboardingVersion": "2.0.76",
   "hasOpusPlanDefault": false,
   "subscriptionNoticeCount": 0,
   "hasAvailableSubscription": false,
   "recommendedSubscription": "",
   "subscriptionUpsellShownCount": 5,
-  "cachedChangelog": "# Changelog\n\n## 1.0.124\n\n- Set `CLAUDE_BASH_NO_LOGIN` environment variable to 1 or true to to skip login shell for BashTool\n- Fix Bedrock and Vertex environment variables evaluating all strings as truthy\n- No longer inform Claude of the list of allowed tools when permission is denied\n- Fixed security vulnerability in Bash tool permission checks\n- Improved VSCode extension performance for large files\n\n## 1.0.123\n\n- Bash permission rules now support output redirections when matching (e.g., `Bash(python:*)` matches `python script.py > output.txt`)\n- Fixed thinking mode triggering on negation phrases like \"don't think\"\n- Fixed rendering performance degradation during token streaming\n- Added SlashCommand tool, which enables Claude to invoke your slash commands. https://docs.claude.com/en/docs/claude-code/slash-commands#SlashCommand-tool\n- Enhanced BashTool environment snapshot logging\n- Fixed a bug where resuming a conversation in headless mode would sometimes enable thinking unnecessarily\n- Migrated --debug logging to a file, to enable easy tailing & filtering\n\n## 1.0.120\n\n- Fix input lag during typing, especially noticeable with large prompts\n- Improved VSCode extension command registry and sessions dialog user experience\n- Enhanced sessions dialog responsiveness and visual feedback\n- Fixed IDE compatibility issue by removing worktree support check\n- Fixed security vulnerability where Bash tool permission checks could be bypassed using prefix matching\n\n## 1.0.119\n\n- Fix Windows issue where process visually freezes on entering interactive mode\n- Support dynamic headers for MCP servers via headersHelper configuration\n- Fix thinking mode not working in headless sessions\n- Fix slash commands now properly update allowed tools instead of replacing them\n\n## 1.0.117\n\n- Add Ctrl-R history search to recall previous commands like bash/zsh\n- Fix input lag while typing, especially on Windows\n- Add sed command to auto-allowed commands in acceptEdits mode\n- Fix Windows PATH comparison to be case-insensitive for drive letters\n- Add permissions management hint to /add-dir output\n\n## 1.0.115\n\n- Improve thinking mode display with enhanced visual effects\n- Type /t to temporarily disable thinking mode in your prompt\n- Improve path validation for glob and grep tools\n- Show condensed output for post-tool hooks to reduce visual clutter\n- Fix visual feedback when loading state completes\n- Improve UI consistency for permission request dialogs\n\n## 1.0.113\n\n- Deprecated piped input in interactive mode\n- Move Ctrl+R keybinding for toggling transcript to Ctrl+O\n\n## 1.0.112\n\n- Transcript mode (Ctrl+R): Added the model used to generate each assistant message\n- Addressed issue where some Claude Max users were incorrectly recognized as Claude Pro users\n- Hooks: Added systemMessage support for SessionEnd hooks\n- Added `spinnerTipsEnabled` setting to disable spinner tips\n- IDE: Various improvements and bug fixes\n\n## 1.0.111\n\n- /model now validates provided model names\n- Fixed Bash tool crashes caused by malformed shell syntax parsing\n\n## 1.0.110\n\n- /terminal-setup command now supports WezTerm\n- MCP: OAuth tokens now proactively refresh before expiration\n- Fixed reliability issues with background Bash processes\n\n## 1.0.109\n\n- SDK: Added partial message streaming support via `--include-partial-messages` CLI flag\n\n## 1.0.106\n\n- Windows: Fixed path permission matching to consistently use POSIX format (e.g., `Read(//c/Users/...)`)\n\n## 1.0.97\n\n- Settings: /doctor now validates permission rule syntax and suggests corrections\n\n## 1.0.94\n\n- Vertex: add support for global endpoints for supported models\n- /memory command now allows direct editing of all imported memory files\n- SDK: Add custom tools as callbacks\n- Added /todos command to list current todo items\n\n## 1.0.93\n\n- Windows: Add alt + v shortcut for pasting images from clipboard\n- Support NO_PROXY environment variable to bypass proxy for specified hostnames and IPs\n\n## 1.0.90\n\n- Settings file changes take effect immediately - no restart required\n\n## 1.0.88\n\n- Fixed issue causing \"OAuth authentication is currently not supported\"\n- Status line input now includes `exceeds_200k_tokens`\n- Fixed incorrect usage tracking in /cost.\n- Introduced `ANTHROPIC_DEFAULT_SONNET_MODEL` and `ANTHROPIC_DEFAULT_OPUS_MODEL` for controlling model aliases opusplan, opus, and sonnet.\n- Bedrock: Updated default Sonnet model to Sonnet 4\n\n## 1.0.86\n\n- Added /context to help users self-serve debug context issues\n- SDK: Added UUID support for all SDK messages\n- SDK: Added `--replay-user-messages` to replay user messages back to stdout\n\n## 1.0.85\n\n- Status line input now includes session cost info\n- Hooks: Introduced SessionEnd hook\n\n## 1.0.84\n\n- Fix tool_use/tool_result id mismatch error when network is unstable\n- Fix Claude sometimes ignoring real-time steering when wrapping up a task\n- @-mention: Add ~/.claude/\\* files to suggestions for easier agent, output style, and slash command editing\n- Use built-in ripgrep by default; to opt out of this behavior, set USE_BUILTIN_RIPGREP=0\n\n## 1.0.83\n\n- @-mention: Support files with spaces in path\n- New shimmering spinner\n\n## 1.0.82\n\n- SDK: Add request cancellation support\n- SDK: New additionalDirectories option to search custom paths, improved slash command processing\n- Settings: Validation prevents invalid fields in .claude/settings.json files\n- MCP: Improve tool name consistency\n- Bash: Fix crash when Claude tries to automatically read large files\n\n## 1.0.81\n\n- Released output styles, including new built-in educational output styles \"Explanatory\" and \"Learning\". Docs: https://docs.claude.com/en/docs/claude-code/output-styles\n- Agents: Fix custom agent loading when agent files are unparsable\n\n## 1.0.80\n\n- UI improvements: Fix text contrast for custom subagent colors and spinner rendering issues\n\n## 1.0.77\n\n- Bash tool: Fix heredoc and multiline string escaping, improve stderr redirection handling\n- SDK: Add session support and permission denial tracking\n- Fix token limit errors in conversation summarization\n- Opus Plan Mode: New setting in `/model` to run Opus only in plan mode, Sonnet otherwise\n\n## 1.0.73\n\n- MCP: Support multiple config files with `--mcp-config file1.json file2.json`\n- MCP: Press Esc to cancel OAuth authentication flows\n- Bash: Improved command validation and reduced false security warnings\n- UI: Enhanced spinner animations and status line visual hierarchy\n- Linux: Added support for Alpine and musl-based distributions (requires separate ripgrep installation)\n\n## 1.0.72\n\n- Ask permissions: have Claude Code always ask for confirmation to use specific tools with /permissions\n\n## 1.0.71\n\n- Background commands: (Ctrl-b) to run any Bash command in the background so Claude can keep working (great for dev servers, tailing logs, etc.)\n- Customizable status line: add your terminal prompt to Claude Code with /statusline\n\n## 1.0.70\n\n- Performance: Optimized message rendering for better performance with large contexts\n- Windows: Fixed native file search, ripgrep, and subagent functionality\n- Added support for @-mentions in slash command arguments\n\n## 1.0.69\n\n- Upgraded Opus to version 4.1\n\n## 1.0.68\n\n- Fix incorrect model names being used for certain commands like `/pr-comments`\n- Windows: improve permissions checks for allow / deny tools and project trust. This may create a new project entry in `.claude.json` - manually merge the history field if desired.\n- Windows: improve sub-process spawning to eliminate \"No such file or directory\" when running commands like pnpm\n- Enhanced /doctor command with CLAUDE.md and MCP tool context for self-serve debugging\n- SDK: Added canUseTool callback support for tool confirmation\n- Added `disableAllHooks` setting\n- Improved file suggestions performance in large repos\n\n## 1.0.65\n\n- IDE: Fixed connection stability issues and error handling for diagnostics\n- Windows: Fixed shell environment setup for users without .bashrc files\n\n## 1.0.64\n\n- Agents: Added model customization support - you can now specify which model an agent should use\n- Agents: Fixed unintended access to the recursive agent tool\n- Hooks: Added systemMessage field to hook JSON output for displaying warnings and context\n- SDK: Fixed user input tracking across multi-turn conversations\n- Added hidden files to file search and @-mention suggestions\n\n## 1.0.63\n\n- Windows: Fixed file search, @agent mentions, and custom slash commands functionality\n\n## 1.0.62\n\n- Added @-mention support with typeahead for custom agents. @<your-custom-agent> to invoke it\n- Hooks: Added SessionStart hook for new session initialization\n- /add-dir command now supports typeahead for directory paths\n- Improved network connectivity check reliability\n\n## 1.0.61\n\n- Transcript mode (Ctrl+R): Changed Esc to exit transcript mode rather than interrupt\n- Settings: Added `--settings` flag to load settings from a JSON file\n- Settings: Fixed resolution of settings files paths that are symlinks\n- OTEL: Fixed reporting of wrong organization after authentication changes\n- Slash commands: Fixed permissions checking for allowed-tools with Bash\n- IDE: Added support for pasting images in VSCode MacOS using ⌘+V\n- IDE: Added `CLAUDE_CODE_AUTO_CONNECT_IDE=false` for disabling IDE auto-connection\n- Added `CLAUDE_CODE_SHELL_PREFIX` for wrapping Claude and user-provided shell commands run by Claude Code\n\n## 1.0.60\n\n- You can now create custom subagents for specialized tasks! Run /agents to get started\n\n## 1.0.59\n\n- SDK: Added tool confirmation support with canUseTool callback\n- SDK: Allow specifying env for spawned process\n- Hooks: Exposed PermissionDecision to hooks (including \"ask\")\n- Hooks: UserPromptSubmit now supports additionalContext in advanced JSON output\n- Fixed issue where some Max users that specified Opus would still see fallback to Sonnet\n\n## 1.0.58\n\n- Added support for reading PDFs\n- MCP: Improved server health status display in 'claude mcp list'\n- Hooks: Added CLAUDE_PROJECT_DIR env var for hook commands\n\n## 1.0.57\n\n- Added support for specifying a model in slash commands\n- Improved permission messages to help Claude understand allowed tools\n- Fix: Remove trailing newlines from bash output in terminal wrapping\n\n## 1.0.56\n\n- Windows: Enabled shift+tab for mode switching on versions of Node.js that support terminal VT mode\n- Fixes for WSL IDE detection\n- Fix an issue causing awsRefreshHelper changes to .aws directory not to be picked up\n\n## 1.0.55\n\n- Clarified knowledge cutoff for Opus 4 and Sonnet 4 models\n- Windows: fixed Ctrl+Z crash\n- SDK: Added ability to capture error logging\n- Add --system-prompt-file option to override system prompt in print mode\n\n## 1.0.54\n\n- Hooks: Added UserPromptSubmit hook and the current working directory to hook inputs\n- Custom slash commands: Added argument-hint to frontmatter\n- Windows: OAuth uses port 45454 and properly constructs browser URL\n- Windows: mode switching now uses alt + m, and plan mode renders properly\n- Shell: Switch to in-memory shell snapshot to fix file-related errors\n\n## 1.0.53\n\n- Updated @-mention file truncation from 100 lines to 2000 lines\n- Add helper script settings for AWS token refresh: awsAuthRefresh (for foreground operations like aws sso login) and awsCredentialExport (for background operation with STS-like response).\n\n## 1.0.52\n\n- Added support for MCP server instructions\n\n## 1.0.51\n\n- Added support for native Windows (requires Git for Windows)\n- Added support for Bedrock API keys through environment variable AWS_BEARER_TOKEN_BEDROCK\n- Settings: /doctor can now help you identify and fix invalid setting files\n- `--append-system-prompt` can now be used in interactive mode, not just --print/-p.\n- Increased auto-compact warning threshold from 60% to 80%\n- Fixed an issue with handling user directories with spaces for shell snapshots\n- OTEL resource now includes os.type, os.version, host.arch, and wsl.version (if running on Windows Subsystem for Linux)\n- Custom slash commands: Fixed user-level commands in subdirectories\n- Plan mode: Fixed issue where rejected plan from sub-task would get discarded\n\n## 1.0.48\n\n- Fixed a bug in v1.0.45 where the app would sometimes freeze on launch\n- Added progress messages to Bash tool based on the last 5 lines of command output\n- Added expanding variables support for MCP server configuration\n- Moved shell snapshots from /tmp to ~/.claude for more reliable Bash tool calls\n- Improved IDE extension path handling when Claude Code runs in WSL\n- Hooks: Added a PreCompact hook\n- Vim mode: Added c, f/F, t/T\n\n## 1.0.45\n\n- Redesigned Search (Grep) tool with new tool input parameters and features\n- Disabled IDE diffs for notebook files, fixing \"Timeout waiting after 1000ms\" error\n- Fixed config file corruption issue by enforcing atomic writes\n- Updated prompt input undo to Ctrl+\\_ to avoid breaking existing Ctrl+U behavior, matching zsh's undo shortcut\n- Stop Hooks: Fixed transcript path after /clear and fixed triggering when loop ends with tool call\n- Custom slash commands: Restored namespacing in command names based on subdirectories. For example, .claude/commands/frontend/component.md is now /frontend:component, not /component.\n\n## 1.0.44\n\n- New /export command lets you quickly export a conversation for sharing\n- MCP: resource_link tool results are now supported\n- MCP: tool annotations and tool titles now display in /mcp view\n- Changed Ctrl+Z to suspend Claude Code. Resume by running `fg`. Prompt input undo is now Ctrl+U.\n\n## 1.0.43\n\n- Fixed a bug where the theme selector was saving excessively\n- Hooks: Added EPIPE system error handling\n\n## 1.0.42\n\n- Added tilde (`~`) expansion support to `/add-dir` command\n\n## 1.0.41\n\n- Hooks: Split Stop hook triggering into Stop and SubagentStop\n- Hooks: Enabled optional timeout configuration for each command\n- Hooks: Added \"hook_event_name\" to hook input\n- Fixed a bug where MCP tools would display twice in tool list\n- New tool parameters JSON for Bash tool in `tool_decision` event\n\n## 1.0.40\n\n- Fixed a bug causing API connection errors with UNABLE_TO_GET_ISSUER_CERT_LOCALLY if `NODE_EXTRA_CA_CERTS` was set\n\n## 1.0.39\n\n- New Active Time metric in OpenTelemetry logging\n\n## 1.0.38\n\n- Released hooks. Special thanks to community input in https://github.com/anthropics/claude-code/issues/712. Docs: https://docs.claude.com/en/docs/claude-code/hooks\n\n## 1.0.37\n\n- Remove ability to set `Proxy-Authorization` header via ANTHROPIC_AUTH_TOKEN or apiKeyHelper\n\n## 1.0.36\n\n- Web search now takes today's date into context\n- Fixed a bug where stdio MCP servers were not terminating properly on exit\n\n## 1.0.35\n\n- Added support for MCP OAuth Authorization Server discovery\n\n## 1.0.34\n\n- Fixed a memory leak causing a MaxListenersExceededWarning message to appear\n\n## 1.0.33\n\n- Improved logging functionality with session ID support\n- Added prompt input undo functionality (Ctrl+Z and vim 'u' command)\n- Improvements to plan mode\n\n## 1.0.32\n\n- Updated loopback config for litellm\n- Added forceLoginMethod setting to bypass login selection screen\n\n## 1.0.31\n\n- Fixed a bug where ~/.claude.json would get reset when file contained invalid JSON\n\n## 1.0.30\n\n- Custom slash commands: Run bash output, @-mention files, enable thinking with thinking keywords\n- Improved file path autocomplete with filename matching\n- Added timestamps in Ctrl-r mode and fixed Ctrl-c handling\n- Enhanced jq regex support for complex filters with pipes and select\n\n## 1.0.29\n\n- Improved CJK character support in cursor navigation and rendering\n\n## 1.0.28\n\n- Slash commands: Fix selector display during history navigation\n- Resizes images before upload to prevent API size limit errors\n- Added XDG_CONFIG_HOME support to configuration directory\n- Performance optimizations for memory usage\n- New attributes (terminal.type, language) in OpenTelemetry logging\n\n## 1.0.27\n\n- Streamable HTTP MCP servers are now supported\n- Remote MCP servers (SSE and HTTP) now support OAuth\n- MCP resources can now be @-mentioned\n- /resume slash command to switch conversations within Claude Code\n\n## 1.0.25\n\n- Slash commands: moved \"project\" and \"user\" prefixes to descriptions\n- Slash commands: improved reliability for command discovery\n- Improved support for Ghostty\n- Improved web search reliability\n\n## 1.0.24\n\n- Improved /mcp output\n- Fixed a bug where settings arrays got overwritten instead of merged\n\n## 1.0.23\n\n- Released TypeScript SDK: import @anthropic-ai/claude-code to get started\n- Released Python SDK: pip install claude-code-sdk to get started\n\n## 1.0.22\n\n- SDK: Renamed `total_cost` to `total_cost_usd`\n\n## 1.0.21\n\n- Improved editing of files with tab-based indentation\n- Fix for tool_use without matching tool_result errors\n- Fixed a bug where stdio MCP server processes would linger after quitting Claude Code\n\n## 1.0.18\n\n- Added --add-dir CLI argument for specifying additional working directories\n- Added streaming input support without require -p flag\n- Improved startup performance and session storage performance\n- Added CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR environment variable to freeze working directory for bash commands\n- Added detailed MCP server tools display (/mcp)\n- MCP authentication and permission improvements\n- Added auto-reconnection for MCP SSE connections on disconnect\n- Fixed issue where pasted content was lost when dialogs appeared\n\n## 1.0.17\n\n- We now emit messages from sub-tasks in -p mode (look for the parent_tool_use_id property)\n- Fixed crashes when the VS Code diff tool is invoked multiple times quickly\n- MCP server list UI improvements\n- Update Claude Code process title to display \"claude\" instead of \"node\"\n\n## 1.0.11\n\n- Claude Code can now also be used with a Claude Pro subscription\n- Added /upgrade for smoother switching to Claude Max plans\n- Improved UI for authentication from API keys and Bedrock/Vertex/external auth tokens\n- Improved shell configuration error handling\n- Improved todo list handling during compaction\n\n## 1.0.10\n\n- Added markdown table support\n- Improved streaming performance\n\n## 1.0.8\n\n- Fixed Vertex AI region fallback when using CLOUD_ML_REGION\n- Increased default otel interval from 1s -> 5s\n- Fixed edge cases where MCP_TIMEOUT and MCP_TOOL_TIMEOUT weren't being respected\n- Fixed a regression where search tools unnecessarily asked for permissions\n- Added support for triggering thinking non-English languages\n- Improved compacting UI\n\n## 1.0.7\n\n- Renamed /allowed-tools -> /permissions\n- Migrated allowedTools and ignorePatterns from .claude.json -> settings.json\n- Deprecated claude config commands in favor of editing settings.json\n- Fixed a bug where --dangerously-skip-permissions sometimes didn't work in --print mode\n- Improved error handling for /install-github-app\n- Bugfixes, UI polish, and tool reliability improvements\n\n## 1.0.6\n\n- Improved edit reliability for tab-indented files\n- Respect CLAUDE_CONFIG_DIR everywhere\n- Reduced unnecessary tool permission prompts\n- Added support for symlinks in @file typeahead\n- Bugfixes, UI polish, and tool reliability improvements\n\n## 1.0.4\n\n- Fixed a bug where MCP tool errors weren't being parsed correctly\n\n## 1.0.1\n\n- Added `DISABLE_INTERLEAVED_THINKING` to give users the option to opt out of interleaved thinking.\n- Improved model references to show provider-specific names (Sonnet 3.7 for Bedrock, Sonnet 4 for Console)\n- Updated documentation links and OAuth process descriptions\n\n## 1.0.0\n\n- Claude Code is now generally available\n- Introducing Sonnet 4 and Opus 4 models\n\n## 0.2.125\n\n- Breaking change: Bedrock ARN passed to `ANTHROPIC_MODEL` or `ANTHROPIC_SMALL_FAST_MODEL` should no longer contain an escaped slash (specify `/` instead of `%2F`)\n- Removed `DEBUG=true` in favor of `ANTHROPIC_LOG=debug`, to log all requests\n\n## 0.2.117\n\n- Breaking change: --print JSON output now returns nested message objects, for forwards-compatibility as we introduce new metadata fields\n- Introduced settings.cleanupPeriodDays\n- Introduced CLAUDE_CODE_API_KEY_HELPER_TTL_MS env var\n- Introduced --debug mode\n\n## 0.2.108\n\n- You can now send messages to Claude while it works to steer Claude in real-time\n- Introduced BASH_DEFAULT_TIMEOUT_MS and BASH_MAX_TIMEOUT_MS env vars\n- Fixed a bug where thinking was not working in -p mode\n- Fixed a regression in /cost reporting\n- Deprecated MCP wizard interface in favor of other MCP commands\n- Lots of other bugfixes and improvements\n\n## 0.2.107\n\n- CLAUDE.md files can now import other files. Add @path/to/file.md to ./CLAUDE.md to load additional files on launch\n\n## 0.2.106\n\n- MCP SSE server configs can now specify custom headers\n- Fixed a bug where MCP permission prompt didn't always show correctly\n\n## 0.2.105\n\n- Claude can now search the web\n- Moved system & account status to /status\n- Added word movement keybindings for Vim\n- Improved latency for startup, todo tool, and file edits\n\n## 0.2.102\n\n- Improved thinking triggering reliability\n- Improved @mention reliability for images and folders\n- You can now paste multiple large chunks into one prompt\n\n## 0.2.100\n\n- Fixed a crash caused by a stack overflow error\n- Made db storage optional; missing db support disables --continue and --resume\n\n## 0.2.98\n\n- Fixed an issue where auto-compact was running twice\n\n## 0.2.96\n\n- Claude Code can now also be used with a Claude Max subscription (https://claude.ai/upgrade)\n\n## 0.2.93\n\n- Resume conversations from where you left off from with \"claude --continue\" and \"claude --resume\"\n- Claude now has access to a Todo list that helps it stay on track and be more organized\n\n## 0.2.82\n\n- Added support for --disallowedTools\n- Renamed tools for consistency: LSTool -> LS, View -> Read, etc.\n\n## 0.2.75\n\n- Hit Enter to queue up additional messages while Claude is working\n- Drag in or copy/paste image files directly into the prompt\n- @-mention files to directly add them to context\n- Run one-off MCP servers with `claude --mcp-config <path-to-file>`\n- Improved performance for filename auto-complete\n\n## 0.2.74\n\n- Added support for refreshing dynamically generated API keys (via apiKeyHelper), with a 5 minute TTL\n- Task tool can now perform writes and run bash commands\n\n## 0.2.72\n\n- Updated spinner to indicate tokens loaded and tool usage\n\n## 0.2.70\n\n- Network commands like curl are now available for Claude to use\n- Claude can now run multiple web queries in parallel\n- Pressing ESC once immediately interrupts Claude in Auto-accept mode\n\n## 0.2.69\n\n- Fixed UI glitches with improved Select component behavior\n- Enhanced terminal output display with better text truncation logic\n\n## 0.2.67\n\n- Shared project permission rules can be saved in .claude/settings.json\n\n## 0.2.66\n\n- Print mode (-p) now supports streaming output via --output-format=stream-json\n- Fixed issue where pasting could trigger memory or bash mode unexpectedly\n\n## 0.2.63\n\n- Fixed an issue where MCP tools were loaded twice, which caused tool call errors\n\n## 0.2.61\n\n- Navigate menus with vim-style keys (j/k) or bash/emacs shortcuts (Ctrl+n/p) for faster interaction\n- Enhanced image detection for more reliable clipboard paste functionality\n- Fixed an issue where ESC key could crash the conversation history selector\n\n## 0.2.59\n\n- Copy+paste images directly into your prompt\n- Improved progress indicators for bash and fetch tools\n- Bugfixes for non-interactive mode (-p)\n\n## 0.2.54\n\n- Quickly add to Memory by starting your message with '#'\n- Press ctrl+r to see full output for long tool results\n- Added support for MCP SSE transport\n\n## 0.2.53\n\n- New web fetch tool lets Claude view URLs that you paste in\n- Fixed a bug with JPEG detection\n\n## 0.2.50\n\n- New MCP \"project\" scope now allows you to add MCP servers to .mcp.json files and commit them to your repository\n\n## 0.2.49\n\n- Previous MCP server scopes have been renamed: previous \"project\" scope is now \"local\" and \"global\" scope is now \"user\"\n\n## 0.2.47\n\n- Press Tab to auto-complete file and folder names\n- Press Shift + Tab to toggle auto-accept for file edits\n- Automatic conversation compaction for infinite conversation length (toggle with /config)\n\n## 0.2.44\n\n- Ask Claude to make a plan with thinking mode: just say 'think' or 'think harder' or even 'ultrathink'\n\n## 0.2.41\n\n- MCP server startup timeout can now be configured via MCP_TIMEOUT environment variable\n- MCP server startup no longer blocks the app from starting up\n\n## 0.2.37\n\n- New /release-notes command lets you view release notes at any time\n- `claude config add/remove` commands now accept multiple values separated by commas or spaces\n\n## 0.2.36\n\n- Import MCP servers from Claude Desktop with `claude mcp add-from-claude-desktop`\n- Add MCP servers as JSON strings with `claude mcp add-json <n> <json>`\n\n## 0.2.34\n\n- Vim bindings for text input - enable with /vim or /config\n\n## 0.2.32\n\n- Interactive MCP setup wizard: Run \"claude mcp add\" to add MCP servers with a step-by-step interface\n- Fix for some PersistentShell issues\n\n## 0.2.31\n\n- Custom slash commands: Markdown files in .claude/commands/ directories now appear as custom slash commands to insert prompts into your conversation\n- MCP debug mode: Run with --mcp-debug flag to get more information about MCP server errors\n\n## 0.2.30\n\n- Added ANSI color theme for better terminal compatibility\n- Fixed issue where slash command arguments weren't being sent properly\n- (Mac-only) API keys are now stored in macOS Keychain\n\n## 0.2.26\n\n- New /approved-tools command for managing tool permissions\n- Word-level diff display for improved code readability\n- Fuzzy matching for slash commands\n\n## 0.2.21\n\n- Fuzzy matching for /commands\n",
-  "changelogLastFetched": 1758817727141,
-  "lastReleaseNotesSeen": "1.0.124",
-  "oauthAccount": {
-    "accountUuid": "5c0ca815-6771-430b-961b-648ebe37cfa1",
-    "emailAddress": "sherwin@gamma.app",
-    "organizationUuid": "36f8591f-2171-46c9-8c80-f00abd0302d0",
-    "displayName": "Sherwin",
-    "organizationRole": "claude_code_user",
-    "workspaceRole": null,
-    "organizationName": "Gamma"
-  },
+  "changelogLastFetched": 1777065772887,
+  "lastReleaseNotesSeen": "2.1.112",
   "s1mNonSubscriberAccessCache": {
     "36f8591f-2171-46c9-8c80-f00abd0302d0": {
       "hasAccess": true,
-      "timestamp": 1758817700781
+      "timestamp": 1767649291339
     }
   },
   "feedbackSurveyState": {
-    "lastShownTime": 1758815728000
+    "lastShownTime": 1773259054938
+  },
+  "hasAcknowledgedCostThreshold": true,
+  "hasUsedBackslashReturn": true,
+  "sonnet45MigrationComplete": true,
+  "opus45MigrationComplete": true,
+  "thinkingMigrationComplete": true,
+  "hasShownOpus45Notice": {
+    "36f8591f-2171-46c9-8c80-f00abd0302d0": true,
+    "2ce55af0-e13a-430b-8df0-2eb46bd4af2f": true
+  },
+  "officialMarketplaceAutoInstallAttempted": true,
+  "officialMarketplaceAutoInstalled": true,
+  "githubRepoPaths": {
+    "sherwinyu/hosts-manager": [
+      "/Users/sherwin/cfg/hosts-manager"
+    ],
+    "gamma-app/gamma": [
+      "/Users/sherwin/projects/gamma",
+      "/Users/sherwin/conductor/workspaces/gamma/islamabad",
+      "/Users/sherwin/conductor/workspaces/gamma/florence",
+      "/Users/sherwin/.claude-worktrees/gamma/happy-kilby",
+      "/Users/sherwin/projects/gamma3",
+      "/Users/sherwin/projects/gamma2"
+    ],
+    "sherwinyu/oryoki": [
+      "/Users/sherwin/projects/oryoki-wt-devin-1777009800-selection-redesign-impl",
+      "/Users/sherwin/projects/oryoki",
+      "/Users/sherwin/projects/oryoki2"
+    ]
+  },
+  "claudeInChromeDefaultEnabled": true,
+  "claudeCodeFirstTokenDate": null,
+  "anonymousId": "claudecode.v1.a8477037-a751-464f-a9d9-0c281833ec16",
+  "hasCompletedClaudeInChromeOnboarding": true,
+  "hasShownS1MWelcomeV2": {
+    "2ce55af0-e13a-430b-8df0-2eb46bd4af2f": true
+  },
+  "skillUsage": {
+    "buddy-glasses:load": {
+      "usageCount": 5,
+      "lastUsedAt": 1768186491718
+    },
+    "workflow-setup:load": {
+      "usageCount": 3,
+      "lastUsedAt": 1771906210084
+    },
+    "workflow-setup:start-project": {
+      "usageCount": 2,
+      "lastUsedAt": 1770359942098
+    },
+    "dev-workflow:eval": {
+      "usageCount": 13,
+      "lastUsedAt": 1771906303059
+    }
+  },
+  "opusProMigrationComplete": true,
+  "cachedChromeExtensionInstalled": true,
+  "clientDataCache": null,
+  "hasShownOpus46Notice": {
+    "2ce55af0-e13a-430b-8df0-2eb46bd4af2f": true
+  },
+  "showSpinnerTree": false,
+  "opus46FeedSeenCount": 4,
+  "penguinModeOrgEnabled": true,
+  "effortCalloutDismissed": true,
+  "sonnet1m45MigrationComplete": true,
+  "birthdayHatAnimationCount": 3,
+  "cachedExtraUsageDisabledReason": null,
+  "effortCalloutV2Dismissed": true,
+  "metricsStatusCache": {
+    "enabled": true,
+    "timestamp": 1777065873899
+  },
+  "claudeAiMcpEverConnected": [
+    "claude.ai Gamma",
+    "claude.ai Hex",
+    "claude.ai Gmail",
+    "claude.ai Slack",
+    "claude.ai Google Calendar",
+    "claude.ai Notion",
+    "claude.ai Granola",
+    "claude.ai Linear",
+    "claude.ai Intuit QuickBooks"
+  ],
+  "oauthAccount": {
+    "accountUuid": "5c0ca815-6771-430b-961b-648ebe37cfa1",
+    "emailAddress": "sherwin@gamma.app",
+    "organizationUuid": "2ce55af0-e13a-430b-8df0-2eb46bd4af2f",
+    "hasExtraUsageEnabled": true,
+    "billingType": "stripe_subscription_contracted",
+    "accountCreatedAt": "2025-09-09T02:02:10.432216Z",
+    "subscriptionCreatedAt": "2024-10-01T00:05:43.957136Z",
+    "displayName": "Sherwin",
+    "organizationRole": "user",
+    "workspaceRole": null,
+    "organizationName": "Gamma"
+  },
+  "mcpServers": {
+    "chrome-devtools": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "chrome-devtools-mcp@latest"
+      ],
+      "env": {}
+    }
+  },
+  "autoUpdatesProtectedForNative": true,
+  "migrationVersion": 11,
+  "deepLinkTerminal": "WezTerm",
+  "opus47LaunchSeenCount": 2,
+  "additionalModelOptionsCache": [],
+  "additionalModelCostsCache": {},
+  "overageCreditGrantCache": {
+    "2ce55af0-e13a-430b-8df0-2eb46bd4af2f": {
+      "info": {
+        "available": false,
+        "eligible": false,
+        "granted": false,
+        "amount_minor_units": null,
+        "currency": null
+      },
+      "timestamp": 1777065774541
+    }
   }
 }
