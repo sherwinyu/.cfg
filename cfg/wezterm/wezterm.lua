@@ -51,6 +51,17 @@ config.initial_rows = 30
 -- Scrollback
 config.scrollback_lines = 10000
 
+-- Helper to extract last directory from path
+local function get_dir_name(cwd_uri)
+	if not cwd_uri then
+		return nil
+	end
+	local cwd = cwd_uri.file_path or tostring(cwd_uri)
+	-- Remove trailing slash and get last two components
+	cwd = cwd:gsub("/$", "")
+	return cwd:match("([^/]+/[^/]+)$") or cwd:match("([^/]+)$") or cwd
+end
+
 -- Key bindings
 config.keys = {
 	-- Split panes
@@ -265,12 +276,36 @@ config.key_tables = {
 				description = "Enter name for this pane:",
 				action = wezterm.action_callback(function(window, pane, line)
 					if line then
-						-- Set the pane title using OSC escape sequence
-						pane:send_text(string.format("\027]2;%s\027\\", line))
+						-- Set the pane title using OSC escape sequence with BEL terminator
+						pane:inject_output(string.format("\027]2;%s\007", line))
 						claude_notify("Pane Renamed", "Pane renamed to: " .. line)
 					end
 				end),
 			}),
+		},
+		-- Show all pane labels (leader i)
+		{
+			key = "i",
+			action = wezterm.action_callback(function(window, pane)
+				local tab = window:active_tab()
+				local panes = tab:panes()
+				local alphabet = "asdfqwerzxcvjklmiuopghtybn"
+				local lines = {}
+				for idx, p in ipairs(panes) do
+					local label = alphabet:sub(idx, idx)
+					local title = p:get_title()
+					local cwd = get_dir_name(p:get_current_working_dir()) or ""
+					local active = (p:pane_id() == pane:pane_id()) and " <-" or ""
+					table.insert(lines, string.format("[%s] %s (%s)%s", label, title, cwd, active))
+				end
+				local msg = table.concat(lines, "\n")
+				-- Strip non-ASCII to avoid utf-8 encoding issues
+				msg = msg:gsub("[^\32-\126\n]", "")
+				wezterm.run_child_process({
+					"osascript", "-e",
+					'display dialog "' .. msg:gsub('"', '\\"'):gsub("\n", "\\n") .. '" with title "Pane Labels" buttons {"OK"} default button "OK" giving up after 5',
+				})
+			end),
 		},
 		-- Rebalance panes evenly (leader =)
 		{
@@ -444,26 +479,24 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
 	end
 end)
 
--- Helper to extract last directory from path
-local function get_dir_name(cwd_uri)
-	if not cwd_uri then
-		return nil
-	end
-	local cwd = cwd_uri.file_path or tostring(cwd_uri)
-	-- Remove trailing slash and get last component
-	cwd = cwd:gsub("/$", "")
-	return cwd:match("([^/]+)$") or cwd
-end
 
--- Right status bar showing workspace and current directory
+-- Right status bar showing workspace, pane count, and current directory
 wezterm.on("update-right-status", function(window, pane)
 	local cwd_uri = pane:get_current_working_dir()
 	local cwd = get_dir_name(cwd_uri) or ""
 	local workspace = window:active_workspace()
+	local num_panes = #window:active_tab():panes()
+
+	local pane_indicator = ""
+	if num_panes > 1 then
+		pane_indicator = string.format("| %d panes ", num_panes)
+	end
 
 	window:set_right_status(wezterm.format({
 		{ Foreground = { Color = "#bb9af7" } },
 		{ Text = " " .. workspace .. " " },
+		{ Foreground = { Color = "#9ece6a" } },
+		{ Text = pane_indicator },
 		{ Foreground = { Color = "#7aa2f7" } },
 		{ Text = "| 📁 " .. cwd .. " " },
 	}))
