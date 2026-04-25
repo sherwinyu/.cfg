@@ -45,6 +45,7 @@ function obj:start()
       visible = true,
       allowRoles = {"AXStandardWindow"}  -- Include only standard windows
     })
+    :rejectApp("CleanShot X")
 
   self.window_filter:subscribe({
     hs.window.filter.windowFocused
