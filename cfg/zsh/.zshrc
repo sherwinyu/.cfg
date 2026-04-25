@@ -105,11 +105,5 @@ export PATH="$HOME/.local/bin:$PATH"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-alias claude="/Users/sherwin/.claude/local/claude"
-
 # bun completions
 [ -s "/Users/sherwin/.bun/_bun" ] && source "/Users/sherwin/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
