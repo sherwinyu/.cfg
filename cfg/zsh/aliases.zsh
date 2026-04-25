@@ -173,6 +173,11 @@ alias yrs='yarn run server'
 alias ysp='yarn start-prod'
 alias yes='yarn eslint src server'
 
+# BUN
+alias br='bun run'
+alias brdw='bun run dev:web'
+alias brdd='bun run dev:desktop'
+
 alias uirs='~/projects/ui/rails-server'
 alias na='~/projects/note-app'
 alias lp='~/projects/note-app/oryoki-src/my-remix-app/lexpla'
