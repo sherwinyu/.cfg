@@ -338,9 +338,13 @@ config.key_tables = {
 				for idx, p in ipairs(panes) do
 					local label = alphabet:sub(idx, idx)
 					local title = p:get_title()
-					local cwd = get_dir_name(p:get_current_working_dir()) or ""
+					local claude_prompt = p:get_user_vars().claude_prompt or ""
 					local active = (p:pane_id() == pane:pane_id()) and " <-" or ""
-					table.insert(lines, string.format("[%s] %s (%s)%s", label, title, cwd, active))
+					if claude_prompt ~= "" then
+						table.insert(lines, string.format("[%s] %s: %s%s", label, title, claude_prompt, active))
+					else
+						table.insert(lines, string.format("[%s] %s%s", label, title, active))
+					end
 				end
 				local msg = table.concat(lines, "\n")
 				-- Strip non-ASCII to avoid utf-8 encoding issues

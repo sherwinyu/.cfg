@@ -101,6 +101,10 @@ if [ -f '/Users/sherwin/cfg/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/she
 if [ -f '/Users/sherwin/cfg/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/sherwin/cfg/google-cloud-sdk/completion.zsh.inc'; fi
 export PATH="$HOME/.local/bin:$PATH"
 
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
 alias claude="/Users/sherwin/.claude/local/claude"
 
 # bun completions

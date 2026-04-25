@@ -72,6 +72,17 @@
           }
         ]
       }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/sherwin/cfg/claude/hooks/set-pane-prompt.sh"
+          }
+        ]
+      }
     ]
   },
   "enabledPlugins": {
