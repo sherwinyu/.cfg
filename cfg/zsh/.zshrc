@@ -107,3 +107,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # bun completions
 [ -s "/Users/sherwin/.bun/_bun" ] && source "/Users/sherwin/.bun/_bun"
+
+# cargo / rustup
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
