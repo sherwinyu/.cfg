@@ -20,7 +20,7 @@ gwt() {
   local worktree_dir="../$(basename "$(pwd)")-wt-${branch//\//-}"
 
   git fetch origin "$branch" && \
-  git worktree add "$worktree_dir" "origin/$branch" && \
+  git worktree add -b "$branch" "$worktree_dir" "origin/$branch" && \
   cd "$worktree_dir" && \
   echo "Worktree ready at $worktree_dir"
 }
