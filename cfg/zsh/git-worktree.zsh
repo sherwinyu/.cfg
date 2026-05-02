@@ -1,10 +1,16 @@
-# Usage: gwt <pr-number-or-branch>
-# Examples: gwt 123, gwt feature/foo
+# Usage: gwt [-f] <pr-number-or-branch>
+# Examples: gwt 123, gwt feature/foo, gwt -f 123 (force: blow away existing dir)
 
 gwt() {
+  local force=0
+  if [[ "$1" == "-f" ]]; then
+    force=1
+    shift
+  fi
+
   local input="$1"
   if [[ -z "$input" ]]; then
-    echo "Usage: gwt <pr-number|branch>"
+    echo "Usage: gwt [-f] <pr-number|branch>"
     return 1
   fi
 
@@ -17,11 +23,43 @@ gwt() {
     branch="$input"
   fi
 
-  local worktree_dir="../$(basename "$(pwd)")-wt-${branch//\//-}"
+  local src_dir="$(pwd)"
+  local worktree_dir="../$(basename "$src_dir")-wt-${branch//\//-}"
 
-  git fetch origin "$branch" && \
-  git worktree add -b "$branch" "$worktree_dir" "origin/$branch" && \
-  cd "$worktree_dir" && \
+  if [ -d "$worktree_dir" ]; then
+    if (( force )); then
+      echo "Force: removing existing worktree at $worktree_dir"
+      git worktree remove "$worktree_dir" --force 2>/dev/null
+      rm -rf "$worktree_dir"
+    elif git -C "$worktree_dir" rev-parse --git-dir 2>/dev/null | grep -q "/.git/worktrees/"; then
+      cd "$worktree_dir" && echo "Worktree already exists at $worktree_dir"
+      return 0
+    else
+      echo "Directory exists but is not a worktree: $worktree_dir (use -f to force)"
+      return 1
+    fi
+  fi
+
+  git fetch origin "$branch" || return 1
+  if git show-ref --verify --quiet "refs/heads/$branch"; then
+    git worktree add "$worktree_dir" "$branch" || return 1
+  else
+    git worktree add -b "$branch" "$worktree_dir" "origin/$branch" || return 1
+  fi
+
+  # Copy local-only (untracked/ignored) .claude files; tracked ones come from the checkout
+  if [ -d "$src_dir/.claude" ]; then
+    git -C "$src_dir" ls-files --others -- .claude/ | while IFS= read -r f; do
+      mkdir -p "$worktree_dir/${f:h}"
+      cp "$src_dir/$f" "$worktree_dir/$f"
+    done
+  fi
+  for f in "$src_dir"/.env*(N); do
+    cp "$f" "$worktree_dir/"
+  done
+
+  cd "$worktree_dir" || return 1
+  bun install
   echo "Worktree ready at $worktree_dir"
 }
 
