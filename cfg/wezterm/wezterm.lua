@@ -103,16 +103,60 @@ config.keys = {
 		mods = "OPT",
 		action = wezterm.action.SendKey({ key = "f", mods = "ALT" }),
 	},
-	-- Pane navigation
+	-- Pane navigation (preserves zoom state)
 	{
 		key = "[",
 		mods = "CMD",
-		action = wezterm.action.ActivatePaneDirection("Prev"),
+		action = wezterm.action_callback(function(window, pane)
+			local tab = window:active_tab()
+			local panes = tab:panes_with_info()
+			if #panes <= 1 then return end
+
+			-- Check if currently zoomed
+			local is_zoomed = false
+			for _, pane_info in ipairs(panes) do
+				if pane_info.is_zoomed then
+					is_zoomed = true
+					break
+				end
+			end
+
+			-- Unzoom, navigate, then re-zoom
+			if is_zoomed then
+				window:perform_action(wezterm.action.SetPaneZoomState(false), pane)
+			end
+			window:perform_action(wezterm.action.ActivatePaneDirection("Prev"), pane)
+			if is_zoomed then
+				window:perform_action(wezterm.action.SetPaneZoomState(true), pane)
+			end
+		end),
 	},
 	{
 		key = "]",
 		mods = "CMD",
-		action = wezterm.action.ActivatePaneDirection("Next"),
+		action = wezterm.action_callback(function(window, pane)
+			local tab = window:active_tab()
+			local panes = tab:panes_with_info()
+			if #panes <= 1 then return end
+
+			-- Check if currently zoomed
+			local is_zoomed = false
+			for _, pane_info in ipairs(panes) do
+				if pane_info.is_zoomed then
+					is_zoomed = true
+					break
+				end
+			end
+
+			-- Unzoom, navigate, then re-zoom
+			if is_zoomed then
+				window:perform_action(wezterm.action.SetPaneZoomState(false), pane)
+			end
+			window:perform_action(wezterm.action.ActivatePaneDirection("Next"), pane)
+			if is_zoomed then
+				window:perform_action(wezterm.action.SetPaneZoomState(true), pane)
+			end
+		end),
 	},
 	-- Tab navigation
 	{
@@ -480,26 +524,59 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
 end)
 
 
--- Right status bar showing workspace, pane count, and current directory
+-- Helper to get pane display name (title or directory)
+local function get_pane_name(p)
+	local title = p:get_title()
+	if not title or title == "" or title:match("^%s*$") or title:match("zsh") or title:match("bash") then
+		local dir = get_dir_name(p:get_current_working_dir())
+		return dir or "pane"
+	end
+	return title
+end
+
 wezterm.on("update-right-status", function(window, pane)
 	local cwd_uri = pane:get_current_working_dir()
 	local cwd = get_dir_name(cwd_uri) or ""
 	local workspace = window:active_workspace()
-	local num_panes = #window:active_tab():panes()
 
-	local pane_indicator = ""
-	if num_panes > 1 then
-		pane_indicator = string.format("| %d panes ", num_panes)
+	local status_elements = {}
+
+	local tab = window:active_tab()
+	local panes = tab:panes_with_info()
+	local pane_count = #panes
+
+	local current_index = 0
+	local is_zoomed = false
+
+	for i, pane_info in ipairs(panes) do
+		if pane_info.pane:pane_id() == pane:pane_id() then
+			current_index = i
+			is_zoomed = pane_info.is_zoomed
+			break
+		end
 	end
 
-	window:set_right_status(wezterm.format({
-		{ Foreground = { Color = "#bb9af7" } },
-		{ Text = " " .. workspace .. " " },
-		{ Foreground = { Color = "#9ece6a" } },
-		{ Text = pane_indicator },
-		{ Foreground = { Color = "#7aa2f7" } },
-		{ Text = "| 📁 " .. cwd .. " " },
-	}))
+	if pane_count > 1 and is_zoomed then
+		local prev_index = current_index > 1 and current_index - 1 or pane_count
+		local prev_name = get_pane_name(panes[prev_index].pane)
+
+		local next_index = current_index < pane_count and current_index + 1 or 1
+		local next_name = get_pane_name(panes[next_index].pane)
+
+		table.insert(status_elements, { Foreground = { Color = "#f7768e" } })
+		table.insert(status_elements, { Text = " ‹" .. prev_name .. " " })
+		table.insert(status_elements, { Foreground = { Color = "#ff9e64" } })
+		table.insert(status_elements, { Text = "| [" .. current_index .. "/" .. pane_count .. "] |" })
+		table.insert(status_elements, { Foreground = { Color = "#f7768e" } })
+		table.insert(status_elements, { Text = " " .. next_name .. "› " })
+	end
+
+	table.insert(status_elements, { Foreground = { Color = "#bb9af7" } })
+	table.insert(status_elements, { Text = " " .. workspace .. " " })
+	table.insert(status_elements, { Foreground = { Color = "#7aa2f7" } })
+	table.insert(status_elements, { Text = "| 📁 " .. cwd .. " " })
+
+	window:set_right_status(wezterm.format(status_elements))
 end)
 
 -- Custom tab bar to show workspace and directory
