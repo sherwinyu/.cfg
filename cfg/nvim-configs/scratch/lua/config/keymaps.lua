@@ -305,6 +305,7 @@ map("n", "<localleader>wl", "<C-w>L", { noremap = true, desc = "Window Pane: Mov
 map("n", "<localleader>wv", "<C-w>v", { noremap = true, desc = "Window pane: split vertical" })
 map("n", "<localleader>ws", "<C-w>s", { noremap = true, desc = "Window pane: split horizontal" })
 map("n", "<localleader>wo", "<C-w>o", { noremap = true, desc = "Window pane: only -- close all other panes" })
+map("n", "<localleader>q", "<cmd>q!<cr>", { noremap = true, desc = "Force quit window" })
 
 -- Searching for text
 vim.keymap.set("v", "*", function()
