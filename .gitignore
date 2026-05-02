@@ -95,3 +95,4 @@ Sites/
 **/node_modules/
 
 IGNORE/
+cfg/.claude.json
