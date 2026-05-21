@@ -1,5 +1,6 @@
 # Usage: gwt [-f] <pr-number-or-branch>
 # Examples: gwt 123, gwt feature/foo, gwt -f 123 (force: blow away existing dir)
+# With -f: also creates a new branch off main if the branch doesn't exist on remote
 
 gwt() {
   local force=0
@@ -40,11 +41,20 @@ gwt() {
     fi
   fi
 
-  git fetch origin "$branch" || return 1
-  if git show-ref --verify --quiet "refs/heads/$branch"; then
-    git worktree add "$worktree_dir" "$branch" || return 1
+  if git fetch origin "$branch" 2>/dev/null; then
+    if git show-ref --verify --quiet "refs/heads/$branch"; then
+      git worktree add "$worktree_dir" "$branch" || return 1
+    else
+      git worktree add -b "$branch" "$worktree_dir" "origin/$branch" || return 1
+    fi
+  elif (( force )); then
+    git fetch origin main || return 1
+    git worktree add -b "$branch" "$worktree_dir" "origin/main" || return 1
+    git -C "$worktree_dir" push -u origin "$branch" || return 1
+    echo "Created new branch '$branch' off main and pushed to remote"
   else
-    git worktree add -b "$branch" "$worktree_dir" "origin/$branch" || return 1
+    echo "Branch '$branch' not found on remote (use -f to create off main)"
+    return 1
   fi
 
   # Copy local-only (untracked/ignored) .claude files; tracked ones come from the checkout
