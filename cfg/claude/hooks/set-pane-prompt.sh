@@ -14,7 +14,9 @@ if [[ -n "$prompt" ]]; then
   if [[ -n "$tty_path" && "$tty_path" != "not a tty" ]]; then
     printf "\033]1337;SetUserVar=%s=%s\007" "claude_prompt" "$encoded" > "$tty_path"
   else
-    # Fallback: try /dev/tty
-    printf "\033]1337;SetUserVar=%s=%s\007" "claude_prompt" "$encoded" > /dev/tty 2>/dev/null
+    # Fallback: try /dev/tty (only if it's writable; suppress open errors)
+    if [[ -w /dev/tty ]]; then
+      printf "\033]1337;SetUserVar=%s=%s\007" "claude_prompt" "$encoded" 2>/dev/null > /dev/tty
+    fi
   fi
 fi
