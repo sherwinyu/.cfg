@@ -107,7 +107,9 @@ gwt() {
   fi
 
   cd "$worktree_dir" || return 1
-  bun install
+  if command -v bun >/dev/null 2>&1; then
+    bun install
+  fi
   echo "Worktree ready at $worktree_dir"
 }
 
