@@ -1,6 +1,15 @@
-# Usage: gwt [-f] <pr-number-or-branch>
-# Examples: gwt 123, gwt feature/foo, gwt -f 123 (force: blow away existing dir)
+# Usage: gwt [-f] <pr-number|pr-url|branch>
+# Examples:
+#   gwt 123                                          (PR # — resolves against the repo in the current cwd)
+#   gwt https://github.com/owner/repo/pull/123       (PR URL — cd to ~/projects/repo first, then resolve)
+#   gwt feature/foo                                  (branch in the current cwd)
+#   gwt -f 123                                        (force: blow away existing dir)
 # With -f: also creates a new branch off main if the branch doesn't exist on remote
+
+# Local-only env/config files copied from the main repo into each new worktree
+# (space-separated globs, relative to the repo root). Override in your shell to
+# add/remove entries, e.g. export GWT_COPY_GLOBS=".env .env.* .envrc .tool-versions"
+: ${GWT_COPY_GLOBS:=".env .env.* .envrc"}
 
 gwt() {
   local force=0
@@ -16,12 +25,32 @@ gwt() {
   fi
 
   local branch
-  if [[ "$input" =~ ^[0-9]+$ ]]; then
-    # It's a PR number — resolve the branch name
-    branch=$(gh pr view "$input" --json headRefName -q .headRefName) || return 1
-    echo "PR #$input → branch: $branch"
+  if [[ "$input" =~ '^https?://github\.com/([^/]+)/([^/]+)/pull/([0-9]+)' ]]; then
+    # It's a PR URL — ignore cwd, switch to the main repo dir under ~/projects
+    local pr_repo="${match[1]}/${match[2]}"
+    local pr_num="${match[3]}"
+    local repo_dir="$HOME/projects/${match[2]}"
+    if [[ ! -d "$repo_dir" ]]; then
+      echo "Repo directory not found: $repo_dir"
+      return 1
+    fi
+    cd "$repo_dir" || return 1
+    branch=$(gh pr view "$pr_num" --repo "$pr_repo" --json headRefName -q .headRefName) || return 1
+    echo "PR #$pr_num ($pr_repo) → branch: $branch"
   else
-    branch="$input"
+    # PR number or branch — both resolve against the repo in the current cwd
+    if ! git rev-parse --git-dir >/dev/null 2>&1; then
+      echo "Not in a git repository: $(pwd)"
+      echo "cd into a repo, or pass a full PR URL (https://github.com/owner/repo/pull/N)"
+      return 1
+    fi
+    if [[ "$input" =~ ^[0-9]+$ ]]; then
+      # It's a PR number — resolve the branch name
+      branch=$(gh pr view "$input" --json headRefName -q .headRefName) || return 1
+      echo "PR #$input → branch: $branch"
+    else
+      branch="$input"
+    fi
   fi
 
   local src_dir="$(pwd)"
@@ -64,9 +93,18 @@ gwt() {
       cp "$src_dir/$f" "$worktree_dir/$f"
     done
   fi
-  for f in "$src_dir"/.env*(N); do
-    cp "$f" "$worktree_dir/"
+  # Copy local-only env/config files (see GWT_COPY_GLOBS above)
+  local pat f
+  for pat in ${(s: :)GWT_COPY_GLOBS}; do
+    for f in "$src_dir"/${~pat}(N); do
+      cp -p "$f" "$worktree_dir/${f:t}"
+      echo "Copied ${f:t}"
+    done
   done
+  # direnv blocks a freshly-copied .envrc until it's allowed
+  if [[ -f "$worktree_dir/.envrc" ]] && command -v direnv >/dev/null 2>&1; then
+    (cd "$worktree_dir" && direnv allow) && echo "direnv allowed in worktree"
+  fi
 
   cd "$worktree_dir" || return 1
   bun install
