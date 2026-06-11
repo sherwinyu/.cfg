@@ -180,6 +180,8 @@ alias brdd='bun run dev:desktop'
 alias brl='bun run lint'
 alias brt='bun run test'
 alias brtc='bun run typecheck'
+alias sbrd='cd packages/agent-server && bun run dev'   # server bun run dev
+alias wbrd='cd packages/web-ui-react && bun run dev'   # web bun run dev
 
 alias uirs='~/projects/ui/rails-server'
 alias na='~/projects/note-app'
