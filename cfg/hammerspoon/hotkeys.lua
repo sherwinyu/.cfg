@@ -271,6 +271,10 @@ hs.hotkey.bind(zoot, "/", function()
 	ToggleApp("Conductor")
 end)
 
+hs.hotkey.bind(zoot, "v", function()
+	ToggleApp("Devin")
+end)
+
 hs.hotkey.bind(hyper, "1", function()
 	local audio = require("audio-test")
 	local outputDevices = {
