@@ -1,4 +1,7 @@
 {
+  "env": {
+    "CLAUDE_CODE_ENABLE_AUTO_MODE": "1"
+  },
   "permissions": {
     "allow": [
       "Read(//Users/sherwin/**)",
@@ -27,7 +30,6 @@
       "WebFetch(domain:wezterm.org)"
     ]
   },
-  "model": "opus[1m]",
   "hooks": {
     "SessionStart": [
       {
@@ -87,8 +89,14 @@
   },
   "enabledPlugins": {
     "workflow-setup@gamma-internal-plugins": true,
-    "buddy-glasses@gamma-internal-plugins": true
+    "buddy-glasses@gamma-internal-plugins": true,
+    "vercel@claude-plugins-official": true
   },
+  "fastMode": true,
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "light",
+  "preferredNotifChannel": "terminal_bell",
   "notifications": {
     "enabled": true,
     "bell_on_completion": true,
@@ -131,5 +139,6 @@
       "decision_needed": "User decision needed",
       "review_required": "Please review completed work"
     }
-  }
+  },
+  "model": "sonnet"
 }

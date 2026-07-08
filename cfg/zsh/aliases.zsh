@@ -11,6 +11,7 @@ function claude-cfg() {
 alias cc='claude'
 alias ccr='claude -r'
 alias ccyolo='claude --dangerously-skip-permissions'
+alias yolo='claude --dangerously-skip-permissions'
 
 alias egrep='egrep --color=auto -i'
 
