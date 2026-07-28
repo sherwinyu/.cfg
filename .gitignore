@@ -96,3 +96,5 @@ Sites/
 
 IGNORE/
 cfg/.claude.json
+.claude.json
+.claude.json.backup
