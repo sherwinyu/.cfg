@@ -13,6 +13,9 @@ alias ccr='claude -r'
 alias ccyolo='claude --dangerously-skip-permissions'
 alias yolo='claude --dangerously-skip-permissions'
 
+# CODEX CLI ALIASES
+alias cdxyolo='codex --dangerously-bypass-approvals-and-sandbox'
+
 alias egrep='egrep --color=auto -i'
 
 alias fgrep='fgrep --color=auto -i'
