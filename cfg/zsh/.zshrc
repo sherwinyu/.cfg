@@ -1,3 +1,11 @@
+# Capture this pane's controlling tty once, while we definitely have one.
+# Claude Code hook subprocesses run detached from the controlling terminal,
+# so they can't discover it themselves via tty(1)/`/dev/tty` - see
+# ~/cfg/claude/hooks/set-pane-prompt.sh.
+if [[ -n "$WEZTERM_PANE" ]]; then
+	export CLAUDE_WEZTERM_TTY="$(tty 2>/dev/null)"
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 

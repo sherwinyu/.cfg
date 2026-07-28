@@ -10,7 +10,9 @@ return {
 					prompt = "Diff base> ",
 					actions = {
 						["default"] = function(selected)
-							local branch = selected[1]:match("%S+")
+							-- strip the leading "* " (current branch) or "+ " (checked out in
+							-- another worktree) marker that `git branch --all` prefixes lines with
+							local branch = selected[1]:match("^[%*%+]?%s*(%S+)")
 							vim.cmd("DiffviewOpen " .. branch)
 						end,
 					},
@@ -33,6 +35,7 @@ return {
 			end,
 			desc = "Diffview: pick base commit",
 		},
+		{ "<leader>dv", "<cmd>DiffviewOpen -- %<cr>", desc = "Diffview: current file only" },
 		{ "<leader>dh", "<cmd>DiffviewFileHistory %<cr>", desc = "Diffview: file history" },
 		{ "<leader>dH", "<cmd>DiffviewFileHistory<cr>", desc = "Diffview: branch history" },
 		{ "<leader>dq", "<cmd>DiffviewClose<cr>", desc = "Diffview: close" },

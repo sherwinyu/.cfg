@@ -8,15 +8,13 @@ prompt=$(echo "$input" | /usr/bin/python3 -c "import sys,json; print(json.load(s
 if [[ -n "$prompt" ]]; then
   # Truncate to 80 chars
   prompt="${prompt:0:80}"
-  # Set WezTerm user var via OSC 1337, writing to the pane's TTY
+  # Set WezTerm user var via OSC 1337, writing to the pane's TTY.
+  # This hook subprocess is detached from any controlling terminal, so
+  # tty(1)/`/dev/tty` can't find it here - use the tty captured by the
+  # shell at login instead (see ~/cfg/zsh/.zshrc).
   encoded=$(echo -n "$prompt" | base64)
-  tty_path=$(tty 2>/dev/null)
-  if [[ -n "$tty_path" && "$tty_path" != "not a tty" ]]; then
-    printf "\033]1337;SetUserVar=%s=%s\007" "claude_prompt" "$encoded" > "$tty_path"
-  else
-    # Fallback: try /dev/tty (only if it's writable; suppress open errors)
-    if [[ -w /dev/tty ]]; then
-      printf "\033]1337;SetUserVar=%s=%s\007" "claude_prompt" "$encoded" 2>/dev/null > /dev/tty
-    fi
+  tty_path="$CLAUDE_WEZTERM_TTY"
+  if [[ -n "$tty_path" && -w "$tty_path" ]]; then
+    printf "\033]1337;SetUserVar=%s=%s\007" "claude_prompt" "$encoded" > "$tty_path" 2>/dev/null
   fi
 fi
