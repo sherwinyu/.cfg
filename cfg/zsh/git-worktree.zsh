@@ -54,18 +54,39 @@ gwt() {
   fi
 
   local src_dir="$(pwd)"
-  local worktree_dir="../$(basename "$src_dir")-wt-${branch//\//-}"
 
-  if [ -d "$worktree_dir" ]; then
+  # Base the new worktree's name on the *main* repo, not the cwd — if we're
+  # already inside a worktree, basename "$src_dir" would stack another
+  # "-wt-<branch>" suffix onto the existing one.
+  local repo_root=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null)
+  repo_root="${repo_root%/.git}"
+  local repo_name="$(basename "$repo_root")"
+  local worktree_dir="../${repo_name}-wt-${branch//\//-}"
+
+  # The branch may already be checked out as a worktree somewhere other than
+  # the conventional path below (different naming, moved, etc) — find it by
+  # branch rather than by directory so we don't collide with git.
+  local existing_dir=$(git worktree list --porcelain | awk -v ref="refs/heads/$branch" '
+    /^worktree / { dir=$2 }
+    /^branch / && $2 == ref { print dir; exit }
+  ')
+
+  if [[ -n "$existing_dir" ]]; then
     if (( force )); then
-      echo "Force: removing existing worktree at $worktree_dir"
-      git worktree remove "$worktree_dir" --force 2>/dev/null
-      rm -rf "$worktree_dir"
-    elif git -C "$worktree_dir" rev-parse --git-dir 2>/dev/null | grep -q "/.git/worktrees/"; then
-      cd "$worktree_dir" && echo "Worktree already exists at $worktree_dir"
-      return 0
+      echo "Force: removing existing worktree at $existing_dir"
+      git worktree remove "$existing_dir" --force 2>/dev/null
+      command rm -rf "$existing_dir"
     else
-      echo "Directory exists but is not a worktree: $worktree_dir (use -f to force)"
+      cd "$existing_dir" && echo "Worktree already exists at $existing_dir"
+      return 0
+    fi
+  elif [ -d "$worktree_dir" ]; then
+    if (( force )); then
+      echo "Force: removing existing directory at $worktree_dir"
+      git worktree remove "$worktree_dir" --force 2>/dev/null
+      command rm -rf "$worktree_dir"
+    else
+      echo "Directory exists but is not a worktree for '$branch': $worktree_dir (use -f to force)"
       return 1
     fi
   fi
