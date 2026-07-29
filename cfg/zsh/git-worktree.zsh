@@ -1,10 +1,11 @@
-# Usage: gwt [-f] <pr-number|pr-url|branch>
+# Usage: gwt [-f] [-b] <pr-number|pr-url|branch>
 # Examples:
 #   gwt 123                                          (PR # — resolves against the repo in the current cwd)
 #   gwt https://github.com/owner/repo/pull/123       (PR URL — cd to ~/projects/repo first, then resolve)
 #   gwt feature/foo                                  (branch in the current cwd)
 #   gwt -f 123                                        (force: blow away existing dir)
-# With -f: also creates a new branch off main if the branch doesn't exist on remote
+#   gwt -b new-branch-name                            (create a new local branch off HEAD, no push)
+# With -f (no -b): also creates a new branch off main if the branch doesn't exist on remote
 
 # Local-only env/config files copied from the main repo into each new worktree
 # (space-separated globs, relative to the repo root). Override in your shell to
@@ -12,20 +13,32 @@
 : ${GWT_COPY_GLOBS:=".env .env.* .envrc"}
 
 gwt() {
-  local force=0
-  if [[ "$1" == "-f" ]]; then
-    force=1
+  local force=0 new_branch=0
+  while [[ "$1" == -* ]]; do
+    case "$1" in
+      -f) force=1 ;;
+      -b) new_branch=1 ;;
+      *) echo "Unknown flag: $1"; return 1 ;;
+    esac
     shift
-  fi
+  done
 
   local input="$1"
   if [[ -z "$input" ]]; then
-    echo "Usage: gwt [-f] <pr-number|branch>"
+    echo "Usage: gwt [-f] [-b] <pr-number|branch>"
     return 1
   fi
 
   local branch
-  if [[ "$input" =~ '^https?://github\.com/([^/]+)/([^/]+)/pull/([0-9]+)' ]]; then
+  if (( new_branch )); then
+    # -b: treat input as a brand-new local branch name off current HEAD —
+    # no PR/URL resolution, no fetch, no push.
+    if ! git rev-parse --git-dir >/dev/null 2>&1; then
+      echo "Not in a git repository: $(pwd)"
+      return 1
+    fi
+    branch="$input"
+  elif [[ "$input" =~ '^https?://github\.com/([^/]+)/([^/]+)/pull/([0-9]+)' ]]; then
     # It's a PR URL — ignore cwd, switch to the main repo dir under ~/projects
     local pr_repo="${match[1]}/${match[2]}"
     local pr_num="${match[3]}"
@@ -91,7 +104,10 @@ gwt() {
     fi
   fi
 
-  if git fetch origin "$branch" 2>/dev/null; then
+  if (( new_branch )); then
+    git worktree add -b "$branch" "$worktree_dir" HEAD || return 1
+    echo "Created new local branch '$branch' off HEAD (not pushed)"
+  elif git fetch origin "$branch" 2>/dev/null; then
     if git show-ref --verify --quiet "refs/heads/$branch"; then
       git worktree add "$worktree_dir" "$branch" || return 1
     else
