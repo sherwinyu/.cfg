@@ -30,51 +30,8 @@
       "WebFetch(domain:wezterm.org)"
     ]
   },
+  "model": "opus[1m]",
   "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/opt/homebrew/bin/watchdog-client"
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/opt/homebrew/bin/watchdog-client"
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/opt/homebrew/bin/watchdog-client"
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/opt/homebrew/bin/watchdog-client"
-          }
-        ]
-      }
-    ],
     "UserPromptSubmit": [
       {
         "matcher": "*",
@@ -139,6 +96,5 @@
       "decision_needed": "User decision needed",
       "review_required": "Please review completed work"
     }
-  },
-  "model": "sonnet"
+  }
 }
