@@ -34,6 +34,7 @@ writeToProfile("karabiner-config-profile", [
   fg_hyper(),
   backslash_hyper_rule(),
   capslock_zoot_rule(),
+  return_zoot_rule(),
   text_editing_layer(),
   sel_layer(),
   del_layer(),
@@ -321,6 +322,24 @@ function capslock_zoot_rule() {
     appleKeyboardOnly([
       map("caps_lock", { optional: "any" })
         .toIfAlone("escape")
+        .toIfHeldDown({
+          key_code: "left_command",
+          modifiers: ["left_control", "left_option"],
+        })
+        .toDelayedAction(toKey("vk_none"), toKey("vk_none"))
+        .parameters({
+          "basic.to_if_alone_timeout_milliseconds": 500,
+          "basic.to_if_held_down_threshold_milliseconds": 0,
+        }),
+    ]),
+  );
+}
+
+function return_zoot_rule() {
+  return rule("Return => Return or Zoot (Ctrl+Option+Cmd)").manipulators(
+    appleKeyboardOnly([
+      map("return_or_enter")
+        .toIfAlone("return_or_enter")
         .toIfHeldDown({
           key_code: "left_command",
           modifiers: ["left_control", "left_option"],
