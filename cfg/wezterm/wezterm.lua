@@ -602,9 +602,26 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 		title = string.format("[%s] %s", workspace, title)
 	end
 
-	return {
-		{ Text = " " .. title .. " " },
-	}
+	local tab_title_elements = {}
+	if tab.is_active then
+		table.insert(tab_title_elements, {
+			Background = { Color = "#89b4fa" },
+		})
+		table.insert(tab_title_elements, {
+			Foreground = { Color = "#1e1e2e" },
+		})
+		table.insert(tab_title_elements, {
+			Attribute = { Intensity = "Bold" },
+		})
+	else
+		-- Keep inactive tab labels readable against the color-scheme background.
+		table.insert(tab_title_elements, {
+			Foreground = { Color = hover and "#ffffff" or "#cdd6f4" },
+		})
+	end
+	table.insert(tab_title_elements, { Text = " " .. title .. " " })
+
+	return tab_title_elements
 end)
 
 -- Window title with workspace and full directory path
@@ -765,4 +782,3 @@ wezterm.on("gui-startup", function(cmd)
 end)
 
 return config
-

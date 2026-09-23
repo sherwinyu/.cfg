@@ -318,10 +318,21 @@ function backslash_hyper_rule() {
 }
 
 function capslock_zoot_rule() {
-  return rule("Capslock => Zoot (Ctrl+Option+Cmd)").manipulators(
+  return rule("Capslock / ] => Zoot (Ctrl+Option+Cmd)").manipulators(
     appleKeyboardOnly([
       map("caps_lock", { optional: "any" })
         .toIfAlone("escape")
+        .toIfHeldDown({
+          key_code: "left_command",
+          modifiers: ["left_control", "left_option"],
+        })
+        .toDelayedAction(toKey("vk_none"), toKey("vk_none"))
+        .parameters({
+          "basic.to_if_alone_timeout_milliseconds": 500,
+          "basic.to_if_held_down_threshold_milliseconds": 0,
+        }),
+      map("close_bracket", { optional: "any" })
+        .toIfAlone("close_bracket")
         .toIfHeldDown({
           key_code: "left_command",
           modifiers: ["left_control", "left_option"],

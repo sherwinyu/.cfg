@@ -30,7 +30,7 @@
       "WebFetch(domain:wezterm.org)"
     ]
   },
-  "model": "opus[1m]",
+  "model": "sonnet",
   "hooks": {
     "UserPromptSubmit": [
       {
@@ -49,10 +49,9 @@
     "buddy-glasses@gamma-internal-plugins": true,
     "vercel@claude-plugins-official": true
   },
-  "fastMode": true,
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
-  "theme": "light",
+  "theme": "auto",
   "preferredNotifChannel": "terminal_bell",
   "notifications": {
     "enabled": true,
