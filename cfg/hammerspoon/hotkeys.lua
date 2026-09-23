@@ -1,25 +1,20 @@
 function ToggleApp(appName)
-	local app = hs.application.get(appName)
-	-- Fallback: search running apps, preferring exact name match over substring
-	if not app then
-		local running = hs.application.runningApplications()
-		local partial = nil
-		for _, a in ipairs(running) do
-			local name = a:name() or ""
-			if name:lower() == appName:lower() then
-				app = a
-				break
-			elseif not partial and name:lower():find(appName:lower(), 1, true) then
-				partial = a
-			end
-		end
-		if not app then
-			app = partial
+	-- Search applications directly so a matching window title cannot be selected.
+	local app = nil
+	local partial = nil
+	for _, a in ipairs(hs.application.runningApplications()) do
+		local name = a:title() or ""
+		if name:lower() == appName:lower() then
+			app = a
+			break
+		elseif not partial and name:lower():find(appName:lower(), 1, true) then
+			partial = a
 		end
 	end
+	app = app or partial
 
 	if app then
-		print("ToggleApp:", appName, "found:", app:name(), "pid:", app:pid(), "frontmost:", app:isFrontmost())
+		print("ToggleApp:", appName, "found:", app:title(), "pid:", app:pid(), "frontmost:", app:isFrontmost())
 		if app:isFrontmost() then
 			app:hide()
 			-- Some apps (e.g. Arc) ignore programmatic hide; fall back to Cmd+H
