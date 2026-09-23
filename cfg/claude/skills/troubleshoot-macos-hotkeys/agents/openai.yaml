@@ -1,0 +1,4 @@
+interface:
+  display_name: "Troubleshoot macOS Hotkeys"
+  short_description: "Diagnose Karabiner and Hammerspoon hotkey failures"
+  default_prompt: "Use $troubleshoot-macos-hotkeys to diagnose why my keyboard shortcut or remapping is not working."
