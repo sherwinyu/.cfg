@@ -14,9 +14,9 @@ alias ccyolo='claude --dangerously-skip-permissions'
 alias yolo='claude --dangerously-skip-permissions'
 
 # CODEX CLI ALIASES
-alias cdxyolo='codex --dangerously-bypass-approvals-and-sandbox'
-alias cdxyl='codex --dangerously-bypass-approvals-and-sandbox --model gpt-5.6-luna -c model_reasoning_effort=high -c service_tier=fast'
-alias cdxyk='codex --dangerously-bypass-approvals-and-sandbox --model gpt-5.3-codex-spark -c service_tier=fast'
+alias cdxyolo='codex --profile dotfiles --dangerously-bypass-approvals-and-sandbox'
+alias cdxyl='codex --profile dotfiles --dangerously-bypass-approvals-and-sandbox --model gpt-5.6-luna -c model_reasoning_effort=high -c service_tier=fast'
+alias cdxyk='codex --profile dotfiles --dangerously-bypass-approvals-and-sandbox --model gpt-5.3-codex-spark -c service_tier=fast'
 
 alias egrep='egrep --color=auto -i'
 

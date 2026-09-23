@@ -1,0 +1,129 @@
+#!/usr/bin/env python3
+"""
+CLI to query Claude Code tool usage stats.
+
+Usage:
+  claude-tools                     # list repos
+  claude-tools <repo>              # show tool counts
+  claude-tools <repo> --perms      # show permission strings (for allowlisting)
+  claude-tools <repo> --raw        # show recent raw entries
+  claude-tools <repo> --since 7    # last 7 days
+"""
+import argparse
+import sqlite3
+from pathlib import Path
+
+
+DB_DIR = Path.home() / ".claude" / "tool-usage"
+
+
+def list_repos():
+    if not DB_DIR.exists():
+        print("No usage data yet.")
+        return
+    repos = sorted(f.stem for f in DB_DIR.glob("*.db"))
+    if not repos:
+        print("No usage data yet.")
+    else:
+        print("Repos with data:")
+        for r in repos:
+            db = DB_DIR / f"{r}.db"
+            size = db.stat().st_size // 1024
+            conn = sqlite3.connect(db)
+            count = conn.execute("SELECT COUNT(*) FROM tool_usage").fetchone()[0]
+            conn.close()
+            print(f"  {r:<30} {count:>6} entries  ({size}KB)")
+
+
+def query_repo(repo, since_days, show_perms, show_raw, tool_filter):
+    db_path = DB_DIR / f"{repo}.db"
+    if not db_path.exists():
+        print(f"No data for repo: {repo}")
+        return
+
+    conn = sqlite3.connect(db_path)
+
+    # Filter by specific tool
+    if tool_filter:
+        print(f"\n=== {tool_filter} entries (last {since_days} days) - {repo} ===\n")
+        rows = conn.execute(f"""
+            SELECT permission_string, timestamp FROM tool_usage
+            WHERE tool_name = ? AND timestamp > datetime('now', '-{since_days} days')
+            ORDER BY timestamp DESC LIMIT 100
+        """, (tool_filter,)).fetchall()
+        for perm, ts in rows:
+            print(f"{ts[:16]}  {perm}")
+        conn.close()
+        return
+
+    if show_raw:
+        print(f"\n=== Recent Entries (last 50) - {repo} ===\n")
+        rows = conn.execute("""
+            SELECT permission_string, timestamp FROM tool_usage
+            ORDER BY timestamp DESC LIMIT 50
+        """).fetchall()
+        for perm, ts in rows:
+            print(f"{ts[:16]}  {perm}")
+        conn.close()
+        return
+
+    print(f"\n=== Tool Usage (last {since_days} days) - {repo} ===\n")
+
+    # Tool counts
+    rows = conn.execute(f"""
+        SELECT tool_name, COUNT(*) as cnt FROM tool_usage
+        WHERE timestamp > datetime('now', '-{since_days} days')
+        GROUP BY tool_name ORDER BY cnt DESC
+    """).fetchall()
+
+    print("Tool                          Count")
+    print("-" * 40)
+    for tool, cnt in rows:
+        print(f"{tool:<30} {cnt:>5}")
+
+    if show_perms:
+        print(f"\n=== Permission Strings (for allowlist) ===\n")
+        rows = conn.execute(f"""
+            SELECT permission_string, COUNT(*) as cnt FROM tool_usage
+            WHERE timestamp > datetime('now', '-{since_days} days')
+              AND permission_string IS NOT NULL
+            GROUP BY permission_string ORDER BY cnt DESC
+            LIMIT 100
+        """).fetchall()
+
+        print("Count  Permission String")
+        print("-" * 70)
+        for perm, cnt in rows:
+            print(f"{cnt:>5}  {perm}")
+
+    conn.close()
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Query Claude Code tool usage stats",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  claude-tools                     List repos with data
+  claude-tools gamma               Show tool counts for gamma
+  claude-tools gamma --perms       Show permission strings for allowlisting
+  claude-tools gamma --raw         Show recent raw entries
+  claude-tools gamma --since 7     Show last 7 days only
+        """
+    )
+    parser.add_argument("repo", nargs="?", help="Repo name")
+    parser.add_argument("--perms", action="store_true", help="Show permission strings")
+    parser.add_argument("--raw", action="store_true", help="Show raw recent entries")
+    parser.add_argument("--tool", type=str, help="Filter by tool name (Read, Bash, Edit, etc.)")
+    parser.add_argument("--since", type=int, default=30, help="Days to look back (default: 30)")
+    args = parser.parse_args()
+
+    if not args.repo:
+        list_repos()
+    else:
+        query_repo(args.repo, args.since, args.perms, args.raw, args.tool)
+
+
+if __name__ == "__main__":
+    main()

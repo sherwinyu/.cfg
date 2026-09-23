@@ -1,0 +1,2 @@
+prefix_rule(pattern=["node", "/Users/sherwin/.codex/skills/.system/openai-docs/scripts/fetch-codex-manual.mjs"], decision="allow")
+prefix_rule(pattern=["gh", "repo", "view", "--json", "nameWithOwner,url"], decision="allow")
