@@ -57,14 +57,5 @@ return {
 		config = function(_, opts)
 			require("litee.symboltree").setup(opts)
 		end,
-		keys = {
-			{
-				"<leader>cs",
-				function()
-					require("litee.symboltree").open_to()
-				end,
-				desc = "LSP: Symbol tree",
-			},
-		},
 	},
 }
