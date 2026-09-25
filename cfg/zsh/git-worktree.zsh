@@ -1,31 +1,151 @@
-# Usage: gwt [-f] [-b] <pr-number|pr-url|branch>
+# Usage: gwt [-f] [-b] <pr-number|pr-url|branch> | gwt [-f] -l <issue-number|ABC-123>
 # Examples:
 #   gwt 123                                          (PR # — resolves against the repo in the current cwd)
 #   gwt https://github.com/owner/repo/pull/123       (PR URL — cd to ~/projects/repo first, then resolve)
 #   gwt feature/foo                                  (branch in the current cwd)
 #   gwt -f 123                                        (force: blow away existing dir)
 #   gwt -b new-branch-name                            (create a new local branch off HEAD, no push)
+#   gwt -l 120                                        (find a Linear issue by number)
+#   gwt -l SHE-120                                    (find a Linear issue by identifier)
 # With -f (no -b): also creates a new branch off main if the branch doesn't exist on remote
+# Linear lookup requires LINEAR_API_KEY and uses fzf when there are multiple matches.
 
 # Local-only env/config files copied from the main repo into each new worktree
 # (space-separated globs, relative to the repo root). Override in your shell to
 # add/remove entries, e.g. export GWT_COPY_GLOBS=".env .env.* .envrc .tool-versions"
 : ${GWT_COPY_GLOBS:=".env .env.* .envrc"}
 
+_gwt_linear_api() {
+  local query="$1" response error
+  response=$(jq -nc --arg query "$query" '{query: $query}' |
+    curl --silent --show-error --fail -X POST \
+      -H 'Content-Type: application/json' \
+      -H "Authorization: $LINEAR_API_KEY" \
+      --data-binary @- https://api.linear.app/graphql) || {
+    echo "Linear API request failed" >&2
+    return 1
+  }
+  error=$(print -r -- "$response" | jq -r '.errors[0].message // empty') || return 1
+  if [[ -n "$error" ]]; then
+    echo "Linear API error: $error" >&2
+    return 1
+  fi
+  print -r -- "$response"
+}
+
+_gwt_linear_target() {
+  local issue="${(U)1}" identifier response query cursor after issue_list='[]'
+  local attachments='[]' pr_list pr_count choice branch dependency
+
+  if [[ -z "${LINEAR_API_KEY:-}" ]]; then
+    echo "Set LINEAR_API_KEY to use gwt -l" >&2
+    return 1
+  fi
+  for dependency in jq curl; do
+    if ! command -v "$dependency" >/dev/null 2>&1; then
+      echo "gwt -l requires $dependency" >&2
+      return 1
+    fi
+  done
+
+  if [[ "$issue" =~ '^[A-Z]{3}-[0-9]+$' ]]; then
+    identifier="$issue"
+  elif [[ "$issue" =~ '^[0-9]+$' ]]; then
+    issue="$((10#$issue))"
+    cursor=''
+    while true; do
+      after=''
+      [[ -n "$cursor" ]] && after=", after: $(jq -Rn --arg value "$cursor" '$value')"
+      query="query { issues(first: 100, includeArchived: true, filter: { number: { eq: $issue } }$after) { nodes { identifier title } pageInfo { hasNextPage endCursor } } }"
+      response=$(_gwt_linear_api "$query") || return 1
+      issue_list=$(print -r -- "$response" | jq -c --argjson previous "$issue_list" '$previous + (.data.issues.nodes // [])') || return 1
+      if [[ "$(print -r -- "$response" | jq -r '.data.issues.pageInfo.hasNextPage')" != true ]]; then
+        break
+      fi
+      cursor=$(print -r -- "$response" | jq -r '.data.issues.pageInfo.endCursor // empty')
+      [[ -n "$cursor" ]] || { echo "Linear returned an incomplete issue page" >&2; return 1; }
+    done
+    local issue_count=$(print -r -- "$issue_list" | jq 'length')
+    if (( issue_count == 0 )); then
+      echo "No Linear issue found for number $issue" >&2
+      return 1
+    elif (( issue_count == 1 )); then
+      identifier=$(print -r -- "$issue_list" | jq -r '.[0].identifier')
+    else
+      command -v fzf >/dev/null 2>&1 || { echo "Multiple Linear issues found; install fzf to choose one" >&2; return 1; }
+      choice=$(print -r -- "$issue_list" | jq -r '.[] | [.identifier, (.title | gsub("[\\t\\r\\n]"; " "))] | @tsv' |
+        fzf --prompt='Linear issue> ' --height=40% --reverse --delimiter=$'\t') || return 1
+      identifier="${choice%%$'\t'*}"
+    fi
+  else
+    echo "Expected a Linear issue number or three-letter identifier (e.g. SHE-120): $issue" >&2
+    return 1
+  fi
+
+  cursor=''
+  while true; do
+    after=''
+    [[ -n "$cursor" ]] && after=", after: $(jq -Rn --arg value "$cursor" '$value')"
+    query="query { issue(id: \"$identifier\") { identifier title branchName attachments(first: 100$after) { nodes { url title } pageInfo { hasNextPage endCursor } } } }"
+    response=$(_gwt_linear_api "$query") || return 1
+    if [[ "$(print -r -- "$response" | jq -r '.data.issue.identifier // empty')" != "$identifier" ]]; then
+      echo "Linear issue not found: $identifier" >&2
+      return 1
+    fi
+    attachments=$(print -r -- "$response" | jq -c --argjson previous "$attachments" '$previous + (.data.issue.attachments.nodes // [])') || return 1
+    if [[ "$(print -r -- "$response" | jq -r '.data.issue.attachments.pageInfo.hasNextPage')" != true ]]; then
+      break
+    fi
+    cursor=$(print -r -- "$response" | jq -r '.data.issue.attachments.pageInfo.endCursor // empty')
+    [[ -n "$cursor" ]] || { echo "Linear returned an incomplete attachment page" >&2; return 1; }
+  done
+
+  pr_list=$(print -r -- "$attachments" | jq -c '[.[] | select(.url | test("^https://github\\.com/[^/]+/[^/]+/pull/[0-9]+($|[/?#])"; "i"))] | unique_by(.url)') || return 1
+  pr_count=$(print -r -- "$pr_list" | jq 'length')
+  if (( pr_count == 1 )); then
+    choice=$(print -r -- "$pr_list" | jq -r '.[0].url')
+  elif (( pr_count > 1 )); then
+    command -v fzf >/dev/null 2>&1 || { echo "Multiple Linear PRs found; install fzf to choose one" >&2; return 1; }
+    choice=$(print -r -- "$pr_list" | jq -r '.[] | [.url, ((.title // "") | gsub("[\\t\\r\\n]"; " "))] | @tsv' |
+      fzf --prompt="PR for $identifier> " --height=40% --reverse --delimiter=$'\t' --with-nth=2,1) || return 1
+    choice="${choice%%$'\t'*}"
+  else
+    branch=$(print -r -- "$response" | jq -r '.data.issue.branchName // empty') || return 1
+    if [[ -z "$branch" ]]; then
+      echo "Linear issue $identifier has no linked GitHub PR or branch name" >&2
+      return 1
+    fi
+    choice="$branch"
+  fi
+  echo "Linear $identifier → $choice" >&2
+  print -r -- "$choice"
+}
+
 gwt() {
-  local force=0 new_branch=0
+  local force=0 new_branch=0 linear_issue=''
   while [[ "$1" == -* ]]; do
     case "$1" in
       -f) force=1 ;;
       -b) new_branch=1 ;;
+      -l)
+        shift
+        [[ -n "$1" && "$1" != -* ]] || { echo "Usage: gwt [-f] -l <issue-number|ABC-123>"; return 1; }
+        linear_issue="$1" ;;
       *) echo "Unknown flag: $1"; return 1 ;;
     esac
     shift
   done
 
   local input="$1"
+  if [[ -n "$linear_issue" ]]; then
+    if (( new_branch )) || [[ -n "$input" ]]; then
+      echo "Use -l with an issue only; it cannot be combined with -b or another target"
+      return 1
+    fi
+    input=$(_gwt_linear_target "$linear_issue") || return 1
+  fi
   if [[ -z "$input" ]]; then
-    echo "Usage: gwt [-f] [-b] <pr-number|branch>"
+    echo "Usage: gwt [-f] [-b] <pr-number|pr-url|branch> | gwt [-f] -l <issue-number|ABC-123>"
     return 1
   fi
 
