@@ -78,7 +78,7 @@ return {
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		event = { "BufReadPost", "BufNewFile" },
-		cmd = { "TSContext" },
+		cmd = { "TSContext", "ContextAlwaysToggle" },
 		init = function()
 			vim.api.nvim_create_user_command("ContextUp", function(command)
 				context_up(command.count)
@@ -101,13 +101,23 @@ return {
 				"<cmd>TSContext toggle<cr>",
 				desc = "Context: toggle sticky hierarchy",
 			},
+			{
+				"<leader>uT",
+				"<cmd>ContextAlwaysToggle<cr>",
+				desc = "Context: toggle always-show breadcrumbs",
+			},
 		},
 		opts = {
+			enable = false, -- The always-show winbar is the default context display.
 			max_lines = 3,
 			multiline_threshold = 3,
 			trim_scope = "outer",
 			mode = "cursor",
 			separator = "─",
 		},
+		config = function(_, opts)
+			require("treesitter-context").setup(opts)
+			require("mylib.context_breadcrumbs").setup()
+		end,
 	},
 }
