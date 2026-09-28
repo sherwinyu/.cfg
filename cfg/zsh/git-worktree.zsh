@@ -35,14 +35,17 @@ _gwt_linear_api() {
 
 _gwt_linear_target() {
   local issue="${(U)1}" identifier response query cursor after issue_list='[]'
-  local attachments='[]' pr_list pr_count choice branch dependency
+  local attachments='[]' pr_list pr_count choice branch
 
-  for dependency in jq linear-cli; do
-    if ! command -v "$dependency" >/dev/null 2>&1; then
-      echo "gwt -l requires $dependency" >&2
-      return 1
-    fi
-  done
+  if ! command -v linear-cli >/dev/null 2>&1; then
+    echo "gwt -l requires linear-cli: https://github.com/nesszer/linear-cli/releases" >&2
+    echo "After installing, sign in: linear-cli auth oauth --secure --scopes read" >&2
+    return 1
+  fi
+  if ! command -v jq >/dev/null 2>&1; then
+    echo "gwt -l requires jq" >&2
+    return 1
+  fi
 
   if [[ "$issue" =~ '^[A-Z]{3}-[0-9]+$' ]]; then
     identifier="$issue"
