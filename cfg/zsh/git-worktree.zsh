@@ -8,7 +8,7 @@
 #   gwt -l 120                                        (find a Linear issue by number)
 #   gwt -l SHE-120                                    (find a Linear issue by identifier)
 # With -f (no -b): also creates a new branch off main if the branch doesn't exist on remote
-# Linear lookup requires LINEAR_API_KEY and uses fzf when there are multiple matches.
+# Linear lookup uses linear-cli's browser OAuth login and fzf for multiple matches.
 
 # Local-only env/config files copied from the main repo into each new worktree
 # (space-separated globs, relative to the repo root). Override in your shell to
@@ -17,12 +17,12 @@
 
 _gwt_linear_api() {
   local query="$1" response error
-  response=$(jq -nc --arg query "$query" '{query: $query}' |
-    curl --silent --show-error --fail -X POST \
-      -H 'Content-Type: application/json' \
-      -H "Authorization: $LINEAR_API_KEY" \
-      --data-binary @- https://api.linear.app/graphql) || {
-    echo "Linear API request failed" >&2
+  response=$(linear-cli api query --output json --compact --no-pager "$query" 2>&1) || {
+    error=$(print -r -- "$response" | jq -r '.message // empty' 2>/dev/null)
+    if [[ "$error" == *'No workspace selected'* ]]; then
+      error='Not signed in. Run: linear-cli auth oauth --secure --scopes read'
+    fi
+    echo "Linear CLI error: ${error:-${response:-query failed}}" >&2
     return 1
   }
   error=$(print -r -- "$response" | jq -r '.errors[0].message // empty') || return 1
@@ -37,11 +37,7 @@ _gwt_linear_target() {
   local issue="${(U)1}" identifier response query cursor after issue_list='[]'
   local attachments='[]' pr_list pr_count choice branch dependency
 
-  if [[ -z "${LINEAR_API_KEY:-}" ]]; then
-    echo "Set LINEAR_API_KEY to use gwt -l" >&2
-    return 1
-  fi
-  for dependency in jq curl; do
+  for dependency in jq linear-cli; do
     if ! command -v "$dependency" >/dev/null 2>&1; then
       echo "gwt -l requires $dependency" >&2
       return 1
