@@ -96,22 +96,11 @@ return {
 				end
 			end
 
-			-- React immediately on focus, and check while Neovim stays focused.
+			-- Update the theme when Neovim gains focus or resumes.
 			vim.api.nvim_create_autocmd({ "FocusGained", "VimResume" }, {
 				group = vim.api.nvim_create_augroup("auto_theme_switcher", { clear = true }),
 				callback = update_theme_from_system,
 			})
-
-			local timer = vim.uv.new_timer()
-			if timer then
-				timer:start(5000, 5000, vim.schedule_wrap(update_theme_from_system))
-				vim.api.nvim_create_autocmd("VimLeavePre", {
-					callback = function()
-						timer:stop()
-						timer:close()
-					end,
-				})
-			end
 		end,
 	},
 
