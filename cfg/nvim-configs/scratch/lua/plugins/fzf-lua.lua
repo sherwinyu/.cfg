@@ -39,6 +39,7 @@ return {
 			-- Help & keymaps
 			{ "<leader>sh", "<cmd>FzfLua help_tags<cr>", desc = "Help" },
 			{ "<leader>sk", "<cmd>FzfLua keymaps<cr>", desc = "Keymaps" },
+			{ "<leader>sC", "<cmd>FzfLua colorschemes<cr>", desc = "Pick color scheme" },
 			{ "<leader>:", "<cmd>FzfLua command_history<cr>", desc = "Command history" },
 			-- Git
 			{ "<leader>gc", "<cmd>FzfLua git_commits<cr>", desc = "Git commits" },

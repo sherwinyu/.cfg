@@ -44,6 +44,7 @@ return {
 		},
 		config = function(_, opts)
 			require("tokyonight").setup(opts)
+			local last_system_appearance
 
 			-- Function to detect macOS appearance
 			local function get_macos_appearance()
@@ -83,19 +84,34 @@ return {
 				end)
 			end
 
-			-- Set initial theme
-			set_theme_from_system()
+			-- Read macOS appearance at startup, then only switch when it changes.
+			last_system_appearance = get_macos_appearance()
+			set_theme_from_system(last_system_appearance)
 
-			-- Update theme when Neovim gains focus (event-based, no polling!)
+			local function update_theme_from_system()
+				local appearance = get_macos_appearance()
+				if appearance ~= last_system_appearance then
+					last_system_appearance = appearance
+					set_theme_from_system(appearance)
+				end
+			end
+
+			-- React immediately on focus, and check while Neovim stays focused.
 			vim.api.nvim_create_autocmd({ "FocusGained", "VimResume" }, {
 				group = vim.api.nvim_create_augroup("auto_theme_switcher", { clear = true }),
-				callback = function()
-					local appearance = get_macos_appearance()
-					if appearance ~= vim.o.background then
-						set_theme_from_system(appearance)
-					end
-				end,
+				callback = update_theme_from_system,
 			})
+
+			local timer = vim.uv.new_timer()
+			if timer then
+				timer:start(5000, 5000, vim.schedule_wrap(update_theme_from_system))
+				vim.api.nvim_create_autocmd("VimLeavePre", {
+					callback = function()
+						timer:stop()
+						timer:close()
+					end,
+				})
+			end
 		end,
 	},
 
