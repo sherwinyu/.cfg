@@ -102,5 +102,6 @@ config commit -m "message"
 - **Update existing config**: Edit in workspace, test functionality, commit changes
 - **WezTerm changes**: Always update workspace function if paths change
 - **Testing**: Use tool-specific commands to validate before committing
+- **`nvb` feature changes**: Read `nvim-configs/scratch/FEATURES.md` before changing custom workflows. Preserve its acceptance criteria when replacing plugins or Lua modules; update the stories and implementation table in the same commit when behavior or bindings change.
 
 This setup enables efficient, keyboard-driven configuration management with automatic workspace setup and proper git integration.

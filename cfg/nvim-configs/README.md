@@ -33,6 +33,7 @@ Each experimental profile gets isolated:
 - **Approach**: Experiment building from ground up with lazy.nvim
 - **Philosophy**: Understand each component, minimal essential setup
 - **Location**: `~/cfg/nvim-configs/scratch/`
+- **Feature contract**: [scratch/FEATURES.md](scratch/FEATURES.md) describes the custom workflows to preserve as implementations change.
 
 ## Aliases
 
