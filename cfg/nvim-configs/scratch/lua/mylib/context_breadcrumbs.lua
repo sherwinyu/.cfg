@@ -4,7 +4,7 @@ local enabled = true
 local saved_winbars = {}
 local rendered_winbars = {}
 
-local function context_query(bufnr)
+local function parsed_language(bufnr)
 	local ok_parser, parser = pcall(vim.treesitter.get_parser, bufnr)
 	if not ok_parser or not parser then
 		return nil
@@ -12,32 +12,118 @@ local function context_query(bufnr)
 	if not pcall(parser.parse, parser) then
 		return nil
 	end
-	local ok_query, query = pcall(vim.treesitter.query.get, parser:lang(), "context")
-	return ok_query and query or nil
+	return parser:lang()
 end
 
-local function is_context(node, query, bufnr)
-	local row = node:start()
-	for _, match in query:iter_matches(node, bufnr, row, row + 1, { max_start_depth = 0 }) do
-		for id, captures in pairs(match) do
-			if query.captures[id] == "context" then
-				local captured = type(captures) == "table" and captures[#captures] or captures
-				if captured == node then
-					return true
+local classes = {
+	class_declaration = true,
+	class_definition = true,
+	class_expression = true,
+	abstract_class_declaration = true,
+	interface_declaration = true,
+}
+
+local functions = {
+	function_declaration = true,
+	generator_function_declaration = true,
+	function_definition = true,
+	function_expression = true,
+	generator_function = true,
+	method_definition = true,
+}
+
+local name_types = {
+	identifier = true,
+	property_identifier = true,
+	private_property_identifier = true,
+	type_identifier = true,
+	field_identifier = true,
+	dotted_name = true,
+	dot_index_expression = true,
+	method_index_expression = true,
+}
+
+local function name_text(node, bufnr)
+	if not node or not name_types[node:type()] then
+		return nil
+	end
+	local name = vim.trim(vim.treesitter.get_node_text(node, bufnr):gsub("%s+", " "))
+	return name ~= "" and name or nil
+end
+
+local function assigned_name(node, bufnr)
+	local parent = node:parent()
+	while parent and (
+		parent:type() == "parenthesized_expression"
+		or parent:type() == "as_expression"
+		or parent:type() == "satisfies_expression"
+		or parent:type() == "type_assertion"
+	) do
+		node, parent = parent, parent:parent()
+	end
+	if not parent then
+		return nil
+	end
+	local kind = parent:type()
+	if kind == "variable_declarator" and parent:field("value")[1] == node then
+		return name_text(parent:field("name")[1], bufnr)
+	end
+	if kind == "pair" and parent:field("value")[1] == node then
+		return name_text(parent:field("key")[1], bufnr)
+	end
+	if kind == "expression_list" and parent:parent() and parent:parent():type() == "assignment_statement" then
+		local assignment = parent:parent()
+		local variables = assignment:named_child(0)
+		if variables and variables:type() == "variable_list" then
+			for i = 0, parent:named_child_count() - 1 do
+				if parent:named_child(i) == node then
+					return name_text(variables:named_child(i), bufnr)
 				end
 			end
 		end
 	end
-	return false
+	return nil
+end
+
+local function scope_label(node, bufnr)
+	local kind = node:type()
+	if classes[kind] or functions[kind] then
+		local label = name_text(node:field("name")[1], bufnr)
+		if not label then
+			label = assigned_name(node, bufnr)
+		end
+		return label, classes[kind] and "class" or "function"
+	end
+	if kind == "arrow_function" then
+		return assigned_name(node, bufnr), "function"
+	end
+	return nil
+end
+
+local function fit(text, width)
+	if width <= 0 then
+		return ""
+	end
+	if vim.fn.strdisplaywidth(text) <= width then
+		return text
+	end
+	if width == 1 then
+		return "…"
+	end
+	local chars = vim.fn.strchars(text)
+	while chars > 0 and vim.fn.strdisplaywidth(vim.fn.strcharpart(text, 0, chars)) > width - 1 do
+		chars = chars - 1
+	end
+	return vim.fn.strcharpart(text, 0, chars) .. "…"
 end
 
 local function breadcrumbs(winid)
 	local bufnr = vim.api.nvim_win_get_buf(winid)
 	local path = vim.api.nvim_buf_get_name(bufnr)
 	local parts = { path ~= "" and vim.fn.fnamemodify(path, ":t") or "[No Name]" }
-	local query = context_query(bufnr)
-	if not query then
-		return parts[1]
+	local width = math.max(1, vim.api.nvim_win_get_width(winid) - 2)
+	if not parsed_language(bufnr) then
+		return fit(parts[1], width)
 	end
 
 	local cursor = vim.api.nvim_win_get_cursor(winid)
@@ -47,37 +133,46 @@ local function breadcrumbs(winid)
 		ignore_injections = true,
 	})
 	if not ok_node then
-		return parts[1]
+		return fit(parts[1], width)
 	end
 
-	local labels = {}
-	local seen_rows = {}
+	local scopes = {}
 	while node do
-		local row = node:start()
-		if not seen_rows[row] and is_context(node, query, bufnr) then
-			local line = vim.api.nvim_buf_get_lines(bufnr, row, row + 1, false)[1] or ""
-			local label = vim.trim(line:gsub("%s+", " "))
-			label = label:gsub("^local function ", "")
-			label = label:gsub("^async function ", "")
-			label = label:gsub("^function ", "")
-			label = label:gsub("^def ", "")
-			label = label:gsub("^class ", "")
-			label = label:gsub(" then$", "")
-			if label ~= "" then
-				table.insert(labels, 1, vim.fn.strcharpart(label, 0, 48))
-				seen_rows[row] = true
-			end
+		local label, kind = scope_label(node, bufnr)
+		if label then
+			table.insert(scopes, { label = fit(label, 48), kind = kind })
 		end
 		node = node:parent()
 	end
 
-	while #labels > 3 do
-		table.remove(labels, 1)
+	local selected = {}
+	for i = 1, math.min(3, #scopes) do
+		table.insert(selected, scopes[i])
 	end
-	vim.list_extend(parts, labels)
-	local width = math.max(20, vim.api.nvim_win_get_width(winid) - 4)
+	for i = #selected + 1, #scopes do
+		if scopes[i].kind == "class" then
+			if #selected == 3 then
+				selected[3] = scopes[i]
+			else
+				table.insert(selected, scopes[i])
+			end
+			break
+		end
+	end
+	for i = #selected, 1, -1 do
+		table.insert(parts, selected[i].label)
+	end
+
 	while #parts > 2 and vim.fn.strdisplaywidth(table.concat(parts, " › ")) > width do
-		table.remove(parts, 2)
+		table.remove(parts, #parts - 1)
+	end
+	if vim.fn.strdisplaywidth(table.concat(parts, " › ")) > width then
+		if #parts == 1 or width < 5 then
+			return fit(parts[1], width)
+		end
+		local separator_width = vim.fn.strdisplaywidth(" › ")
+		parts[1] = fit(parts[1], math.max(1, width - separator_width - vim.fn.strdisplaywidth(parts[2])))
+		parts[2] = fit(parts[2], width - separator_width - vim.fn.strdisplaywidth(parts[1]))
 	end
 	return table.concat(parts, " › ")
 end

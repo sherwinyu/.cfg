@@ -79,13 +79,14 @@ This is the behavior contract for the custom workflows in the scratch Neovim pro
 
 ### NVB-07 — Keep location visible while editing
 
-**Story:** As I move through a nested file, I can see my file and enclosing code context at the top, even when the defining lines are still visible in the buffer.
+**Story:** As I move through a nested file, I can quickly tell which file, class, and function I am in, even when their defining lines are still visible in the buffer.
 
 **Acceptance criteria**
 
 - The always-show view is the default for normal file windows and updates as the cursor moves.
-- It shows the filename and, when syntax context is available, the enclosing scopes around the cursor. Long breadcrumb trails are shortened to fit narrow windows, favoring the nearest scopes.
-- It works in split windows. When a parser or context query is unavailable, the filename remains visible and editing continues normally.
+- It shows the filename and enclosing named classes, methods, and functions, including functions assigned to names. It omits source snippets, anonymous callbacks, variables, and control-flow blocks.
+- Long names and breadcrumb trails are shortened to fit narrow windows, favoring the nearest function and its enclosing class.
+- It works in split windows. When a parser or named scope is unavailable, the filename remains visible and editing continues normally.
 - It does not place a breadcrumb bar in utility or floating windows.
 
 ### NVB-08 — Switch between always-show and sticky context
