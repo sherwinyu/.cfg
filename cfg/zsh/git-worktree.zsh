@@ -1,19 +1,194 @@
 # Usage: gwt [-f] [-b] <pr-number|pr-url|branch> | gwt [-f] -l <issue-number|ABC-123>
+#        gwt -c|--clone [new-branch] [source-worktree]
+#        gwt check-status [pr-number|pr-url|branch]
 # Examples:
 #   gwt 123                                          (PR # — resolves against the repo in the current cwd)
 #   gwt https://github.com/owner/repo/pull/123       (PR URL — cd to ~/projects/repo first, then resolve)
 #   gwt feature/foo                                  (branch in the current cwd)
 #   gwt -f 123                                        (force: blow away existing dir)
 #   gwt -b new-branch-name                            (create a new local branch off HEAD, no push)
+#   gwt --clone                                      (auto-name: current-branch__1, __2, ...)
+#   gwt --clone agent-b                               (duplicate current worktree's committed HEAD)
+#   gwt -c agent-c ../repo-wt-agent-b                  (duplicate another worktree's committed HEAD)
 #   gwt -l 120                                        (find a Linear issue by number)
 #   gwt -l SHE-120                                    (find a Linear issue by identifier)
+#   gwt check-status                                 (live remote branch/PR status, no checkout)
+#   gwt check-status 123                              (status of a specific PR)
 # With -f (no -b): also creates a new branch off main if the branch doesn't exist on remote
 # Linear lookup uses linear-cli's browser OAuth login and fzf for multiple matches.
+# Clone creates a fresh branch/folder without fetching or pushing. Only committed
+# code plus the local-only setup below is copied; other untracked/dirty files are excluded.
+# Automatic names skip existing branches/folders. Cloning a numbered clone continues
+# its original branch's series. Detached HEAD requires an explicit new branch name.
 
-# Local-only env/config files copied from the main repo into each new worktree
+# Local-only env/config files copied from the source into each new worktree
 # (space-separated globs, relative to the repo root). Override in your shell to
 # add/remove entries, e.g. export GWT_COPY_GLOBS=".env .env.* .envrc .tool-versions"
 : ${GWT_COPY_GLOBS:=".env .env.* .envrc"}
+
+_gwt_usage() {
+  echo 'Usage: gwt [-f] [-b] <pr-number|pr-url|branch> | gwt [-f] -l <issue-number|ABC-123>'
+  echo '       gwt -c|--clone [new-branch] [source-worktree]'
+  echo '       Omit new-branch for source-branch__1, __2, ... (next available name)'
+  echo '       gwt check-status [pr-number|pr-url|branch] (defaults to current branch)'
+}
+
+_gwt_check_status() {
+  local target="$1" branch local_branch repo remote_repo remote remote_url merge_ref
+  local prs pr query remote_oid result=0
+  local fields='number,title,state,isDraft,url,headRefName,baseRefName,mergedAt,closedAt,headRepository,headRepositoryOwner'
+  command -v gh >/dev/null 2>&1 || { echo 'gwt check-status requires gh' >&2; return 1; }
+  command -v jq >/dev/null 2>&1 || { echo 'gwt check-status requires jq' >&2; return 1; }
+
+  if [[ "$target" =~ '^https?://github\.com/[^/]+/[^/]+/pull/[0-9]+([/?#].*)?$' || "$target" =~ '^[0-9]+$' ]]; then
+    pr=$(gh pr view "$target" --json "$fields") || return 1
+    prs=$(print -r -- "$pr" | jq -c '[.]') || return 1
+    branch=$(print -r -- "$pr" | jq -r '.headRefName') || return 1
+    repo=$(print -r -- "$pr" | jq -r '.url | split("/") | .[3:5] | join("/")') || return 1
+    remote_repo=$(print -r -- "$pr" | jq -r 'if .headRepository and .headRepositoryOwner then .headRepositoryOwner.login + "/" + .headRepository.name else empty end') || return 1
+  else
+    git rev-parse --git-dir >/dev/null 2>&1 || { echo "Not in a git repository: $PWD" >&2; return 1; }
+    branch="$target"
+    if [[ -z "$branch" ]]; then
+      branch=$(git symbolic-ref --quiet --short HEAD) || {
+        echo 'Detached HEAD; supply a branch name, PR number, or PR URL' >&2
+        return 1
+      }
+    fi
+    git check-ref-format "refs/heads/$branch" >/dev/null 2>&1 || {
+      echo "Invalid branch name: $branch" >&2
+      return 1
+    }
+    local_branch="$branch"
+    repo=$(gh repo view --json nameWithOwner -q .nameWithOwner) || return 1
+    remote_repo="$repo"
+    remote=$(git config --get "branch.$local_branch.remote") || remote=''
+    merge_ref=$(git config --get "branch.$local_branch.merge") || merge_ref=''
+    if [[ -n "$remote" && "$remote" != . && "$merge_ref" == refs/heads/* ]]; then
+      branch="${merge_ref#refs/heads/}"
+    else
+      remote=origin
+    fi
+    if remote_url=$(git remote get-url "$remote" 2>/dev/null); then
+      remote_repo=$(gh repo view "$remote_url" --json nameWithOwner -q .nameWithOwner) || return 1
+    fi
+    # Include merged/closed PRs, and distinguish identical branch names in forks.
+    prs=$(gh pr list --repo "$repo" --head "$branch" --state all --limit 100 --json "$fields") || return 1
+    prs=$(print -r -- "$prs" | jq -c --arg repo "$remote_repo" --arg branch "$branch" '
+      [.[] | select(.headRefName == $branch and
+        (.headRepositoryOwner.login + "/" + .headRepository.name) == $repo)]') || return 1
+  fi
+
+  print -r -- "Repository: $repo"
+  [[ -z "$local_branch" || "$local_branch" == "$branch" ]] || print -r -- "Local branch: $local_branch"
+  print -r -- "Branch: $branch"
+  if [[ -n "$remote_repo" ]]; then
+    query='query($owner: String!, $name: String!, $ref: String!) { repository(owner: $owner, name: $name) { ref(qualifiedName: $ref) { target { oid } } } }'
+    if remote_oid=$(gh api graphql -f query="$query" -f owner="${remote_repo%%/*}" -f name="${remote_repo#*/}" -f ref="refs/heads/$branch" --jq '.data.repository.ref.target.oid // empty'); then
+      if [[ -n "$remote_oid" ]]; then
+        print -r -- "Remote branch: exists ($remote_repo at ${remote_oid[1,12]})"
+      else
+        print -r -- "Remote branch: absent ($remote_repo; deleted or never pushed)"
+      fi
+    else
+      print -r -- 'Remote branch: unknown (GitHub query failed)'
+      result=1
+    fi
+  else
+    print -r -- 'Remote branch: unavailable (PR source repository was deleted)'
+  fi
+  if [[ "$(print -r -- "$prs" | jq 'length')" == 0 ]]; then
+    print -r -- 'PR: none found for this branch (open, closed, or merged)'
+  else
+    print -r -- "$prs" | jq -r 'sort_by(.number) | reverse | .[] |
+      "PR #\(.number): \(.state)\(if .state == "OPEN" and .isDraft then " (draft)" else "" end) → \(.baseRefName)\(if .mergedAt then " (merged " + .mergedAt + ")" elif .closedAt then " (closed " + .closedAt + ")" else "" end)\n  \(.title)\n  \(.url)"' || return 1
+    (( $(print -r -- "$prs" | jq 'length') < 100 )) || print -r -- 'Showing up to 100 matching PRs; use a PR number to check a specific one.'
+  fi
+  return "$result"
+}
+
+_gwt_setup() {
+  local src_dir="$1" worktree_dir="$2" clone="${3:-0}" pat f relative_file
+  # Tracked files come from the commit, even if the source has local edits.
+  if [[ -d "$src_dir/.claude" ]]; then
+    while IFS= read -r -d '' relative_file; do
+      [[ ! -e "$worktree_dir/$relative_file" && ! -L "$worktree_dir/$relative_file" ]] || continue
+      mkdir -p "$worktree_dir/${relative_file:h}" || return 1
+      cp -p "$src_dir/$relative_file" "$worktree_dir/$relative_file" || return 1
+    done < <(git -C "$src_dir" ls-files --others -z -- .claude/)
+  fi
+  for pat in ${(s: :)GWT_COPY_GLOBS}; do
+    for f in "$src_dir"/${~pat}(N); do
+      [[ -f "$f" ]] || continue
+      relative_file="${f#$src_dir/}"
+      git -C "$src_dir" ls-files --error-unmatch -- "$relative_file" >/dev/null 2>&1 && continue
+      [[ ! -e "$worktree_dir/${f:t}" && ! -L "$worktree_dir/${f:t}" ]] || continue
+      cp -p "$f" "$worktree_dir/${f:t}" || return 1
+      echo "Copied ${f:t}"
+    done
+  done
+  if [[ -f "$worktree_dir/.envrc" ]] && command -v direnv >/dev/null 2>&1; then
+    (cd "$worktree_dir" && direnv allow) && echo "direnv allowed in worktree"
+  fi
+
+  cd "$worktree_dir" || return 1
+  if [[ -f package.json ]] && command -v bun >/dev/null 2>&1; then
+    if (( clone )); then
+      bun install --frozen-lockfile || return 1
+    else
+      bun install || return 1
+    fi
+  fi
+  echo "Worktree ready at $worktree_dir"
+}
+
+_gwt_clone() {
+  local branch="$1" source_dir="${2:-.}" src_dir commit repo_root worktree_dir
+  local source_branch suffix=1
+  src_dir=$(git -C "$source_dir" rev-parse --show-toplevel 2>/dev/null) || {
+    echo "Not a worktree directory: $source_dir" >&2
+    return 1
+  }
+  commit=$(git -C "$src_dir" rev-parse --verify 'HEAD^{commit}') || return 1
+  repo_root=$(git -C "$src_dir" rev-parse --path-format=absolute --git-common-dir) || return 1
+  repo_root="${repo_root%/.git}"
+  if [[ -z "$branch" ]]; then
+    source_branch=$(git -C "$src_dir" symbolic-ref --quiet --short HEAD) || {
+      echo 'Source has detached HEAD; supply a new branch name: gwt --clone <new-branch>' >&2
+      return 1
+    }
+    if [[ "$source_branch" =~ '^(.+)__[0-9]+$' ]]; then
+      source_branch="${match[1]}"
+    fi
+    while true; do
+      branch="${source_branch}__${suffix}"
+      worktree_dir="${src_dir:h}/${repo_root:t}-wt-${branch//\//-}"
+      if ! git -C "$src_dir" show-ref --verify --quiet "refs/heads/$branch" &&
+          [[ ! -e "$worktree_dir" && ! -L "$worktree_dir" ]]; then
+        break
+      fi
+      (( suffix += 1 ))
+    done
+  fi
+  git check-ref-format --branch "$branch" >/dev/null 2>&1 &&
+    git check-ref-format "refs/heads/$branch" >/dev/null 2>&1 || {
+    echo "Invalid new branch name: $branch" >&2
+    return 1
+  }
+  worktree_dir="${src_dir:h}/${repo_root:t}-wt-${branch//\//-}"
+
+  if git -C "$src_dir" show-ref --verify --quiet "refs/heads/$branch"; then
+    echo "Clone needs a new branch; '$branch' already exists" >&2
+    return 1
+  fi
+  if [[ -e "$worktree_dir" || -L "$worktree_dir" ]]; then
+    echo "Clone destination already exists: $worktree_dir" >&2
+    return 1
+  fi
+  git -C "$src_dir" worktree add -b "$branch" "$worktree_dir" "$commit" || return 1
+  echo "Cloned committed state of $src_dir at ${commit[1,12]} onto '$branch' (not pushed)"
+  _gwt_setup "$src_dir" "$worktree_dir" 1
+}
 
 _gwt_linear_api() {
   local query="$1" response error
@@ -121,11 +296,14 @@ _gwt_linear_target() {
 }
 
 gwt() {
-  local force=0 new_branch=0 linear_issue=''
+  local force=0 new_branch=0 clone=0 check_status=0 linear_issue=''
   while [[ "$1" == -* ]]; do
     case "$1" in
       -f) force=1 ;;
       -b) new_branch=1 ;;
+      -c|--clone) clone=1 ;;
+      --check-status) check_status=1 ;;
+      -h|--help) _gwt_usage; return 0 ;;
       -l)
         shift
         [[ -n "$1" && "$1" != -* ]] || { echo "Usage: gwt [-f] -l <issue-number|ABC-123>"; return 1; }
@@ -136,6 +314,27 @@ gwt() {
   done
 
   local input="$1"
+  if [[ "$input" == check-status ]] && (( ! new_branch && ! clone )) && [[ -z "$linear_issue" ]]; then
+    check_status=1
+    shift
+    input="$1"
+  fi
+  if (( check_status )); then
+    if (( force || new_branch || clone )) || [[ -n "$linear_issue" || $# -gt 1 ]]; then
+      echo 'Use check-status [pr-number|pr-url|branch]; it cannot be combined with -f, -b, --clone, or -l' >&2
+      return 1
+    fi
+    _gwt_check_status "$input"
+    return $?
+  fi
+  if (( clone )); then
+    if (( force || new_branch )) || [[ -n "$linear_issue" || $# -gt 2 ]]; then
+      echo 'Use --clone [new-branch] [source-worktree]; it cannot be combined with -f, -b, or -l' >&2
+      return 1
+    fi
+    _gwt_clone "$input" "${2:-.}"
+    return $?
+  fi
   if [[ -n "$linear_issue" ]]; then
     if (( new_branch )) || [[ -n "$input" ]]; then
       echo "Use -l with an issue only; it cannot be combined with -b or another target"
@@ -144,7 +343,7 @@ gwt() {
     input=$(_gwt_linear_target "$linear_issue") || return 1
   fi
   if [[ -z "$input" ]]; then
-    echo "Usage: gwt [-f] [-b] <pr-number|pr-url|branch> | gwt [-f] -l <issue-number|ABC-123>"
+    _gwt_usage
     return 1
   fi
 
@@ -185,7 +384,7 @@ gwt() {
     fi
   fi
 
-  local src_dir="$(pwd)"
+  local src_dir=$(git rev-parse --show-toplevel) || return 1
 
   # Base the new worktree's name on the *main* repo, not the cwd — if we're
   # already inside a worktree, basename "$src_dir" would stack another
@@ -193,13 +392,13 @@ gwt() {
   local repo_root=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null)
   repo_root="${repo_root%/.git}"
   local repo_name="$(basename "$repo_root")"
-  local worktree_dir="../${repo_name}-wt-${branch//\//-}"
+  local worktree_dir="${src_dir:h}/${repo_name}-wt-${branch//\//-}"
 
   # The branch may already be checked out as a worktree somewhere other than
   # the conventional path below (different naming, moved, etc) — find it by
   # branch rather than by directory so we don't collide with git.
   local existing_dir=$(git worktree list --porcelain | awk -v ref="refs/heads/$branch" '
-    /^worktree / { dir=$2 }
+    /^worktree / { dir=substr($0, 10) }
     /^branch / && $2 == ref { print dir; exit }
   ')
 
@@ -242,31 +441,7 @@ gwt() {
     return 1
   fi
 
-  # Copy local-only (untracked/ignored) .claude files; tracked ones come from the checkout
-  if [ -d "$src_dir/.claude" ]; then
-    git -C "$src_dir" ls-files --others -- .claude/ | while IFS= read -r f; do
-      mkdir -p "$worktree_dir/${f:h}"
-      cp "$src_dir/$f" "$worktree_dir/$f"
-    done
-  fi
-  # Copy local-only env/config files (see GWT_COPY_GLOBS above)
-  local pat f
-  for pat in ${(s: :)GWT_COPY_GLOBS}; do
-    for f in "$src_dir"/${~pat}(N); do
-      cp -p "$f" "$worktree_dir/${f:t}"
-      echo "Copied ${f:t}"
-    done
-  done
-  # direnv blocks a freshly-copied .envrc until it's allowed
-  if [[ -f "$worktree_dir/.envrc" ]] && command -v direnv >/dev/null 2>&1; then
-    (cd "$worktree_dir" && direnv allow) && echo "direnv allowed in worktree"
-  fi
-
-  cd "$worktree_dir" || return 1
-  if command -v bun >/dev/null 2>&1; then
-    bun install
-  fi
-  echo "Worktree ready at $worktree_dir"
+  _gwt_setup "$src_dir" "$worktree_dir"
 }
 
 # Usage: gwtc
