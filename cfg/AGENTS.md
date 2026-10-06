@@ -102,6 +102,15 @@ config commit -m "message"
 - **Update existing config**: Edit in workspace, test functionality, commit changes
 - **WezTerm changes**: Always update workspace function if paths change
 - **Testing**: Use tool-specific commands to validate before committing
-- **`nvb` feature changes**: Read `nvim-configs/scratch/FEATURES.md` before changing custom workflows. Preserve its acceptance criteria when replacing plugins or Lua modules; update the stories and implementation table in the same commit when behavior or bindings change.
+- **`nvb` feature changes**: Follow the feature documentation workflow below.
+
+## `nvb` Feature Documentation
+
+`nvim-configs/scratch/FEATURES.md` is the user-facing behavior contract for the scratch Neovim profile (`nvb`). Read the affected stories before changing a custom workflow.
+
+- For each new custom workflow, add a user story with observable acceptance criteria and record its commands, bindings, and implementation in the table.
+- When behavior or bindings change, update the affected stories and implementation table in the same commit as the code.
+- When replacing a plugin or Lua module, preserve the documented workflow and acceptance criteria unless the behavior change is intentional and documented.
+- Verify the affected acceptance criteria with a focused headless check or in a real `nvb` session before committing.
 
 This setup enables efficient, keyboard-driven configuration management with automatic workspace setup and proper git integration.
