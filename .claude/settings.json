@@ -30,7 +30,6 @@
       "WebFetch(domain:wezterm.org)"
     ]
   },
-  "model": "sonnet",
   "hooks": {
     "UserPromptSubmit": [
       {
@@ -95,5 +94,6 @@
       "decision_needed": "User decision needed",
       "review_required": "Please review completed work"
     }
-  }
+  },
+  "fastMode": true
 }
