@@ -1,3 +1,4 @@
+require("hs.ipc")
 hs.timer.doAfter(1000, function()
 	hs.alert.show("Config loaded..")
 end)

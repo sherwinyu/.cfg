@@ -4,7 +4,10 @@ function ToggleApp(appName)
 	local partial = nil
 	for _, a in ipairs(hs.application.runningApplications()) do
 		local name = a:title() or ""
-		if name:lower() == appName:lower() then
+		-- Skip bundle-less processes (e.g. the `claude` CLI node process shadowing Claude.app)
+		if not a:bundleID() then
+			-- skip
+		elseif name:lower() == appName:lower() then
 			app = a
 			break
 		elseif not partial and name:lower():find(appName:lower(), 1, true) then
