@@ -1,20 +1,25 @@
-function ToggleApp(appName)
-	-- Search applications directly so a matching window title cannot be selected.
+function ToggleApp(appName, bundleID)
 	local app = nil
-	local partial = nil
-	for _, a in ipairs(hs.application.runningApplications()) do
-		local name = a:title() or ""
-		-- Skip bundle-less processes (e.g. the `claude` CLI node process shadowing Claude.app)
-		if not a:bundleID() then
-			-- skip
-		elseif name:lower() == appName:lower() then
-			app = a
-			break
-		elseif not partial and name:lower():find(appName:lower(), 1, true) then
-			partial = a
+	if bundleID then
+		-- Match the app identity so similarly named helpers cannot be selected.
+		app = hs.application.applicationsForBundleID(bundleID)[1]
+	else
+		-- Search applications directly so a matching window title cannot be selected.
+		local partial = nil
+		for _, a in ipairs(hs.application.runningApplications()) do
+			local name = a:title() or ""
+			-- Skip bundle-less processes (e.g. the `claude` CLI node process shadowing Claude.app)
+			if not a:bundleID() then
+				-- skip
+			elseif name:lower() == appName:lower() then
+				app = a
+				break
+			elseif not partial and name:lower():find(appName:lower(), 1, true) then
+				partial = a
+			end
 		end
+		app = app or partial
 	end
-	app = app or partial
 
 	if app then
 		print("ToggleApp:", appName, "found:", app:title(), "pid:", app:pid(), "frontmost:", app:isFrontmost())
@@ -42,7 +47,11 @@ function ToggleApp(appName)
 		end
 	else
 		-- Start the app if it's not running
-		hs.application.launchOrFocus(appName)
+		if bundleID then
+			hs.application.launchOrFocusByBundleID(bundleID)
+		else
+			hs.application.launchOrFocus(appName)
+		end
 	end
 end
 
@@ -233,7 +242,8 @@ hs.hotkey.bind(zoot, ";", function()
 end)
 
 hs.hotkey.bind(zoot, ",", function()
-	ToggleApp("ChatGPT")
+	-- ChatGPT Classic and its helper have similar names to the current app.
+	ToggleApp("ChatGPT", "com.openai.codex")
 end)
 
 hs.hotkey.bind(zoot, ".", function()
