@@ -17,6 +17,7 @@ sourceit ~/cfg/zsh/copy-earlier-word.zsh
 sourceit ~/cfg/zsh/hosts-manager.zsh
 sourceit ~/cfg/zsh/git-worktree.zsh
 sourceit ~/cfg/zsh/port-kill.zsh
+sourceit ~/cfg/zsh/ccq.zsh
 
 if [[ -r ~/cfg/zsh/zsh.local ]]; then
   source ~/cfg/zsh/zsh.local

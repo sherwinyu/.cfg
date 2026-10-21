@@ -5,7 +5,6 @@
   "permissions": {
     "allow": [
       "Read(//Users/sherwin/**)",
-      "Write(/Users/sherwin/cfg/**)",
       "Edit(/Users/sherwin/cfg/**)",
       "Bash(osascript:*)",
       "Bash(hs:*)",
