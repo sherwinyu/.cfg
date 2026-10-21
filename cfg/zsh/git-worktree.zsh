@@ -1,5 +1,6 @@
 # Usage: gwt [-f] [-b] <pr-number|pr-url|branch> | gwt [-f] -l <issue-number|ABC-123>
 #        gwt -c|--clone [new-branch] [source-worktree]
+#        gwt -m|--move [branch-to-switch-to]
 #        gwt check-status [pr-number|pr-url|branch]
 # Examples:
 #   gwt 123                                          (PR # — resolves against the repo in the current cwd)
@@ -10,6 +11,8 @@
 #   gwt --clone                                      (auto-name: current-branch__1, __2, ...)
 #   gwt --clone agent-b                               (duplicate current worktree's committed HEAD)
 #   gwt -c agent-c ../repo-wt-agent-b                  (duplicate another worktree's committed HEAD)
+#   gwt --move                                       (move current branch to a worktree; this dir switches to main)
+#   gwt -m develop                                    (same, but switch this dir to develop)
 #   gwt -l 120                                        (find a Linear issue by number)
 #   gwt -l SHE-120                                    (find a Linear issue by identifier)
 #   gwt check-status                                 (live remote branch/PR status, no checkout)
@@ -29,6 +32,7 @@
 _gwt_usage() {
   echo 'Usage: gwt [-f] [-b] <pr-number|pr-url|branch> | gwt [-f] -l <issue-number|ABC-123>'
   echo '       gwt -c|--clone [new-branch] [source-worktree]'
+  echo '       gwt -m|--move [branch-to-switch-to] (move current branch + uncommitted work to a worktree)'
   echo '       Omit new-branch for source-branch__1, __2, ... (next available name)'
   echo '       gwt check-status [pr-number|pr-url|branch] (defaults to current branch)'
 }
@@ -190,6 +194,59 @@ _gwt_clone() {
   _gwt_setup "$src_dir" "$worktree_dir" 1
 }
 
+_gwt_move() {
+  local target="$1" orig_dir="$PWD" src_dir branch repo_root worktree_dir stashed=0
+  src_dir=$(git rev-parse --show-toplevel 2>/dev/null) || {
+    echo "Not in a git repository: $PWD" >&2
+    return 1
+  }
+  branch=$(git symbolic-ref --quiet --short HEAD) || {
+    echo 'Detached HEAD; no branch to move' >&2
+    return 1
+  }
+  # Default to the repo's default branch (origin/HEAD), falling back to main.
+  if [[ -z "$target" ]]; then
+    target=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null)
+    target="${target#origin/}"
+    : ${target:=main}
+  fi
+  [[ "$target" != "$branch" ]] || { echo "Already on '$branch'; pick a different branch to switch to" >&2; return 1; }
+  repo_root=$(git rev-parse --path-format=absolute --git-common-dir) || return 1
+  repo_root="${repo_root%/.git}"
+  worktree_dir="${src_dir:h}/${repo_root:t}-wt-${branch//\//-}"
+  if [[ -e "$worktree_dir" || -L "$worktree_dir" ]]; then
+    echo "Destination already exists: $worktree_dir" >&2
+    return 1
+  fi
+
+  # Carry uncommitted work (including untracked files) over to the worktree.
+  if [[ -n "$(git -C "$src_dir" status --porcelain)" ]]; then
+    git -C "$src_dir" stash push -q -u -m "gwt move: $branch" || return 1
+    stashed=1
+  fi
+  # Release the branch so the worktree can check it out.
+  git -C "$src_dir" switch "$target" || {
+    (( stashed )) && git -C "$src_dir" stash pop --index
+    return 1
+  }
+  git -C "$src_dir" worktree add "$worktree_dir" "$branch" || {
+    git -C "$src_dir" switch "$branch" && (( stashed )) && git -C "$src_dir" stash pop --index
+    return 1
+  }
+  if (( stashed )); then
+    git -C "$worktree_dir" stash pop -q --index ||
+      echo "Could not apply uncommitted changes; they are still in 'git stash list'" >&2
+  fi
+  _gwt_setup "$src_dir" "$worktree_dir"
+  cd "$orig_dir" 2>/dev/null || cd "$src_dir"
+  echo "Moved '$branch' to worktree; $src_dir is now on '$target'"
+  if command -v pbcopy >/dev/null 2>&1 && print -rn -- "$worktree_dir" | pbcopy; then
+    echo "$worktree_dir (copied to clipboard)"
+  else
+    echo "$worktree_dir"
+  fi
+}
+
 _gwt_linear_api() {
   local query="$1" response error
   response=$(linear-cli api query --output json --compact --no-pager "$query" 2>&1) || {
@@ -296,12 +353,13 @@ _gwt_linear_target() {
 }
 
 gwt() {
-  local force=0 new_branch=0 clone=0 check_status=0 linear_issue=''
+  local force=0 new_branch=0 clone=0 move=0 check_status=0 linear_issue=''
   while [[ "$1" == -* ]]; do
     case "$1" in
       -f) force=1 ;;
       -b) new_branch=1 ;;
       -c|--clone) clone=1 ;;
+      -m|--move) move=1 ;;
       --check-status) check_status=1 ;;
       -h|--help) _gwt_usage; return 0 ;;
       -l)
@@ -333,6 +391,14 @@ gwt() {
       return 1
     fi
     _gwt_clone "$input" "${2:-.}"
+    return $?
+  fi
+  if (( move )); then
+    if (( force || new_branch || clone )) || [[ -n "$linear_issue" || $# -gt 1 ]]; then
+      echo 'Use --move [branch-to-switch-to]; it cannot be combined with -f, -b, --clone, or -l' >&2
+      return 1
+    fi
+    _gwt_move "$input"
     return $?
   fi
   if [[ -n "$linear_issue" ]]; then
