@@ -34,7 +34,7 @@ local workspace_color_schemes = {
 config.hide_tab_bar_if_only_one_tab = false -- Show tab bar to display workspace
 config.tab_bar_at_bottom = false
 config.use_fancy_tab_bar = true
-config.tab_max_width = 25
+config.tab_max_width = 60
 config.show_tabs_in_tab_bar = true
 config.show_new_tab_button_in_tab_bar = false
 
@@ -313,17 +313,34 @@ config.key_tables = {
 				end)
 			end),
 		},
-		-- Rename current pane (leader r)
+		-- Toggle short/long pane badges in the tab bar (leader b)
+		{
+			key = "b",
+			action = wezterm.action_callback(function(window, pane)
+				wezterm.GLOBAL.badge_long = not wezterm.GLOBAL.badge_long
+				-- Long badges need wider tabs
+				for _, w in ipairs(wezterm.gui.gui_windows()) do
+					local overrides = w:get_config_overrides() or {}
+					overrides.tab_max_width = wezterm.GLOBAL.badge_long and 100 or nil
+					w:set_config_overrides(overrides)
+				end
+			end),
+		},
+		-- Set this pane's manual badge (leader r); empty input clears it
 		{
 			key = "r",
 			action = wezterm.action.PromptInputLine({
-				description = "Enter name for this pane:",
+				description = "Badge for this pane (max 3 words, empty to clear):",
 				action = wezterm.action_callback(function(window, pane, line)
-					if line then
-						-- Set the pane title using OSC escape sequence with BEL terminator
-						pane:inject_output(string.format("\027]2;%s\007", line))
-						claude_notify("Pane Renamed", "Pane renamed to: " .. line)
+					local tty = pane:get_tty_name()
+					if line == nil or not tty then
+						return
 					end
+					local args = line:match("%S") and { line } or { "-c" }
+					wezterm.run_child_process({
+						"env", "CLAUDE_WEZTERM_TTY=" .. tty,
+						wezterm.home_dir .. "/cfg/wezterm/badge.sh", table.unpack(args),
+					})
 				end),
 			}),
 		},
@@ -583,6 +600,51 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(wezterm.format(status_elements))
 end)
 
+-- Pane badges, set with ~/cfg/wezterm/badge.sh via user vars:
+-- badge (manual, short only) and agent_badge_{short,long} (agents).
+-- Leader+b toggles which agent badge length the tab bar shows.
+local BADGE_COLORS = { badge = "#e8590c", agent_badge = "#8839ef" }
+local MIN_TITLE_WIDTH = 12
+
+local function get_tab_badges(tab)
+	-- Active pane first, then the rest of the tab's panes
+	local vars_list = { tab.active_pane.user_vars }
+	local mux_tab = wezterm.mux.get_tab(tab.tab_id)
+	if mux_tab then
+		for _, p in ipairs(mux_tab:panes()) do
+			table.insert(vars_list, p:get_user_vars())
+		end
+	end
+
+	local want, other = "agent_badge_short", "agent_badge_long"
+	if wezterm.GLOBAL.badge_long then
+		want, other = other, want
+	end
+
+	-- First non-empty value across the tab's panes, trying each var name in order
+	local function first(...)
+		for _, vars in ipairs(vars_list) do
+			for _, name in ipairs({ ... }) do
+				local text = vars[name]
+				if text and text ~= "" then
+					return text
+				end
+			end
+		end
+	end
+
+	local badges = {}
+	local manual = first("badge")
+	if manual then
+		table.insert(badges, { text = manual, color = BADGE_COLORS.badge })
+	end
+	local agent = first(want, other)
+	if agent then
+		table.insert(badges, { text = agent, color = BADGE_COLORS.agent_badge })
+	end
+	return badges
+end
+
 -- Custom tab bar to show workspace and directory
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 	local workspace = tab.active_pane.user_vars.WEZTERM_WORKSPACE or wezterm.mux.get_active_workspace()
@@ -602,24 +664,46 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 		title = string.format("[%s] %s", workspace, title)
 	end
 
-	local tab_title_elements = {}
+	local tab_style = {}
 	if tab.is_active then
-		table.insert(tab_title_elements, {
-			Background = { Color = "#89b4fa" },
-		})
-		table.insert(tab_title_elements, {
-			Foreground = { Color = "#1e1e2e" },
-		})
-		table.insert(tab_title_elements, {
-			Attribute = { Intensity = "Bold" },
-		})
+		table.insert(tab_style, { Background = { Color = "#89b4fa" } })
+		table.insert(tab_style, { Foreground = { Color = "#1e1e2e" } })
+		table.insert(tab_style, { Attribute = { Intensity = "Bold" } })
 	else
 		-- Keep inactive tab labels readable against the color-scheme background.
-		table.insert(tab_title_elements, {
-			Foreground = { Color = hover and "#ffffff" or "#cdd6f4" },
-		})
+		table.insert(tab_style, { Foreground = { Color = hover and "#ffffff" or "#cdd6f4" } })
+	end
+
+	-- Title first, then badges. Badges get whatever width the title leaves,
+	-- but the title always keeps at least MIN_TITLE_WIDTH columns.
+	local badges = get_tab_badges(tab)
+	local badges_width = 0
+	for _, b in ipairs(badges) do
+		badges_width = badges_width + wezterm.column_width(b.text) + 3 -- padding + gap
+	end
+	title = wezterm.truncate_right(title, math.max(max_width - badges_width - 2, MIN_TITLE_WIDTH))
+	local remaining = max_width - wezterm.column_width(title) - 2
+
+	local tab_title_elements = {}
+	for _, s in ipairs(tab_style) do
+		table.insert(tab_title_elements, s)
 	end
 	table.insert(tab_title_elements, { Text = " " .. title .. " " })
+
+	for _, b in ipairs(badges) do
+		local text = wezterm.truncate_right(b.text, remaining - 3)
+		if wezterm.column_width(text) == 0 then
+			break
+		end
+		table.insert(tab_title_elements, "ResetAttributes")
+		table.insert(tab_title_elements, { Background = { Color = b.color } })
+		table.insert(tab_title_elements, { Foreground = { Color = "#ffffff" } })
+		table.insert(tab_title_elements, { Attribute = { Intensity = "Bold" } })
+		table.insert(tab_title_elements, { Text = " " .. text .. " " })
+		table.insert(tab_title_elements, "ResetAttributes")
+		table.insert(tab_title_elements, { Text = " " })
+		remaining = remaining - wezterm.column_width(text) - 3
+	end
 
 	return tab_title_elements
 end)

@@ -103,6 +103,7 @@ config commit -m "message"
 - **WezTerm changes**: Always update workspace function if paths change
 - **Testing**: Use tool-specific commands to validate before committing
 - **`nvb` feature changes**: Follow the feature documentation workflow below.
+- **WezTerm feature changes**: Same workflow, using `wezterm/FEATURES.md`.
 
 ## `nvb` Feature Documentation
 
@@ -112,5 +113,19 @@ config commit -m "message"
 - When behavior or bindings change, update the affected stories and implementation table in the same commit as the code.
 - When replacing a plugin or Lua module, preserve the documented workflow and acceptance criteria unless the behavior change is intentional and documented.
 - Verify the affected acceptance criteria with a focused headless check or in a real `nvb` session before committing.
+
+## WezTerm Feature Documentation
+
+`wezterm/FEATURES.md` is the behavior contract for the custom WezTerm workflows (pane badges today). Follow the same rules as for `nvb` above: read the affected stories first, keep stories and the implementation table in the same commit as the code, and verify in a real WezTerm window before committing.
+
+## Agent Badges
+
+When running in a WezTerm pane, set an agent badge so the user can see what you're doing from the tab bar (see `wezterm/FEATURES.md`, WEZ-02):
+
+- When you start a substantial task, run `badge -a "<short>" "<long>"`. Use at most 3 words for the short form and at most 9 for the long form, e.g. `badge -a "fixing login" "fixing the SSO redirect loop on staging"`.
+- Update it when the task changes meaningfully, for example to `badge -a "needs input" "waiting for your decision on the migration"` when you're blocked on the user.
+- Run `badge -a -c` when the task is done.
+- Never set or clear the manual badge (`badge` without `-a`); it belongs to the user.
+- If `badge` fails (for example, outside WezTerm), carry on without it.
 
 This setup enables efficient, keyboard-driven configuration management with automatic workspace setup and proper git integration.
