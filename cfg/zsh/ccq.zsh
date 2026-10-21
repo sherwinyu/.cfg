@@ -13,6 +13,8 @@ CCQ_ALLOWED_TOOLS=(
   'Bash(git branch:*)' 'Bash(git blame:*)' 'Bash(git rev-parse:*)'
   'Bash(gh pr view:*)' 'Bash(gh pr list:*)' 'Bash(gh pr checks:*)'
   'Bash(gh run view:*)' 'Bash(gh run list:*)' 'Bash(gh issue view:*)'
+  # Linear (read-only tools only), via the claude.ai connector or the plugin
+  mcp__{claude_ai_Linear,plugin_productivity_linear}__{get_{issue,issue_status,project,milestone,team,user,workspace,document,attachment,comment,cycle,diff,diff_threads,notifications,release,release_note,status_updates,template,triage_responsibility,agent_skill},list_{issues,issue_statuses,issue_labels,projects,project_labels,milestones,teams,users,documents,comments,cycles,custom_views,diffs,releases,release_notes,release_pipelines,templates,agent_skills},search_documentation,extract_images}
 )
 
 ccq() {
