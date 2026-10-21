@@ -112,10 +112,10 @@ hs.hotkey.bind({}, "F8", function()
 end)
 
 hs.hotkey.bind(zoot, "9", function()
-	ToggleApp("Oryoki")
+	ToggleApp("Oryoki", "com.oryoki.desktop")
 end)
 hs.hotkey.bind({}, "F9", function()
-	ToggleApp("Oryoki")
+	ToggleApp("Oryoki", "com.oryoki.desktop")
 end)
 
 hs.hotkey.bind({}, "F10", function()
@@ -274,8 +274,7 @@ hs.hotkey.bind(zoot, "n", function()
 end)
 
 hs.hotkey.bind(zoot, "o", function()
-	-- soon to be Oryoki
-	ToggleApp("Oryoki")
+	ToggleApp("Oryoki", "com.oryoki.desktop")
 end)
 
 hs.hotkey.bind(zoot, "-", function()
