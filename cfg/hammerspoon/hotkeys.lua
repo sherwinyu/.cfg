@@ -2,7 +2,14 @@ function ToggleApp(appName, bundleID)
 	local app = nil
 	if bundleID then
 		-- Match the app identity so similarly named helpers cannot be selected.
-		app = hs.application.applicationsForBundleID(bundleID)[1]
+		-- Skip processes outside the app bundle (e.g. the Dock's "Dock Extra (ChatGPT.app)" XPC helper).
+		local bundlePath = hs.application.pathForBundleID(bundleID)
+		for _, a in ipairs(hs.application.applicationsForBundleID(bundleID)) do
+			if not bundlePath or a:path() == bundlePath then
+				app = a
+				break
+			end
+		end
 	else
 		-- Search applications directly so a matching window title cannot be selected.
 		local partial = nil
