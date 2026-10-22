@@ -43,7 +43,7 @@ take_words() {
 	echo "${words[*]:0:n}"
 }
 
-if [[ -n $CLAUDE_WEZTERM_TTY && -w $CLAUDE_WEZTERM_TTY ]]; then
+if [[ $CLAUDE_WEZTERM_TTY == /dev/* && -w $CLAUDE_WEZTERM_TTY ]]; then
 	tty_path=$CLAUDE_WEZTERM_TTY
 elif { : >/dev/tty; } 2>/dev/null; then
 	tty_path=/dev/tty
