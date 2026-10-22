@@ -43,6 +43,8 @@ print -r -- local-fixture > "$source_wt/.env.local"
 chmod 600 "$source_wt/.env.local"
 print -r -- local-fixture > "$source_wt/.claude/local file.txt"
 print -r -- local-fixture > "$source_wt/.claude/"$'line\nbreak.txt'
+# Claude Code subagent worktrees belong to the source checkout, not new ones.
+git -C "$repo" worktree add -q --detach "$source_wt/.claude/worktrees/agent-x"
 print -r -- excluded > "$source_wt/untracked.txt"
 source_status=$(git -C "$source_wt" status --porcelain)
 
@@ -57,6 +59,7 @@ clone_one="$test_root/repo with spaces-wt-agents-one"
 [[ "$(<code.txt)" == source-commit && "$(<.env.example)" == committed ]] || fail 'Copied dirty code/config'
 [[ "$(<.claude/tracked.txt)" == committed ]] || fail 'Copied dirty tracked Claude file'
 [[ -f .claude/local\ file.txt && -f .claude/$'line\nbreak.txt' ]] || fail 'Lost local Claude setup'
+[[ ! -e .claude/worktrees ]] || fail 'Copied Claude subagent worktrees'
 [[ -f .env.local && ! -f untracked.txt ]] || fail 'Wrong untracked file selection'
 [[ "$(stat -f %Lp .env.local)" == 600 ]] || fail 'Lost private env permissions'
 [[ "$(git -C "$source_wt" status --porcelain)" == "$source_status" ]] || fail 'Changed source state'

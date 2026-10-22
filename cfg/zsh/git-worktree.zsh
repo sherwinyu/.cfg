@@ -114,12 +114,15 @@ _gwt_check_status() {
 _gwt_setup() {
   local src_dir="$1" worktree_dir="$2" clone="${3:-0}" pat f relative_file
   # Tracked files come from the commit, even if the source has local edits.
+  # Claude Code's subagent worktrees (.claude/worktrees/) stay with the source,
+  # and other nested repos show up as directory entries ("path/"); skip both.
   if [[ -d "$src_dir/.claude" ]]; then
     while IFS= read -r -d '' relative_file; do
+      [[ "$relative_file" != */ ]] || continue
       [[ ! -e "$worktree_dir/$relative_file" && ! -L "$worktree_dir/$relative_file" ]] || continue
       mkdir -p "$worktree_dir/${relative_file:h}" || return 1
       cp -p "$src_dir/$relative_file" "$worktree_dir/$relative_file" || return 1
-    done < <(git -C "$src_dir" ls-files --others -z -- .claude/)
+    done < <(git -C "$src_dir" ls-files --others -z -- .claude/ ':!.claude/worktrees/')
   fi
   for pat in ${(s: :)GWT_COPY_GLOBS}; do
     for f in "$src_dir"/${~pat}(N); do
