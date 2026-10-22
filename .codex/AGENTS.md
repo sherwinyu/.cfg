@@ -1,1 +1,1 @@
-Please greet me at the start of the session as Captain
+/Users/sherwin/cfg/agents/AGENTS.md

@@ -1,6 +1,6 @@
-# Codex Configuration Work
+# Dotfiles Configuration Work
 
-This document captures the established patterns for working with dotfiles and configuration files using Codex.
+This document captures the established patterns for working with dotfiles and configuration files using coding agents (Claude Code, Codex, etc.). `CLAUDE.md` is a symlink to this file.
 
 ## Environment Setup
 
@@ -11,15 +11,15 @@ This is a bare git repository for dotfiles management using the pattern:
 
 ## Pre-approved Tool Permissions
 
-When working on configuration files, Codex has permission to use these tools without asking:
+When working on configuration files, agents have permission to use these tools without asking:
 
 ```bash
 # Read any config files
 Read(//Users/sherwin/.config/**)
 Read(//Users/sherwin/cfg/**)
 
-# Check WezTerm configuration
-Bash(WEZTERM_CONFIG_FILE="/Users/sherwin/cfg/wezterm/wezterm.lua" wezterm show-config)
+# Check WezTerm configuration loads (this version has no `show-config`)
+Bash(wezterm --config-file /Users/sherwin/cfg/wezterm/wezterm.lua ls-fonts --text a)
 
 # Fetch WezTerm documentation
 WebFetch(domain:wezterm.org)
@@ -28,12 +28,12 @@ WebFetch(domain:wezterm.org)
 Bash(ln:*)
 
 # Notification system
-Bash(/Users/sherwin/cfg/Codex/notify.sh)
+Bash(/Users/sherwin/cfg/claude/notify.sh)
 ```
 
 ## Notification System
 
-**IMPORTANT**: Codex must use the notification system to alert when human input is required or when completing significant tasks.
+**IMPORTANT**: Agents must use the notification system to alert when human input is required or when completing significant tasks.
 
 Always trigger notifications in these scenarios:
 - When waiting for human input or confirmation
@@ -42,12 +42,12 @@ Always trigger notifications in these scenarios:
 - When reaching a natural stopping point where user attention is needed
 - Before asking questions that require user decision-making
 
-**Usage**: Run `/Users/sherwin/cfg/Codex/notify.sh "message"` via the Bash tool.
+**Usage**: Run `/Users/sherwin/cfg/claude/notify.sh "message"` via the Bash tool.
 
 **Examples**:
-- `/Users/sherwin/cfg/Codex/notify.sh "Task completed - please review"`
-- `/Users/sherwin/cfg/Codex/notify.sh "Human input required"`
-- `/Users/sherwin/cfg/Codex/notify.sh "Error encountered - user attention needed"`
+- `/Users/sherwin/cfg/claude/notify.sh "Task completed - please review"`
+- `/Users/sherwin/cfg/claude/notify.sh "Human input required"`
+- `/Users/sherwin/cfg/claude/notify.sh "Error encountered - user attention needed"`
 
 ## Directory Structure Patterns
 
@@ -58,7 +58,10 @@ Always trigger notifications in these scenarios:
 ├── karabiner-config/          # Karabiner config
 ├── hammerspoon/               # Hammerspoon config
 ├── zsh/                       # Zsh config
-└── AGENTS.md                  # This file
+├── agents/AGENTS.md           # Global user preferences for all agent sessions
+│                              #   (~/.claude/CLAUDE.md and ~/.codex/AGENTS.md link here)
+├── AGENTS.md                  # This file: instructions for working in this repo
+└── CLAUDE.md                  # Symlink to AGENTS.md
 ```
 
 Symlinks:
@@ -70,7 +73,7 @@ Symlinks:
 ## WezTerm Workspace Setup
 
 The `cfg` workspace is automatically created with:
-- **Main tab**: ~/cfg with `config status` and `Codex session list`
+- **Main tab**: ~/cfg with `config status` and `claude session list`
 - **Wez tab**: ~/cfg/wezterm
 - **nvimc tab**: ~/cfg/nvim
 - **karabiner tab**: ~/cfg/karabiner-config
@@ -117,15 +120,5 @@ config commit -m "message"
 ## WezTerm Feature Documentation
 
 `wezterm/FEATURES.md` is the behavior contract for the custom WezTerm workflows (pane badges today). Follow the same rules as for `nvb` above: read the affected stories first, keep stories and the implementation table in the same commit as the code, and verify in a real WezTerm window before committing.
-
-## Agent Badges
-
-When running in a WezTerm pane, set an agent badge so the user can see what you're doing from the tab bar (see `wezterm/FEATURES.md`, WEZ-02):
-
-- When you start a substantial task, run `badge -a "<short>" "<long>"`. Use at most 3 words for the short form and at most 9 for the long form, e.g. `badge -a "fixing login" "fixing the SSO redirect loop on staging"`.
-- Update it when the task changes meaningfully, for example to `badge -a "needs input" "waiting for your decision on the migration"` when you're blocked on the user.
-- Run `badge -a -c` when the task is done.
-- Never set or clear the manual badge (`badge` without `-a`); it belongs to the user.
-- If `badge` fails (for example, outside WezTerm), carry on without it.
 
 This setup enables efficient, keyboard-driven configuration management with automatic workspace setup and proper git integration.

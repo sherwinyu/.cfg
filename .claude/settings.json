@@ -47,6 +47,12 @@
     "buddy-glasses@gamma-internal-plugins": true,
     "vercel@claude-plugins-official": true
   },
+  "sandbox": {
+    "excludedCommands": [
+      "badge",
+      "/Users/sherwin/cfg/wezterm/badge.sh"
+    ]
+  },
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "theme": "auto",

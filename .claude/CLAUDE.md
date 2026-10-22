@@ -1,1 +1,1 @@
-/Users/sherwin/cfg/claude/CLAUDE.md
+/Users/sherwin/cfg/agents/AGENTS.md
