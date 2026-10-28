@@ -1,4 +1,6 @@
-# Hammerspoon mouse layer
+# Hammerspoon configuration
+
+## Mouse layer
 
 Hold **Button 4** (normally the mouse's Back/thumb button):
 
@@ -34,3 +36,16 @@ require("mouse-layer"):stop()
 ```
 
 Restart with `require("mouse-layer"):start()` or reload Hammerspoon.
+
+## Type the clipboard
+
+Hyper is Command+Option+Control+Shift. Tap **Hyper+V** once to type the current
+clipboard as keystrokes after a 300 ms double-tap window.
+
+Tap **Hyper+V** twice within that window to send **Control+Command+C**, wait up
+to two seconds for the clipboard to change, then type the new contents. Further
+taps are ignored while the copy is pending. An empty clipboard or a copy that
+does not update it produces an alert instead of typing stale text.
+
+Implemented in `hotkeys.lua`. The double-tap action depends on the active app
+handling Control+Command+C; this configuration does not define that copy action.
