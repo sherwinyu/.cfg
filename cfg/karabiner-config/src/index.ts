@@ -186,11 +186,11 @@ function nav_layer() {
           map("k").to("up_arrow"),
           map("j").to("down_arrow"),
 
-          map("u").to("[", "command"),
-          map("i").to("]", "command"),
+          map("u").to("f18"),
+          map("i").to("f19"),
 
-          map("y").to("[", ["command", "shift"]),
-          map("o").to("]", ["command", "shift"]),
+          map("y").to("f18", "shift"),
+          map("o").to("f19", "shift"),
 
           map("a").to("left_arrow", "command"),
           map(";").to("right_arrow", "command"),
@@ -212,8 +212,8 @@ function ds_nav_layer() {
         map("k").to("up_arrow", "left_shift"),
         map("j").to("down_arrow", "left_shift"),
 
-        map("u").to("[", ["command", "left_shift"]),
-        map("i").to("]", ["command", "left_shift"]),
+        map("u").to("f18", "left_shift"),
+        map("i").to("f19", "left_shift"),
 
         map("a").to("left_arrow", "command"),
         map(";").to("right_arrow", "command"),

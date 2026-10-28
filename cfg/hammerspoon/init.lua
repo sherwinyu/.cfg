@@ -37,3 +37,6 @@ hotkeyWatcher:start()
 -- Window navigation (center-point based)
 local windowNav = require("window-nav")
 windowNav.bindHotkeys(zoot)
+
+-- Button 4 is a held mouse layer: left = Back, right = Forward, both = Enter.
+require("mouse-layer"):start()

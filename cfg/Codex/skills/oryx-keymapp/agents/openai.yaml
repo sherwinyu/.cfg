@@ -1,0 +1,4 @@
+interface:
+  display_name: "Oryx and Keymapp"
+  short_description: "Edit ZSA layouts and verify keyboard flashing"
+  default_prompt: "Use $oryx-keymapp to update my connected ZSA keyboard layout and verify the resulting firmware and app shortcuts."

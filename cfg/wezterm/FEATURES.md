@@ -54,6 +54,24 @@ A badge answers "what is this tab for, and what is the agent in it doing?" at a 
 - If the requested length is empty, the other length is shown instead of nothing.
 - The mode resets to short when the WezTerm GUI restarts.
 
+## Pane and tab navigation
+
+### WEZ-05 — Navigate and rearrange without using history shortcuts
+
+**Story:** I can use the same D-layer keys on my Apple keyboard and ErgoDox to
+focus panes, switch tabs, and rearrange them while leaving Command-brackets
+available for application history.
+
+**Acceptance criteria**
+
+- `D+U/I` emits `F18/F19` and focuses the previous/next pane, preserving pane zoom.
+- `D+Y/O` emits `Shift+F18/F19` and switches to the previous/next tab.
+- Adding Control rotates panes for `U/I` or moves tabs left/right for `Y/O`.
+- On the Apple keyboard, `D+S+U/I` also emits `Shift+F18/F19`.
+- `D+H/J/K/L` continues emitting ordinary arrow keys.
+- Command-brackets and their shifted/control variants no longer invoke these
+  custom WezTerm pane/tab actions.
+
 ## Current interface and implementation
 
 This table is a locator for maintainers. The stories above are the contract; these files can change.
@@ -63,6 +81,7 @@ This table is a locator for maintainers. The stories above are the contract; the
 | WEZ-01–02 | Leader `r`; `badge`, `badge -a`, `badge -c` (on `PATH` via `~/.local/bin/badge`) | `badge.sh` writes pane user vars (`badge`, `agent_badge_short`, `agent_badge_long`) with `OSC 1337 SetUserVar` to `$CLAUDE_WEZTERM_TTY` (set in `~/.zshrc`) or `/dev/tty`; leader `r` in `wezterm.lua` calls it with the pane's tty |
 | WEZ-03 | Automatic | `get_tab_badges` and the `format-tab-title` handler in `wezterm.lua`; `config.tab_max_width` |
 | WEZ-04 | Leader `b` | `wezterm.GLOBAL.badge_long` and per-window `tab_max_width` overrides in `wezterm.lua` |
+| WEZ-05 | `F18/F19`; Shift selects tabs; Control rearranges | `config.keys` in `wezterm.lua`; Apple D-layer in `karabiner-config/src/index.ts`; ErgoDox nav layer 3 in Oryx |
 
 Claude Code runs Bash commands in a sandbox that cannot write to the pane's tty, so `badge` and `badge.sh` are listed in `sandbox.excludedCommands` in `~/cfg/.claude/settings.local.json`.
 

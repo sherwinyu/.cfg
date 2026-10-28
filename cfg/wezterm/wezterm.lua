@@ -105,8 +105,8 @@ config.keys = {
 	},
 	-- Pane navigation (preserves zoom state)
 	{
-		key = "[",
-		mods = "CMD",
+		key = "F18",
+		mods = "NONE",
 		action = wezterm.action_callback(function(window, pane)
 			local tab = window:active_tab()
 			local panes = tab:panes_with_info()
@@ -132,8 +132,8 @@ config.keys = {
 		end),
 	},
 	{
-		key = "]",
-		mods = "CMD",
+		key = "F19",
+		mods = "NONE",
 		action = wezterm.action_callback(function(window, pane)
 			local tab = window:active_tab()
 			local panes = tab:panes_with_info()
@@ -160,35 +160,35 @@ config.keys = {
 	},
 	-- Tab navigation
 	{
-		key = "[",
-		mods = "CMD|SHIFT",
+		key = "F18",
+		mods = "SHIFT",
 		action = wezterm.action.ActivateTabRelative(-1),
 	},
 	{
-		key = "]",
-		mods = "CMD|SHIFT",
+		key = "F19",
+		mods = "SHIFT",
 		action = wezterm.action.ActivateTabRelative(1),
 	},
 	-- Move tabs left/right
 	{
-		key = "[",
-		mods = "CTRL|SHIFT|CMD",
+		key = "F18",
+		mods = "CTRL|SHIFT",
 		action = wezterm.action.MoveTabRelative(-1),
 	},
 	{
-		key = "]",
-		mods = "CTRL|SHIFT|CMD",
+		key = "F19",
+		mods = "CTRL|SHIFT",
 		action = wezterm.action.MoveTabRelative(1),
 	},
 	-- Rotate panes (move pane position within tab)
 	{
-		key = "[",
-		mods = "CTRL|CMD",
+		key = "F18",
+		mods = "CTRL",
 		action = wezterm.action.RotatePanes("CounterClockwise"),
 	},
 	{
-		key = "]",
-		mods = "CTRL|CMD",
+		key = "F19",
+		mods = "CTRL",
 		action = wezterm.action.RotatePanes("Clockwise"),
 	},
 	-- Pane zoom toggle
