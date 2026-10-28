@@ -110,6 +110,21 @@ This is the behavior contract for the custom workflows in the scratch Neovim pro
 - The initial jump records the prior location as the previous-context mark so the user can return.
 - If no enclosing context exists, the buffer is unchanged and I get a clear message.
 
+## Tabs
+
+### NVB-10 — Identify tabs with multiple windows
+
+**Story:** I can tell which tabs contain split windows without displaying a
+window count in the tab label.
+
+**Acceptance criteria**
+
+- An automatically named tab with more than one window ends its label with `**`.
+- A tab with one window has no multi-window suffix; closing the extra windows
+  removes the suffix.
+- The marker replaces Tabby's default `[N+]` window-count suffix.
+- An explicit custom tab name remains unchanged, including in a split tab.
+
 ## Current interface and implementation
 
 This table is a locator for maintainers. The stories above are the contract; these libraries and files can change.
@@ -120,6 +135,7 @@ This table is a locator for maintainers. The stories above are the contract; the
 | NVB-02 | Automatic on startup, focus, and resume | `lua/plugins/ui.lua`; Tokyo Night Day / Moon today |
 | NVB-04–06 | `<Space>dc`, `<Space>dC`, `<Space>dv`, `<Space>db`, `<Space>dB` | `lua/plugins/diffview.lua`, `lua/mylib/diff_base.lua`, `lua/plugins/gitsigns.lua` |
 | NVB-07–09 | `<Space>uT`, `:ContextAlwaysToggle`, `<Space>ut`, `gk`, `:ContextUp` | `lua/plugins/treesitter.lua`, `lua/mylib/context_breadcrumbs.lua` |
+| NVB-10 | Automatic `**` suffix on unnamed tabs with multiple windows | `lua/plugins/tabline.lua`; Tabby fallback tab names |
 
 ## Changing an implementation
 

@@ -14,6 +14,20 @@ return {
 				tail = "TabLine",
 			}
 
+			-- Mark tabs with multiple windows with "**" instead of tabby's default "[N+]"
+			local api = require("tabby.module.api")
+			local win_name = require("tabby.feature.win_name")
+			require("tabby.feature.tab_name").set_default_option({
+				name_fallback = function(tabid)
+					local cur_win = api.get_tab_current_win(tabid)
+					local name = api.is_float_win(cur_win) and "[Floating]" or win_name.get(cur_win)
+					if #api.get_tab_wins(tabid) > 1 then
+						name = name .. "**"
+					end
+					return name
+				end,
+			})
+
 			require("tabby.tabline").set(function(line)
 				return {
 					{
