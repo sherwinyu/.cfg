@@ -44,8 +44,7 @@
   },
   "enabledPlugins": {
     "workflow-setup@gamma-internal-plugins": true,
-    "buddy-glasses@gamma-internal-plugins": true,
-    "vercel@claude-plugins-official": true
+    "buddy-glasses@gamma-internal-plugins": true
   },
   "sandbox": {
     "excludedCommands": [

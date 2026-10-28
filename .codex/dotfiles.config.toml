@@ -18,9 +18,6 @@ enabled = true
 [plugins."presentations@openai-primary-runtime"]
 enabled = true
 
-[plugins."vercel@claude-plugins-official"]
-enabled = true
-
 [plugins."linear@openai-curated"]
 enabled = true
 
