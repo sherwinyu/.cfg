@@ -87,6 +87,7 @@
 /.nvm/
 /.officecli/
 /.paragon/
+/.remarkable/
 /.pi/
 /.pyenv/
 /.rbenv/
@@ -96,6 +97,14 @@
 /.volta/
 /.windsurf/
 /.yarn/
+
+# Local reMarkable authentication and generated skill copies
+/.rmapi
+/cfg/claude/skills/.trash/
+/cfg/claude/skills/synced/
+
+# Generated standalone explanations (archive project-specific pages separately)
+/explainers/
 
 # Histories, backups, and transient output
 /.CFUserTextEncoding
