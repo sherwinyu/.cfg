@@ -40,3 +40,7 @@ windowNav.bindHotkeys(zoot)
 
 -- Button 4 is a held mouse layer: left = Back, right = Forward, both = Enter.
 require("mouse-layer"):start()
+
+-- Popover for Linear issues and GitHub PRs: select one in WezTerm, or press
+-- Hyper+I over one in any app. See README.
+require("hover-peek"):start()
