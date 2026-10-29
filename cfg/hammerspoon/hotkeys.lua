@@ -100,6 +100,25 @@ local zoot = { "ctrl", "alt", "cmd" }
 -- Hyper+V types the clipboard; double-tap within 300ms copies with Ctrl+Cmd+C first.
 hs.hotkey.bind(hyper, "v", require("clipboard-typing").trigger)
 
+-- Hyper+X deletes the word the cursor is in: to its start, to its end, then
+-- delete the word backwards. Bound here rather than in Karabiner, which ignores
+-- the ErgoDox. Posted events carry only Option, not the held Hyper modifiers.
+-- They also set the left-Option device bit, as a real keyboard does: WezTerm
+-- reads Option from that bit and otherwise sees no modifier at all.
+local leftOption = hs.eventtap.event.rawFlagMasks.alternate
+	| hs.eventtap.event.rawFlagMasks.deviceLeftAlternate
+	| hs.eventtap.event.rawFlagMasks.nonCoalesced
+local function optionStroke(key)
+	for _, down in ipairs({ true, false }) do
+		hs.eventtap.event.newKeyEvent({ "alt" }, key, down):rawFlags(leftOption):post()
+	end
+end
+hs.hotkey.bind(hyper, "x", function()
+	optionStroke("left")
+	optionStroke("right")
+	optionStroke("delete")
+end)
+
 hs.hotkey.bind({}, "F7", function()
 	ToggleApp("WezTerm")
 end)

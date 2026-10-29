@@ -292,6 +292,7 @@ function fg_hyper() {
         map("n").to("n", "Hyper"),
         map("u").to("u", "Hyper"),
         map("w").to("w", "Hyper"),
+        map("x").to("x", "Hyper"),
         map("[").to("[", "Hyper"),
         map("]").to("]", "Hyper"),
         map("/").to("u", "Meh"),
