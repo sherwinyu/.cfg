@@ -35,7 +35,36 @@ To disable temporarily in the Hammerspoon Console:
 require("mouse-layer"):stop()
 ```
 
-Restart with `require("mouse-layer"):start()` or reload Hammerspoon.
+Restart with `require("mouse-layer"):start(require("wispr-transcript").typeLatest)`
+or reload Hammerspoon.
+
+## Paste a Wispr Flow transcript
+
+Click **Mouse 8** to copy the latest unarchived Wispr Flow transcript into the
+clipboard, then invoke the same clipboard-typing handler as Hyper+V. The action
+runs when Mouse 8 is released; Mouse 8 itself is consumed. It reads Wispr Flow's local
+`flow.sqlite` database asynchronously in read-only mode, preferring `editedText`,
+then `formattedText`, then `asrText` on the most recent history row.
+
+The transcript remains on the clipboard, and no synthetic Mouse 7 event is sent.
+Mouse 8 and Hyper+V share the 300 ms double-tap window described below. While a
+database read is pending, additional requests are ignored. Missing/empty history,
+a database error, or a failed clipboard write produces an alert. It reads saved
+history and does not wait for an in-progress transcription to finish.
+
+Implemented in `wispr-transcript.lua`, called by `mouse-layer.lua`. Mouse 8
+corresponds to Quartz button number 7. The database schema belongs to Wispr Flow
+and may need updating if the app changes it.
+
+Focused checks for transcript reading and the shared typing handler:
+
+```sh
+luajit ~/cfg/hammerspoon/tests/clipboard-typing-test.lua
+hs -c 'return dofile(hs.configdir .. "/tests/wispr-transcript-test.lua")'
+```
+
+The transcript check isolates database tasks and typing; it does not read private
+history or insert text into the active application.
 
 ## Type the clipboard
 
@@ -47,7 +76,8 @@ to two seconds for the clipboard to change, then type the new contents. Further
 taps are ignored while the copy is pending. An empty clipboard or a copy that
 does not update it produces an alert instead of typing stale text.
 
-Implemented in `hotkeys.lua`. The double-tap action depends on the active app
+The shared handler is implemented in `clipboard-typing.lua` and bound in
+`hotkeys.lua`. The double-tap action depends on the active app
 handling Control+Command+C; this configuration does not define that copy action.
 
 ## Peek at Linear issues and PRs

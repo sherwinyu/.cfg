@@ -97,45 +97,8 @@ local zoot = { "ctrl", "alt", "cmd" }
 
 -- General hotkeys
 
-local function typeClipboardAsKeystrokes()
-	local text = hs.pasteboard.getContents()
-	if not text or text == "" then
-		hs.alert.show("Clipboard has no text to type")
-		return
-	end
-	hs.eventtap.keyStrokes(text)
-end
-
 -- Hyper+V types the clipboard; double-tap within 300ms copies with Ctrl+Cmd+C first.
-local clipboardTapTimer
-local clipboardCopyPending = false
-hs.hotkey.bind(hyper, "v", function()
-	if clipboardCopyPending then
-		return
-	end
-
-	if clipboardTapTimer then
-		clipboardTapTimer:stop()
-		clipboardTapTimer = nil
-		clipboardCopyPending = true
-		-- Watch before sending the copy chord so even an immediate update is noticed.
-		hs.pasteboard.callbackWhenChanged(2, function(changed)
-			clipboardCopyPending = false
-			if changed then
-				typeClipboardAsKeystrokes()
-			else
-				hs.alert.show("Copy shortcut did not update the clipboard")
-			end
-		end)
-		hs.eventtap.keyStroke({ "ctrl", "cmd" }, "c", 10000)
-	else
-		-- Defer the single tap until a second tap can be ruled out.
-		clipboardTapTimer = hs.timer.doAfter(0.3, function()
-			clipboardTapTimer = nil
-			typeClipboardAsKeystrokes()
-		end)
-	end
-end)
+hs.hotkey.bind(hyper, "v", require("clipboard-typing").trigger)
 
 hs.hotkey.bind({}, "F7", function()
 	ToggleApp("WezTerm")

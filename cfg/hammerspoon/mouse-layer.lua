@@ -5,8 +5,11 @@ local buttonNumber = hs.eventtap.event.properties.mouseEventButtonNumber
 local modifierDown = false
 local pressed = {}
 local seen = {}
+local pasteTranscript
+local transcriptDown = false
 
 local function reset()
+	transcriptDown = false
 	modifierDown = false
 	pressed = {}
 	seen = {}
@@ -14,6 +17,15 @@ end
 
 local function handle(event)
 	local kind = event:getType()
+	if pasteTranscript and event:getProperty(buttonNumber) == 7 then
+		if kind == types.otherMouseDown then
+			transcriptDown = true
+		elseif kind == types.otherMouseUp and transcriptDown then
+			transcriptDown = false
+			pasteTranscript()
+		end
+		return true
+	end
 	if event:getProperty(buttonNumber) == 3 then
 		if kind == types.otherMouseDown then
 			modifierDown = true
@@ -58,9 +70,10 @@ local function handle(event)
 	}
 end
 
-function M:start()
+function M:start(onPasteTranscript)
 	if self.tap then return self end
 	reset()
+	pasteTranscript = onPasteTranscript
 	self.tap = hs.eventtap.new({
 		types.otherMouseDown, types.otherMouseUp, types.otherMouseDragged,
 		types.leftMouseDown, types.leftMouseUp, types.leftMouseDragged,
@@ -77,6 +90,7 @@ function M:stop()
 	if self.tap then self.tap:stop(); self.tap = nil end
 	if self.sleepWatcher then self.sleepWatcher:stop(); self.sleepWatcher = nil end
 	reset()
+	pasteTranscript = nil
 	return self
 end
 

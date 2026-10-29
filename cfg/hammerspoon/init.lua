@@ -39,7 +39,8 @@ local windowNav = require("window-nav")
 windowNav.bindHotkeys(zoot)
 
 -- Button 4 is a held mouse layer: left = Back, right = Forward, both = Enter.
-require("mouse-layer"):start()
+-- Mouse 8 types the latest saved Wispr Flow transcript.
+require("mouse-layer"):start(require("wispr-transcript").typeLatest)
 
 -- Popover for Linear issues and GitHub PRs: select one in WezTerm, or press
 -- Hyper+I over one in any app. See README.
